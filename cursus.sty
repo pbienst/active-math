@@ -1,0 +1,205 @@
+
+\usepackage{a4}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tabularx}
+\usepackage{minitoc}
+
+
+\setcounter{tocdepth}{2} \setcounter{minitocdepth}{1}
+
+\pagestyle{plain} %enkel paginanummers
+
+%voor Nederlandse afbreekregels, namen van dagen, maanden, enz..
+\usepackage{babel}
+
+%het gebruikt lettertype
+\usepackage{palatino}   % font
+
+%alternatieve verbatimstijl
+\usepackage{alltt}
+
+\pagestyle{plain}
+
+% grootte van de pagina
+%\textheight 240mm %
+%\textwidth 160mm %
+%\topmargin 1mm %
+%\headheight 1mm %
+%\headsep 1mm %
+%\evensidemargin 1mm %
+%\oddsidemargin 1mm %
+%\marginparwidth 25mm %
+%\leftmargin 1mm %
+%\rightmargin 1mm %
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+     
+\textheight 8.9in
+     
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+\advance\hoffset by -3mm  % A4 is narrower.
+\advance\voffset by  8mm  % A4 is taller.
+%\endinput
+
+% paragraph indenting and spacing
+\parindent 0mm
+\addtolength{\parskip}{0.5\baselineskip}
+
+% nieuwe captions: `Figuur' of `Tabel' in bold + kleinere font
+\renewcommand{\@makecaption}[2]{
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\bfseries \small #1:} \small #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\small \bfseries #1:} \small #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip
+}
+
+\makeatletter
+\newcommand*\ignorecontents{\let\addtocontents\dontaddtocontents}
+\newcommand*\obeycontents{\let\addtocontents\ORIGFaddtocontents}
+
+\renewcommand\part{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \thispagestyle{empty}%
+  \if@twocolumn
+    \onecolumn
+    \@tempswatrue
+  \else
+    \@tempswafalse
+  \fi
+  \null\vfil
+  \secdef\@part\@spart}
+
+
+\usepackage[tight]{shorttoc}
+\setcounter{tocdepth}{2}
+\setcounter{minitocdepth}{1}
+
+\newenvironment{sidebar_old}
+    { \begin{quote} 
+      \begin{small}
+    }
+    { \end{small}
+      \end{quote}
+    }
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{exa}{Example}[section]
+
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}[chapter]
+
+\usepackage{colortbl}
+%% begin - to go to preamble
+\edef\BarAtCode{\the\catcode`\@}
+\catcode`\@=11\relax
+\newlength{\bar@leftskip}
+\newlength{\bar@barwidth}
+\newlength{\bar@sepwidth}
+\newlength{\bar@textwidth}
+
+\newcommand{\bardefault}{%
+  \setlength{\bar@leftskip}{0pt}%
+  \setlength{\bar@barwidth}{3pt}%
+  \setlength{\bar@sepwidth}{16pt}%
+}
+
+\newcommand{\bar@settextwidth}{%
+  \setlength{\bar@textwidth}{\textwidth}%
+  \addtolength{\bar@textwidth}{-\bar@leftskip}%
+  \addtolength{\bar@textwidth}{-\bar@sepwidth}%
+  \addtolength{\bar@textwidth}{-\bar@barwidth}%
+  \addtolength{\bar@textwidth}{-\leftmargin}%
+  \addtolength{\bar@textwidth}{-3pt}%
+}
+
+\bardefault\bar@settextwidth
+%\newenvironment{sidebar}[1][\obeylines\tt]{\par\medskip\noindent%
+\newenvironment{sidebar}[1][\obeylines\tt]{\par\medskip\noindent%
+  \setlength{\tabcolsep}{0pt}
+  \begin{tabular}{l>{\columncolor[gray]{.75}}rcl}%
+    \hspace*{\bar@leftskip}&%
+    \hspace*{\bar@barwidth}&%
+    \hspace*{\bar@sepwidth}&%
+    \begin{minipage}[b]{\bar@textwidth}%
+      #1}{\end{minipage}\end{tabular}\par\medskip}
+
+\newcommand{\barleftskip}[1]{\setlength{\bar@leftskip}{#1}\bar@settextwidth}
+\newcommand{\barbarwidth}[1]{\setlength{\bar@barwidth}{#1}\bar@settextwidth}
+\newcommand{\barsepwidth}[1]{\setlength{\bar@sepwidth}{#1}\bar@settextwidth}
+
+\catcode`\@=\BarAtCode\relax
+%% end
+\barleftskip{1cm} % make "leftskip" of 1cm
+
+
+\newcommand{\OverviewTOC}{
+    %moet nog aangepast worden zodat er geen paginanummers verschijnen
+    %\shorttableofcontents{Inhoud}{0}
+    \input{preamble/dummytoc}
+}
+
+\clubpenalty=10000  % Don't allow orphans
+\widowpenalty=10000 % Don't allow widows
+
+\usepackage{ifpdf} 
+\ifx\pdfoutput\undefined \pdffalse \else \pdfoutput=1 \pdftrue \fi
+\ifpdf
+    \usepackage[pdftex,
+                pdftitle={\Title},
+                pdfauthor={\Author},
+                pdfsubject={\Subject},
+                pdfkeywords={\Keywords},
+                pdfpagemode={UseOutlines},
+                bookmarks=true,
+                bookmarksopen=true,
+                bookmarksopenlevel=0,
+                bookmarksnumbered=true,
+                hypertexnames=false,
+                pdfstartview={FitV},
+                colorlinks,
+                linkcolor={black},
+                citecolor={black},
+                urlcolor={black}]
+                {hyperref}
+    \usepackage[pdftex]{graphicx}
+    \usepackage{epstopdf}
+    \pdfcompresslevel=9
+\else
+    \usepackage[dvips]{epsfig}
+    \usepackage{hyperref}
+    \usepackage{graphicx}
+\fi
+
+
+\usepackage[below]{placeins} %keeps figures with the right section
+
+% Formatting the Bibliography
+\let\stdthebibliography\thebibliography
+\renewcommand{\thebibliography}{%
+    \let\chapter\section
+    \stdthebibliography}
+\bibliographystyle{alpha}
+
+\newcommand{\FotonicaBibliography}{
+    \bibliography{fotonica}
+}

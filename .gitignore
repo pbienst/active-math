@@ -1,0 +1,8 @@
+*.pdf
+.svn
+*.backup
+*.gz
+*.bmt
+*.mtc*
+NOTES
+*.log

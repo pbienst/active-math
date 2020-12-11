@@ -1,0 +1,862 @@
+\setcounter{chapter}{2} % previous chapter number
+
+\chapter{Numerical techniques in photonics}
+\label{h:numeric}
+
+\begin{quote}
+The purpose of computing is insight, not numbers.
+
+--- Richard Hamming
+\end{quote}
+
+\begin{quote}
+Understanding grows only logarithmically with the number of floating point operations 
+
+--- J.P. Boyd
+\end{quote}
+
+%\setcounter{page}{1}
+\minitoc
+
+In this chapter, we will briefly touch upon a number of techniques to numerically solve the wave equation in cases where no analytic solution is available. Different methods will be introduced: finite differences, finite elements, eigenmode expansion, and finally a more abstract framework, namely the method of the weighted residuals. Each of these subjects could be the topic of an entire course in its own right, so we will only be able to introduce the basic principle of these methods without going into any level of detail. For more details on these and other methods, we refer to the course "Computational solutions of wave problems".
+
+\section{Finite differences}
+
+\subsection{Finite difference approximation of derivatives}
+
+In this method, we do not seek to find the solution to the wave equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \emph{mesh}, and the distance between discretisation points is called the \emph{mesh size}. Obviously the hope is that as the mesh becomes finer and finer, the solution that we obtain converges to the true solution of the wave equation.
+
+Since we only have information about the solution at discrete points, we will need to approximate the derivatives that figure in the wave equation using data from those discrete points. To develop these so--called \emph{finite difference} approximations for derivatives, we start from the following truncated Taylor expansions (for a 1D case):
+
+\begin{gather}
+f(x+\Delta x) = f(x) + \Delta x \frac{d f}{d x} + \frac{{(\Delta x)}^2}{2} \frac{d^2 f}{d x^2} + \frac{{(\Delta x)}^3}{6} \frac{d^3 f}{d x^3} + \mathcal{O}\left(\Delta x^4\right) \label{eq-taylor-plus} \\
+f(x-\Delta x) = f(x) - \Delta x \frac{d f}{d x} + \frac{{(\Delta x)}^2}{2} \frac{d^2 f}{d x^2} - \frac{{(\Delta x)}^3}{6} \frac{d^3 f}{d x^3} + \mathcal{O}\left(\Delta x^4\right) \label{eq-taylor-min}
+\end{gather} 
+
+From Eq.~\ref{eq-taylor-plus} we get
+
+\begin{equation}
+\frac{d f}{d x} = \frac{f(x+\Delta x) - f(x)}{\Delta x} + \mathcal{O}\left(\Delta x\right)
+\end{equation} 
+
+This is called the \emph{forward difference} approximation of $df / dx$. Since the error term is $\mathcal{O}(\Delta x)$, this is called a first order approximation.
+
+Similarly from Eq.~\ref{eq-taylor-min}:
+
+\begin{equation}
+\frac{d f}{d x} = \frac{f(x) - f(x- \Delta x)}{\Delta x} + \mathcal{O}\left(\Delta x\right)
+\end{equation} 
+
+This so--called \emph{backward difference} is also first--order accurate.
+
+By subtracting Eq.~\ref{eq-taylor-plus} from Eq.~\ref{eq-taylor-min}, we get a \emph{central difference} formula, which now however is second--order accurate:
+
+\begin{equation}
+\fbox{$\displaystyle
+\frac{d f}{d x} = \frac{f(x + \Delta x) - f(x- \Delta x)}{2 \Delta x} + \mathcal{O}\left(\Delta x^2\right)
+$}
+\end{equation} 
+
+This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at this is that the central difference involves both neighbouring points, so there is more balanced information on the local behaviour of the function, which makes it more accurate.
+
+Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}.
+
+\begin{figure}
+\centering
+\includegraphics{numeric/figures/fd}
+\caption{The arc AB represents backward differences, BC forward differences and AC central differences.}
+\label{fig-fd}
+\end{figure}
+
+By adding Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get an approximation for the second derivative:
+
+\begin{equation}
+\fbox{$\displaystyle
+\frac{d^2 f}{d x^2} = \frac{f(x + \Delta x) -2 f(x) + f(x- \Delta x)}{ \Delta x^2} + \mathcal{O}\left(\Delta x^2\right)
+$}
+\end{equation} 
+
+If we want to get more accurate results, we could either use a finer mesh or add more information by including higher order neighbours like $f(x-2\Delta x)$ and $f(x+2\Delta x)$.
+
+\begin{sidebar}
+\begin{ex}
+Construct a finite-difference scheme that will allow you to integrate the following differential equation:
+
+$$\frac{du(t)}{dt} = -a u(t)$$
+
+Calculate the approximations $u_n = u(n \Delta t)$ given an initial condition $u_0$ using several methods: \\
+
+a) Approximate the time derivate using a forward difference. (This results in the forward Euler method.) \\
+
+b) Same, but now use a backward difference. (This results in the backward Euler method.)\\
+
+c) Construct a central difference at the intermediate time $t_{n+1/2}$ and eliminate $u_{n+1/2}$ by considering it to be the average of $u_{n}$ and $u_{n+1}$. (This results in the Crank-Nicholson method.) \\
+
+d) Show that all of these methods can be formulated as one method (the $\theta$-rule):
+
+$$u_{n+1} = \frac{1-(1-\theta) a \Delta t}{1+ \theta a \Delta t} u_n$$ \\
+
+Which $\theta$-values correspond to which methods?
+
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Derive the following higher-order approximation of the second derivative:
+$$\frac{d^2 f}{d x^2} = \frac{-f(x + 2 \Delta x) + 16 f(x + \Delta x) -30 f(x) + 16 f(x- \Delta x) - f(x - 2 \Delta x)}{12 \Delta x^2} + \mathcal{O}\left(\Delta x^4\right) $$
+\end{ex}
+\end{sidebar}
+
+
+\subsection{Solving the 1D Helmholtz equation with finite differences}
+
+Illustrating finite difference methods is best done using a simple example, so we will solve the 1D Helmholtz equation in a uniform medium:
+
+\begin{equation}
+\frac{d^2 f(x)}{d x^2} + k^2 f(x) = 0 \label{eq-helmholtz-1d}
+\end{equation} 
+
+We solve this problem at a fixed wavelength, i.e. a fixed value of $k$. The discretised version of Eq.~\ref{eq-helmholtz-1d} reads
+
+\begin{equation}
+\frac{f(x + \Delta x) -2 f(x) + f(x- \Delta x)}{ \Delta x^2} + k^2 f(x) = 0 \label{eq-hh-diff}
+\end{equation}  
+ 
+To make this example even more concrete, let us assume a uniform grid with $\Delta x=1$ from $x=1$ to $x=5$. To illustrate boundary conditions, let us further assume that the values of $f$ are fixed at the boundaries, e.g. $f(1)=f_1$ and $f(5)=f_5$. This could be from a source forcing the electric field to a constant value, or from a metal wall which forces the electric field to zero. 
+
+We still need to determine the following unknowns: $f(2)$, $f(3)$ and $f(4)$.
+
+The discretised version of Eq.~\ref{eq-helmholtz-1d}, including the boundary conditions, reads
+
+\begin{align}
+f(1)=&f_1 \\
+f(1) -2f(2) + f(3) + k^2 f(2) =& 0 \\
+f(2) -2f(3) + f(4) + k^2 f(3) =& 0\\
+f(3) -2f(4) + f(5) + k^2 f(4) =& 0\\
+f(5)=&f_5
+\end{align} 
+
+Using matrix notation, this becomes
+
+\begin{gather}
+\begin{bmatrix}
+1& 0& 0& 0& 0 \\
+1& k^2-2& 1& 0& 0 \\
+0& 1& k^2-2& 1& 0  \\
+0& 0& 1& k^2-2& 1  \\
+0& 0& 0& 0& 1
+\end{bmatrix}
+\begin{bmatrix}
+f(1) \\
+f(2) \\
+f(3) \\
+f(4) \\
+f(5)
+\end{bmatrix}
+= 
+\begin{bmatrix}
+f_1 \\
+0 \\
+0 \\
+0 \\
+f_5
+\end{bmatrix} \label{eq-ex-fd}
+\end{gather}
+
+So, we've reduced the problem of solving a differential equation to the problem of solving a linear system of equations of the form ${\bf A}\cdot{\bf x}={\bf b}$.
+
+It is important to realise that the discretisation step that we have introduced replaces the original equation with a new one, and that even an exact solution of the discretised problem will only yield an approximate solution of the original problem. The error we have introduced in this way, is called the \emph{discretisation error}. The hope is that by refining the mesh size, we get successively smaller discretisation errors. 
+
+%\subsection{Solving the system ${\bf A} \cdot {\bf x}={\bf b}$}
+\subsection{Solving linear systems}
+
+\subsubsection{Direct and iterative methods}
+
+In order to solve the linear system ${\bf A}\cdot{\bf x}={\bf b}$ that arises from formulating a problem using finite differences, there are a number of options.
+
+First of all, we can use a \emph{direct method}, i.e. explicitly invert the matrix ${\bf A}$. Normally, this takes $O(N^3)$ operations, so it doesn't scale very well with large problem sizes. However, inspecting Eq.~\ref{eq-ex-fd}, we notice that the discretisation of the wave equation yields a tridiagonal matrix, where only three diagonals are non--zero. Matrix equations of this type can be solved quite efficiently, using a fairly compact variant of Gaussian elimination, taking only $O(N^2)$ operations.
+
+A second philosophy is to give up the notion of solving the system exactly, and search for a faster approximate solution, converged relative to the discretisation error but perhaps not relative to machine round--off. This seems acceptable, especially since the algebraic equations are only an approximation to the continuum equations anyway, subject to discretisation error.
+
+A way of constructing such an approximate solution is to use an \emph{iterative method}: starting from an initial guess (e.g. setting all unknowns to zero), successive approximations  are constructed in the hope that after a sufficient number of iterations, the estimate converges to the true solution. There exists a plethora of literature on iterative methods, which we obviously cannot treat in detail here, but in order to get a flavour for the basic ideas, we will now discuss one of the most basic iterative schemes (which unfortunately has limited practical use in its most simple incarnation).
+
+\subsubsection{The Jacobi method}
+
+Let's return to the discretised version of the Helmholtz equation Eq.~\ref{eq-hh-diff}:
+
+\begin{equation}
+f_{i+1} -2 f_i + f_{i-1} +  \Delta x^2 k^2 f_i = 0 \label{eq-hh-diff-2}
+\end{equation}  
+
+The subscript $i$ denotes the values at position $x_0 + i \Delta x$.
+
+Now, let's start from an initial set of estimates $f_i^0$, where the superscript denotes the iteration number. For Jacobi iteration, the update rule to go from estimates $f_i^n$ to $ f_i^{n+1}$ is defined as
+
+\begin{equation}
+f_{i+1}^n -2 f_i^n + f_{i-1}^n +  \Delta x^2 k^2 f_i^n = \alpha (f_i^{n+1} - f_i^n ) \label{eq-jacobi}
+\end{equation}  
+
+This can be understood as follows. If the method has converged, then the successive estimates won't change significantly anymore, such that $ f_i^{n+1} \thickapprox f_i^n $. But this means that the right--hand side of Eq.~\ref{eq-jacobi} will be equal to zero, or alternatively that $f_i^n$ is indeed the solution of Eq.~\ref{eq-hh-diff-2}.
+
+The (positive) parameter $\alpha$ is called the relaxation parameter, which can be fine--tuned by the user of the method. A small value of $\alpha$ means that the $f$ values will change rapidly from iteration to iteration, but with the risk of taking such large steps that the method won't converge. On the other hand, a larger value of $\alpha$ reduces the risk of diverging solutions, but on the other hand more iterations will be needed to reach convergence.
+
+To clarify this further, we will now investigate when the Jacobi method diverges, i.e. when the $f$ values become unbounded for a bounded initial estimate.
+
+\subsubsection{Convergence analysis of the Jacobi method}
+
+To study convergence, we take an approach that is based on Fourier analysis: any wave used as the initial estimate can be written as a sum of Fourier components $e^{-j k_x x}$, which are nothing other than plane waves with wavevector $k_x$. Let's take such a plane wave and investigate what happens when iterating through the Jacobi method. If the amplitude of such a wave stays bounded when iterating, and this is true for all admissible wavevectors $k_x$, then we can be sure that whatever initial estimate will be used, the method will not produce an unbounded result at some time.
+
+Our plane waves take the following form:
+
+\begin{equation}
+f_i^n = A^n e^{-j k_x i \Delta x}
+\end{equation} 
+
+After one Jacobi iteration, we get:
+
+\begin{equation}
+f_i^{n+1} = A^n e^{-j k_x i \Delta x} \left[{ 1 + \frac{1}{\alpha}\left(e^{+ j k_x  \Delta x} - 2+  e^{-j k_x  \Delta x} + \Delta x^2 k^2\right)}\right]
+\end{equation} 
+
+or
+
+\begin{equation}
+\frac{f_i^{n+1}}{f_i^{n}} =  1 + \frac{1}{\alpha}\left[2 \cos ( k_x  \Delta x) - 2 + \Delta x^2 k^2\right]
+\end{equation} 
+
+In order for this not to diverge, the ratio  $|f_i^{n+1} / f_i^{n}|$ should be smaller than 1 for any positive $\alpha$. This happens if
+
+\begin{equation}
+2 \cos ( k_x  \Delta x) - 2 \le - \Delta x^2 k^2 \label{eq-conv-jacobi}
+\end{equation} 
+
+The left--hand side of this equation lies between -4 and 0 and reaches its maximum for $k_x=0$, which is an important case as it corresponds to a uniform solution. Since it's very likely that the final solution has a DC component, we better make sure that the method converges in this case. However, for this case we can only satisfy Eq.~\ref{eq-conv-jacobi} if $k=0$. So this means that unfortunately the Jacobi method is non--convergent for the general Helmholtz equation, but only works for Laplace's equation, i.e. the special case where $k=0$.
+
+\subsection{Finite differences in the time domain}
+
+Without going into any detail, we finally want to mention the existence of a very popular method to solve Maxwell's equations in the time domain. This \emph{finite--difference time--domain} method (FDTD) uses central differences to discretise the full vectorial Maxwell's equations both in space and time.
+
+It uses a staggered grid, i.e. the electric field and the magnetic field are not discretised at the same point in space, but are arranged in a \emph{Yee cell} (Fig.~\ref{fig-yee}). The arrangement of the field components in a Yee cell is such that the discretised curl laws of Maxwell's equations can be written out in a natural form.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{numeric/figures/yeecell}
+\caption{The Yee cell in the FDTD algorithm.}
+\label{fig-yee}
+\end{figure}
+
+As for the time evolution of the fields, FDTD uses a leap--frogging scheme, where the electric fields calculated at $t=0$ are used to determine the magnetic fields at $t=0.5$. These are subsequently used to calculate the electric fields at $t=1$ and so on.
+
+\begin{sidebar}
+\begin{ex}
+Use Python and its libraries NumPy and SciPy to program a finite-difference method to solve the following differential equation
+
+$$ -\left(a(x) u'(x) \right)' + c(x)u(x) = f(x)$$
+
+in the interval $[0,1]$, with the functions $a$, $a'$, $c$ and $f$ given, and $u(0) = u(1) = 0$. Assume that $a$ and $c$ are positive in the interval of interest.\\
+
+Expand the derivative of the product, and use a backward-difference approximation for $u'$ and a central-difference approximation for $u''$. \\
+
+Use a sparse solver to take advantage of the banded matrix structure. Consult the SciPy documentation for the right way to construct these matrices. \\
+
+To check your results, try the solver using the following set of functions:
+
+$$a_1(x) = 1 + x^2$$
+$$c_1(x) = 0$$
+$$u_1(x) = x(1-x) e^x $$
+
+To do so, construct the required $f(x)$ from $a_1(x)$, $c_1(x)$ and the exact solution $u_1(x)$ and evaluate how close the numerical approximation of $u$ is to this analytical form.
+
+\end{ex}
+\end{sidebar}
+
+\section{Finite elements}
+
+\subsection{Basic recipe of finite elements}
+
+All finite element methods more or less share the same philosophy, which is outlined in the following recipe:
+
+\begin{itemize}
+\item
+Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods. Often, more triangles are used where higher resolution is required. See e.g. the grid in Fig.~\ref{fig-grid}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{numeric/figures/grid}
+\caption{Example of a triangular grid.}
+\label{fig-grid}
+\end{figure}
+\item
+Approximate the unknown function using a separate approximation expression for each element of the form
+\begin{equation}
+\psi(x,y) = \sum_{i=1}^M u_i b_i(x,y) \label{eq-fe-1}
+\end{equation}  
+Here the $b_i(x,y)$ are some convenient set of known basis functions. In order to solve the problem, the $M$ unknown coefficients $u_i$ per element still need to be determined.
+\item
+Introduce some constraint on the $MK$ number of unknowns, e.g. to ensure that $\psi$ is continuous across the elements.
+\item
+Write down an expression $J$ containing the approximating functions $b_i$ and the coefficients $u_i$. Because the $b_i$ are chosen in advance and therefore known, $J$ is function of the unknown $u_i$ only. The precise form of $J$ differs from problem to problem, but is often related to the total power in the system.
+\item
+Find the coefficients $u_i$ such that $J$ is minimised. In a popular method due to \emph{Rayleigh and Ritz}, this is done simply by setting all $\partial J / \partial u_i$ equal to zero and solving the resulting linear system. If $J$ is an expression for the total energy in the system, there is a clear physical interpretation for this procedure: the true solution to the problem is one that minimises the energy in the system.
+\end{itemize}
+
+\subsection{Solving the 1D Helmholtz equation with finite elements}
+
+In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite element methods can be used to solve the 1D Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrated the concept of finite differences:
+
+\begin{equation}
+\frac{d^2 \psi (x)}{d x^2} + k^2 \psi(x) = 0 \label{eq-helmholtz-1d-2}
+\end{equation} 
+
+\subsubsection{Piecewise approximation}
+
+To describe the unknown function $\psi$, we will use a very simple but common approach, which is that of a piecewise straight approximation. We will subdivide our domain into $K$ finite elements being line segments of identical length. In each segment, we will assume that $\psi$ varies linearly between the end points $x_1$ and $x_2$ of that segment:
+
+\begin{equation}
+\psi(x) = \frac{x_2 - x}{x_2 - x_1} \psi_1 + \frac{x - x_1}{x_2 - x_1} \psi_2 \label{eq-fe-2}
+\end{equation} 
+
+Here $\psi_1$ and $\psi_2$ are the so far unknown values of $\psi$ at $x_1$ and $x_2$ respectively. End points of the segments are often called \emph{nodes} of the mesh.
+
+Comparing Eq.~\ref{eq-fe-1} and \ref{eq-fe-2}, we get that $M=2$, $u_i$ is $\psi_i$ and
+
+\begin{align}
+b_1(x) =& \frac{x_2 - x}{x_2 - x_1} \\
+b_2(x) =& \frac{x - x_1}{x_2 - x_1}
+\end{align} 
+
+These shape functions or interpolation functions are sketched in Fig.~\ref{fig-shape}.
+
+\begin{figure}
+\centering
+\includegraphics{numeric/figures/interpol}
+\caption{Simple shape functions $b_1(x)$ and $b_2(x)$ for a 1D finite element model.}
+\label{fig-shape}
+\end{figure}
+
+(It is sometimes useful to express the interpolation functions in terms of a local scaled coordinate $\xi=(x-x_1)/(x_2-x_1)$ ranging from 0 to 1. The advantage of local coordinates is that expressions for $J$ can be more easily applied to the case where the size of the elements is not the same throughout the mesh.)
+
+\subsubsection{Joining the elements}
+
+The elements are not independent but are usually coupled through some continuity condition. In the case of our problem, $\psi$ needs to be continuous across elements. The effect of this is that the number of unknowns is reduced.
+
+To see how this is done in practise, consider Fig.~\ref{fig-connect}  with on one hand a \emph{disconnected} local numbering scheme of the nodes, and on the other hand a \emph{connected} global numbering scheme, which already takes the continuity conditions into account.
+
+
+\begin{figure}
+\centering
+\includegraphics{numeric/figures/connect}
+\caption{\emph{Top}: disconnected local numbering. \emph{Bottom}: connected global numbering.}
+\label{fig-connect}
+\end{figure}
+
+The disconnected values are related to connected values by the following matrix equation:
+
+\begin{equation}
+\begin{bmatrix}
+\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4 \\ \psi_5 \\ \psi_6
+\end{bmatrix}_{disc}
+=
+\begin{bmatrix}
+1 & 0 & 0 & 0  \\ 
+0 & 1 & 0 & 0  \\   
+0 & 1 & 0 & 0  \\ 
+0 & 0 & 1 & 0  \\   
+0 & 0 & 1 & 0  \\  
+0 & 0 & 0 & 1  
+\end{bmatrix}
+\begin{bmatrix}
+\psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4
+\end{bmatrix}_{con}
+\label{eq-con-matrix}
+\end{equation} 
+
+The matrix in Eq.~\ref{eq-con-matrix} is called the \emph{connection matrix} of the mesh. Obviously, for such a simple case is seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for computer implementation of finite element methods.
+
+\subsubsection{An expression for $J$}
+
+In order to keep the method physically interpretable, let's use the total energy of the system as an expression for $J$. From the complex Poynting theorem, we know that the time--averaged stored energy in a system is given by
+
+\begin{align}
+J =& \frac{1}{2} \int ( {\bf E} \cdot {\bf D}^* - {\bf H} \cdot {\bf B}^* ) dx \\
+  =& \frac{1}{2} \int ( \varepsilon |{\bf E}|^2 - \mu |{\bf H}|^2 ) dx
+\end{align} 
+
+We can use one of Maxwell's curl laws to eliminate ${\bf E}$:
+
+\begin{equation}
+{\bf E} = \frac{1}{j \omega \varepsilon} \nabla \times {\bf H}
+\end{equation}  
+
+Let's assume that we are working in the TM case, where ${\bf H} = H {\bf 1}_z = \psi {\bf 1}_z $. We get
+
+\begin{equation}
+J = \frac{1}{2} \int \left( \frac{1}{\omega ^2 \varepsilon}\left|{\frac{d H}{d x}}\right|^2 - \mu |H|^2 \right) dx
+\end{equation}
+
+Although we will not prove it here, it can be shown that in the case of lossless media, we can always scale the solution such that the absolute values in the previous equation can be replaced by simple squares. Also, multiplying $J$ by the constant $2 \omega ^2 \varepsilon$ does not affect the location of the minimum, such that finally we can write
+
+\begin{equation}
+J = \int \left( \left(\frac{d H}{d x}\right)^2 - k^2 H^2 \right) dx
+\end{equation}
+
+or going back to our function $\psi$:
+
+\begin{equation}
+\fbox{$\displaystyle
+J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx \label{eq-J-power}
+$}
+\end{equation} 
+
+The contribution of a single element to $J$ can now be calculated in terms of the unknown nodal values $\psi_i$ using the explicit form of the shape functions from Eq.~\ref{eq-fe-2}. This leads to tedious but straightforward algebra, which we will not repeat here. In view of the structure of Eq.~\ref{eq-J-power}, the contribution of a single element leads to a bilinear equation of the form
+
+\begin{equation}
+J_i = \begin{bmatrix}
+\psi_1 \psi_2 
+\end{bmatrix}_{disc}
+\begin{bmatrix}
+A & B \\
+C & D 
+\end{bmatrix}
+\begin{bmatrix}
+\psi_1 \\ \psi_2
+\end{bmatrix}_{disc}
+\label{eq-J-power-i}
+\end{equation} 
+
+The total power is just the sum of the contributions from all elements, which can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
+
+The expressions in terms of disconnected nodal values can be transformed in terms of connected values using the connection matrix, like e.g. the one from Eq.~\ref{eq-con-matrix}. In this way, all the continuity conditions are imposed.
+
+\subsubsection{Minimising $J$}
+
+To find the unknowns $\psi_i$ that minimise $J$ we simply impose
+
+\begin{equation}
+\frac{\partial J}{\partial \psi_i} = 0 \label{eq-rayleigh-ritz}
+\end{equation} 
+
+and this for all $i$. Since $J$ is a bilinear form, Eq.~\ref{eq-rayleigh-ritz} takes the form of $MK$ linear equations with $MK$ unknowns. Just as was the case with the finite--difference method, this system can either be solved directly or iteratively.
+
+\subsection{Finite elements as a variational method}
+
+In theory, the outline of the finite element method that we have given so far is perfectly adequate to describe it. However, it yields additional insight to cast it in the framework of a variational method.
+
+To do this, let's introduce some terminology first.
+
+A \emph{functional} is a mapping from a function to a scalar value, unlike a function, which just maps one or more scalars to a scalar. The entity $J$ that we have introduced is a functional \footnote{Note that in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a standard function $J(\psi(\psi_i))$, albeit one of multiple arguments.}, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $J=J(\psi)$.
+
+A \emph{variational expression} comes from minimising a functional over a set of admissible functions. E.g. in our case we have been solving the following variational expression:
+
+\begin{equation}
+P = \min_\psi J(\psi)
+\end{equation} 
+
+where $P$ is the total power in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
+
+The \emph{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a number of known basis functions, and then determine the expansion coefficients such that the functional is minimised.
+
+So far we don't seem to have done anything useful except introducing some new terminology. However, by looking at the power $P$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $P$, since $\delta J=0$ at the minimum of the functional. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
+
+Now, the power $P$ is a decidedly uninteresting quantity for practical applications. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
+
+To conclude this section on finite elements, we wish to provide some extra proof that a function that minimises the functional from Eq.~\ref{eq-J-power} is indeed a solution to the Helmholtz equation. So far, this was only made acceptable by invoking physical arguments based on minimum energy, but a mathematical proof for this was lacking. At the same time, let's extend the method to three dimensions:
+
+\begin{equation}
+J = \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV \label{eq-variational1}
+\end{equation} 
+
+If a function $\psi$ minimises the functional $J$, then $\delta J$ has to be zero for $\psi$. For $\delta J$ (also called the \emph{first variation} of $J$) we get
+
+\begin{align}
+\delta J =& J(\psi + \delta \psi) - J(\psi) \\
+         =& \iiint \left( (\nabla (\psi + \delta \psi))^2 - k^2 (\psi + \delta \psi)^2 \right) dV - \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV
+\end{align} 
+
+If we neglect second order terms in $\delta \psi$, we get
+
+\begin{equation}
+\delta J = \iiint \left( 2 \nabla \psi \cdot \nabla (\delta \psi) - 2 k^2 \psi \delta \psi \right) dV
+\end{equation}
+
+By using one of the incarnations of Green's theorem, we can write \footnote{Apply the divergence theorem to the vector identity $\nabla \cdot (u \nabla v) = u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v)$}
+
+\begin{equation}
+\iiint \nabla \psi \cdot \nabla (\delta \psi) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - \iiint \delta \psi \cdot \nabla^2 \psi dV
+\end{equation} 
+
+So,
+
+\begin{equation}
+\delta J = 2\iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - 2\iiint \delta \psi \cdot \nabla^2 \psi dV - 2 \iiint k^2 \psi \delta \psi dV
+\end{equation} 
+
+Demanding that $\delta J = 0$ (a condition which is called \emph{stationarity}), we get
+
+\begin{equation}
+\iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS \label{eq-euler-lagrange-1}
+\end{equation}
+
+Suppose that our boundary conditions are of the Dirichlet type such that $\psi=0$ on the boundary. Then, in order to be an admissible function, $\delta \psi$ also has to be zero on the boundary, so the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will be zero.
+
+Similarly, for Neumann--type boundary conditions where $\partial \psi / \partial n = 0$ on the boundary, the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will also be zero.
+
+So for these common boundary conditions we get
+
+\begin{equation}
+\iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = 0
+\end{equation} 
+
+Since our choice of $\delta \psi$ has been completely arbitrary, it follows that stationarity of the variational expression requires that $\psi$ has to satisfy
+
+\begin{equation}
+\nabla^2 \psi + k^2 \psi = 0 \label{eq-euler-lagrange-2}
+\end{equation} 
+
+This is of course the Helmholtz equation.
+
+Eq.~\ref{eq-euler-lagrange-2} is called the \emph{Euler} or the \emph{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}.
+
+\begin{sidebar}
+\begin{ex}
+Show that demanding that the 1D Helmholtz equation is orthogonal to any arbitrary function leads to the variational form 
+
+$$J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx$$
+
+\end{ex}
+\end{sidebar}
+
+
+\begin{sidebar}
+\begin{ex}
+Show that $10x-38/3$ is the best least-squares approximation to the parabola 
+
+$$f(x) = 10(x-1)^2 -1$$ 
+
+in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
+
+\end{ex}
+\end{sidebar}
+
+
+\begin{sidebar}
+\begin{ex}
+Consider an arbitrarily shaped waveguide filled with air but bounded by perfectly conducting metal walls. As we know, its modes will satisfy the following equation:
+
+$$ \nabla_{xy}^2 \psi + \left( k^2 - k_z^2 \right)\psi = 0 $$
+
+We are interested in finding the value of $k$ at cut--off ($k_z^2=0$), because we can get the cut-off wavelength from that. Show that the following is a variational expression for this cut--off wavevector $k_{cut}$:
+
+$$ k_{cut}^2 = \frac{\iint_S (\nabla_{xy} \psi)^2 dS}{\iint_S \psi^2 dS}$$
+where $S$ is the cross--section of the waveguide.
+\end{ex}
+\end{sidebar}
+
+
+\begin{sidebar}
+\begin{ex}
+
+Use the identity
+
+$$\int \int_S p \nabla q \cdot \nabla r dS= - \int \int_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
+
+to show that the following variational expression
+
+$$J(\phi)=\int \int_S f(x,y) (\nabla \phi)^2 dS$$
+
+with $f(x,y)$ a given scalar function, has this Euler-Langrange equation:
+
+$$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
+
+\end{ex}
+\end{sidebar}
+
+\section{Eigenmode expansion}
+
+In eigenmode expansion, we slice up the structure that we want to model in a number of layers where the refractive index profile does not change in the propagation direction (often taken to be the $z$--direction). A typical example is given in Fig.~\ref{fig-interface}, which shows the interface between two waveguides I and II.
+
+\begin{figure}
+\centering
+\includegraphics{numeric/figures/interface}
+\caption{Interface between two layers.}
+\label{fig-interface}
+\end{figure}
+
+We will expand the field in each waveguide using the eigenmodes of that waveguide. It can be shown that these eigenmodes form a \emph{complete} set, i.e. they can be used to expand any arbitrary field in that layer. Also, by enclosing the structure that we want to model in a metal box, this set of eigenmodes is a discrete set rather than a continuum.
+
+The interface is placed at $z=0$ and a single mode with index $p$ is incident
+from medium I. This incident mode will give rise to a backward--propagating field
+in medium I, which we expand in terms of the eigenmodes of this medium. Likewise,
+we expand the transmitted field in the eigenmodes of medium II. We now apply the well--known \emph{mode--matching} technique. It starts off by imposing the continuity of the tangential components of the
+total field: 
+
+\begin{eqnarray}
+\mathbf{E}^{I}_{p,t}+\sum _{j}R_{j,p}\mathbf{E}^{I}_{j,t} & = & \sum _{j}T_{j,p}\mathbf{E}^{II}_{j,t}\label{Eq:MM 1a} \\
+\mathbf{H}^{I}_{p,t}-\sum _{j}R_{j,p}\mathbf{H}^{I}_{j,t} & = & \sum _{j}T_{j,p}\mathbf{H}^{II}_{j,t}\label{Eq:MM 1b} 
+\end{eqnarray}
+
+The minus sign for the reflected ${\bf H}$ field deserves some additional clarification. It is relatively easy to show by splitting Maxwell's curl equations into their transverse and $z$--components, that for any eigenmode solution 
+
+\begin{equation}
+\label{Eq:eigen fw}
+\left( \mathbf{E}_{n,t},\mathbf{E}_{n,z},\mathbf{H}_{n,t},\mathbf{H}_{n,z},\beta _{n}\right) 
+\end{equation}
+
+there exists also a second solution corresponding to a backward propagating eigenmode:
+
+\begin{equation}
+\label{Eq:eigen bw}
+\left( \mathbf{E}_{n,t},-\mathbf{E}_{n,z},-\mathbf{H}_{n,t},\mathbf{H}_{n,z},-\beta _{n}\right) 
+\end{equation}
+
+This explains the minus sign in the reflected ${\bf H}$ field.
+
+To calculate the unknown expansion coefficients $R_{j,p}$ and $T_{j,p}$
+(which can be seen as reflection and transmission coefficients), we take the
+right cross product of Eq.~\ref{Eq:MM 1a} with $\mathbf{H}^{I}_{i,t}$
+and the left cross product of Eq.~\ref{Eq:MM 1b} with $\mathbf{E}^{I}_{i,t}$.
+Here, $i$ is an arbitrary index. After integrating over the cross--section,
+we get:
+
+\begin{eqnarray}
+\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{i}\right\rangle +\sum _{j}R_{j,p}\left\langle \mathbf{E}^{I}_{j},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \label{Eq:MM 2a} \\
+\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{p}\right\rangle -\sum _{j}R_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{j}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:MM 2b} 
+\end{eqnarray}
+
+where the scalar product is defined as the following overlap integral:
+
+\begin{equation} 
+\left\langle \mathbf{E}_{m},\mathbf{H}_{n}\right\rangle \equiv \iint _{s}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\bf S}
+\end{equation} 
+
+If we decide to truncate the series expansion after $N$ terms, we have
+$2N$ unknowns: $N$ reflection coefficients and $N$ transmission
+coefficients. Eq.~\ref{Eq:MM 2a} and \ref{Eq:MM 2b} provide us exactly with
+$2N$ equations, since we can write them for all $i$ in $1 \cdots N$.
+However, we can reduce the dimensionality of this linear system by invoking
+the orthogonality relation $\iint_{S}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\bf S}=0$:
+
+\begin{eqnarray}
+\delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle +R_{i,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \label{Eq:MM 3a} \\
+\delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle -R_{i,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:MM 3b} 
+\end{eqnarray}
+
+Adding and subtracting these equations yields:
+
+\begin{eqnarray}
+\sum _{j}\left[ \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle +\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \right] T_{j,p}=2\delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle  &  & \label{Eq:MM 4a} \\
+R_{i,p}=\frac{1}{2\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle }\sum _{j}\left[ \left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle -\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \right] T_{j,p} &  & \label{Eq:MM 4b} 
+\end{eqnarray}
+
+This shows that we can first calculate the transmission coefficients by solving
+an $N \times N$ linear system, and then obtain the reflection coefficients
+by a simple matrix multiplication.
+
+After obtaining $R$ and $T$ upon incidence of mode $p$, we can
+of course repeat the whole procedure using all modes $p$ in $ 1 \cdots N$.
+Important to note is that this changes only the right--hand side in the linear system in Eq.~\ref{Eq:MM 4a}, so that we do not have to invert\footnote{%
+Actually, when solving the system even an explicit inverse is not required,
+as we can use the LU decomposition of the system matrix.
+} another system matrix. 
+
+Usually, we will choose to normalise our modes such that \( \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle =1 \).
+We can then write Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b} more compactly after
+defining the following overlap matrices:
+
+\begin{eqnarray}
+\mathbf{O}_{I,II}\left( i,j\right)  & \equiv  & \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:O_I_II} \\
+\mathbf{O}_{II,I}\left( i,j\right)  & \equiv  & \left\langle \mathbf{E}^{II}_{i},\mathbf{H}^{I}_{j}\right\rangle \label{Eq:O_II_I} 
+\end{eqnarray}
+
+
+With the superscript $T$ denoting transpose, we finally get:
+
+\begin{eqnarray}
+\mathbf{T}_{I,II} & = & 2\left( \mathbf{O}_{I,II}+\mathbf{O}^{T}_{II,I}\right) ^{-1}\label{Eq:MM 5a} \\
+\mathbf{R}_{I,II} & = & \frac{1}{2}\left( \mathbf{O}^{T}_{II,I}-\mathbf{O}_{I,II}\right) \cdot \mathbf{T}_{I,II}\label{Eq:MM 5b} 
+\end{eqnarray}
+
+
+In these expressions $\mathbf{T}_{I,II}$ and $\mathbf{R}_{I,II}$ are
+the so--called transmission and reflection matrices. Their \( p \)--th columns
+consist of the $T_{j,p}$ and $R_{j,p}$ from Eq.~\ref{Eq:MM 4a} and
+\ref{Eq:MM 4b}. If we collect the expansion coefficients of an arbitrary incident
+field in a column vector $\mathbf{A}_{inc}$, we can write very compactly
+for the reflected and transmitted fields: 
+
+\begin{eqnarray}
+\mathbf{A}_{refl} & = & \mathbf{R}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:R matrix} \\
+\mathbf{A}_{trans} & = & \mathbf{T}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:T matrix} 
+\end{eqnarray}
+
+Obviously, we can repeat the entire procedure for incidence from medium II,
+which gives us the matrices $\mathbf{R}_{II,I}$ and $\mathbf{T}_{II,I}$.
+These four matrices completely characterise the scattering that occurs at an
+interface.
+
+Finally, we want to point out the similarity in structure between Eq.~\ref{Eq:MM 5a}
+and \ref{Eq:MM 5b} and the well--known Fresnel equations to calculate reflection
+and transmission for normal incidence of a plane wave upon the interface between
+two semi--infinite media:
+
+\begin{eqnarray}
+T & = & \frac{2n_{1}}{n_{1}+n_{2}}\label{Eq:T normal} \\
+R & = & \frac{n_{1}-n_{2}}{n_{1}+n_{2}}\label{Eq:R normal} 
+\end{eqnarray}
+
+In fact, Eq.~\ref{Eq:T normal} and \ref{Eq:R normal} can also be derived
+from the more general treatment presented here. For homogeneous layers, where
+the refractive index does not vary in the transverse direction, it turns out
+that the overlap matrices are diagonal, meaning that there is no cross--coupling
+between the different modes. Further evaluation of the formula's reveals that
+the Fresnel equations are indeed recovered.
+
+Obviously, a realistic structure will consist of more than one interface, but that problem is outside the scope of this course.
+
+\begin{sidebar}
+\begin{ex}
+Show that when working with basis functions which are not orthogonal, the eigenmode expansion equations for the reflection and the transmission matrix at an interface become
+
+$$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,II} & \mathbf{O}_{I,I} \end{bmatrix} \begin{bmatrix} \mathbf{T}_{I,II} \\ \mathbf{R}_{I,II} \end{bmatrix} =  \begin{bmatrix} \mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,I} \end{bmatrix} $$
+
+\end{ex}
+\end{sidebar}
+
+\section{Method of weighted residuals}
+
+To conclude this section, we will now present a rather abstract framework for solving Maxwell's equations numerically, which has the advantage of allowing for a unified approach which shows more clearly the similarities and the differences between several numerical methods.
+
+The method of \emph{weighted residuals} is a very general scheme for projecting Maxwell's equations into a form suitable for numerical solution by standard matrix methods.
+
+We start from a problem of the form
+
+\begin{equation}
+L u = v \label{eq-operator}
+\end{equation}
+
+where $v$ represents some known excitation and $u$ is the unknown and wanted field. $L$ is a linear operator involving differentiation, integration or both. For the Helmholtz equation, $v=0$ and $L=\nabla^2 + k^2$. 
+
+Suppose we approximate the unknown $u$ by
+
+\begin{equation}
+\tilde{u}(x) = \sum_{i=1}^N u_i b_i(x) \label{eq-expansion}
+\end{equation} 
+
+where $b_i(x)$ are a complete set of known basis functions. The general problem is now to choose the coefficients $u_i$ to approximate as well as possible the unknown solution $u$ to Eq.~\ref{eq-operator} with a finite number of basis functions. In general, it will be impossible to satisfy Eq.~\ref{eq-operator} exactly, so how are we to define "approximate as well as possible"? We do not know the exact solution $u$ and so cannot even discuss any error in its approximation $\tilde{u}$. We can however define what is called the \emph{error residual}:
+
+\begin{equation}
+R(x) = L\tilde{u} - v = L \sum_{i=1}^N u_i b_i(x) - v(x)
+\end{equation} 
+
+which is clearly zero if and only if we have an exact solution to Eq.~\ref{eq-operator}. Now we have a realistic objective: trying to make the residual as small as possible.
+
+To proceed, we choose another set of functions, the so--called \emph{test} or \emph{weight} functions $w_i$. We also introduce an inner product (scalar product) formally written as $\langle f(x),g(x) \rangle$. The definition of the inner product is in a sense arbitrary and often follows from the specifics of the problem considered.
+
+Rather than asking the impossible that $R(x)=0$ for all $x$, we insist that $R(x)$ be orthogonal to each of the weight functions under the scalar product considered. This results in the following $N$ equations for $N$ unknowns:
+
+\begin{equation}
+\left\langle \left\{ L \sum_{i=1}^N u_i b_i(x) - v(x)  \right\}, w_j(x) \right\rangle = 0 \hspace{0.5cm} j=1,2\cdots,N \label{eq-weighted-res}
+\end{equation}
+
+In the above equation, $b_i(x)$, $v(x)$ and $w_j(x)$ are known functions of $x$. $L$ is the known operator and $u_i$ are the unknown and wanted scalars which when put into Eq.~\ref{eq-expansion} give our approximate solution.
+
+Because of the linearity of Eq.~\ref{eq-weighted-res}, it can be put into a compact matrix form:
+
+\begin{equation}
+{\bf L} \cdot {\bf u} = {\bf v}
+\end{equation} 
+
+Here, {\bf u} denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. {\bf v} denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\bf L}$ is a known $N \times N$ matrix with $(i,j)$th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
+
+So, our equation $Lu=v$ has been \emph{projected} by approximation into the matrix equation ${\bf L} \cdot {\bf u} = {\bf v}$, which can be solved with standard numerical routines.
+
+Apart from the the weighted residuals method, the above procedure is also called the \emph{method of moments} or the \emph{generalised Galerkin method}.
+
+\subsubsection{Choice of basis and test functions}
+
+Starting from the general procedure outlined above, different numerical methods can be derived that are catalogued according to their choice of basis and test functions.
+
+If basis and test functions are chosen equal, i.e. $b_i(x) = w_i(x)$, the the method is called the (non--generalised) \emph{Galerkin method}. Often this leads to a formulation which can be cast in a variational form, having the advantages already outlined previously.
+
+Another choice is
+
+\begin{equation}
+w_j(x) = \delta(x-x_j)
+\end{equation} 
+
+This corresponds to demanding the the error residual vanishes exactly at the points $x_j$ when the scalar product is defined as the integral of the product:
+
+\begin{equation}
+\left\langle R(x), w_j(x) \right\rangle = \int R(x) \delta(x-x_j) dx = R(x_j) = 0
+\end{equation} 
+
+This is called the \emph{point matching} or \emph{collocation method}.
+
+\begin{sidebar}
+\begin{ex}
+Assuming a commutative scalar product, show that the choice 
+
+$$w_i(x) = L b_i(x)$$
+
+leads to the minimisation of the norm of the error residual 
+
+$$\left\langle R(x), R(x) \right\rangle$$ 
+
+Because of this property, this choice is called the \emph{least-squares residual} method.
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+In the least-squares residual method, what is the geometrical interpretation of imposing that 
+
+$$\left\langle R(x), w_j(x) \right\rangle$$ 
+
+for all values of $j$?
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Construct an example where the Galerkin method and the least-squares residual method are identical.
+\end{ex}
+\end{sidebar}
+
+\subsubsection{Relation with finite elements, eigenmode expansion and finite differences}
+
+Although there is no exact one--to--one correspondence, finite elements and eigenmode expansion share a similar philosophy with the method of weighted residuals, most notably the concept of projecting an unknown function using a set of basis functions.
+
+In the finite element method, basis functions are the interpolation or shape functions. Because they are non--zero only in a limited area of the computational domain (the finite element), they are called \emph{subdomain basis functions}. Weighting functions are chosen identical to test functions. 
+
+In the eigenmode expansion method, basis and test functions are also equal and are chosen to be the eigenmodes of each layer. The scalar product used is defined as the overlap integral 
+
+\begin{equation}
+\left\langle \mathbf{E}_{m},\mathbf{H}_{n}\right\rangle \equiv \iint _{s}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\bf S}
+\end{equation}
+
+As far as finite differences are concerned, one could say that the basis functions are a set of delta functions at each grid point, however this is perhaps stretching the analogy a bit too far.
+
+Another interesting comparison between finite differences, finite elements and eigenmode expansion is how they differ in terms of what we could loosely call ``local extent''. A second order finite difference approach only looks at neighbouring points in order to calculate derivatives. For a finite element approach, information from a larger spatial area is taken into account, namely the behaviour of the function over a single element. Finally, eigenmode expansion is like finite elements in the limit of a single element spanning the entire domain, and has the largest spatial extent.
+
+
+\pagebreak
+\section*{Boris Grigorievich Galerkin (1871--1945)}
+
+\parpic{\includegraphics[scale=0.5]{numeric/figures/galerkin}}
+
+Boris Grigorievich Galerkin came from a poor family and this was to mean that he had a harder time through his years of education than would otherwise have been the case. He attended secondary school in Minsk, then in 1893 he entered the Petersburg Technological Institute. Here he studied mathematics and engineering but he needed to make money to survive so at first he took on private tutoring, then from 1896 he worked as a designer. 
+
+After graduating from the Technological Institute in 1899 he got a job at the Kharkov Locomotive Plant. In 1903 Galerkin went to St Petersburg and there he became engineering manager at the Northern Mechanical and Boiler Plant. 
+
+From 1909 Galerkin began to study building sites and construction works throughout Europe. In the same year he began teaching at the Petersburg Technological Institute. His first publication on longitudinal curvature also appeared in 1909, work which carried on from beginnings which had been laid by Euler. This paper was highly relevant to his study of construction sites since the results were applied to the construction of bridges and frames for buildings. 
+
+His visits around European construction sites ended around 1914 but his academic work then turned to the area for which he is today best known, namely the method of approximate integration of differential equations known as the Galerkin method. He published his finite element method in 1915. 
+
+In 1920 Galerkin was promoted to Head of Structural Mechanics at the Petersburg Technological Institute. By this time he also held two chairs, one in elasticity at the Leningrad Institute of Communications Engineers and one in structural mechanics at Leningrad University. 
+
+In 1921 the St Petersburg Mathematical Society was reopened (it had closed in 1917 due to the Russian Revolution) as the Petrograd Physical and Mathematical Society. Galerkin played a major role in the Society along with Steklov, Sergei Bernstein, Friedmann and others. 
+
+Other work for which Galerkin is famous is his work on thin elastic plates. His major monograph on this topic Thin Elastic Plates was published in 1937. From 1940 until his death, Galerkin was head of the Institute of Mechanics of the Soviet Academy of Sciences. 
+
+(J.J. O'Connor and E.F. Robertson, from http://www--gap.dcs.st--and.ac.uk)
