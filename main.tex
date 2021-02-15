@@ -1,0 +1,293 @@
+% Load the kaobook class
+\documentclass[
+fontsize=10pt, % Base font size
+	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
+]{kaobook}
+
+% Choose the language
+\usepackage[english]{babel} % Load characters and hyphenation
+\usepackage[english=british]{csquotes}	% English quotes
+
+% Load the bibliography package
+\usepackage{styles/kaobiblio}
+\addbibresource{minimal.bib} % Bibliography file
+
+% Load mathematical packages for theorems and related environments. NOTE: choose only one between 'mdftheorems' and 'plaintheorems'.
+\usepackage{styles/mdftheorems}
+%\usepackage{styles/plaintheorems}
+
+% Load the package for hyperreferences
+\usepackage{styles/kaorefs}
+
+\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+
+% Own modifications
+
+\definecolor{headingbordeaux}{HTML}{AF2E46}
+\definecolor{headingblue}{HTML}{004A90}
+\definecolor{greenbackground}{HTML}{F0F7ED}
+\definecolor{bluebackground}{HTML}{EFF8FD}
+
+\addtokomafont{chapter}{\color{headingbordeaux}}
+\addtokomafont{section}{\color{headingblue}}
+\addtokomafont{subsection}{\color{headingbordeaux}}
+
+% Box style
+\mdfsetup{skipabove=\topskip,skipbelow=0pt}%-.5\topskip}
+\mdfdefinestyle{mdfkaoexer}{
+	skipabove=\topskip,
+	skipbelow=\topskip, % Does not work :(
+	rightmargin=0pt,
+	leftmargin=0pt,
+	innertopmargin=4pt,
+	innerbottommargin=6pt,
+	innerrightmargin=3pt,
+	innerleftmargin=3pt,
+	topline=true,
+	bottomline=true,
+	rightline=false,
+	leftline=false,
+	%linewidth=1pt,
+	%roundcorner=0pt,
+	%font={},
+	%frametitlefont={},
+	frametitlerule=true,
+	%linecolor=black,
+	%backgroundcolor=LightBlue,
+	%fontcolor=black,
+	%frametitlebackgroundcolor=LightBlue,
+  }
+  
+\theoremstyle{kaoexercise}
+\declaretheorem[
+	name=Exercise,
+	%refname={example,examples},
+	refname={Exercise,Exercises},
+	Refname={Exercise,Exercises},
+	numberwithin=chapter,
+	mdframed={
+		style=mdfkaoexer,
+		backgroundcolor=bluebackground,
+		%frametitlebackgroundcolor=\@theorembackground,
+	},
+]{exer}
+
+\declaretheoremstyle[
+	%spaceabove=.5\thm@preskip,
+	%spacebelow=.5\thm@postskip,
+	%headfont=\normalfont\bfseries,
+	%notefont=\normalfont, notebraces={ (}{)},
+	%bodyfont=\small,
+	%headformat={\NAME\space\NUMBER\space\NOTE},
+	headpunct={},
+    postheadspace=0em,
+    headindent=0em,
+	%prefoothook={\hfill\qedsymbol}
+	%refname={theorem,theorems},
+	%Refname={Theorem,Theorems},
+]{kaocue}
+
+\theoremstyle{kaocue}
+\declaretheorem[
+	name=,
+	numbered=no,
+	mdframed={
+		style=mdfkaoexer,
+		backgroundcolor=greenbackground,
+	},
+    ]{cue}
+
+% Dummy environments for use by the Python preprocessor.
+
+\newenvironment{ans}% 
+{% begin code
+ \linebreak\textbf{Answer}%
+}%
+
+\newenvironment{hnt}% 
+{% begin code
+ \linebreak\textbf{Hint}%
+}%
+
+
+% Different icons.
+
+\newcommand\iconmarginoffset{-3pt}
+\newcommand\iconheight{15pt}
+\newcommand{\trivial}{\includegraphics[height=\iconheight]{icons/trivial.png}}
+\newcommand{\normal}{\includegraphics[height=\iconheight]{icons/normal.png}}
+\newcommand{\hard}{\includegraphics[height=\iconheight]{icons/hard.png}}
+\newcommand{\hint}{\includegraphics[height=\iconheight]{icons/hint.png}}
+\newcommand{\answer}{\includegraphics[height=\iconheight]{icons/answer.png}}
+\newcommand{\ugent}{\includegraphics[height=\iconheight]{icons/ugent.png}}
+\newcommand{\youtube}{\includegraphics[height=\iconheight]{icons/video.png}}
+
+
+\newcommand{\sectionmarginoffset}{-1pt} % hack
+\newcommand{\sectionyoutubeugent}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}\,\,\ugent}#1}}
+\newcommand{\sectionyoutube}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}}#1}}
+\newcommand{\sectionugent}[1]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\ugent}#1}}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	BOOK INFORMATION
+%----------------------------------------------------------------------------------------
+
+\titlehead{Mathematics for Photonics}
+\title[Mathematics for Photonics]{Mathematics for Photonics}
+\author[PB]{Peter Bienstman}
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+
+\KOMAoptions{twoside=semi}
+\input{preamble/frontpage}
+\KOMAoptions{twoside=false}
+
+\frontmatter % Denotes the start of the pre-document content, uses roman numerals
+
+\setcounter{page}{1}
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+\uppertitleback{\@titlehead} % Header
+
+\lowertitleback{
+	
+	\textbf{Licence} \\
+	\ccbyncsa
+	
+	To view a copy of the CC4 code, visit: \\\url{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+	
+	\medskip
+	
+	\textbf{Colophon} \\
+	This document was typeset with the help of \href{https://sourceforge.net/projects/koma-script/}{\KOMAScript} and \href{https://www.latex-project.org/}{\LaTeX} using the \href{https://github.com/fmarotta/kaobook/}{kaobook} class.
+	
+	%\medskip
+	
+	%\textbf{Publisher} \\
+	%First printed in May 2019 by \@publishers
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+%\dedication{
+%	The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
+%	\flushright -- D'Arcy Wentworth Thompson
+%}
+
+%----------------------------------------------------------------------------------------
+%	OUTPUT TITLE PAGE AND PREVIOUS
+%----------------------------------------------------------------------------------------
+
+% Note that \maketitle outputs the pages before here
+
+% If twoside=false, \uppertitleback and \lowertitleback are not printed
+% To overcome this issue, we set twoside=semi just before printing the title pages, and set it back to false just after the title pages
+\KOMAoptions{twoside=semi}
+\maketitle
+\KOMAoptions{twoside=false}
+
+%----------------------------------------------------------------------------------------
+%	PREFACE
+%----------------------------------------------------------------------------------------
+
+
+\input{preamble/preface}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
+%----------------------------------------------------------------------------------------
+
+\begingroup % Local scope for the following commands
+
+% Define the style for the TOC, LOF, and LOT
+%\setstretch{1} % Uncomment to modify line spacing in the ToC
+\hypersetup{linkcolor=headingblue} % Uncomment to set the colour of links in the ToC
+\setlength{\textheight}{230\vscale} % Manually adjust the height of the ToC pages
+
+% Turn on compatibility mode for the etoc package
+\etocstandarddisplaystyle % "toc display" as if etoc was not loaded
+\etocstandardlines % "toc lines as if etoc was not loaded
+
+\tableofcontents % Output the table of contents
+
+%\listoffigures % Output the list of figures
+
+% Comment both of the following lines to have the LOF and the LOT on different pages
+%\let\cleardoublepage\bigskip
+%\let\clearpage\bigskip
+
+%\listoftables % Output the list of tables
+
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
+\setchapterstyle{kao} % Choose the default chapter heading style
+
+\input{helmholtz/helmholtz}
+%\input{complex/complex}
+%\input{special/special}
+%\input{numeric/numeric}
+%\input{periodic/periodic}
+%\input{dynamic/dynamic}
+
+% Old chapter, no longer used.
+% \input{stochastic/stochastic}
+
+
+\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+
+%\pagelayout{wide} % No margins
+%\addpart{Appendix}
+%\pagelayout{margin} % Restore margins
+
+%\chapter{Some more blindtext}
+
+%\blindtext
+
+%----------------------------------------------------------------------------------------
+
+\backmatter % Denotes the end of the main document content
+\setchapterstyle{plain} % Output plain chapters from this point onwards
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% Manually created biobliograhpy:
+\input{postamble/bibliography}
+
+% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+
+%\defbibnote{bibnote}{Here are the references in citation order.\par\bigskip} % Prepend this text to the bibliography
+%\printbibliography[heading=bibintoc, title=Bibliography, prenote=bibnote] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+
+%\printindex % Output the index
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

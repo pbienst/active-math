@@ -1,7 +1,6 @@
 \chapter{Complex calculus}
 \label{h:complex}
 
-\setcounter{page}{1}
 
 \begin{quote}
 The shortest path between two truths in the real domain passes through the
@@ -19,142 +18,15 @@ almost an amphibian between being and not being.
 
 \minitoc
 
-
 In this chapter, we will discuss the basic principles of complex analysis. We
 will define functions of a complex variable and show how to differentiate and
 integrate them. In order to facilitate the calculation of integrals, residue
 calculus is introduced. Finally, we discuss conformal transformations as a way
 to map problems to equivalent ones having an 'easier' geometry. 
 
-We will see that complex analysis has a number of direct applications in
-photonics, e.g. the Kramers--Kronig dispersion relations, and the use of
-conformal transformations to study waveguide bends.
-
-\section{The complex wave equation}
-
-In the absence of current sources, Maxwell's curl equations in the time domain
-are given by
-
-\begin{equation}
-      \nabla \times {\bf E} ({\bf r},t) = - \mu({\bf r)} \frac{\partial {\bf H}
-({\bf r} ,t)}{\partial t} \label{eq-rot-E}
-\end{equation}
-\begin{equation}
-      \nabla \times {\bf H} ({\bf r},t) = \varepsilon({\bf r}) \frac{\partial
-{\bf E}({\bf r},t)}{\partial t} \label{eq-rot-H}
-\end{equation}
-
-For the common case of linear isotropic media, the dielectric permittivity
-$\varepsilon$ and the magnetic permeability $\mu$ are scalars, which can however
-be a function of the spatial coordinate ${\bf r}$.
-
-In the next chapters, we will restrict ourselves to the important case where all
-the fields have a harmonic time dependence with a fixed frequency $\omega$, e.g.
-for the $x$--component of the electric field:
-
-\begin{equation}
-E_x({\bf r},t) = E_{x,0}({\bf r}) \cos \left( \omega t + \phi_{E_x} ({\bf r})
-\right) \label{eq-phasor}
-\end{equation}
-
-Similar expressions can be written for the other field components and for the
-magnetic field. It is convenient to introduce a complex number $\tilde{E}_x$
-called a \emph{phasor}, that is defined as
-
-\begin{equation}
-\tilde{E}_x(\mathbf{r})=E_{x,0}({\bf r}) e^{j \phi_{E_x}({\bf r})}
-\end{equation}
-
-The relation between this complex phasor and the real electric field is then
-simply given by
-
-\begin{equation}
-E_x({\bf r},t) = \Re \left(\tilde{E}_x({\bf r}) e^{j \omega t}\right)
-\end{equation}
-
-By taking the time derivative of Eq.~\ref{eq-phasor}, it is easy to show that 
-
-\begin{equation}
-\frac{\partial E_x({\bf r},t)}{\partial t} = \Re \left(j \omega \tilde{E}_x({\bf
-r}) e^{j \omega t}\right)
-\end{equation}
-
-Therefore, the phasor corresponding to $\partial E_x({\bf r},t) / \partial t$ is
-given by $j \omega \tilde{E}_x({\bf r})$.
-
-In what follows, we will omit the tilde and implicitly assume that we are always
-dealing with phasors. We can also collect the phasors for all field components
-in complex vectors ${\bf E}$ and ${\bf H}$. Using phasor notation,
-Eq.~\ref{eq-rot-E} and \ref{eq-rot-H} become
-
-\begin{equation}
-      \nabla \times {\bf E}({\bf r}) = - j \omega \mu({\bf r}) {\bf H}({\bf r})
-\label{eq-rot-E-phas}
-\end{equation}
-\begin{equation}   
-      \nabla \times {\bf H}({\bf r}) = j \omega \varepsilon({\bf r}) {\bf
-E}({\bf r}) \label{eq-rot-H-phas}
-\end{equation}
-
-By taking the curl of Eq.~\ref{eq-rot-E-phas} and plugging
-Eq.~\ref{eq-rot-H-phas} in the result we get
-
-\begin{equation}
-\nabla \times \nabla \times {\bf E}({\bf r}) = \omega^2 \varepsilon({\bf r})
-\mu({\bf r}) {\bf E}({\bf r}) 
-\end{equation}
-
-From vector calculus we know that
-
-\begin{equation}
-\nabla \times \nabla \times {\bf E}({\bf r}) = \nabla (\nabla \cdot {\bf E}({\bf
-r})) - \nabla^2 {\bf E}({\bf r})
-\end{equation}
-
-Let's for the moment consider a uniform medium without charge $\rho$. In that
-case, Maxwell's divergence laws tell us that $\nabla \cdot {\bf E}({\bf r})=0$,
-leading to
-
-\begin{equation}
-\nabla^2 {\bf E}({\bf r}) + k^2 {\bf E}({\bf r}) = 0 \label{eq-helmholtz}
-\end{equation}
-
-where we have introduced the wave vector $k=\omega \sqrt{\varepsilon
-\mu}$.
-
-Eq.~\ref{eq-helmholtz} is called the (vectorial) Helmholtz equation. Note that
-the same equation can also be derived for the magnetic field ${\bf H}$. In
-Cartesian coordinates, each of the vectorial components of ${\bf E}$ and ${\bf
-H}$ satisfy a scalar Helmholtz equation:
-
-\begin{equation}
-\nabla^2 \psi({\bf r}) + k^2 \psi({\bf r}) = 0 \label{eq-helmholtz-1}
-\end{equation}
-
-Now, if we are studying a system which has a piecewise constant refractive
-index, Eq.~\ref{eq-helmholtz-1} will be valid in each of the uniform subregions.
-So formally we can write for the scalar Helmholtz equation in a medium with
-discrete index jumps:
-
-\begin{equation}
-\fbox{$\displaystyle
-\nabla^2 \psi({\bf r}) + k_0^2 n^2({\bf r}) \psi({\bf r}) = 0
-\label{eq-helmholtz-3}
-$}
-\end{equation}
-
-Here, $k_0=\omega \sqrt{\varepsilon_0 \mu_0}$ is the wave vector in vacuum, and
-the refractive index $n$ is defined by $n=\sqrt{\varepsilon \mu} /
-\sqrt{\varepsilon_0 \mu_0}$.
-
-Eq.~\ref{eq-helmholtz-3} is strictly speaking only valid \emph{inside} each
-uniform subregion. At the interface between different media we still have to
-deal with the appropriate continuity conditions for the fields.
-
-Since $\psi$ is a complex number, it seems worthwhile to study the calculus of
-functions of a complex variable. We will see that this has a number of direct
-applications in photonics, e.g. the Kramers--Kronig dispersion relations, and
-the use of conformal transformations to study waveguide bends.
+We will also study a number of direct applications of complex analysis, e.g. the 
+Kramers--Kronig dispersion relations, and the use of conformal transformations 
+to model waveguide bends.
 
 \section{Functions of a complex variable}
 
