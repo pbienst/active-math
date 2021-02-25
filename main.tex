@@ -101,9 +101,9 @@ fontsize=10pt, % Base font size
 
 % Dummy environments for use by the Python preprocessor.
 
-\newenvironment{ans}% 
+\newenvironment{sol}% 
 {% begin code
- \linebreak\textbf{Answer}%
+ \linebreak\textbf{Solution}%
 }%
 
 \newenvironment{hnt}% 
@@ -120,13 +120,13 @@ fontsize=10pt, % Base font size
 \newcommand{\normal}{\includegraphics[height=\iconheight]{icons/normal.png}}
 \newcommand{\hard}{\includegraphics[height=\iconheight]{icons/hard.png}}
 \newcommand{\hint}{\includegraphics[height=\iconheight]{icons/hint.png}}
-\newcommand{\answer}{\includegraphics[height=\iconheight]{icons/answer.png}}
+\newcommand{\solution}{\includegraphics[height=\iconheight]{icons/answer.png}}
 \newcommand{\ugent}{\includegraphics[height=\iconheight]{icons/ugent.png}}
-\newcommand{\youtube}{\includegraphics[height=\iconheight]{icons/video.png}}
+\newcommand{\youtube}{\,\,\includegraphics[height=\iconheight]{icons/video.png}\,\,\,}
 
 
 \newcommand{\sectionmarginoffset}{-1pt} % hack
-\newcommand{\sectionyoutubeugent}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}\,\,\ugent}#1}}
+\newcommand{\sectionyoutubeugent}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}\,\ugent}#1}}
 \newcommand{\sectionyoutube}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}}#1}}
 \newcommand{\sectionugent}[1]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\ugent}#1}}
 
@@ -269,6 +269,8 @@ fontsize=10pt, % Base font size
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
+\input{solutions}
+\input{hints}
 % Manually created biobliograhpy:
 \input{postamble/bibliography}
 
