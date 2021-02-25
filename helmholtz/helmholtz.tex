@@ -1,10 +1,18 @@
 \setcounter{chapter}{-1}
+\setchapterpreamble[u]{\margintoc}
 \chapter{The Helmholtz equation}
 \label{h:helmholz}
 
 In this introductory chapter, we will review the Helmholtz equation, as it is fundamental in photonics, and will be used in many of the subsequent chapters.
 
 \sectionyoutubeugent{Maxwell's equations in the frequency domain}{Rx6ptGNSuKA}
+
+\begin{marginfigure}[+0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/James_Clerk_Maxwell#/media/File:James_Clerk_Maxwell.png
+  \includegraphics{helmholtz/figures/james_clerk_maxwell}
+  \caption{James Clerk Maxwell}
+\end{marginfigure}
 
 To start with, let's recall Maxwell's curl equations in the time domain. In the absence of current sources, they are given by
 
@@ -83,17 +91,21 @@ These are Maxwell's equations expressed in the frequency domain.
 \end{exer}
 
 \begin{exer}
-  % \noindent\marginnote[\iconmarginoffset]{\trivial \answer \, \youtube \,\,\, \ugent}How do you need to change Eq.~\ref{eq-phasor} so that the time dependence of a phasor corresponds to $e^{-j \omega t}$?
   % difficulty: trivial
- How do you need to change Eq.~\ref{eq-phasor} so that the time dependence of a phasor corresponds to $e^{-j \omega t}$? 
+ How do you need to change Eq.~\ref{eq-phasor}, so that the time dependence of a phasor corresponds to $e^{-j \omega t}$? 
 \end{exer}
 
 \section{The Helmholtz equation}
 
-By taking the curl of Eq.~\ref{eq-rot-E-phas} and plugging Eq.~\ref{eq-rot-H-phas} in the result we get
+\begin{cue}
+Take the curl of Eq.~\ref{eq-rot-E-phas} and use Eq.~\ref{eq-rot-H-phas}.
+\end{cue}
+
+By taking the curl of Eq.~\ref{eq-rot-E-phas} and plugging Eq.~\ref{eq-rot-H-phas} in the result, we get
 
 \begin{equation}
-\nabla \times \nabla \times {\mathbf E}({\mathbf r}) = \omega^2 \varepsilon({\mathbf r}) \mu({\mathbf r}) {\mathbf E}({\mathbf r}) 
+  \nabla \times \nabla \times {\mathbf E}({\mathbf r}) = \omega^2 \varepsilon({\mathbf r}) \mu({\mathbf r}) {\mathbf E}({\mathbf r})
+  \label{eq-helm-1}
 \end{equation}
 
 From vector calculus we know that
@@ -101,6 +113,10 @@ From vector calculus we know that
 \begin{equation}
 \nabla \times \nabla \times {\mathbf E}({\mathbf r}) = \nabla (\nabla \cdot {\mathbf E}({\mathbf r})) - \nabla^2 {\mathbf E}({\mathbf r})
 \end{equation}
+
+\begin{cue}
+Use this to simplify Eq. \ref{eq-helm-1} in a uniform medium without charge $\rho$. 
+\end{cue}
 
 Let's for the moment consider a uniform medium without charge $\rho$. In that case, Maxwell's divergence laws tell us that $\nabla \cdot {\mathbf E}({\mathbf r})=0$, leading to
 
@@ -111,6 +127,13 @@ Let's for the moment consider a uniform medium without charge $\rho$. In that ca
 where we have introduced the wave vector $k=\omega \sqrt{\varepsilon \mu}$.
 
 Eq.~\ref{eq-helmholtz} is called the (vectorial) Helmholtz equation. Note that the same equation can also be derived for the magnetic field ${\mathbf H}$. In Cartesian coordinates, each of the vectorial components of ${\mathbf E}$ and ${\mathbf H}$ satisfy a scalar Helmholtz equation:
+
+\begin{marginfigure}[-0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Hermann_von_Helmholtz#/media/File:Hermann_von_Helmholtz.jpg
+  \includegraphics{helmholtz/figures/Hermann_von_Helmholtz}
+  \caption{Hermann von Helmholtz}
+\end{marginfigure}
 
 \begin{equation}
 \nabla^2 \psi({\mathbf r}) + k^2 \psi({\mathbf r}) = 0 \label{eq-helmholtz-1}
@@ -130,16 +153,28 @@ Eq.~\ref{eq-helmholtz-3} is strictly speaking only valid \emph{inside} each unif
 Since $\psi$ is a complex number, it seems worthwhile to study the calculus of functions of a complex variable. We will see that this has a number of direct applications in photonics, e.g. the Kramers--Kronig dispersion relations, and the use of conformal transformations to study waveguide bends.
 
 \begin{exer}
-solve in 1D
-\end{exer}
-  
-\begin{exer}
-uniform assumption
+    % difficulty: trivial
+Solve the Helmholtz equation in a single uniform medium.
 \end{exer}
 
 \begin{exer}
-Helmholtz with if we use a different time dependence.
+    % difficulty: trivial
+What does the Helmholz equation look like in case we use the time convention  $e^{-j \omega t}$? 
 \end{exer}
+
+\begin{exer}
+      % difficulty: hard
+The Helmholtz equation we derived here is only valid for uniform media. Exactly which step of the derivation breaks down in non-uniform media?
+\end{exer}
+
+\section*{Review questions}
+
+\begin{itemize}
+\item What is a phasor?
+\item Write down Maxwell's curl equations in the frequency domain.
+\item Write down the Helmholtz equation.
+\end{itemize}
+
 
 
 %%% Local Variables:

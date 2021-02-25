@@ -34,6 +34,12 @@ fontsize=10pt, % Base font size
 \addtokomafont{section}{\color{headingblue}}
 \addtokomafont{subsection}{\color{headingbordeaux}}
 
+% Only used for important formulas.
+
+\renewcommand\fbox{\fcolorbox{red}{white}}
+\setlength{\fboxrule}{1.5pt}
+\setlength{\fboxsep}{10pt}
+
 % Box style
 \mdfsetup{skipabove=\topskip,skipbelow=0pt}%-.5\topskip}
 \mdfdefinestyle{mdfkaoexer}{
