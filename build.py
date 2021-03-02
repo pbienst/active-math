@@ -1,4 +1,4 @@
-# Build the differert variants of the document, extract hints and solutions
+# Build the different variants of the document, extract hints and solutions
 # to their own chapters
 
 import os

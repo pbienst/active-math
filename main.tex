@@ -105,6 +105,17 @@ fontsize=10pt, % Base font size
 	},
     ]{cue}
 
+\theoremstyle{kaocue}
+\declaretheorem[
+	name=,
+	numbered=no,
+	mdframed={
+		style=mdfkaoexer,
+		backgroundcolor=bluebackground,
+	},
+    ]{exunmarked}
+    
+  
 % Dummy environments for use by the Python preprocessor.
 
 \newenvironment{sol}% 
@@ -167,9 +178,8 @@ fontsize=10pt, % Base font size
 \lowertitleback{
 	
 	\textbf{Licence} \\
-	\ccbyncsa
-	
-	To view a copy of the CC4 code, visit: \\\url{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
+	\ccbyncsa \\
+	This work is licenced under a Creative Commons 4.0 Attribution-NonCommercial-ShareAlike licence. To view a copy of the CC4 code, visit: \\\url{https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode}
 	
 	\medskip
 	
@@ -210,6 +220,8 @@ fontsize=10pt, % Base font size
 
 
 \input{preamble/preface}
+\input{preamble/how_to_use}
+\input{preamble/ugent}
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
