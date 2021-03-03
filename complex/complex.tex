@@ -1,34 +1,32 @@
+\setchapterpreamble[u]{\margintoc}
 \chapter{Complex calculus}
 \label{h:complex}
 
-
 \begin{quote}
-The shortest path between two truths in the real domain passes through the
-complex domain.
+The shortest path between two truths in the real domain passes through the complex domain.
 
 --- Jacques Hadamard
 \end{quote}
 
 \begin{quote}
-The imaginary number is a fine and wonderful recourse of the divine spirit,
-almost an amphibian between being and not being.
+The imaginary number is a fine and wonderful recourse of the divine spirit, almost an amphibian between being and not being.
 
 --- Gottfried Wilhelm Leibniz
 \end{quote}
 
-\minitoc
+\begin{quote}
+  Life is complex: it has both real and imaginary components.
+  
+--- Rich Rosen
+\end{quote}
 
-In this chapter, we will discuss the basic principles of complex analysis. We
-will define functions of a complex variable and show how to differentiate and
-integrate them. In order to facilitate the calculation of integrals, residue
-calculus is introduced. Finally, we discuss conformal transformations as a way
-to map problems to equivalent ones having an 'easier' geometry. 
+In this chapter, we will discuss the basic principles of complex analysis and its applications.
 
-We will also study a number of direct applications of complex analysis, e.g. the 
-Kramers--Kronig dispersion relations, and the use of conformal transformations 
-to model waveguide bends.
+We will define functions of a complex variable and show how to differentiate and integrate them. In order to facilitate the calculation of integrals, residue calculus is introduced. Finally, we discuss conformal transformations as a way to map problems to equivalent ones having an 'easier' geometry. 
 
-\section{Functions of a complex variable}
+We will also study a number of direct applications of complex analysis, e.g. the Kramers--Kronig dispersion relations, and the use of conformal transformations to model waveguide bends.
+
+\sectionugent{Functions of a complex variable}
 
 A function of a complex variable is simply defined as
 
@@ -36,60 +34,80 @@ A function of a complex variable is simply defined as
 f(z) \stackrel{def}{=} f(x + j y) \stackrel{def}{=}  u(x,y) + j v(x,y)
 \end{equation}
 
-Here, $u$ and $v$ are two real--valued functions of $x$ and $y$. Unsurprisingly,
-we call $u$ the real part of $f$ and $v$ the imaginary part of $f$.
+Here, $u$ and $v$ are two real--valued functions of $x$ and $y$. Unsurprisingly, we call $u$ the real part of $f$ and $v$ the imaginary part of $f$.
 
-
-\begin{sidebar}
-\begin{exa}
+\begin{cue}
 Take
 $$u = x^2 - y^2$$
 $$v = 2 x y$$
-Then
-$$f(z) = u + j v = x^2 - y^2 +2j x y = (x + jy)^2$$
-So, formally we can say that $u$ and $v$ define the function $f(z) = z^2$
-\end{exa}
-\end{sidebar}
+What is $f(z)$?
+\end{cue}
 
-\begin{sidebar}
-\begin{exa}
+In this case,
+
+$$f(z) = u + j v = x^2 - y^2 +2j x y = (x + jy)^2$$
+
+So, formally we can say that $u$ and $v$ define the function $f(z) = z^2$
+
+\begin{cue}
 Given
 $$f(z) = z z^* $$
 such that
 $$f(z) = (x + jy)(x - jy) = x^2 + y^2$$
-The corresponding $u$ and $v$ are therefore
+
+What are the corresponding $u$ and $v$?
+\end{cue}
+
+The real and imaginary parts are:
+
 $$u = x^2 + y^2$$
 $$v = 0$$
-\end{exa}
-\end{sidebar}
 
+\sectionugent{Derivatives of complex functions}
 
-
-\section{Derivatives of complex functions}
-
-Let us now differentiate complex functions. In analogy with real--valued
-functions, we would like to define the complex derivative as
+Let us now differentiate complex functions. In analogy with real--valued functions, we would like to define the complex derivative as
 
 \begin{equation}
-f' (z)=\frac{df}{dz}  \stackrel{def}{=} \lim_{\Delta z \to 0} \frac{f(z+\Delta
-z) - f(z)}{z+\Delta z - z} \label{eq-deriv}
+f' (z)=\frac{df}{dz} \stackrel{def}{=} \lim_{\Delta z \to 0} \frac{f(z+\Delta z) - f(z)}{z+\Delta z - z} \label{eq-deriv}
 \end{equation} 
 
-The problem here is that it is entirely possible that the result of
-Eq.~\ref{eq-deriv} is dependent on the direction of approach to the point $z$
-(see Fig.~\ref{fig-approach-z}).
+\begin{cue}
+Use this definition to find the derivative of $f(z)=z^2$.
+\end{cue}
 
-\begin{figure}
-\centering
-\includegraphics{complex/figures/approach_z}
+To calculate the derivative of  $f(z)=z^2$, we find that
+
+$$f'(z)=\lim_{\Delta z \to 0} \frac{(z+\Delta z)^2 - z^2}{\Delta z} = \lim_{\Delta z \to 0} \frac{2 z \Delta z - (\Delta z)^2}{\Delta z}=2z $$
+
+This gives the same result as in the real-valued case.
+
+\begin{cue}
+Try the same approach to find the derivative of $f(z)=|z|^2$.
+\end{cue}
+
+In this case, we get
+
+$$f'(z)=\lim_{\Delta z \to 0} \frac{|z+\Delta z|^2 - |z|^2}{\Delta z} $$
+
+The numerator is obviously real-valued, but the denominator is in general complex, so that the result of this operation would depend on the direction of approach encoded in $\Delta z$.
+
+This is obviously undesirable. Now, we can ask ourself the question, what are the conditions under which the derivative Eq.~\ref{eq-deriv} of a complex function is independent of the direction of approach?
+
+Let's have a look at the necessary conditions first. If the direction of approach does not matter at all, than we should certainly get the same result if we pick two special directions (see Fig.~\ref{fig-approach-z}).
+
+\begin{cue}
+ By splitting both $f$ and $z$ into their real and imaginary components, take the limit of $\Delta f / \Delta z$ along the horizontal direction.
+\end{cue}
+
+\begin{marginfigure}
+  \scalebox{0.75}{%
+    \includegraphics{complex/figures/approach_z}
+    }
 \caption{Different approaches to $z$ in the complex plane.}
 \label{fig-approach-z}
-\end{figure}
+\end{marginfigure}
 
-Let us derive sufficient conditions for which the value of the derivative is
-independent on the direction of approach.
-
-First, for an approach where $\Delta y = 0$ and $\Delta x \to 0$, we get
+Along the horizontal direction, $\Delta y = 0$, so taking the limit $\Delta x \to 0$, we get
 
 \begin{align}
 \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
@@ -101,7 +119,11 @@ x} \nonumber \\
 x}\label{eq-deriv-dx}
 \end{align} 
 
-Alternatively, for an approach where $\Delta x = 0$ and $\Delta y \to 0$, we get
+\begin{cue}
+Do the same for an approach along the vertical direction.
+\end{cue}
+
+Along the vertical direction, $\Delta x = 0$ and we should take the limit $\Delta y \to 0$:
 
 \begin{align}
 \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
@@ -113,9 +135,11 @@ y} \nonumber \\
 y}\label{eq-deriv-dy}
 \end{align}
 
-A \emph{necessary} condition for the complex derivative to be independent of the
-direction of approach, can be derived from equating the real and imaginary parts
-of Eq.~\ref{eq-deriv-dx} and \ref{eq-deriv-dy}:
+\begin{cue}
+Now derive a necessary condition for the complex derivative to be independent of the direction of approach.
+\end{cue}
+
+A necessary condition for the complex derivative to be independent of the direction of approach, can be derived from equating the real and imaginary parts of Eq.~\ref{eq-deriv-dx} and \ref{eq-deriv-dy}:
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -125,51 +149,49 @@ of Eq.~\ref{eq-deriv-dx} and \ref{eq-deriv-dy}:
 $}
 \end{equation} 
 
-These are called the \emph{Cauchy--Riemann conditions}. A complex function that
-satisfies these conditions is called \emph{analytic} (or holomorphic). Important
-to note is that for a function to be analytic, it necessarily has to be
-continuous and should not contain any singularities, otherwise the derivative
-would certainly be undefined.
+\begin{marginfigure}[-3.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Bernhard_Riemann#/media/File:Georg_Friedrich_Bernhard_Riemann.jpeg
+  \includegraphics{complex/figures/b_riemann}
+  \caption{Bernhard Riemann (1826-1866)}
+\end{marginfigure}
 
-We will now show that the Cauchy--Riemann conditions are not only necessary,
-they are also sufficient (assuming all partial derivatives are continuous). 
+
+These are called the \emph{Cauchy--Riemann conditions}. A complex function that satisfies these conditions is called \emph{analytic} (or holomorphic). Important to note is that for a function to be analytic, it necessarily has to be continuous and should not contain any singularities, otherwise the derivative would certainly be undefined.
+
+We will now show that the Cauchy--Riemann conditions are not only necessary, they are also sufficient (assuming all partial derivatives are continuous).
 
 We can write the total differential
 
 \begin{equation}
-d f = \left( \frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x}\right)
-d x+\left(\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y}\right) d
-y
+d f = \left( \frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x}\right) d x+\left(\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y}\right) d y
 \end{equation} 
 
 such that
 
 \begin{equation}
-\frac{d f}{d z} = \frac{\left(\frac{\partial u}{\partial x}+j\frac{\partial
-v}{\partial x}\right) d x+\left(\frac{\partial u}{\partial y}+j\frac{\partial
-v}{\partial y}\right) d y}{d x + j d y}
+\frac{d f}{d z} = \frac{\left(\frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x}\right) d x+\left(\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y}\right) d y}{d x + j d y}
 \end{equation} 
 
 or
 
 \begin{equation}
-\frac{d f}{d z} = \frac{\left(\frac{\partial u}{\partial x}+j\frac{\partial
-v}{\partial x}\right) +\left(\frac{\partial u}{\partial y}+j\frac{\partial
-v}{\partial y}\right) \frac{d y}{d x}}{1 + j \frac{d y}{d x}} \label{eq-cr-suf}
+\frac{d f}{d z} = \frac{\left(\frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x}\right) +\left(\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y}\right) \frac{d y}{d x}}{1 + j \frac{d y}{d x}} \label{eq-cr-suf}
 \end{equation} 
 
-We now need to prove that this expression is independent on $d y / d x$ in order
-for the complex derivatives to be independent of the direction of approach. Indeed, each direction of approach will have its own value of $d y / d x$ .
+\begin{cue}
+Where in Eq.~\ref{eq-cr-suf} is the direction of approach encoded? Get rid of that term by applying the Cauchy-Riemann conditions.
+\end{cue}
+
+We now need to prove that this expression is independent on $d y / d x$ in order for the complex derivatives to be independent of the direction of approach. Indeed, each direction of approach will have its own value of $d y / d x$ .
 
 Applying the Cauchy--Riemann conditions to the $y$--derivatives, we obtain
 
 \begin{equation}
-\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y} = -\frac{\partial
-v}{\partial x}+j\frac{\partial u}{\partial x}
+\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y} = -\frac{\partial v}{\partial x}+j\frac{\partial u}{\partial x}
 \end{equation}
 
-Substituting this into Eq.\ref{eq-cr-suf}, we get that the $d y / d x$
-dependence cancels out to give
+Substituting this into Eq.\ref{eq-cr-suf}, we get that the $d y / d x$ dependence cancels out to give
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -177,66 +199,60 @@ dependence cancels out to give
 $}
 \end{equation} 
 
-This equation also shows that only derivatives with respect to $x$ are needed to
-calculate the complex derivative.
+This equation also shows that only derivatives with respect to $x$ are needed to calculate the complex derivative.
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: trivial
+% ugent
 Are the following functions analytic? If so, calculate their derivative.
 $$\begin{array}{lcll}a) & f(z)=z^2 \\b) & f(z)=z z^* \\c) & f(z)= \Re(z)=x \end{array}$$
-\end{ex}
-\end{sidebar}
 
-\begin{sidebar}
-\begin{ex} \label{ex-harmonic}
+What rule-of-thumb can you derive from these results?
+\end{exer}
+
+\begin{exer}
+% difficulty: normal
+\label{ex-harmonic}
 $u$ and $v$ are the real and imaginary parts, respectively, of an analytic function $f(z)$. Show that $u$ and $v$ are \emph{harmonic} functions, i.e. they satisfy Laplace's equation
 $$\nabla^2 u = \nabla^2 v = 0$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex} \label{ex-harmonic}
+\begin{exer}
+ % difficulty: normal
 $u$ and $v$ are the real and imaginary parts, respectively, of an analytic function $f(z)$. Show that $|f'(z)|^2$ is equal to the Jacobian determinant
 $$\frac{\partial (u,v)}{\partial (x,y)} =  \begin{vmatrix} \partial u / \partial x & \partial u / \partial y \\ \partial v / \partial x & \partial v / \partial y \end{vmatrix}$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
 
+\sectionugent{Integrals of complex functions}
 
-\section{Integrals of complex functions}
+With differentiation under control, it is time to study integrals of complex functions. The integral of a complex function along a specified path ${C}$ between $z_0$ and $z_1$ (see Fig.~\ref{fig-integral}) is defined by
 
-\subsection{Definition}
-With differentiation under control, it is time to study integrals of complex
-functions. The integral of a complex function along a specified path
-$\mathcal{C}$ between $z_0$ and $z_1$ (see Fig.~\ref{fig-integral}) is defined
-by
-
-\begin{align}
-\int_\mathcal{C}f(z)dz = & \int_\mathcal{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
-\nonumber \\
-= & \int_\mathcal{C}\left[u(x,y)dx-v(x,y)dy\right] + j
-\int_\mathcal{C}\left[v(x,y)dx+u(x,y)dy\right] \label{eq-complex-int}
-\end{align} 
-
-\begin{figure}
+\begin{marginfigure}[-0.0cm]
 \centering
-\includegraphics[width=5cm]{complex/figures/integral}
+\includegraphics{complex/figures/integral}
 \caption{A complex line integral.}
 \label{fig-integral}
-\end{figure}
+\end{marginfigure}
 
-So, the integral of a complex function has been expressed in terms of well-known
-real line integrals, which are calculated in the normal way by parametrisation
-of the curve. (Note that in Eq.~\ref{eq-complex-int} $dx$ and $dy$ are not
-independent, but related by the choice of the integration path.)
+\begin{align}
+\int_{C}f(z)dz = & \int_{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
+\nonumber \\
+= & \int_{C}\left[u(x,y)dx-v(x,y)dy\right] + j
+\int_{C}\left[v(x,y)dx+u(x,y)dy\right] \label{eq-complex-int}
+\end{align} 
 
-\begin{sidebar}
-\begin{exa}
-Let's calculate the contour integral $\oint_\mathcal{C}z^ndz$ where the contour $\mathcal{C}$ is a counterclockwise circular path of radius $r$ around the origin $z=0$.
+So, the integral of a complex function has been expressed in terms of well-known real line integrals, which are calculated in the normal way by parametrisation of the curve. (Note that in Eq.~\ref{eq-complex-int} $dx$ and $dy$ are not independent, but related by the choice of the integration path.)
 
-We parametrise the curve in polar coordinates using $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$. We get
+Let's calculate the contour integral $\oint_{C}z^ndz$ where the contour ${C}$ is a counterclockwise circular path of radius $r$ around the origin $z=0$. Note that we do not necessarily need to split up the integral into its real and imaginary components, but that we can directly parametrise the complex path if we want.
 
-$$\oint_\mathcal{C} z^n dz = \int_0^{2\pi} \left(r^n e^{jn\theta}\right) \left(jr e^{j \theta}d \theta\right)=j r^{n+1} \int_0^{2\pi} e^{j(n+1)\theta} d \theta $$
+\begin{cue}
+Parametrise the curve in polar coordinates using $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$ and calculate the integral. 
+\end{cue}
+
+Expressing the unit cirle as $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$, we get
+
+$$\oint_{C} z^n dz = \int_0^{2\pi} \left(r^n e^{jn\theta}\right) \left(jr e^{j \theta}d \theta\right)=j r^{n+1} \int_0^{2\pi} e^{j(n+1)\theta} d \theta $$
 
 For $n \neq -1$ this is equal to
 
@@ -244,290 +260,310 @@ $$ \frac{r^{n+1}}{n+1}\left[e^{j(n+1)\theta}\right]_0^{2\pi}=0 $$
 
 because of the periodicity of the exponential. For $n=-1$, we obtain 
 
-$$ \oint_\mathcal{C} \frac{dz}{z} = j \int_0^{2\pi} d \theta = 2 \pi j $$
+$$ \oint_{C} \frac{dz}{z} = j \int_0^{2\pi} d \theta = 2 \pi j $$
 
 which is independent of $r$.
 
-\end{exa}
-\end{sidebar}
+Note that the results of this seemingly trivial integral will prove to have deep consequences later.
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: trivial
 Use parametrisation to calculate the integral
 
 $$\int_{z_0}^{z_1} dz$$
 
 for any given points $z_0$ and $z_1$.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\subsection{Cauchy's integral theorem (Cauchy I)}
+\sectionugent{Cauchy's integral theorem}
 
-One of two major theorems in complex calculus is Cauchy's integral theorem,
-which will succinctly call \emph{Cauchy I} in these notes. It states that 
+\begin{marginfigure}[+0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Augustin-Louis_Cauchy
+  \includegraphics{complex/figures/cauchy}
+  \caption{Augustin-Louis Cauchy (1789-1857)}
+\end{marginfigure}
+
+One of two major theorems in complex calculus is Cauchy's integral theorem. It states that 
 
 \begin{equation}
 \fbox{$\displaystyle
-\oint_{\mathcal{C}} f(z) dz = 0 \label{eq-cauchy-1}
+\oint_{{C}} f(z) dz = 0 \label{eq-cauchy-1}
 $}
 \end{equation}
 
-Important to note is that Eq.~\ref{eq-cauchy-1} only holds if $f(z)$ is analytic
-for all the points enclosed by the contour $\mathcal{C}$, as well as for the
-points on the contour itself. The symbol $\oint$ is used to emphasise that the
-path is closed.
+Important to note is that Eq.~\ref{eq-cauchy-1} only holds if $f(z)$ is analytic for all the points enclosed by the contour ${C}$, as well as for the points on the contour itself. The symbol $\oint$ is used to emphasise that the path is closed.
 
-To prove Eq.~\ref{eq-cauchy-1}, we first apply the definition of the complex
-contour integral given in Eq.~\ref{eq-complex-int}:
+\begin{cue}
+To prove Eq.~\ref{eq-cauchy-1}, first apply the definition of the complex contour integral given in Eq.~\ref{eq-complex-int}.
+\end{cue}
+
+This gives
 
 \begin{align}
-\oint_\mathcal{C}f(z)dz = & \oint_\mathcal{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
+\oint_{C}f(z)dz = & \oint_{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
 \nonumber \\
-= & \oint_\mathcal{C}\left[u(x,y)dx-v(x,y)dy\right] + j
-\oint_\mathcal{C}\left[v(x,y)dx+u(x,y)dy\right]  \label{eq-cauchy-proof}
+= & \oint_{C}\left[u(x,y)dx-v(x,y)dy\right] + j
+\oint_{C}\left[v(x,y)dx+u(x,y)dy\right]  \label{eq-cauchy-proof}
 \end{align}
- 
-The two (real--valued) line integrals on the right--hand side can be converted
-to surface integrals by making use of Stokes's Theorem:
 
-\begin{subequations}
+\begin{marginfigure}[-3cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Sir_George_Stokes,_1st_Baronet#/media/File:Ggstokes.jpg
+  \includegraphics{complex/figures/stokes}
+  \caption{George Stokes (1819-1903)}
+\end{marginfigure}
+
+In order to be able to use the Cauchy-Riemann conditions, we somehow need to bring partial derivatives into this formula. For this, we will use Stokes's theorem:
+
 \begin{equation}
-\oint_{\mathcal{\mathcal{C}}} {\bf A} \cdot d {\bf l} = \iint_S \nabla \times
-{\bf A} \cdot d {\bf S}
-\end{equation}  
-or in two dimensions (i.e. $A_z=0$ and the contour contained in the
-$(x,y)$--plane):
+\oint_{{{C}}} {\bf A} \cdot d {\bf l} = \iint_S \nabla \times {\bf A} \cdot d {\bf S}
+\end{equation}
+
+\begin{cue}
+Convert Stokes's theorem to our two-dimensional case.
+\end{cue}
+
+In two dimensions (i.e. $A_z=0$ and the contour contained in the $(x,y)$--plane), Stokes becomes:
+
 \begin{equation}
-\oint_{\mathcal{C}} \left(A_x dx + A_y dy\right) = \iint_S \left(\frac{\partial
+\oint_{{C}} \left(A_x dx + A_y dy\right) = \iint_S \left(\frac{\partial
 A_y}{\partial x} - \frac{\partial A_x}{\partial y} \right)dx dy
 \end{equation} 
-\end{subequations}
 
-For the first term in Eq.~\ref{eq-cauchy-proof}, we choose $A_x=u$ and $A_y=-v$
-such that
+\begin{cue}
+Figure out which values of $A_x$ and $A_y$ to use, so that we can apply Cauchy--Riemann to the first term in Eq.~\ref{eq-cauchy-proof}.
+\end{cue}
+
+For the first term in Eq.~\ref{eq-cauchy-proof}, we choose $A_x=u$ and $A_y=-v$ such that
 
 \begin{align}
-\oint_\mathcal{C}\left[u(x,y)dx-v(x,y)dy\right] =& \oint_{\mathcal{C}} \left(A_x
-dx + A_y dy\right) \nonumber \\
-=& \iint_S \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial
-y} \right)dx dy \nonumber \\
-=& -\iint_S \left(\frac{\partial v}{\partial x} + \frac{\partial u}{\partial y}
-\right)dx dy 
+\oint_{C}\left[u(x,y)dx-v(x,y)dy\right] =& \oint_{{C}} \left(A_x dx + A_y dy\right) \nonumber \\
+=& \iint_S \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y} \right)dx dy \nonumber \\ =& -\iint_S \left(\frac{\partial v}{\partial x} + \frac{\partial u}{\partial y} \right)dx dy 
 \end{align} 
 
 Because of the Cauchy--Riemann conditions Eq.~\ref{eq-Cauchy-Riemann}, this
 vanishes.
 
-A similar conclusion can be drawn for the second term in
-Eq.~\ref{eq-cauchy-proof} by setting $A_x=v$ and $A_y=u$, which proves that the
-entire integral in Eq.~\ref{eq-cauchy-1} vanishes.
+\begin{cue}
+Which values of $A_x$ and $A_y$ should we use for the second term in Eq.~\ref{eq-cauchy-proof}?
+\end{cue}
 
-\begin{sidebar}
-\begin{ex}
+A similar conclusion can be drawn for the second term in Eq.~\ref{eq-cauchy-proof} by setting $A_x=v$ and $A_y=u$, which proves that the entire integral in Eq.~\ref{eq-cauchy-1} vanishes.
+
+\begin{exer}
+% difficulty: trivial
 Prove that for an analytic function $f(z)$ the line integral 
 $$\int_{z_0}^{z_1}f(z)dz$$
 is independent on the exact path between $z_0$ and $z_1$.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\subsection {Cauchy's integral formula (Cauchy II)}
 
-The second major theorem in complex calculus is Cauchy's integral \emph{formula}
-(as opposed to Cauchy's integral \emph{theorem} from the previous section).
-Cauchy II states that for an analytic function $f(z)$
+\sectionugent{Cauchy's integral formula}
+
+The second major theorem in complex calculus is Cauchy's integral \emph{formula} (as opposed to Cauchy's integral \emph{theorem} from the previous section). Cauchy integral formula states that for an analytic function $f(z)$
 
 \begin{equation}
 \fbox{$\displaystyle
-\frac{1}{2 \pi j}\oint_{\mathcal{C}} \frac{f(z)} {z-z_0} dz = f(z_0)
+\frac{1}{2 \pi j}\oint_{{C}} \frac{f(z)} {z-z_0} dz = f(z_0)
 \label{eq-cauchy-2}
 $}
 \end{equation}
 
-Important here is that $z_0$ is a point enclosed by the contour $\mathcal{C}$.
-If $z_0$ were outside of the contour, then the integrand of
-Eq.~\ref{eq-cauchy-2} would be analytic in the entire region enclosed by the
-contour. In that case, Cauchy I applies and the integral vanishes.
+Important here is that $z_0$ is a point enclosed by the contour ${C}$.
 
-To prove Eq.~\ref{eq-cauchy-2}, we note that although the function $f(z)$ is
-analytic, $\frac{f(z)} {z-z_0}$ is not because is has a singularity at $z=z_0$.
-However, if we deform $\mathcal{C}$ to exclude the singularity as in
-Fig.~\ref{fig-cauchy-II}, Cauchy I does apply:
+\begin{cue}
+What would happen to Eq.~\ref{eq-cauchy-2} if  $z_0$ were outside of the contour?  
+\end{cue}
 
-\begin{equation}
-\oint_{\mathcal{C}} \frac{f(z)} {z-z_0} dz -\oint_{\mathcal{C}_2} \frac{f(z)}
-{z-z_0} dz=0
-\end{equation} 
+If $z_0$ were outside of the contour, then the integrand of Eq.~\ref{eq-cauchy-2} would be analytic in the entire region enclosed by the contour. In that case, Cauchy I applies and the integral vanishes.
 
-\begin{figure}
+\begin{marginfigure}
 \centering
 \includegraphics[width=5cm]{complex/figures/cauchy_II}
 \caption{Contour to prove Cauchy's formula.}
 \label{fig-cauchy-II}
-\end{figure}
+\end{marginfigure}
 
-Here, $\mathcal{C}$ is the original outer contour and $\mathcal{C}_2$ is the
-circle surrounding the point $z_0$ traversed in a counterclockwise direction
-(hence the minus sign). The two sections of the path along the contour line
-cancel because $f(z)$ is continuous.
+To prove Eq.~\ref{eq-cauchy-2}, we note that although the function $f(z)$ is analytic, $f(z)/(z-z_0)$ is not, because is has a singularity at $z=z_0$. However, if we deform ${C}$ to exclude the singularity as in Fig.~\ref{fig-cauchy-II}, we end up with a contour where Cauchy's theorem does apply.
 
-To calculate the integral along $\mathcal{C}_2$, we use the parametrisation
-$z=z_0 + r e^{j\theta}$:
+\begin{cue}
+Apply Cauchy's theorem to this extended contour, splitting up the contributions from its different parts.
+\end{cue}
+
+The result is
 
 \begin{equation}
-\oint_{\mathcal{C}_2} \frac{f(z)} {z-z_0} dz = \oint_{\mathcal{C}_2} \frac{f(z_0
+\oint_{{C}} \frac{f(z)} {z-z_0} dz -\oint_{{C}_2} \frac{f(z)}
+{z-z_0} dz=0
+\end{equation} 
+
+Here, ${C}$ is the original outer contour and ${C}_2$ is the circle surrounding the point $z_0$ traversed in a counterclockwise direction (hence the minus sign). The two sections of the path along the contour line cancel because $f(z)$ is continuous (a side effect of it being analytic).
+
+\begin{cue}
+Parametrise ${C}_2$ and calculate its contribution to the integral. Then, take the limit $ r \to 0 $ to prove Cauchy's formula.   
+\end{cue}
+
+To calculate the integral along ${C}_2$, we use the parametrisation $z=z_0 + r e^{j\theta}$:
+
+\begin{equation}
+\oint_{{C}_2} \frac{f(z)} {z-z_0} dz = \oint_{{C}_2} \frac{f(z_0
 + r e^{j\theta})} {r e^{j\theta}} \left(rje^{j \theta} d \theta\right)
 \end{equation}
 
 In the limit $ r \to 0 $ this becomes
 \begin{align}
-\oint_{\mathcal{C}_2} \frac{f(z)} {z-z_0} dz = & j f(z_0) \oint_{\mathcal{C}_2}
+\oint_{{C}_2} \frac{f(z)} {z-z_0} dz = & j f(z_0) \oint_{{C}_2}
 d \theta \nonumber \\
  = &2 \pi j f(z_0)
 \end{align}
  
 which proves Cauchy's integral formula.
 
-Note that this formula is quite remarkable. It means that if the values of an
-analytic function are specified on a contour, we immediately know the function
-values at all the interior points.
+Note that this formula is quite remarkable. It means that as soon as the values of an analytic function are specified on a contour, we immediately know the function values at all the interior points.
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: trivial
+% ugent
 Use Cauchy's formula to calculate 
-$$\oint_{\mathcal{C}}  \frac {e^z} {z+1} dz$$
-Here $C$ is a circle of radius 4 centered at the origin. 
-\end{ex}
-\end{sidebar}
+$$\oint_{{C}}  \frac {e^z} {z+1} dz$$
+Here ${C}$ is a circle of radius 4 centered at the origin. 
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: normal
 Use Cauchy's formula to calculate 
-$$\oint_{\mathcal{C}}  \frac {e^{az}} {z} dz$$
-Here $C$ is the unit circle and $a$ is a real-valued constant. Then, write this integral in terms of $\theta$ and show
+$$\oint_{{C}}  \frac {e^{az}} {z} dz$$
+Here ${C}$ is the unit circle and $a$ is a real-valued constant. Then, write this integral in terms of $\theta$ and show
 $$ \int_0^\pi e ^{a \cos \theta} \cos (a \sin \theta) d\theta = \pi $$ 
-\end{ex}
-\end{sidebar}
+\end{exer}
 
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: hard
+% ugent
+\begin{hnt}
+  Apply Cauchy's formula to each of the terms of
+  $$\frac{f(z_0+\Delta z_0) - f(z_0)}{\Delta z_0}$$
+  Then take the limit ${\Delta z_0} \to 0$.
+\end{hnt}
 Prove the following identity:
-$$f'(z_0)=\frac{1}{2 \pi j} \oint_{\mathcal{C}} \frac{f(z)} {(z-z_0)^2} dz$$
-(This expression can be used to (numerically) calculate the derivative of an analytic function.)
-Hint: apply Cauchy II to each of the terms of
-$$\frac{f(z_0+\Delta z_0) - f(z_0)}{\Delta z_0}$$
-Then take the limit ${\Delta z_0} \to 0$.
+$$f'(z_0)=\frac{1}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^2} dz$$
+
+This expression can be used to (numerically) calculate the derivative of an analytic function.
 \label{ex-cauchy-diff}
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
-By repeating the technique used in Ex. \ref{ex-cauchy-diff}, show that
-$$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{\mathcal{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
+\begin{exer}
+% difficulty: hard
+By repeating the technique used in Ex. \ref{ex-cauchy-diff}, show that $$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
+
 This also means that if a function is analytic, then the derivatives of any order automatically exist.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\section{Residue calculus}
+\sectionugent{Laurent series}
 
-\subsection{Laurent series}
+Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$. In this region, we can construct a contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
 
-Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$ (Fig.~\ref{fig-laurent}). In this region, we can construct a contour that only encloses points where the function is analytic, such that we can apply
-Cauchy II:
+\begin{cue}
+  Apply Cauchy's formula, splitting up the contour into its different parts.
+\end{cue}
+
+Cauchy's formula gives us
 
 \begin{equation}
-f(z)=\frac{1}{2 \pi j }\oint_{\mathcal{C}_1} \frac{f(z')} {z'-z} dz' -\frac{1}{2
-\pi j }\oint_{\mathcal{C}_2} \frac{f(z')} {z'-z} dz' \label{laurent_0}
+f(z)=\frac{1}{2 \pi j }\oint_{{C}_1} \frac{f(z')} {z'-z} dz' -\frac{1}{2
+\pi j }\oint_{{C}_2} \frac{f(z')} {z'-z} dz' \label{laurent_0}
 \end{equation} 
 
-\begin{figure}
-\centering
-\includegraphics[width=6cm]{complex/figures/laurent}
-\caption{Contour to derive Laurent's theorem.}
+\begin{marginfigure}
+\includegraphics{complex/figures/laurent}
+\caption{Contour to derive Laurent series.}
 \label{fig-laurent}
-\end{figure}
+\end{marginfigure}
 
-Here, $z$ is a fixed point on the inside of the contour, while $z'$ is the
-integration variable running along the contour. The two line segments cancel
-once again. Simple manipulation of Eq.~\ref{laurent_0} yields
+Here, $z$ is a fixed point on the inside of the contour, while $z'$ is the integration variable running along the contour. The two line segments cancel once again.
 
-\begin{equation}
-f(z)=\frac{1}{2 \pi j }\oint_{\mathcal{C}_1} f(z') \frac{1 / z'} {1-z / z'} dz'
-+ \frac{1}{2 \pi j }\oint_{\mathcal{C}_2} f(z') \frac{1 / z} {1 - z' / z} dz'
-\label{eq-laurent-1}
-\end{equation} 
-
-Note that $z$ is on the inside of $\mathcal{C}_1$, such that $| z | < |z'| $, or
-$ |z / z' | < 1$ in the first term in Eq.~\ref{eq-laurent-1}. Similarly, $z$ is
-on the outside of $\mathcal{C}_2$, such that $|z'| < | z | $, or $ |z'  / z| <
-1$ in the second term in Eq.~\ref{eq-laurent-1}.
-
-One can prove that the following straightforward generalisation of the
-well--known real series expansion holds:
+Our aim is to transform this formula into a series expansion. One can prove that the following straightforward generalisation of the well--known geometric series expansion holds:
 
 \begin{equation}
 \frac{1}{1-z} = \sum_{n=0}^\infty z^n, \hspace{.5cm} |z| < 1
 \end{equation}
 
+\begin{cue}
+Manipulate the different terms in Eq.~\ref{laurent_0} so that we are able to use the geometric series. Pay special attention to the radius of convergenc, by dividing the numerator and denominator by $z$ or $z'$.
+\end{cue}
+
+Simple manipulation of Eq.~\ref{laurent_0} yields
+
+\begin{equation}
+f(z)=\frac{1}{2 \pi j }\oint_{{C}_1} f(z') \frac{1 / z'} {1-z / z'} dz' + \frac{1}{2 \pi j }\oint_{{C}_2} f(z') \frac{1 / z} {1 - z' / z} dz'
+\label{eq-laurent-1}
+\end{equation} 
+
+Note that $z$ is on the inside of ${C}_1$, such that $| z | < |z'| $, or $ |z / z' | < 1$ in the first term in Eq.~\ref{eq-laurent-1}. Similarly, $z$ is on the outside of ${C}_2$, such that $|z'| < | z | $, or $ |z'  / z| <
+1$ in the second term in Eq.~\ref{eq-laurent-1}.
+
 With this, we can write Eq.~\ref{eq-laurent-1} as
 
 \begin{equation}
-f(z)=\frac{1}{2 \pi j }\oint_{\mathcal{C}_1} \frac{f(z')}{z'}
-\sum_{m=0}^{\infty} \left( \frac{z}{z'}\right)^m dz' + \frac{1}{2 \pi j
-}\oint_{\mathcal{C}_2} \frac{f(z')}{z} \sum_{n=0}^{\infty}
-\left(\frac{z'}{z}\right)^n dz'
-\end{equation} 
+f(z)=\frac{1}{2 \pi j }\oint_{{C}_1} \frac{f(z')}{z'} \sum_{m=0}^{\infty} \left( \frac{z}{z'}\right)^m dz' + \frac{1}{2 \pi j }\oint_{{C}_2} \frac{f(z')}{z} \sum_{n=0}^{\infty} \left(\frac{z'}{z}\right)^n dz'
+\end{equation}
+
+\begin{cue}
+Clean up this formula so that the coefficients of the power series become clearly visible.
+\end{cue}
 
 Provided we can exchange summation and integration, we can write
 
 \begin{equation}
-f(z)=\frac{1}{2 \pi j } \sum_{m=0}^{\infty} z^m \oint_{\mathcal{C}_1}
-\frac{f(z')}{z^{\prime (m+1)}} dz' + \frac{1}{2 \pi j } \sum_{n=0}^{\infty} z ^
-{-n-1} \oint_{\mathcal{C}_2}  {f(z')}  (z')^ n dz'
+f(z)=\frac{1}{2 \pi j } \sum_{m=0}^{\infty} z^m \oint_{{C}_1} \frac{f(z')}{z^{\prime (m+1)}} dz' + \frac{1}{2 \pi j } \sum_{n=0}^{\infty} z ^ {-n-1} \oint_{{C}_2}  {f(z')}  (z')^ n dz'
 \end{equation} 
 
 or more symmetrically
 
 \begin{equation}
-f(z)=\frac{1}{2 \pi j } \sum_{m=0}^{\infty} z^m \oint_{\mathcal{C}_1}
-\frac{f(z')}{z^{\prime (m+1)}} dz' + \frac{1}{2 \pi j } \sum_{n=1}^{\infty} z ^
-{-n} \oint_{\mathcal{C}_2}  \frac{f(z')}{z^{\prime^ {(-n+1)}}} dz'
+f(z)=\frac{1}{2 \pi j } \sum_{m=0}^{\infty} z^m \oint_{{C}_1} \frac{f(z')}{z^{\prime (m+1)}} dz' + \frac{1}{2 \pi j } \sum_{n=1}^{\infty} z ^ {-n} \oint_{{C}_2} \frac{f(z')}{z^{\prime^ {(-n+1)}}} dz'
 \label{eq-laurent-int}
 \end{equation} 
 
-This means that we can expand $f(z)$ in a power series containing both negative
-and positive powers of $z$:
+This means that we can expand $f(z)$ in a power series containing both negative and positive powers of $z$:
 
 \begin{equation}
 f(z)= \sum_{m=-\infty}^{\infty} a_m z^m
 \end{equation} 
 
-This generalisation of a Taylor series in the presence of singularities is
-called a \emph{Laurent series}, in this case a Laurent series around the origin.
+This generalisation of a Taylor series in the presence of singularities is called a \emph{Laurent series}, in this case a Laurent series around the origin.
 
-\begin{sidebar}
-\begin{exa}
-We will develop
+As an example, let's develop
 
 $$f(z)=\frac{1}{z(z-1)}$$
 
 in a Laurent series around the origin for the two rings $0 < | z | < 1$ and $ 1 < |z|$.
 
+\begin{cue}
+Do this first for the region where  $| z | < 1$, using the geometric series.
+\end{cue}
+
 For the first ring where $| z | < 1$, we can easily write
 
 $$f(z)=\frac{1}{z} \cdot \frac{1}{z-1} = -\frac{1}{z} \sum_{m=0}^{\infty} z^m =-\frac{1}{z}-1-z-z^2 \cdots$$
 
-However, in the second ring, the previous series does not converge, so this time we write
+However, in the second ring  $ 1 < |z|$, the previous series does not converge.
+
+\begin{cue}
+Divide the numerator and denominator of $f(z)$ by $z$, such that you can use the geometric series again.
+\end{cue}
+
+We can write
 
 $$f(z)=\frac{1}{z} \cdot \frac{1 / z }{1-1/z} = \frac{1}{z^2} \sum_{m=0}^{\infty} \frac{1}{z^m} =\cdots+\frac{1}{z^4}+\frac{1}{z^3} + \frac{1}{z^2}$$
 
 This series converges in the second ring, since $|1/z| < 1$ there.
-\end{exa}
-\end{sidebar}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: trivial
+% ugent
 \label{ex_laurent_1}
 Develop
 
@@ -535,38 +571,38 @@ $$f(z)=\frac{e^z}{z-1}$$
 
 in a Laurent series around the origin for the ring $0 < | z | < 1$.
 
-Here $e^z$ is a function which is analytic in all of $\mathbb{C}$ and defined by
+$e^z$ is a function which is analytic in all of $\mathbb{C}$ and defined by
 
 $$e^z \stackrel{def}{=} \sum_{m=0}^{\infty} \frac{z^m}{m!} $$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+% difficulty: normal
 Same as Exercise \ref{ex_laurent_1}, but for the outer ring  $1 < | z |$.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
-What is the relationship between a Fourier and a Laurent series? Hint: transform a Fourier series in exponential notation to a Laurent series.
-\end{ex}
-\end{sidebar}
-
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
+  % difficulty: normal
 Show that the exact location of the contours to derive Laurent series does not matter, as long as the contours don't cross any singularities.
-\end{ex}
-\end{sidebar}
+\end{exer}
+
+\begin{exer}
+  % difficulty: hard
+  
+  What is the relationship between a Fourier and a Laurent series?
+
+  \begin{hnt}
+  Transform a Fourier series in exponential notation to a Laurent series.
+  \end{hnt}
+    
+\end{exer}
 
 
-\subsection{Singularities}
+\sectionugent{Singularities}
 
-$z_0$ is a singular point of $f(z)$ if $f(z)$ is not analytic there. There are
-two important types of singularities, \emph{poles} and \emph{branch points},
-which we will now discuss.
+$z_0$ is a singular point of $f(z)$ if $f(z)$ is not analytic there. There are two important types of singularities, \emph{poles} and \emph{branch points}, which we will now discuss.
 
-\subsubsection*{Poles}
+\subsection*{Poles}
 
 We develop $f(z)$ in a Laurent series around $z_0$:
 
@@ -574,21 +610,15 @@ We develop $f(z)$ in a Laurent series around $z_0$:
 f(z)= \sum_{m=-\infty}^{\infty} a_m (z-z_0)^m
 \end{equation} 
 
-If the index $m$ doesn't run all the way to $-\infty$, but only to a finite
-value $-M$, $z_0$ is called a \emph{pole of order $M$}. As a trivial example,
-$f(z)=1/z$ has a pole of order 1 at $z=0$ (also called a \emph{simple pole}).
+If the index $m$ doesn't run all the way to $-\infty$, but only to a finite value $-M$, $z_0$ is called a \emph{pole of order $M$}. As a trivial example, $f(z)=1/z$ has a pole of order 1 at $z=0$ (also called a \emph{simple pole}).
 
-On the other hand, if there is an infinite number of negative $m$--values for
-which $a_m$ is non--zero, $z_0$ is called an \emph{essential singularity}.
+On the other hand, if there is an infinite number of negative $m$--values for which $a_m$ is non--zero, $z_0$ is called an \emph{essential singularity}.
 
-A pole of order $M$ can be removed by multiplying $f(z)$ by $(z-z_0)^M$. This
-obviously cannot be done for an essential singularity.
+A pole of order $M$ can be removed by multiplying $f(z)$ by $(z-z_0)^M$. This obviously cannot be done for an essential singularity.
 
-One can also prove that in a small neighbourhood around an essential singularity, the
-function actually takes all possible complex values (with at most a single exception)! So, obviously it makes no sense
-to talk about the limit of that function there.
+\noindent\marginnote{This is shown in Picard's Great Theorem.}One can also prove that in a small neighbourhood around an essential singularity, the function actually takes all possible complex values (with at most a single exception)! So, obviously it makes no sense to talk about the limit of that function there.
 
-\subsubsection*{Branch points}
+\subsection*{Branch points}
 
 Consider the relation
 
@@ -609,12 +639,12 @@ graphical representation of this complex function. Since this is essentially a
 4D--object, we can plot e.g. a 3D projection $(\Re(z),\Im(z),\Re(w))$ and use
 the phase of $w$ to colour the surface. This is done in Fig.~\ref{fig-riemann}.
 
-\begin{figure}
+\begin{marginfigure}
 \centering
-\includegraphics[width=8.5cm]{complex/figures/riemann}
+\includegraphics{complex/figures/riemann}
 \caption{Riemann surface of $w=z^{1/2}$. Note that $u=\Re(w)$. }
 \label{fig-riemann}
-\end{figure}
+\end{marginfigure}
 
 This 4D--object is also called the \emph{Riemann surface} of the complex square
 root function and Fig.~\ref{fig-riemann} shows a representation of it. It clearly shows the multivaluedness of the square root: for each
@@ -639,12 +669,13 @@ to the negative real axis in the $z$--plane. We call this negative real
 $z$--axis a \emph{branch cut}, originating from the \emph{branch point} $z=0$
 (see Fig.~\ref{fig-branchcut}).
 
-\begin{figure}
+\begin{marginfigure}
+%11cm
 \centering
-\includegraphics[width=11cm]{complex/figures/branchcut}
+\includegraphics{complex/figures/branchcut}
 \caption{The mapping $w=z^{1/2}$.}
 \label{fig-branchcut}
-\end{figure}
+\end{marginfigure}
 
 Note that our function is now no longer continuous when crossing the branch cut:
 for $z_+ = \rho e^{j (\pi - \epsilon)}$, we get $w_+ = \sqrt{\rho} e^{j (\pi/2 -
@@ -657,13 +688,14 @@ The relationship between branch cuts and the Riemann surface is show
 schematically in Fig.~\ref{fig-sheets}: our branch cut cuts the Riemann surface
 in two separate \emph{Riemann sheets}, one corresponding to arguments $[-\pi,
 \pi]$, the other one corresponding to arguments $[\pi,3 \pi]$.
-\begin{figure}
+
+\begin{marginfigure}
 \centering
 \includegraphics{complex/figures/sheets}
 \caption{The branch cut cuts the Riemann surface in two separate Riemann sheets.
 Adjacent regions on the Riemann surface are marked by similar letters.}
 \label{fig-sheets}
-\end{figure}
+\end{marginfigure}
 
 It is important to remark that, when choosing a contour to evaluate the integral
 theorems we've seen so far, we are not allowed to cross a branch cut, as the
@@ -682,25 +714,21 @@ $z=0$ to infinity would suit the purpose equally well. Its only goal is to lift
 the ambiguity with respect to the choice of $w$. There are however often
 physical reasons which inspire the choice of branch cut.
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Consider
 
 $$f(z)=(z-1)^{1/2}(z+1)^{1/2}$$
 
 Show that a valid choice as branch cut for this function is the segment $-1<= x <= 1$, i.e. it is possible to establish a single--valued function using this cut, and any contour which does not cross this cut does not encounter discontinuities.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 What does the Riemann surface of $w=\ln(z)$ look like?
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\subsection{Residue calculus}
+\sectionugent{Residue calculus}
 
-\subsubsection*{Residue}
+\subsection*{Residue}
 
 Suppose $z_0$ is an isolated singularity of $f(z)$. We can develop this function
 in a Laurent series around $z_0$:
@@ -713,47 +741,44 @@ The \emph{residue} of $z_0$ is defined as $a_{-1}$, i.e. the coefficient of
 $1/z$ in the Laurent series. Using Eq.~\ref{eq-laurent-int}, we immediately get
 
 \begin{equation}
-Res_{z_0}=\frac{1}{2 \pi j }  \oint_{\mathcal{C}} f(z) dz \label{eq-res-int}
+Res_{z_0}=\frac{1}{2 \pi j }  \oint_{{C}} f(z) dz \label{eq-res-int}
 \end{equation} 
 
-\begin{sidebar}
-\begin{exa}
+\begin{cue}
 $z=0$ is a simple pole of $f(z)=1/z$ with residue 1.
-\end{exa}
+\end{cue}
 
-\begin{exa}
+\begin{cue}
 $z=0$ is a second order pole of $f(z)=1/z^2$ with residue 0.
-\end{exa}
+\end{cue}
 
-\begin{exa}
+\begin{cue}
 $z=0$ is an essential singularity of $f(z)=e^{1/z}$ with residue 1, since
 $$e^{1/z} = \sum_{m=0}^{\infty} \frac{1}{z^m m!} $$
-\end{exa}
-\end{sidebar}
+\end{cue}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 What is the residue of $\frac{1}{z+z^2}$ at $z=0$?
-\end{ex}
+\end{exer}
 
-\begin{ex}
+\begin{exer}
 Use a series expansion to calculate the residue of $z \cos \frac{1}{z}$ at $z=0$.
-\end{ex}
+\end{exer}
 
-\begin{ex}
+\begin{exer}
 Use a series expansion to calculate the residue of $\frac{z - \sin z}{z}$ at $z=0$.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\subsubsection*{Residue theorem}
 
-Suppose $f(z)$ is analytic inside a contour $\mathcal{C}$, except for some
-isolated singularities $z_k$ inside $\mathcal{C}$ (so, branch cuts are not
+\subsection*{Residue theorem}
+
+Suppose $f(z)$ is analytic inside a contour ${C}$, except for some
+isolated singularities $z_k$ inside ${C}$ (so, branch cuts are not
 allowed, but e.g. poles are OK). Then
 
 \begin{equation}
 \fbox{$\displaystyle
-\oint_{\mathcal{C}} f(z) dz = 2 \pi j \sum_k Res_{z_k} \label{eq-res-theorem}
+\oint_{{C}} f(z) dz = 2 \pi j \sum_k Res_{z_k} \label{eq-res-theorem}
 $}
 \end{equation} 
 
@@ -765,27 +790,27 @@ Fig.~\ref{fig-residue}, on which we can apply Cauchy I (the straight segments
 cancel as before):
 
 \begin{equation}
-\oint_{\mathcal{C}} f(z) dz - \sum_k \oint_{\mathcal{C}_k} f(z) dz = 0
+\oint_{{C}} f(z) dz - \sum_k \oint_{{C}_k} f(z) dz = 0
 \label{eq-res-proof-1}
 \end{equation}
 
-\begin{figure}
+\begin{marginfigure}
 \centering
-\includegraphics[width=5.5cm]{complex/figures/residue}
+\includegraphics{complex/figures/residue}
 \caption{Contour to prove residue theorem.}
 \label{fig-residue}
-\end{figure}
+\end{marginfigure}
 
 The integral around any singular point can be written as (Eq.~\ref{eq-res-int})
 
 \begin{equation}
-\oint_{\mathcal{C}_k} f(z) dz = 2 \pi j Res_{z_k} \label{eq-res-proof-2}
+\oint_{{C}_k} f(z) dz = 2 \pi j Res_{z_k} \label{eq-res-proof-2}
 \end{equation} 
 
 Combining Eq.~\ref{eq-res-proof-1} and Eq.~\ref{eq-res-proof-2} immediately
 proves the theorem.
 
-\subsubsection*{Calculating residues}
+\subsection*{Calculating residues}
 
 The residue theorem is of enormous practical importance, as it allows us to
 replace the cumbersome problem of evaluating contour integrals by the algebraic
@@ -794,37 +819,38 @@ importance, we will now discuss a number of techniques that allow us to easily
 calculate the residues, apart from writing down the Laurent series, or applying
 Eq.~\ref{eq-res-int}. The proofs are left as an exercise.
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 If $z_0$ is a simple pole of $f(z)$, use the Laurent series to prove that
 $$Res_{z_0} = \left[f(z)(z-z_0)\right]_{z=z_0}$$ \label{ex-res1}
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 If $z_0$ is a simple pole of $f(z)=\frac{g(z)}{h(z)}$, i.e. $z_0$ is a simple zero of $h(z)$ and $g(z_0) \ne 0$, show that
 $$Res_{z_0} = \frac{g(z_0)}{h'(z_0)}$$
 \emph{Hint:} write $h(z)$ as $r(z)(z-z_0)$, and apply the result from Ex.~\ref{ex-res1}.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 If $z_0$ is a pole of order $M$ of $f(z)$, prove that
 $$Res_{z_0} = \frac{1}{(M-1)!}{\left[D^{M-1}[f(z)(z-z_0)^M]\right]}_{z=z_0}$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
 
-\subsection{Limit theorems}
+\sectionugent{Limit theorems}
 
 The residue theorem is not directly applicable to contours that are infinitely
 large or contours that pass through a singularity. For these cases, the
 following limit theorems (which we will present without proof) are of great
 practical importance.
 
-\subsubsection{Jordan's lemma}
+\subsection*{Jordan's lemma}
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=6.5cm]{complex/figures/jordan}
+\caption{Jordan's lemma.}
+\label{fig-jordan}
+\end{marginfigure}
 
 For a contour lying on the 'proper' side of $a$, i.e. the half plane not
 containing $a+\beta^*$ (see Fig.~\ref{fig-jordan}), we have that if  
@@ -834,25 +860,19 @@ containing $a+\beta^*$ (see Fig.~\ref{fig-jordan}), we have that if
 \end{equation}
 then
 \begin{equation}
-\lim_{R \to \infty} \int_{\mathcal{C}_R} f(z) e^{\beta z} dz = 0
+\lim_{R \to \infty} \int_{{C}_R} f(z) e^{\beta z} dz = 0
 \end{equation}
 
-\begin{figure}
-\centering
-\includegraphics[width=6.5cm]{complex/figures/jordan}
-\caption{Jordan's lemma.}
-\label{fig-jordan}
-\end{figure}
 
 Note that for this theorem (and also for the next limit theorems)
-${\mathcal{C}_R}$ only includes the circular part of the contour and not the
+${{C}_R}$ only includes the circular part of the contour and not the
 straight line segments.
 
 The condition that the contour should lie in the proper half plane is to assure
 that $e^{\beta z}$ does not blow up towards infinity, as can be easily verified
 for the case where $a=0$ and $\beta=jb$.
 
-\subsubsection{Big limit theorem}
+\subsection*{Big limit theorem}
 
 For a circular contour spanning an angle $\alpha$ with top at $z=a$ (see
 Fig.~\ref{fig-limit-theorem}), we have that if
@@ -862,17 +882,17 @@ Fig.~\ref{fig-limit-theorem}), we have that if
 \end{equation}
 then
 \begin{equation}
-\lim_{R \to \infty} \int_{\mathcal{C}_R} f(z) dz = j \alpha A
+\lim_{R \to \infty} \int_{{C}_R} f(z) dz = j \alpha A
 \end{equation}
 
-\begin{figure}
+\begin{marginfigure}
 \centering
 \includegraphics[width=4cm]{complex/figures/limit_theorem}
 \caption{Contours for big and small limit theorems.}
 \label{fig-limit-theorem}
-\end{figure}
+\end{marginfigure}
 
-\subsubsection{Small limit theorem} 
+\subsection*{Small limit theorem} 
 
 For a circular contour spanning an angle $\alpha$ with top at $z=a$ (see
 Fig.~\ref{fig-limit-theorem}), we have that if
@@ -882,23 +902,23 @@ Fig.~\ref{fig-limit-theorem}), we have that if
 \end{equation}
 then
 \begin{equation}
-\lim_{R \to 0} \int_{\mathcal{C}_R} f(z) dz = j \alpha A
+\lim_{R \to 0} \int_{{C}_R} f(z) dz = j \alpha A
 \end{equation}
 
 For the special case where $f(z)$ has a simple pole at $z=a$, we can easily
 prove this by integrating the Laurent series term by term.
 
-\subsection{Cauchy principal value}
+\subsection*{Cauchy principal value}
 
 Consider the integral $\int_0^1 dx / x$ (see Fig.~\ref{fig-pv}). As the area
 under this curve is infinite, this integral clearly diverges.
 
-\begin{figure}
+\begin{marginfigure}
 \centering
 \includegraphics[width=5.5cm]{complex/figures/pv}
 \caption{The function $1/x$.}
 \label{fig-pv}
-\end{figure}
+\end{marginfigure}
 
 Strictly speaking, the same is true for the integral $\int_{-1}^1 dx / x$, as
 this should be seen as
@@ -934,7 +954,7 @@ PV \int_{-\infty}^\infty f(x) dx = \lim_{a \to \infty} \int_{-a}^{a} f(x) dx
 \end{equation} 
 
 
-\subsection{Evaluation of integrals on the real axis}
+\sectionugent{Evaluation of real--valued integrals}
 
 Now we have all the necessary tools in our box to tackle the important problem
 of calculating real--valued integrals by means of complex contour integration.
@@ -942,7 +962,7 @@ We will present a number of examples which illustrate some typical techniques
 used in this respect. After that, we will also present an important application
 in the domain of photonics, namely the Kramers--Kronig dispersion relations.
 
-\subsubsection{Example 1}
+\subsection*{Example 1}
 
 Consider integrals of the type
 
@@ -967,11 +987,11 @@ d \theta = \frac{1}{j}\frac{dz}{z}
 such that the integral Eq.~\ref{eq-cont-int-1} becomes
 
 \begin{equation}
--j \oint_{\mathcal{C}} f\left(\frac{z + 1/z}{2}, \frac{z - 1/z}{2j}\right)
+-j \oint_{{C}} f\left(\frac{z + 1/z}{2}, \frac{z - 1/z}{2j}\right)
 \frac{dz}{z}
 \end{equation} 
 
-The integration contour $\mathcal{C}$ is the unit circle, and the integral can
+The integration contour ${C}$ is the unit circle, and the integral can
 easily be evaluated using the residue theorem.
 
 As an example, we will calculate
@@ -984,14 +1004,14 @@ I = \int_0^{2 \pi} \frac{d \theta}{1 + \epsilon \cos \theta}, \hspace{0.5cm}
 This transforms into
 
 \begin{equation}
-I = -j \oint_{\mathcal{C}} \frac{1}{1 + (\epsilon / 2)\left(z + 1/z\right)}
+I = -j \oint_{{C}} \frac{1}{1 + (\epsilon / 2)\left(z + 1/z\right)}
 \frac{dz}{z}
 \end{equation} 
 
 or
 
 \begin{equation}
-I = -\frac{2j}{\epsilon} \oint_{\mathcal{C}} \frac{dz}{z^2 + (2 / \epsilon)z +
+I = -\frac{2j}{\epsilon} \oint_{{C}} \frac{dz}{z^2 + (2 / \epsilon)z +
 1}
 \end{equation} 
 
@@ -1024,7 +1044,7 @@ So finally
 - \epsilon^2}}, \hspace{0.5cm} |\epsilon| < 1
 \end{equation} 
 
-\subsubsection{Example 2}
+\subsection*{Example 2}
 
 Let's calculate
 
@@ -1038,27 +1058,27 @@ but this would require two different contours for each of the complex
 exponentials.} (Fig.~\ref{fig-example-2}):
 
 \begin{equation}
-I = \oint_{\mathcal{C}} \frac{e^{j \lambda z}}{1 + z^2} dz
+I = \oint_{{C}} \frac{e^{j \lambda z}}{1 + z^2} dz
 \end{equation}
 
-\begin{figure}
+\begin{marginfigure}
 \centering
 \includegraphics{complex/figures/int_ex_2}
 \caption{Contour for example 2.}
 \label{fig-example-2}
-\end{figure}
+\end{marginfigure}
 
 The only pole enclosed by the contour is at $j$, with residue $e^{-\lambda}/(j
 +j)$, such that the residue theorem leads to
 
 \begin{equation}
-\int_{-R}^{R} \frac{e^{j \lambda x}}{1 + x^2} dx + \int_{\mathcal{C_R}}
+\int_{-R}^{R} \frac{e^{j \lambda x}}{1 + x^2} dx + \int_{{C_R}}
 \frac{e^{j \lambda z}}{1 + z^2} dz = 2 \pi j \frac{e^{-\lambda}}{2 j} = \pi
 e^{-\lambda}
 \end{equation}
 
 Let's take the limit of $R \to \infty$. Can we apply Jordan's lemma to the
-contribution of $\mathcal{C_R}$? If $\lambda > 0$, the contour lies indeed in
+contribution of ${C_R}$? If $\lambda > 0$, the contour lies indeed in
 the 'proper' part of the complex plane. For the second condition, we need to
 calculate the following limit:
 
@@ -1069,7 +1089,7 @@ calculate the following limit:
 
 Since $e^{2 j \arg z}$ always stays bounded, this limit goes to zero for all
 directions in the complex plane. So, we can apply Jordan's lemma and the
-contribution from $\mathcal{C_R}$ vanishes:
+contribution from ${C_R}$ vanishes:
 
 \begin{equation}
 \int_{-\infty}^{\infty}\frac{e^{j \lambda x}}{1 + x^2} dx = \pi e^{-\lambda}
@@ -1087,7 +1107,7 @@ Finally, due to the even character of the integrand, we arrive at
 \int_0^{\infty}\frac{\cos \lambda x}{1 + x^2} dx = \frac{\pi}{2} e^{-\lambda}
 \end{equation}
 
-\subsubsection{Example 3}
+\subsection*{Example 3}
 
 Let's now try an example with branch point singularities:
 
@@ -1096,16 +1116,7 @@ Let's now try an example with branch point singularities:
 \end{equation}
 
 We stick to the traditional choice of branch cut, namely the negative real axis
-(Fig.~\ref{fig-example-3}). The contour is placed 'just above' this branch cut. In order to avoid
-the branch point at $z=0$, we also make a small detour around the origin.
-
-\begin{align}
-I = \oint_{\mathcal{C}} \frac{z^{1/2}}{z^2+a^2} dz =& 2 \pi j Res_{j a}
-\nonumber \\
-=& 2 \pi j \frac{(j a)^{1/2}}{ja + ja} \nonumber \\
-=& \pi \frac{\sqrt{a}e^{\frac{1}{2}j\frac{\pi}{2}}}{a} \nonumber \\
-=& \frac{\pi}{\sqrt{a}} e^{j \pi /4}
-\end{align}
+(Fig.~\ref{fig-example-3}). The contour is placed 'just above' this branch cut. In order to avoid the branch point at $z=0$, we also make a small detour around the origin.
 
 \begin{figure}
 \centering
@@ -1114,8 +1125,16 @@ I = \oint_{\mathcal{C}} \frac{z^{1/2}}{z^2+a^2} dz =& 2 \pi j Res_{j a}
 \label{fig-example-3}
 \end{figure}
 
+\begin{align}
+I = \oint_{{C}} \frac{z^{1/2}}{z^2+a^2} dz =& 2 \pi j Res_{j a}
+\nonumber \\
+=& 2 \pi j \frac{(j a)^{1/2}}{ja + ja} \nonumber \\
+=& \pi \frac{\sqrt{a}e^{\frac{1}{2}j\frac{\pi}{2}}}{a} \nonumber \\
+=& \frac{\pi}{\sqrt{a}} e^{j \pi /4}
+\end{align}
+
 We use the big limit theorem to calculate the contribution of the outer circular
-part $\mathcal{C_R}$ to the integral. For that, we calculate the following
+part ${C_R}$ to the integral. For that, we calculate the following
 limit:
 
 \begin{equation}
@@ -1168,7 +1187,7 @@ So finally
 \int_0^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx = \frac{\pi}{\sqrt{2a}}
 \end{equation}
 
-\subsubsection{Kramers--Kronig dispersion relations}
+\subsection*{Kramers--Kronig dispersion relations}
 
 Suppose $f(z)$ is an analytic function with $\lim_\infty f(z) = 0$ in the upper
 half of the complex plane.
@@ -1176,12 +1195,12 @@ half of the complex plane.
 Applying Cauchy I to the contour in Fig.~\ref{fig-KK} leads to
 
 \begin{equation}
-\oint_{\mathcal{C}} \frac{f(z)}{z-x_0} dz = 0
+\oint_{{C}} \frac{f(z)}{z-x_0} dz = 0
 \end{equation}
 
 \begin{figure}
 \centering
-\includegraphics{complex/figures/kk}
+\includegraphics[width=10cm]{complex/figures/kk}
 \caption{Contour for Kramers--Kronig dispersion relations.}
 \label{fig-KK}
 \end{figure}
@@ -1293,64 +1312,48 @@ fact that the systems considered are causal (i.e. effect cannot precede cause).
 Thus, there is an immediate physical significance of the Kramers--Kronig
 dispersion relations.
 
-\subsubsection{Exercises}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_0^{\infty} \frac{dx}{1+x^2} = \frac{\pi}{2}$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_0^{\infty} \frac{\sin x}{x} dx = \frac{\pi}{2}$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_0^{\infty} \frac{1}{\left(x^2 + a^2\right)^2} dx = \frac{\pi}{4 a^3}$$
 Here $a$ is a positive real-valued number.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_{-\infty}^{\infty} \frac{\sin \pi x}{x (x-1) (x-2)} dx = 2 \pi$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_0^{2\pi} \frac{\cos^2 \theta d \theta}{13-5\cos 2 \theta} = \frac{\pi}{10}$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
 \begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that for $n \ge 1$
 $$ \int_0^\pi \sin^{2n} \theta d \theta = \frac{(2n)!}{ 2^{2n}(n!)^2} \pi$$
-\end{ex}
-\end{sidebar}
+\end{exer}
 
-\begin{sidebar}
-\begin{ex}
+\begin{exer}
 Use complex contour integration to show that
 $$ \int_0^\infty \frac{x ^ {2m}}{x^{2n} + 1} dx = \frac{\pi}{2n} \mathrm{cosec}  \left( \frac{2m+1}{2n} \pi \right)$$
 Here $m$ and $n$ are integers and $0 \le m < n$.
-\end{ex}
-\end{sidebar}
+\end{exer}
 
+\sectionugent{Conformal transformations}
 
-
-\section{Conformal transformations}
-
-\subsection{Angle--preserving transformations}
+\subsection*{Angle--preserving transformations}
 
 A complex function $w = f(z) = u(x,y)+jv(x,y)$ can be seen as a mapping from the
 complex $z$--plane to the complex $w$--plane. A typical way to visualise this is
@@ -1404,7 +1407,7 @@ lines.
 If such an angle--preserving transformation defined by an analytic function is also injective between two domains, it is
 called a \emph{conformal transformation}.
 
-\subsection{Conformal transformations and the Helmholtz equation}
+\subsection*{Conformal transformations and the Helmholtz equation}
 
 Conformal transformations can be useful to solve the Helmholtz equation in a
 'difficult' coordinate system. The idea is to use a conformal mapping to
@@ -1508,7 +1511,7 @@ Formally, this is identical to the Helmholtz equation in the $z$--plane, except
 that \emph{the index distribution $n$ has been replaced by a transformed index
 distribution $T \cdot n$}.
 
-\subsection{Example: bent waveguides}
+\subsection*{Example: bent waveguides}
 
 To give an example of the power of conformal transformations, we will use it to
 find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). We
@@ -1516,7 +1519,7 @@ consider the system to be invariant in the $z$--direction.
 
 \begin{figure}
 \centering
-\includegraphics[width=14cm, angle=270]{complex/figures/bends}
+\includegraphics[width=8cm, angle=270]{complex/figures/bends}
 \caption{Calculating bend modes using conformal transformation.}
 \label{fig-bends}
 \end{figure}
@@ -1584,140 +1587,13 @@ the mode will tend to be concentrated there. For very short bend radii, the mode
 will leak towards the outer cladding, where the index is even higher. This is
 the origin of the radiation loss in waveguide bends.
 
-\pagebreak
-\section*{Augustin Cauchy (1789--1857)}
+\section*{Review questions}
 
-\parpic{\includegraphics[scale=0.5]{complex/figures/cauchy}}
-Augustin Cauchy was the mathematician that set the foundation of rigour in
-modern analysis. A product of the revolutions in France during the eighteenth
-and nineteenth centuries, he provided the revolutionary ideas that set this
-branch of mathematics on its present course. He is also known as being one of
-the most prolific writers in the history of the science.
+\begin{itemize}
+\item TODO
+\end{itemize}
 
-Augustin Louis Cauchy was born in Paris, France, on August 21, 1789, only a
-month after the storming of the Bastille. His father, a government official and
-staunch royalist, recognised the coming revolution and quickly moved his family
-to a country cottage in Arcueil. Having escaped the guillotine, the family was
-poor and the young boy was generally malnourished. For the rest of his life,
-this early poverty left the future mathematician in a state of ill--health.
-During his eleven year stay at the cottage, Augustin received a classical
-education and a strong disposition for the monarchy from his father, who wrote
-his own textbooks in verse, and strict Catholic religious training from his
-mother. This training would influence the rest of his life. His zealous
-political and religious beliefs would alienate this great mathematician from the
-majority of his countrymen.
-
-
-In 1800, the Cauchy's family returned to Paris after the political situation
-stabilised. During this early period in his life, Augustin's talent was
-recognised by two great mathematicians, Marquis Laplace and Joseph Lagrange.
-Both, after seeing the young boy's work, encouraged him to continue in
-mathematics. As Lagrange once predicted, he would eventually outdo both of them.
-Cauchy's education, however, was in engineering. After attending the Ecole
-Polytechnique, a military engineering school taught by some of the country's
-greatest mathematicians, and the Ecole des Ponts et Chaussees, he took a
-position as an engineer in Napoleon's army at Cherbourg. Somehow during his busy
-schedule, he found time to dabble in mathematics. During his three years there,
-he produced several significant mathematical papers, including one on
-determinants that gave the term its modern meaning. All this mathematical output
-also accomplished to ruin his health and ended his career in military
-engineering.
-
-
-Now with all his efforts focused on mathematics, Cauchy became a star on the
-mathematics scene. After a slew of achievements, he became a professor at the
-Polytechnique in 1816. Then at the unheard of age of 27, he was elected to the
-Academy of Sciences in Paris. To be selected for the Academy was one of the
-highest honours that could be given to a scientist. Unfortunately, his
-acceptance of the position was filled with controversy. At the time, Napoleon
-had just been overthrown and the Bourbons had been returned to the throne. The
-new king immediately went about removing the former emperor's supporters
-including Gaspard Monge, a member of the Academy. Despite his political views,
-Monge was one of the greatest mathematicians in France and his removal was
-considered an outrage. However, when Cauchy was offered his seat, he accepted
-without reserve. Being a staunch royalist, he saw nothing wrong with the removal
-of an enemy of the king and saw it as his duty to the monarchy to take the
-position. This action did not bode well with many of countrymen and made him
-many enemies. Nevertheless, the mathematician continued his work and somehow
-found time to be married two years later.
-
-
-This would not be the last time his political views would get him into trouble.
-In 1830 after the overthrow of King Charles X, all members of the Academy were
-obligated to swear an oath of allegiance to the new king. Having already taken
-an oath to Charles, Cauchy refused. He was removed from his position and
-self--exiled to Switzerland without his family. There he became a professor at
-the University of Turin and planned to spend the rest of his life working on
-mathematics. That was not to be. Two years later, Charles X, now in exile, asked
-the professor to supervise the education of his heir Henri. Being a good
-royalist, he agreed and was joined with his family in Vienna. His new duties
-overwhelmed him and his mathematical work lessened to a trickle. He found his
-escape in 1838 when he returned to Paris. Before he left, the king had given him
-the impressive sounding but practically useless title of baron. He still refused
-to take the oath and constantly struggled to find and hold a position. Finally
-in 1848, the oath was abolished and he resumed his old posts. Recognising his
-value to Academy, he was exempted when the oath was reestablished in 1852.
-
-
-Augustin Cauchy died on May 23, 1857, after contracting a fever on a trip to the
-country to help restore his health. His last words were, "Men die but their
-works endure."
-
-
-Cauchy's life was one as unusual and complicated as the times he lived in.
-Brought up as a devout Catholic in a time most Frenchmen were opposed to the
-Church, he suffered prejudice from many people. However, the discrimination did
-not discourage him from engaging in his life's favourite hobby, charity. When he
-was not involved in some math problem, he was often working on some new mercy
-mission for the less fortunate. On the other hand, he could be bigoted against
-those who did not hold his religious views. For example, part of the reason
-Cauchy delayed the publication of fellow mathematician Niels Abel's masterpiece
-was because the latter called him a "bigoted Catholic."
-
-
-He also tended to be just as opinionated in matters of politics. A supporter of
-the monarchy, he came into direct conflict with the supporters of both the
-republic and Napoleon. Again, he was both discriminated against and prejudiced
-against others. On one hand, his life was put into constant turmoil because of
-the affair with the oath. On the other hand, he helped repress the mathematical
-work of Nicolas Galois because the latter was a radical republican. Certainly,
-Cauchy led a very complicated and intricate life.
-
-
-Cauchy is famous in the field of mathematics for two main reasons: his numerous
-contributions to the science and his immense publishing. His works spanned every
-branch of mathematics and are simply too long to list. He is especially famous
-for his works with convergent series and rigour in analysis. Early in his
-career, Cauchy developed the criteria for determining if an infinite series is
-convergent or divergent. While attending a lecture on the subject, it is told
-that Laplace became panicked and rushed home. He had just finished his
-masterpiece that used infinite series as its backbone and desperately checked
-each one for convergence, which they did. Cauchy second great contribution was
-setting the groundwork for rigour in analysis and all of mathematics. Rigour is
-discovery of the logical foundations of a science. Over the previous centuries,
-mathematicians had tried in vain to discover what were the underlying principles
-of calculus and many had asserted that Newton's discovery was flawed. Cauchy
-took the first step toward unifying the science. First, he defined continuity
-and derivative in terms of the limit. Second, he gave the first good definition
-of the limit as : "When the values successively assigned to the same variable
-indefinitely approach a fixed value, so as to end by differing from it as little
-as desired, this fixed value is called the limit of all the others." Though this
-is not a mathematical definition, it is a good approximation of the idea, which
-would be further clarified by future mathematicians. Other important works
-include determinants, polygonal numbers, complex numbers and the theory of
-substitutions.
-
-
-Cauchy is also famous for his writings. Simply put, he overwhelmed the
-mathematics world with the number and size of his works. All in all, his total
-output included 789 full length papers, one of the largest outputs ever. It was
-not uncommon for him to finish two such papers in one week. In addition, these
-works tended to be rather long, sometimes extending for over 300 pages. In fact,
-after submitting several large papers to be published in the weekly bulletin,
-the Academy was forced to limit submissions to four pages to save their small
-budget from Cauchy's pen. However, all this writing did get his work out into
-the public and spread his ideas. A lot of his fame can be assessed to the fact
-that he simply overwhelmed all his competitors on the bookshelves. Because of
-this fact, his name is prominent in almost any analysis textbook.
-
-(Paul Golba, from http://www.shu.edu/projects/reals/history/cauchy.html)
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
