@@ -460,7 +460,7 @@
 \let\c@abspage\relax
 % \newcommand{\pp@g@sidenote}{}
 \RequirePackage{floatrow} % Set up captions of floats
-\RequirePackage{dblfloatfix} % Better positioning of wide figures and tables
+%\RequirePackage{dblfloatfix} % Better positioning of wide figures and tables
 
 % Improve the figure placing (see https://www.overleaf.com/learn/latex/Tips)
 \def\topfraction{.9}%
@@ -581,6 +581,37 @@
 	}%
     \togglefalse{kaocaption}%
 }
+
+% Change the formatting of the captions
+\addtokomafont{captionlabel}{\bfseries} % Bold font for the figure label
+% Declare a new style to format the caption according to \@margin@par (see above)
+\DeclareCaptionFormat{margin}{\@margin@par #1#2#3}
+% Declare a new caption style for lstlistings
+\newsavebox\mycap
+\DeclareCaptionFormat{llap}{%
+	\begin{lrbox}{\mycap}%
+	\begin{minipage}{\marginparwidth}%
+	\@margin@par #1:#2#3%
+	\end{minipage}%
+	\end{lrbox}%
+	\marginnote[0.2cm]{\usebox\mycap}%
+}
+% Set the global caption style
+\captionsetup{
+	format=margin, % Use the style previously declared
+	strut=no,%
+	%hypcap=true, % Links point to the top of the figure
+	singlelinecheck=false,%
+	%width=\marginparwidth,
+	indention=0pt, % Suppress indentation
+	parindent=0pt, % Suppress space between paragraphs
+	aboveskip=6pt, % Increase the space between the figure and the caption
+	belowskip=6pt, % Increase the space between the caption and the table
+}
+
+% Needed to have continued figures and tables (https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Figures_in_multiple_parts)
+\DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
+\captionsetup[ContinuedFloat]{labelformat=cont}
 
 % Captions for the 'margin' layout
 \NewDocumentCommand{\marginfloatsetup}{}{%
@@ -748,48 +779,17 @@
 		floatwidth=\textwidth%
 	}
 	\captionsetup[lstlisting]{% Captions style for lstlistings
-		format=margin,%
+		%format=margin,%
 		labelsep=colon,%
 		strut=no,%
 		singlelinecheck=false,%
 		indention=0pt,%
 		parindent=0pt,%
-		aboveskip=6pt,%
+    	aboveskip=6pt,%
 		belowskip=6pt,%
 		belowskip=-0.1cm%
 	}
 }
-
-% Change the formatting of the captions
-\addtokomafont{captionlabel}{\bfseries} % Bold font for the figure label
-% Declare a new style to format the caption according to \@margin@par (see above)
-\DeclareCaptionFormat{margin}{\@margin@par #1#2#3}
-% Declare a new caption style for lstlistings
-\newsavebox\mycap
-\DeclareCaptionFormat{llap}{%
-	\begin{lrbox}{\mycap}%
-	\begin{minipage}{\marginparwidth}%
-	\@margin@par #1:#2#3%
-	\end{minipage}%
-	\end{lrbox}%
-	\marginnote[0.2cm]{\usebox\mycap}%
-}
-% Set the global caption style
-\captionsetup{
-	format=margin, % Use the style previously declared
-	strut=no,%
-	%hypcap=true, % Links point to the top of the figure
-	singlelinecheck=false,%
-	%width=\marginparwidth,
-	indention=0pt, % Suppress indentation
-	parindent=0pt, % Suppress space between paragraphs
-	aboveskip=6pt, % Increase the space between the figure and the caption
-	belowskip=6pt, % Increase the space between the caption and the table
-}
-
-% Needed to have continued figures and tables (https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions#Figures_in_multiple_parts)
-\DeclareCaptionLabelFormat{cont}{#1~#2\alph{ContinuedFloat}}
-\captionsetup[ContinuedFloat]{labelformat=cont}
 
 %----------------------------------------------------------------------------------------
 %	TOC, LOF & LOT
@@ -850,6 +850,93 @@
 		% Print the table of contents in the margin
 		\marginnote[#1]{\localtableofcontents}%
 	\endgroup%
+}
+
+% Optional title for margintoc (by hCarlFelix, 
+% https://github.com/fmarotta/kaobook/issues/101)
+% We want to create an additional entries in the toc which is to be used for the margintoc
+% We define these as mtocsection and mtocsubsection for section and subsection`
+\newcommand{\mtocsection}[1]{
+    \etoctoccontentsline{mtocsection}{\protect\numberline{\thesection}#1}
+}
+\newcommand{\mtocsubsection}[1]{
+    \etoctoccontentsline{mtocsubsection}{\protect\numberline{\thesubsection}#1}
+}
+
+% Next, we redefine \section and \subsection so that they accept an additional parameter
+% \section[alternative-title-for-toc]{title-as-written-in-text}[alternative-title-for-margintoc]
+
+% Adapted from Frank Mittelbach's answer at Stackexchange
+% https://tex.stackexchange.com/a/109560/226693
+\let\oldsection\section  % save the old command
+\let\oldsubsection\subsection  % save the old command
+
+\RenewDocumentCommand\section {s o m o}
+  {
+    \IfBooleanTF{#1}
+      { \oldsection*{#3} 
+        \IfNoValueF{#2}            % if TOC arg is given create a TOC entry
+          { \addcontentsline{toc}{section}{#2}  }
+      }
+      {                              % no star given 
+        \IfNoValueTF{#2}
+          { \oldsection {#3} }       % no TOC arg
+          { \oldsection[#2]{#3}  }
+        \IfNoValueTF{#4}     % optional label given, if not we do nothing
+          { \mtocsection {#3} }
+          { \mtocsection {#4} }
+      }
+  }
+
+\RenewDocumentCommand\subsection {s o m o}
+  {
+    \IfBooleanTF{#1}
+      { \oldsubsection*{#3} 
+        \IfNoValueF{#2}            % if TOC arg is given create a TOC entry
+          { \addcontentsline{toc}{subsection}{#2}  }
+      }
+      {                              % no star given 
+        \IfNoValueTF{#2}
+          { \oldsubsection {#3} }       % no TOC arg
+          { \oldsubsection[#2]{#3}  }
+        \IfNoValueTF{#4}     % optional label given, if not we do nothing
+          { \mtocsubsection {#3} }
+          { \mtocsubsection {#4} }
+      }
+  }
+
+\etocsetlevel{mtocsection}{6}% dummy sectioning level
+\etocsetlevel{mtocsubsection}{6}% dummy sectioning level
+
+% We then need to redefine \margintoc so that it takes the mtoc versions instead of the regular section and subsection
+\newcommand{\margintocshort}[1][\mtocshift]{
+    \begingroup
+        % Move regular section and subsection to level 6 so that they won't be included and instead set let the mtoc versions take their place.
+        % Adapted from https://tex.stackexchange.com/a/133559/226693
+        \etocsetlevel{section}{6}
+        \etocsetlevel{subsection}{6}
+        \etocsetlevel{mtocsection}{1}
+        \etocsetlevel{mtocsubsection}{2}
+
+        \etocsetstyle{mtocsection}%
+        	{\parindent -5pt \parskip 3pt}%
+        	{\leftskip 20pt \rightskip 12pt} %
+        	{\hspace{0.01cm}\llap{\etocnumber\hspace{0.1cm}}\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\makebox[-0.1cm][l]{\etocpage}\par}%	{}%
+
+        % Set the style for subsection entries
+        \etocsetstyle{mtocsubsection}%
+            {\parindent -5pt \parskip 0pt}%
+            {\leftskip 20pt \rightskip 12pt}%
+            {\hspace{0.01cm}\llap{\hspace{0.1cm}}\etocname\nobreak\leaders\hbox{\hbox to 1.5ex   {\hss.\hss}}\hfill\makebox[-0.1cm][l]{\etocpage}\par}%
+            {}%
+    	% Set the global style of the toc
+    	%\etocsettocstyle{}{}
+    	%\etocsettocstyle{\normalfont\sffamily\normalsize}{}
+    	\etocsettocstyle{\usekomafont{section}\small}{}%
+    	\etocsetnexttocdepth{\themargintocdepth}%
+    	% Print the table of contents in the margin
+    	\marginnote[#1]{\localtableofcontents}%
+    \endgroup%
 }
 
 %----------------------------------------------------------------------------------------
@@ -927,8 +1014,8 @@
 	colorlinks=true,
 	%allcolors=DarkGreen,
 	citecolor = DarkOrange,
-	linkcolor = DarkBlue,
-	%pagecolor = DarkBlue,
+    linkcolor = Blue,
+    %pagecolor = Blue,
 	urlcolor = OliveGreen,
 }
 
@@ -950,6 +1037,12 @@
 	\hyper@linkend
 	\ifhmode\spacefactor\@x@sf\fi
 	\relax
+}
+
+\let\oldthanks\thanks
+\renewcommand\thanks[1]{%
+    \label{bhfn:0}%
+    \oldthanks{#1}%
 }
 
 % Adjust the colour of the footnotes marks using the colour defined above
@@ -976,7 +1069,7 @@
 %\addtokomafont{subsection}{\color{Maroon}}
 %\addtokomafont{subsubsection}{\color{Maroon}}
 %\addtokomafont{paragraph}{\color{Maroon}}
-%\addtokomafont{captionlabel}{\color{DarkBlue}}
+%\addtokomafont{captionlabel}{\color{Blue}}
 %\addtokomafont{pagenumber}{\color{Maroon}}
 
 \hypersetup{
@@ -984,7 +1077,7 @@
 	%citecolor=DarkOrange!70!black,
 	citecolor=OliveGreen,
 	filecolor=OliveGreen,
-	%linkcolor=DarkBlue,
+    %linkcolor=Blue,
 	linkcolor=Black,
 	%menucolor=Red,
 	%runcolor=Red,

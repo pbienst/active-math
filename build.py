@@ -16,9 +16,17 @@ re_yt = re.compile(r"""% youtube: (.+?)\s""", re.DOTALL)
 
 def process_exer(chapter_dirs):
     with open(os.path.join(build_dir, "solutions.tex"), 'w') as sol_file:
-        sol_file.write("\\chapter{Solutions to selected exercises}\n")
+        sol_file.write("""\\chapter{Solutions to selected exercises}
+\\setlength{\\columnsep}{18pt}
+\\def\\columnseprulecolor{\\color{white}} 
+\\begin{multicols*}{2}
+""")
         with open(os.path.join(build_dir, "hints.tex"), 'w') as hnt_file:
-            hnt_file.write("\\chapter{Hints for selected exercises}\n")
+            hnt_file.write("""\\chapter{Hints for selected exercises}
+\\setlength{\\columnsep}{18pt}
+\\def\\columnseprulecolor{\\color{white}} 
+\\begin{multicols*}{2}
+""")        
             chapter_counter = -1 # Preamble
             for chapter_dir in chapter_dirs:
                 exer_counter = 0
@@ -72,8 +80,9 @@ def process_exer(chapter_dirs):
                 with open(chapter_file, 'w') as outfile:
                     outfile.write(new_chapter_text)
                 chapter_counter += 1
-
-                
+            hnt_file.write("\\end{multicols*}")
+        sol_file.write("\\end{multicols*}")
+        
 def build():
     # So far only the UGent version, ebook only.
 
@@ -100,6 +109,10 @@ def build():
                    cwd=build_dir)
     subprocess.run(["biber",
                     os.path.join(build_dir, "main.bcf")],
+                   cwd=build_dir)
+    subprocess.run(["pdflatex", "-file-line-error",
+                    "-interaction=nonstopmode",
+                    os.path.join("main.tex")],
                    cwd=build_dir)
     subprocess.run(["pdflatex", "-file-line-error",
                     "-interaction=nonstopmode",

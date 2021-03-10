@@ -26,6 +26,10 @@ We will define functions of a complex variable and show how to differentiate and
 
 We will also study a number of direct applications of complex analysis, e.g. the Kramers--Kronig dispersion relations, and the use of conformal transformations to model waveguide bends.
 
+
+\pagebreak
+
+
 \sectionugent{Functions of a complex variable}
 
 A function of a complex variable is simply defined as
@@ -63,6 +67,10 @@ The real and imaginary parts are:
 $$u = x^2 + y^2$$
 $$v = 0$$
 
+
+\pagebreak
+
+
 \sectionugent{Derivatives of complex functions}
 
 Let us now differentiate complex functions. In analogy with real--valued functions, we would like to define the complex derivative as
@@ -93,19 +101,17 @@ The numerator is obviously real-valued, but the denominator is in general comple
 
 This is obviously undesirable. Now, we can ask ourself the question, what are the conditions under which the derivative Eq.~\ref{eq-deriv} of a complex function is independent of the direction of approach?
 
+\begin{marginfigure}[-.3cm]
+\includegraphics[width=4cm]{complex/figures/approach_z}
+\caption{Different approaches to $z$ in the complex plane.}
+\label{fig-approach-z}
+\end{marginfigure}
+
 Let's have a look at the necessary conditions first. If the direction of approach does not matter at all, than we should certainly get the same result if we pick two special directions (see Fig.~\ref{fig-approach-z}).
 
 \begin{cue}
  By splitting both $f$ and $z$ into their real and imaginary components, take the limit of $\Delta f / \Delta z$ along the horizontal direction.
 \end{cue}
-
-\begin{marginfigure}
-  \scalebox{0.75}{%
-    \includegraphics{complex/figures/approach_z}
-    }
-\caption{Different approaches to $z$ in the complex plane.}
-\label{fig-approach-z}
-\end{marginfigure}
 
 Along the horizontal direction, $\Delta y = 0$, so taking the limit $\Delta x \to 0$, we get
 
@@ -149,13 +155,12 @@ A necessary condition for the complex derivative to be independent of the direct
 $}
 \end{equation} 
 
-\begin{marginfigure}[-3.0cm]
+\begin{marginfigure}[-4.0cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Bernhard_Riemann#/media/File:Georg_Friedrich_Bernhard_Riemann.jpeg
   \includegraphics{complex/figures/b_riemann}
   \caption{Bernhard Riemann (1826-1866)}
 \end{marginfigure}
-
 
 These are called the \emph{Cauchy--Riemann conditions}. A complex function that satisfies these conditions is called \emph{analytic} (or holomorphic). Important to note is that for a function to be analytic, it necessarily has to be continuous and should not contain any singularities, otherwise the derivative would certainly be undefined.
 
@@ -201,6 +206,8 @@ $}
 
 This equation also shows that only derivatives with respect to $x$ are needed to calculate the complex derivative.
 
+\pagebreak
+
 \begin{exer}
 % difficulty: trivial
 % ugent
@@ -229,11 +236,14 @@ $$\frac{\partial (u,v)}{\partial (x,y)} =  \begin{vmatrix} \partial u / \partial
 \end{exer}
 
 
+\pagebreak
+
+
 \sectionugent{Integrals of complex functions}
 
 With differentiation under control, it is time to study integrals of complex functions. The integral of a complex function along a specified path ${C}$ between $z_0$ and $z_1$ (see Fig.~\ref{fig-integral}) is defined by
 
-\begin{marginfigure}[-0.0cm]
+\begin{marginfigure}[]
 \centering
 \includegraphics{complex/figures/integral}
 \caption{A complex line integral.}
@@ -243,8 +253,8 @@ With differentiation under control, it is time to study integrals of complex fun
 \begin{align}
 \int_{C}f(z)dz = & \int_{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
 \nonumber \\
-= & \int_{C}\left[u(x,y)dx-v(x,y)dy\right] + j
-\int_{C}\left[v(x,y)dx+u(x,y)dy\right] \label{eq-complex-int}
+  = & \int_{C}\left[u(x,y)dx-v(x,y)dy\right] + \nonumber\\
+  & j\int_{C}\left[v(x,y)dx+u(x,y)dy\right] \label{eq-complex-int}
 \end{align} 
 
 So, the integral of a complex function has been expressed in terms of well-known real line integrals, which are calculated in the normal way by parametrisation of the curve. (Note that in Eq.~\ref{eq-complex-int} $dx$ and $dy$ are not independent, but related by the choice of the integration path.)
@@ -280,9 +290,13 @@ $$\int_{z_0}^{z_1} dz$$
 for any given points $z_0$ and $z_1$.
 \end{exer}
 
+
+\pagebreak
+
+
 \sectionugent{Cauchy's integral theorem}
 
-\begin{marginfigure}[+0.0cm]
+\begin{marginfigure}[+0.3cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Augustin-Louis_Cauchy
   \includegraphics{complex/figures/cauchy}
@@ -308,11 +322,11 @@ This gives
 \begin{align}
 \oint_{C}f(z)dz = & \oint_{C}\left(u(x,y)+jv(x,y)\right)(dx+jdy)
 \nonumber \\
-= & \oint_{C}\left[u(x,y)dx-v(x,y)dy\right] + j
-\oint_{C}\left[v(x,y)dx+u(x,y)dy\right]  \label{eq-cauchy-proof}
+  = & \oint_{C}\left[u(x,y)dx-v(x,y)dy\right] + \nonumber \\
+  & j \oint_{C}\left[v(x,y)dx+u(x,y)dy\right]  \label{eq-cauchy-proof}
 \end{align}
 
-\begin{marginfigure}[-3cm]
+\begin{marginfigure}[-0.0cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Sir_George_Stokes,_1st_Baronet#/media/File:Ggstokes.jpg
   \includegraphics{complex/figures/stokes}
@@ -335,6 +349,8 @@ In two dimensions (i.e. $A_z=0$ and the contour contained in the $(x,y)$--plane)
 \oint_{{C}} \left(A_x dx + A_y dy\right) = \iint_S \left(\frac{\partial
 A_y}{\partial x} - \frac{\partial A_x}{\partial y} \right)dx dy
 \end{equation} 
+
+\pagebreak
 
 \begin{cue}
 Figure out which values of $A_x$ and $A_y$ to use, so that we can apply Cauchy--Riemann to the first term in Eq.~\ref{eq-cauchy-proof}.
@@ -364,6 +380,9 @@ is independent on the exact path between $z_0$ and $z_1$.
 \end{exer}
 
 
+\pagebreak
+
+
 \sectionugent{Cauchy's integral formula}
 
 The second major theorem in complex calculus is Cauchy's integral \emph{formula} (as opposed to Cauchy's integral \emph{theorem} from the previous section). Cauchy integral formula states that for an analytic function $f(z)$
@@ -383,7 +402,7 @@ What would happen to Eq.~\ref{eq-cauchy-2} if  $z_0$ were outside of the contour
 
 If $z_0$ were outside of the contour, then the integrand of Eq.~\ref{eq-cauchy-2} would be analytic in the entire region enclosed by the contour. In that case, Cauchy's theorem applies and the integral vanishes.
 
-\begin{marginfigure}
+\begin{marginfigure}[-1cm]
 \centering
 \includegraphics[width=5cm]{complex/figures/cauchy_II}
 \caption{Contour to prove Cauchy's formula.}
@@ -417,10 +436,10 @@ To calculate the integral along ${C}_2$, we use the parametrisation $z=z_0 + r e
 \end{equation}
 
 In the limit $ r \to 0 $ this becomes
+
 \begin{align}
-\oint_{{C}_2} \frac{f(z)} {z-z_0} dz = & j f(z_0) \oint_{{C}_2}
-d \theta \nonumber \\
- = &2 \pi j f(z_0)
+\oint_{{C}_2} \frac{f(z)} {z-z_0} dz = & \, j f(z_0) \oint_{{C}_2} d \theta \nonumber \\
+ = & \, 2 \pi j f(z_0)
 \end{align}
  
 which proves Cauchy's integral formula.
@@ -434,7 +453,7 @@ Use Cauchy's formula to calculate
 $$\oint_{{C}}  \frac {e^z} {z+1} dz$$
 Here ${C}$ is a circle of radius 4 centered at the origin.
 \begin{sol}
-  $2 \pi j e^{-1}$
+$$\frac{2 \pi j}{e}$$
 \end{sol}
 \end{exer}
 
@@ -444,33 +463,49 @@ Use Cauchy's formula to calculate
 $$\oint_{{C}}  \frac {e^{az}} {z} dz$$
 Here ${C}$ is the unit circle and $a$ is a real-valued constant. Then, write this integral in terms of $\theta$ and show
 $$ \int_0^\pi e ^{a \cos \theta} \cos (a \sin \theta) d\theta = \pi $$
-
 \begin{sol}
-  $2 \pi j$
+$$2 \pi j$$
 \end{sol}
 \end{exer}
 
 \begin{exer}
 % difficulty: hard
 % ugent
-\begin{hnt}
-Apply Cauchy's formula to each of the terms of $\frac{f(z_0+\Delta z_0) - f(z_0)}{\Delta z_0}$. Then take the limit ${\Delta z_0} \to 0$.
-\end{hnt}
+\label{ex-cauchy-diff}
 Prove the following identity:
+
 $$f'(z_0)=\frac{1}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^2} dz$$
 
 This expression can be used to (numerically) calculate the derivative of an analytic function.
-\label{ex-cauchy-diff}
+\begin{hnt}
+Apply Cauchy's formula to each of the terms of $$\frac{f(z_0+\Delta z_0) - f(z_0)}{\Delta z_0}$$ Then take the limit ${\Delta z_0} \to 0$.
+\end{hnt}
 \end{exer}
 
 \begin{exer}
 % difficulty: hard
-By repeating the technique used in Ex. \ref{ex-cauchy-diff}, show that $$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
+Show that
 
+  $$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
+  
 This also means that if a function is analytic, then the derivatives of any order automatically exist.
+\begin{hnt}
+Repeating the technique used in Ex. \ref{ex-cauchy-diff}.
+\end{hnt}  
 \end{exer}
 
+
+\pagebreak
+
+
 \sectionugent{Laurent series}
+
+
+\begin{marginfigure}
+\includegraphics{complex/figures/laurent}
+\caption{Contour to derive Laurent series.}
+\label{fig-laurent}
+\end{marginfigure}
 
 Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$. In this region, we can construct a contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
 
@@ -484,12 +519,6 @@ Cauchy's formula gives us
 f(z)=\frac{1}{2 \pi j }\oint_{{C}_1} \frac{f(z')} {z'-z} dz' -\frac{1}{2
 \pi j }\oint_{{C}_2} \frac{f(z')} {z'-z} dz' \label{laurent_0}
 \end{equation} 
-
-\begin{marginfigure}
-\includegraphics{complex/figures/laurent}
-\caption{Contour to derive Laurent series.}
-\label{fig-laurent}
-\end{marginfigure}
 
 Here, $z$ is a fixed point on the inside of the contour, while $z'$ is the integration variable running along the contour. The two line segments cancel once again.
 
@@ -542,14 +571,15 @@ This means that we can expand $f(z)$ in a power series containing both negative 
 f(z)= \sum_{m=-\infty}^{\infty} a_m z^m
 \end{equation} 
 
-This generalisation of a Taylor series in the presence of singularities is called a \emph{Laurent series}, in this case a Laurent series around the origin.
-
-\begin{marginfigure}[-.5cm]
+\begin{marginfigure}[-.0cm]
   % credits: Wikipedia
   % url: https://upload.wikimedia.org/wikipedia/commons/d/d8/Pierre_Alphonse_Laurent.jpeg
   \includegraphics{complex/figures/pierre_laurent}
   \caption{Pierre Alphonse Laurent (1813–1854)}
 \end{marginfigure}
+
+This generalisation of a Taylor series in the presence of singularities is called a \emph{Laurent series}, in this case a Laurent series around the origin.
+
 
 As an example, let's develop
 
@@ -592,7 +622,7 @@ $e^z$ is a function which is analytic in all of $\mathbb{C}$ and defined by
 $$e^z \stackrel{def}{=} \sum_{m=0}^{\infty} \frac{z^m}{m!} $$
 
 \begin{sol}
- $f(z)= - \sum_{k=0}^{\infty} \left(\sum _{m=0}^k \frac{1}{m!} \right) z^k $
+$$f(z)= - \sum_{k=0}^{\infty} \left(\sum _{m=0}^k \frac{1}{m!} \right) z^k $$
 \end{sol}
 
 \end{exer}
@@ -602,7 +632,7 @@ $$e^z \stackrel{def}{=} \sum_{m=0}^{\infty} \frac{z^m}{m!} $$
   Same as Exercise \ref{ex_laurent_1}, but for the outer ring  $1 < | z |$.
 
 \begin{sol}
- $f(z)=  \sum_{k=-\infty}^{\infty} \left(\sum_{m=k+1}^\infty \frac{1}{m!} \right) z^k $
+$$f(z)=  \sum_{k=-\infty}^{\infty} \left(\sum_{m=k+1}^\infty \frac{1}{m!} \right) z^k $$
 \end{sol}
   
 \end{exer}
@@ -615,14 +645,14 @@ $$e^z \stackrel{def}{=} \sum_{m=0}^{\infty} \frac{z^m}{m!} $$
 
 \begin{exer}
   % difficulty: hard
-  
   What is the relationship between a Fourier and a Laurent series?
-
   \begin{hnt}
   Transform a Fourier series in exponential notation to a Laurent series.
   \end{hnt}
-    
 \end{exer}
+
+
+\pagebreak
 
 
 \sectionugent{Singularities}
@@ -655,6 +685,8 @@ Note that a pole of order $M$ can be removed by multiplying $f(z)$ by $(z-z_0)^M
 
 \noindent\marginnote{This is shown in Picard's Great Theorem.}One can also prove that in a small neighbourhood around an essential singularity, the function actually takes all possible complex values (with at most a single exception)! So, obviously it makes no sense to talk about the limit of that function there.
 
+\pagebreak
+
 \subsection*{Branch points}
 
 Consider the relation
@@ -671,7 +703,7 @@ For $z=\rho e^{j\theta}$, a possible solution to Eq.~\ref{eq-sqrt} is $w_1 = \rh
 
 So, Eq.~\ref{eq-sqrt} is clearly not a single--valued function: a single point in the $z$--plane (except $z=0$) corresponds to two points in the $w$--plane. To get a handle on the multivaluedness of $z^{1/2}$, it's instructive to look at a graphical representation of this complex function. Since this is essentially a 4D--object, we can plot e.g. a 3D projection $(\Re(z),\Im(z),\Re(w))$ and use the phase of $w$ to colour the surface. This is done in Fig.~\ref{fig-riemann}.
 
-\begin{marginfigure}
+\begin{marginfigure}[-3cm]
 \centering
 \includegraphics{complex/figures/riemann}
 \caption{Riemann surface of $w=z^{1/2}$. Note that $u=\Re(w)$. }
@@ -686,14 +718,16 @@ When you do such an excursion in the complex plane, how does the angle of $w$ ch
 
 From the figure, it is clear that we will have circled twice around the origin for that, so one could say that on the Riemann surface, the argument $w$ needs to change over $4 \pi$ in order to complete a full round trip. Therefore, this Riemann surface can be seen as an extension of the complex plane which is 'twice as large' as the regular complex plane.
 
-\begin{marginfigure}
+Although the Riemann surface is a very profound and beautiful mathematical concept, for practical purposes people often like to work with single--valued functions mapping the complex plane to the regular (i.e. non-extended) complex plane. To do this, we can adopt a convention to restrict ourselves e.g. to values in the right half of the $w$--plane, i.e. where $\Re(w)>0$.
+
+
+\begin{marginfigure}[-1cm]
 \centering
 \includegraphics[width=4cm]{complex/figures/branchcut_portrait}
 \caption{The mapping $w=z^{1/2}$.}
 \label{fig-branchcut}
 \end{marginfigure}
 
-Although the Riemann surface is a very profound and beautiful mathematical concept, for practical purposes people often like to work with single--valued functions mapping the complex plane to the regular (i.e. non-extended) complex plane. To do this, we can adopt a convention to restrict ourselves e.g. to values in the right half of the $w$--plane, i.e. where $\Re(w)>0$.
 
 \begin{cue}
 To which figure in the $z$--plane does the boundary $\Re(w)=0$ map?
@@ -701,18 +735,17 @@ To which figure in the $z$--plane does the boundary $\Re(w)=0$ map?
 
 The boundary $\Re(w)=0$ between these two halves of the $w$--plane corresponds to the negative real axis in the $z$--plane. We call this negative real $z$--axis a \emph{branch cut}, originating from the \emph{branch point} $z=0$ (see Fig.~\ref{fig-branchcut}).
 
-
 \begin{cue}
 Looking at Fig.~\ref{fig-branchcut}, once we introduce the branch cut, what is the square root of $z_+$ and $z_-$? What happens to the output of the function if you cross the branch cut in the $z$--plane? 
 \end{cue}
 
 Our function is now no longer continuous when crossing the branch cut: for $z_+ = \rho e^{j (\pi - \epsilon)}$, we get $w_+ = \sqrt{\rho} e^{j (\pi/2 - \epsilon/2)}$, whereas for $z_- = \rho e^{j (\pi + \epsilon)}$, we get $w_- = \sqrt{\rho} e^{j (\pi/2 + \epsilon/2)} e^{j \pi}$. (This can be seen by looking at Fig.~\ref{fig-branchcut}.) In the limit of zero $\epsilon$, $w_+$ tends to $j\sqrt{\rho}$, whereas $w_-$ tends to $-j\sqrt{\rho}$.
 
-\begin{marginfigure}
+\begin{marginfigure}[1cm]
 \centering
 \includegraphics{complex/figures/sheets}
 \caption{The branch cut cuts the Riemann surface in two separate Riemann sheets.
-Adjacent regions on the Riemann surface are marked by similar letters.}
+Adjacent regions on the Riemann surface are marked by the same letters.}
 \label{fig-sheets}
 \end{marginfigure}
 
@@ -724,6 +757,8 @@ Note that integrals on both sides of a branch cut will generally not cancel out,
 
 The choice of branch cut is in no way unique: any line (even a curved one) from $z=0$ to infinity would suit the purpose equally well. Its only goal is to lift the ambiguity with respect to the choice of $w$. There are however often physical reasons which inspire the choice of branch cut.
 
+\pagebreak
+
 \begin{exer}
 % difficulty: normal
 % ugent
@@ -734,17 +769,51 @@ Show that asking that $\Re(w)>0$ is equivalent to asking that you restrict the a
 \begin{exer}
 % difficulty: normal
 % ugent
+  \label{ex-product-roots}
+\begin{marginfigure}[0.5cm]
+\centering
+\includegraphics[width=4cm]{complex/figures/riemann2}
+\caption{Half the Riemann surface of $w=(z-1)^{1/2}(z+1)^{1/2}$. Note that $u=\Re(w)$. }
+\label{fig-riemann2}
+\end{marginfigure}
 Consider
 
 $$f(z)=(z-1)^{1/2}(z+1)^{1/2}$$
 
-Using the conventional choice of branch cut for an individual square root (expressed in terms of angles as in Ex.~\ref{ex-branch-ang}), show that the branch cut for this product of square roots is the segment $-1<= x <= 1$. Do this by looking at 8 strategically located points in the $z$--plane, and calculate the angle of the corresponding $w$--value. Verify that it is possible to establish a single--valued function using this cut, and that any contour which does not cross this cut does not encounter discontinuities.
+Using the conventional choice of branch cut for an individual square root (expressed in terms of angles as in Ex.~\ref{ex-branch-ang}), show that the branch cut for this product of square roots is the segment $-1 \le x \le 1$. Do this by looking at 8 strategically located points in the $z$--plane, and calculate the angle of the corresponding $w$--value.
+
+
+Verify that it is possible to establish a single--valued function using this cut, and that any contour which does not cross this cut does not encounter discontinuities.
 \end{exer}
 
 \begin{exer}
 % difficulty: normal
 What does the Riemann surface of $w=\ln(z)$ look like?
 \end{exer}
+
+\begin{exer}
+% difficulty: hard
+\begin{marginfigure}[0.cm]
+\centering
+\includegraphics[width=4cm]{complex/figures/riemann3}
+\caption{Half the Riemann surface of $w=(z-1)^{1/2}(z+1)^{1/2}$. Note that $v=\Im(w)$. }
+\label{fig-riemann3}
+\end{marginfigure}
+
+For Eq.~\ref{ex-product-roots}, what range of angles would you need to chose for the arguments of each of the square roots in order to end up with a branch cut consisting of the union of  $x \le -1$ and $1 \le x$?
+
+
+Note that Fig.~\ref{fig-riemann2} and \ref{fig-riemann3} each seem to suggest a different natural choice for a branchut, even though they both correspond to the same Riemann surface.
+
+
+Why is that? Which branch cut is more natural?
+  \begin{sol}
+    $\arg(z-1) \in [0, 2 \pi], \arg(z+1) \in [-\pi,\pi]$. Figs.~\ref{fig-riemann2} and \ref{fig-riemann3} are both different projections of a 4D Riemann surface. That they seem to suggest a certain natural choice for the branchcut is purely accidental.
+\end{sol}
+\end{exer}
+
+\pagebreak
+
 
 \sectionugent{Residue calculus}
 
@@ -761,7 +830,7 @@ f(z)= \sum_{m=-\infty}^{\infty} a_m (z-z_0)^m
 The \emph{residue} of $z_0$ is defined as $a_{-1}$, i.e. the coefficient of $1/z$ in the Laurent series. Using Eq.~\ref{eq-laurent-int}, we immediately get
 
 \begin{equation}
-Res_{z_0}=\frac{1}{2 \pi j }  \oint_{{C}} f(z) dz \label{eq-res-int}
+\mathrm{Res}_{z_0}=\frac{1}{2 \pi j }  \oint_{{C}} f(z) dz \label{eq-res-int}
 \end{equation}
 
 \begin{cue}
@@ -782,17 +851,20 @@ $$e^{1/z} = \sum_{m=0}^{\infty} \frac{1}{z^m m!} $$
 
 \begin{exer}
 % difficulty: normal
-  Use a series expansion to calculate the residue of $z \cos \frac{1}{z}$ at $z=0$.
+  Use a series expansion to calculate the residue at $z=0$ of
+  $$z \cos \frac{1}{z}$$
   \begin{sol}
-    $-1/2$
+    $$-1/2$$
   \end{sol}
 \end{exer}
 
 \begin{exer}
 % difficulty: normal
-  Use a series expansion to calculate the residue of $\frac{z - \sin z}{z}$ at $z=0$.
+  Use a series expansion to calculate the residue at $z=0$ of
+
+  $$\frac{z - \sin z}{z}$$
   \begin{sol}
-    $0$
+    $$0$$
   \end{sol}
 \end{exer}
 
@@ -803,7 +875,7 @@ Suppose $f(z)$ is analytic inside a contour ${C}$, except for some isolated sing
 
 \begin{equation}
 \fbox{$\displaystyle
-\oint_{{C}} f(z) dz = 2 \pi j \sum_k Res_{z_k} \label{eq-res-theorem}
+\oint_{{C}} f(z) dz = 2 \pi j \sum_k \mathrm{Res}_{z_k} \label{eq-res-theorem}
 $}
 \end{equation} 
 
@@ -832,7 +904,7 @@ Applying Cauchy's theorem on this contour (the straight segments cancel as befor
 The integral around any singular point can be written as (Eq.~\ref{eq-res-int})
 
 \begin{equation}
-\oint_{{C}_k} f(z) dz = 2 \pi j Res_{z_k} \label{eq-res-proof-2}
+\oint_{{C}_k} f(z) dz = 2 \pi j \mathrm{Res}_{z_k} \label{eq-res-proof-2}
 \end{equation} 
 
 Combining Eq.~\ref{eq-res-proof-1} and Eq.~\ref{eq-res-proof-2} immediately proves the theorem.
@@ -845,15 +917,17 @@ The residue theorem is of enormous practical importance, as it allows us to repl
 % difficulty: normal
 % ugent
   If $z_0$ is a simple pole of $f(z)$, use the Laurent series to prove that
-$$Res_{z_0} = \left[f(z)(z-z_0)\right]_{z=z_0}$$
+$$\mathrm{Res}_{z_0} = \left[f(z)(z-z_0)\right]_{z=z_0}$$
 \label{ex-res1}
 \end{exer}
 
 \begin{exer}
 % difficulty: trivial
-What is the residue of $\frac{1}{z+z^2}$ at $z=0$?
+  Calculate the residue at $z=0$ of
+
+   $$\frac{1}{z+z^2}$$ 
 \begin{sol}
-  $1$
+  $$1$$
 \end{sol}
 \end{exer}
 
@@ -861,7 +935,7 @@ What is the residue of $\frac{1}{z+z^2}$ at $z=0$?
 % difficulty: hard
 % ugent
   If $z_0$ is a simple pole of $f(z)=\frac{g(z)}{h(z)}$, i.e. $z_0$ is a simple zero of $h(z)$ and $g(z_0) \ne 0$, show that
-    $$Res_{z_0} = \frac{g(z_0)}{h'(z_0)}$$
+    $$\mathrm{Res}_{z_0} = \frac{g(z_0)}{h'(z_0)}$$
 \begin{hnt}
 Write $h(z)$ as $r(z)(z-z_0)$, and apply the result from Ex.~\ref{ex-res1}.
 \end{hnt}
@@ -870,8 +944,11 @@ Write $h(z)$ as $r(z)(z-z_0)$, and apply the result from Ex.~\ref{ex-res1}.
 \begin{exer}
 % difficulty: hard
 If $z_0$ is a pole of order $M$ of $f(z)$, prove that
-$$Res_{z_0} = \frac{1}{(M-1)!}{\left[D^{M-1}[f(z)(z-z_0)^M]\right]}_{z=z_0}$$
+$$\mathrm{Res}_{z_0} = \frac{1}{(M-1)!}{\left[D^{M-1}[f(z)(z-z_0)^M]\right]}_{z=z_0}$$
 \end{exer}
+
+
+\pagebreak
 
 
 \sectionugent{Limit theorems}
@@ -934,7 +1011,7 @@ then
 
 \begin{marginfigure}
 \centering
-\includegraphics[width=4cm]{complex/figures/limit_theorem}
+\includegraphics[width=3.5cm]{complex/figures/limit_theorem}
 \caption{Contours for big and small limit theorems.}
 \label{fig-limit-theorem}
 \end{marginfigure}
@@ -1000,6 +1077,7 @@ The same balancing process can also be applied to limits at infinity:
 PV \int_{-\infty}^\infty f(x) dx = \lim_{a \to \infty} \int_{-a}^{a} f(x) dx
 \end{equation} 
 
+\pagebreak
 
 \sectionugent{Evaluation of real--valued integrals}
 
@@ -1100,6 +1178,7 @@ So finally
 - \epsilon^2}}, \hspace{0.5cm} |\epsilon| < 1
 \end{equation} 
 
+\pagebreak
 \subsection*{Example 2: integrals of the type $\int_\infty^{\infty} f(z) e^{jbz} dz$}
 
 Let's calculate
@@ -1110,6 +1189,10 @@ Let's calculate
 
 \noindent\marginnote{Alternatively, we could have made use of $\cos z = (e^{j z} + e^{-jz})/2$, but then Jordan's lemma would have required two separate integrals for each of the complex exponentials, each with a different contour.}To do this, we will calculate the real part of the following contour integral (Fig.~\ref{fig-example-2}):
 
+\begin{equation}
+I = \oint_{{C}} \frac{e^{j \lambda z}}{1 + z^2} dz
+\end{equation}
+
 \begin{marginfigure}
 \centering
 \includegraphics{complex/figures/int_ex_2}
@@ -1117,14 +1200,10 @@ Let's calculate
 \label{fig-example-2}
 \end{marginfigure}
 
-\begin{equation}
-I = \oint_{{C}} \frac{e^{j \lambda z}}{1 + z^2} dz
-\end{equation}
-
 Evaluating the part of this contour on the real axis, and then taking the real part will recover the required cosine in the integral.
 
 \begin{cue}
-  Use residue calculus to evaluate the contour integral.
+Use residue calculus to evaluate the contour integral.
 \end{cue}
 
 The only pole enclosed by the contour is at $j$, with residue $e^{-\lambda}/(j+j)$, such that the residue theorem leads to
@@ -1138,7 +1217,7 @@ e^{-\lambda}
 Let's now take the limit $R \to \infty$ and study the different contributions to the contour.
 
 \begin{cue}
-  Can we apply Jordan's lemma to ${C_R}$? 
+Can we apply Jordan's lemma to ${C_R}$? 
 \end{cue}
 
 If $\lambda > 0$, the contour lies indeed in the 'proper' part of the complex plane. For the second condition, we need to calculate the following limit:
@@ -1178,27 +1257,32 @@ Let's now try an example with branch point singularities:
 \int_0^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx, \hspace{0.5cm} a > 0
 \end{equation}
 
-We stick to the traditional choice of branch cut, namely the negative real axis
-(Fig.~\ref{fig-example-3}). The contour is placed 'just above' this branch cut. In order to avoid the branch point at $z=0$, we also make a small detour around the origin.
-
-\begin{marginfigure}
+\begin{marginfigure}[-0cm]
 \centering
 \includegraphics{complex/figures/int_ex_3}
 \caption{Contour for example 3.}
 \label{fig-example-3}
 \end{marginfigure}
 
+We stick to the traditional choice of branch cut, namely the negative real axis (Fig.~\ref{fig-example-3}). The contour is placed 'just above' this branch cut. In order to avoid the branch point at $z=0$, we also make a small detour around the origin.
+
+\begin{cue}
+Use residue calculus to evaluate the contour integral.
+\end{cue}
+
 \begin{align}
-I = \oint_{{C}} \frac{z^{1/2}}{z^2+a^2} dz =& 2 \pi j Res_{j a}
+I = \oint_{{C}} \frac{z^{1/2}}{z^2+a^2} dz =& \, 2 \pi j \textrm{Res}_{j a}
 \nonumber \\
-=& 2 \pi j \frac{(j a)^{1/2}}{ja + ja} \nonumber \\
-=& \pi \frac{\sqrt{a}e^{\frac{1}{2}j\frac{\pi}{2}}}{a} \nonumber \\
-=& \frac{\pi}{\sqrt{a}} e^{j \pi /4}
+=& \, 2 \pi j \frac{(j a)^{1/2}}{ja + ja} \nonumber \\
+=& \, \pi \frac{\sqrt{a}e^{\frac{1}{2}j\frac{\pi}{2}}}{a} \nonumber \\
+=& \, \frac{\pi}{\sqrt{a}} e^{j \pi /4}
 \end{align}
 
-We use the big limit theorem to calculate the contribution of the outer circular
-part ${C_R}$ to the integral. For that, we calculate the following
-limit:
+\begin{cue}
+What is the contribution of ${C_R}$ to the integral in the limit of infinite radius?
+\end{cue}
+
+We use the big limit theorem to calculate the contribution of the outer circular part ${C_R}$ to the integral. For that, we calculate the following limit:
 
 \begin{equation}
 \lim_{z \to \infty}\frac{z^{1/2}}{z^2+a^2} \cdot z = \lim_{z \to
@@ -1206,16 +1290,21 @@ limit:
 e^{j \arg z}
 \end{equation}
 
-Just as before, the complex exponentials involving $\arg z$ always stay bounded,
-so this limit goes to zero and the contribution from this part of the contour
-vanishes.
+Just as before, the complex exponentials involving $\arg z$ always stay bounded, so this limit goes to zero and the contribution from this part of the contour vanishes.
 
-Similarly, we use the small limit theorem to show that the contribution for the
-semicircle around the branch point vanishes:
+\begin{cue}
+What is the contribution of the small inner circle $\gamma$ to the integral in the limit of zero radius?
+\end{cue}
+
+Similarly, we use the small limit theorem to show that the contribution for the semicircle around the branch point vanishes in the limit of zero radius:
 
 \begin{equation}
 \lim_{z \to 0}\frac{z^{1/2}}{z^2+a^2} \cdot z = \frac{0}{a^2} = 0
 \end{equation}
+
+\begin{cue}
+Write down what remains of the contour integral and use this to calculate our original real-valued integral.
+\end{cue}
 
 So finally we are left with
 
@@ -1223,8 +1312,7 @@ So finally we are left with
 I = \int_{- \infty}^{0}\frac{z^{1/2}}{z^2+a^2}dz + \int_{0}^{\infty}\frac{z^{1/2}}{z^2+a^2}dz
 \end{equation} 
 
-Returning from $z$ to $x$, we get with our choice of branch cut (see the
-calculation of $w_+$ in the section on branch cuts) that 
+Returning from $z$ to $x$, we get with our choice of branch cut (see the calculation of $w_+$ in the section on branch cuts) that 
 
 \begin{equation}
 z^{1/2} = 
@@ -1239,8 +1327,8 @@ such that
 \begin{align}
 I = & \int_{- \infty}^{0}\frac{j\sqrt{-x}}{x^2+a^2}dx +
 \int_{0}^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx \nonumber \\
- = & (1 + j) \ \int_{0}^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx \nonumber \\
- = & \frac{\pi}{\sqrt{a}} e^{j \pi /4}
+ = & \, (1 + j) \ \int_{0}^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx \nonumber \\
+ = & \, \frac{\pi}{\sqrt{a}} e^{j \pi /4}
 \end{align} 
 
 So finally
@@ -1249,48 +1337,112 @@ So finally
 \int_0^{\infty}\frac{\sqrt{x}}{x^2+a^2}dx = \frac{\pi}{\sqrt{2a}}
 \end{equation}
 
+\pagebreak
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_0^{\infty} \frac{dx}{1+x^2} = \frac{\pi}{2}$$
+% difficulty: trivial
+% ugent
+  \label{ex-contour-integral-1}
+Use complex contour integration to calculate
+$$\int_0^{\infty} \frac{dx}{1+x^2}$$
+\begin{sol}
+$$\frac{\pi}{2}$$
+\end{sol}
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_0^{\infty} \frac{\sin x}{x} dx = \frac{\pi}{2}$$
+% difficulty: trivial
+Repeat Ex.~\ref{ex-contour-integral-1}, but show that you get the same result if you close the contour in a different half plane, and/or change its orientation.
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_0^{\infty} \frac{1}{\left(x^2 + a^2\right)^2} dx = \frac{\pi}{4 a^3}$$
+% difficulty: trivial
+% ugent
+  Comment on the suitability of the following contours for calculating
+  $$ \int_0^{\infty} \frac{\sin x}{x} dx$$
+
+  (All of these were harvested from actual student solutions.)
+
+\begin{center}
+\includegraphics[width=10cm]{complex/figures/contours}
+\end{center}
+  
+\end{exer}
+
+\begin{exer}
+% difficulty: normal
+% ugent
+Use complex contour integration to calculate
+$$ \int_0^{\infty} \frac{\sin x}{x} dx$$
+\begin{sol}
+$$\frac{\pi}{2}$$
+\end{sol}
+\end{exer}
+
+\pagebreak
+
+\begin{exer}
+% difficulty: normal
+Use complex contour integration to calculate
+$$ \int_0^{\infty} \frac{1}{\left(x^2 + a^2\right)^2} dx$$
 Here $a$ is a positive real-valued number.
+\begin{sol}
+$$\frac{\pi}{4 a^3}$$
+\end{sol}
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_{-\infty}^{\infty} \frac{\sin \pi x}{x (x-1) (x-2)} dx = 2 \pi$$
+% difficulty: normal
+Use complex contour integration to calculate
+$$ \int_{-\infty}^{\infty} \frac{\sin \pi x}{x (x-1) (x-2)} dx$$
+\begin{sol}
+$$2 \pi$$
+\end{sol}
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_0^{2\pi} \frac{\cos^2 \theta d \theta}{13-5\cos 2 \theta} = \frac{\pi}{10}$$
+% difficulty: normal
+Use complex contour integration to calculate
+$$ \int_0^{2\pi} \frac{\cos^2 \theta d \theta}{13-5\cos 2 \theta}$$
+\begin{sol}
+$$\frac{\pi}{10}$$
+\end{sol}
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that for $n \ge 1$
-$$ \int_0^\pi \sin^{2n} \theta d \theta = \frac{(2n)!}{ 2^{2n}(n!)^2} \pi$$
+% difficulty: hard
+Use complex contour integration to calculate
+$$ \int_0^\pi \sin^{2n} \theta d \theta$$
+Here, $n \ge 1$.
+\begin{sol}
+$$\frac{(2n)!}{ 2^{2n}(n!)^2} \pi$$
+\end{sol}
 \end{exer}
 
 \begin{exer}
-Use complex contour integration to show that
-$$ \int_0^\infty \frac{x ^ {2m}}{x^{2n} + 1} dx = \frac{\pi}{2n} \mathrm{cosec}  \left( \frac{2m+1}{2n} \pi \right)$$
+% difficulty: hard
+Use complex contour integration to calculate
+$$ \int_0^\infty \frac{x ^ {2m}}{x^{2n} + 1} dx$$
 Here $m$ and $n$ are integers and $0 \le m < n$.
+\begin{sol}
+$$\frac{\pi}{2n} \mathrm{cosec} \left( \frac{2m+1}{2n} \pi \right)$$
+\end{sol}
 \end{exer}
 
 
-\section{Application: Kramers--Kronig dispersion relations}
+\pagebreak
+
+
+\sectionugent{Application: Kramers--Kronig dispersion relations}
 
 Suppose $f(z)$ is an analytic function with $\lim_\infty f(z) = 0$ in the upper half of the complex plane.
+
+\begin{marginfigure}[-0.5cm]
+\centering
+\includegraphics{complex/figures/kk}
+\caption{Contour for Kramers--Kronig dispersion relations.}
+\label{fig-KK}
+\end{marginfigure}
 
 Applying Cauchy's theorem to the contour in Fig.~\ref{fig-KK} leads to
 
@@ -1298,24 +1450,26 @@ Applying Cauchy's theorem to the contour in Fig.~\ref{fig-KK} leads to
 \oint_{{C}} \frac{f(z)}{z-x_0} dz = 0
 \end{equation}
 
-\begin{marginfigure}
-  %10cm
-\centering
-\includegraphics{complex/figures/kk}
-\caption{Contour for Kramers--Kronig dispersion relations.}
-\label{fig-KK}
+\begin{cue}
+Split up the contour integral into contributions from its different parts.
+\end{cue}
+
+\begin{marginfigure}[1.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Hans_Kramers
+  \includegraphics[]{complex/figures/h_kramers}
+  \caption{Hans Kramers (1894–1952)}
 \end{marginfigure}
 
 The integral over the large semi--circle vanishes because of the big limit
 theorem. For the contribution of the small semi--circle around the pole $x_0$ we
 could use the small limit theorem, or alternatively calculate it directly:
 
-\begin{equation}
-\lim_{\epsilon \to 0} \int_{- \infty}^{x_0-\epsilon} \frac{f(x)}{x-x_0}dx +
-\lim_{\epsilon \to 0} \int_{\pi}^0 \frac{f(x_0+\epsilon e^{j \theta})}{\epsilon
-e^{j\theta}} \epsilon j e^{j \theta} d \theta + \lim_{\epsilon \to 0}
-\int_{x_0+\epsilon}^{\infty} \frac{f(x)}{x-x_0}dx = 0
-\end{equation} 
+\begin{align}
+\lim_{\epsilon \to 0} & \int_{- \infty}^{x_0-\epsilon} \frac{f(x)}{x-x_0}dx + \nonumber \\
+\lim_{\epsilon \to 0} & \int_{\pi}^0 \frac{f(x_0+\epsilon e^{j \theta})}{\epsilon e^{j\theta}} \epsilon j e^{j \theta} d \theta + \nonumber \\
+\lim_{\epsilon \to 0} & \int_{x_0+\epsilon}^{\infty} \frac{f(x)}{x-x_0}dx = 0
+\end{align} 
 
 This leads to 
 
@@ -1324,19 +1478,31 @@ f(x_0) = \frac{1}{\pi j} PV \int_{- \infty}^{\infty} \frac{f(x)}{x-x_0}dx
 \label{eq-kk-1}
 \end{equation} 
 
+If you squint a bit, you could say that the singularity $x_0$ lies more or less on our contour (although we avoided it with the small semicircle). You could therefore say that it's halfway between a singularity outside of the contour (Cauchy's theorem) and one inside the contour (Cauchy's formula). This is also reflected in the result of the integral, which is the average of these two cases, with an extra principal value thrown in for good measure.
 
 \begin{exer}
-   % difficulty: trivial 
+% difficulty: trivial 
 Show that Eq.~\ref{eq-kk-1} can also be obtained by choosing a contour that circles around $x_0$ in the lower half of the complex plane.
 \end{exer}
+
+\begin{cue}
+Split up Eq.~\ref{eq-kk-1} into its real and imaginary parts to derive expressions for $ u(x_0)= \Re f(x_0)$ and $ v(x_0)= \Im f(x_0)$.
+\end{cue}
+
+\begin{marginfigure}[-1.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Ralph_Kronig
+  \includegraphics{complex/figures/r_kronig}
+  \caption{Ralf Kronig (1904–1995)}
+\end{marginfigure}
 
 Splitting Eq.~\ref{eq-kk-1} into real and imaginary parts yields
 
 \begin{align}
-f(x_0) =& u(x_0) + jv(x_0) \nonumber \\
-       =& \frac{1}{\pi j} PV \int_{- \infty}^{\infty} \frac{u(x)+jv(x)}{x-x_0}dx
+f(x_0) =& \, u(x_0) + jv(x_0) \nonumber \\
+       =& \, \frac{1}{\pi j} PV \int_{- \infty}^{\infty} \frac{u(x)+jv(x)}{x-x_0}dx
  \nonumber \\
-       =& \frac{1}{\pi} PV \int_{- \infty}^{\infty} \frac{v(x)}{x-x_0}dx -
+       =& \, \frac{1}{\pi} PV \int_{- \infty}^{\infty} \frac{v(x)}{x-x_0}dx -
 \frac{j}{\pi} PV \int_{- \infty}^{\infty} \frac{u(x)}{x-x_0}dx
 \end{align}
 
@@ -1352,16 +1518,31 @@ v(x_0) = -\frac{1}{\pi} PV \int_{- \infty}^{\infty} \frac{u(x)}{x-x_0}dx
 \label{eq-KK}
 \end{subequations}
 
+\begin{marginfigure}[-1.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/David_Hilbert
+  \includegraphics{complex/figures/d_hilbert}
+  \caption{David Hilbert (1862–1943)}
+\end{marginfigure}
+
 Equations \ref{eq-KK} are called the \emph{Kramers--Kronig} dispersion
 relations. They state that under the conditions given above, the real part of a
 function can be expressed as an integral over the imaginary part and
-vice--versa. By definition, equations \ref{eq-KK} also express that the real and
-imaginary parts are \emph{Hilbert transforms} of each other.
+vice--versa.
 
-In photonics, we apply these relations to the function $f(z) = \chi(\omega) =
-n(\omega)^2 -1$. (Remember from the course ``Optical Materials'' that
-$\mathbf{P}(\omega)=\varepsilon_0 \chi(\omega) \mathbf{E}(\omega)$). Replacing
-$x_0$ by $\omega$, and $x$ by $\omega'$, we get
+By definition, equations \ref{eq-KK} also express that the real and
+imaginary parts are \emph{Hilbert transforms} of each other. Hilbert transforms also find use in e.g. telecommunications.
+
+Let's now apply this to the field of material dispersion by applying these relations to the function $f(z) = \chi(\omega) =
+n(\omega)^2 -1$. $\chi(\omega)$ is a material's susceptibility and relates the polarisation $\mathbf{P}$ to the incident electric field $\mathbf{E}$ according to
+$\mathbf{P}(\omega)=\varepsilon_0 \chi(\omega) \mathbf{E}(\omega)$).
+
+\begin{exer}
+% difficulty: normal
+  What is the mathematical reason we used $f(z) = \chi(\omega)$ here, and not e.g. $f(z) = n(\omega)$? Link this to the physics of the problem. 
+\end{exer}
+
+Replacing $x_0$ by $\omega$, and $x$ by $\omega'$, we get
 
 \begin{subequations} 
 \begin{equation}
@@ -1385,7 +1566,7 @@ refractive index.
 Suppose you have a material without dispersion, i.e. where the real part of the squared refractive index is constant. Show that such a material is lossless, i.e. the imaginary part of the squared refractive index is zero.
 \end{exer}
 
-Recall the definition of the susceptibility is the time domain:
+Recall the definition of the susceptibility in the time domain:
 
 \begin{equation}
 \mathbf{P}(t)=\varepsilon_0 \int_{-\infty}^t \chi(t-t') \mathbf{E}(t')\, dt'.
@@ -1405,7 +1586,11 @@ $$\Re \chi(\omega) =  \frac{2}{\pi} PV \int_{0}^{\infty}{ \frac{\omega'\Im \chi(
 $$\Im \chi(\omega) = -\frac{2}{\pi} PV \int_{0}^{\infty}{ \frac{\omega \Re \chi(\omega')}{\omega'^2-\omega^2}d\omega'}$$
 \end{exer}
 
-Finally, it's important to note that one can prove that there is a relation between the Kramers--Kronig dispersion relations and the fact that the systems considered are \emph{causal} (i.e. effect cannot precede cause)\noindent\marginnote{This is dealt with in the Titchmarsh theorem}. Thus, there is an immediate physical significance of the Kramers--Kronig dispersion relations.
+Finally, it's important to note that one can prove that there is a relation between the Kramers--Kronig dispersion relations and the fact that the systems considered are \emph{causal} (i.e. effect cannot precede cause)\noindent\marginnote{This is one of the subjects of the Titchmarsh theorem.}. Thus, there is an immediate physical significance of the Kramers--Kronig dispersion relations.
+
+
+\pagebreak
+
 
 \sectionugent{Conformal transformations}
 
@@ -1567,7 +1752,7 @@ Formally, this is identical to the Helmholtz equation in the $z$--plane, except
 that \emph{the index distribution $n$ has been replaced by a transformed index
 distribution $T \cdot n$}.
 
-\subsection*{Example: bent waveguides}
+\subsection*{Application: bent waveguides}
 
 To give an example of the power of conformal transformations, we will use it to
 find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). We
@@ -1642,6 +1827,9 @@ profile. Because the refractive index  is higher near the outside of the bend,
 the mode will tend to be concentrated there. For very short bend radii, the mode
 will leak towards the outer cladding, where the index is even higher. This is
 the origin of the radiation loss in waveguide bends.
+
+
+\pagebreak
 
 \section*{Review questions}
 
