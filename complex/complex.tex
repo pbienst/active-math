@@ -89,8 +89,10 @@ $$f'(z)=\lim_{\Delta z \to 0} \frac{(z+\Delta z)^2 - z^2}{\Delta z} = \lim_{\Del
 
 This gives the same result as in the real-valued case.
 
+At this point, you might wonder what all the fuzz is about, as complex analysis seems to boil down to simply replacing $x$ by $z$. However, there's more going on than meets the eye.
+
 \begin{cue}
-Try the same approach to find the derivative of $f(z)=|z|^2$.
+Try to find the derivative of $f(z)=|z|^2$.
 \end{cue}
 
 In this case, we get
@@ -101,7 +103,7 @@ The numerator is obviously real-valued, but the denominator is in general comple
 
 This is obviously undesirable. Now, we can ask ourself the question, what are the conditions under which the derivative Eq.~\ref{eq-deriv} of a complex function is independent of the direction of approach?
 
-\begin{marginfigure}[-.3cm]
+\begin{marginfigure}[-2cm]
 \includegraphics[width=4cm]{complex/figures/approach_z}
 \caption{Different approaches to $z$ in the complex plane.}
 \label{fig-approach-z}
@@ -1361,7 +1363,7 @@ Repeat Ex.~\ref{ex-contour-integral-1}, but show that you get the same result if
   Comment on the suitability of the following contours for calculating
   $$ \int_0^{\infty} \frac{\sin x}{x} dx$$
 
-  (All of these were harvested from actual student solutions.)
+  (All of these were harvested from actual students trying their hand at this problem.)
 
 \begin{center}
 \includegraphics[width=10cm]{complex/figures/contours}
@@ -1461,9 +1463,7 @@ Split up the contour integral into contributions from its different parts.
   \caption{Hans Kramers (1894–1952)}
 \end{marginfigure}
 
-The integral over the large semi--circle vanishes because of the big limit
-theorem. For the contribution of the small semi--circle around the pole $x_0$ we
-could use the small limit theorem, or alternatively calculate it directly:
+The integral over the large semi--circle vanishes because of the big limit theorem. For the contribution of the small semi--circle around the pole $x_0$ we could use the small limit theorem, or alternatively calculate it directly:
 
 \begin{align}
 \lim_{\epsilon \to 0} & \int_{- \infty}^{x_0-\epsilon} \frac{f(x)}{x-x_0}dx + \nonumber \\
@@ -1525,17 +1525,12 @@ v(x_0) = -\frac{1}{\pi} PV \int_{- \infty}^{\infty} \frac{u(x)}{x-x_0}dx
   \caption{David Hilbert (1862–1943)}
 \end{marginfigure}
 
-Equations \ref{eq-KK} are called the \emph{Kramers--Kronig} dispersion
-relations. They state that under the conditions given above, the real part of a
-function can be expressed as an integral over the imaginary part and
-vice--versa.
+Equations \ref{eq-KK} are called the \emph{Kramers--Kronig} dispersion relations. They state that under the conditions given above, the real part of a function can be expressed as an integral over the imaginary part and vice--versa.
 
-By definition, equations \ref{eq-KK} also express that the real and
-imaginary parts are \emph{Hilbert transforms} of each other. Hilbert transforms also find use in e.g. telecommunications.
+By definition, equations \ref{eq-KK} also express that the real and imaginary parts are \emph{Hilbert transforms} of each other. Hilbert transforms also find use in e.g. telecommunications.
 
 Let's now apply this to the field of material dispersion by applying these relations to the function $f(z) = \chi(\omega) =
-n(\omega)^2 -1$. $\chi(\omega)$ is a material's susceptibility and relates the polarisation $\mathbf{P}$ to the incident electric field $\mathbf{E}$ according to
-$\mathbf{P}(\omega)=\varepsilon_0 \chi(\omega) \mathbf{E}(\omega)$).
+n(\omega)^2 -1$. $\chi(\omega)$ is a material's susceptibility and relates the polarisation $\mathbf{P}$ to the incident electric field $\mathbf{E}$ according to $\mathbf{P}(\omega)=\varepsilon_0 \chi(\omega) \mathbf{E}(\omega)$).
 
 \begin{exer}
 % difficulty: normal
@@ -1556,10 +1551,7 @@ Replacing $x_0$ by $\omega$, and $x$ by $\omega'$, we get
 \label{eq-KK-2}
 \end{subequations}
 
-Remember that the imaginary part of the refractive index $n$ is a measure for
-optical absorption. So, this means e.g. that in theory it is enough to measure
-the losses of a material over a wide wavelength range to calculate its
-refractive index.
+As you might remember, the imaginary part of the refractive index $n$ is a measure for optical absorption. So, this means e.g. that in theory it is enough to measure the losses of a material over a wide wavelength range to calculate its refractive index.
 
 \begin{exer}
   % difficulty: normal
@@ -1572,12 +1564,7 @@ Recall the definition of the susceptibility in the time domain:
 \mathbf{P}(t)=\varepsilon_0 \int_{-\infty}^t \chi(t-t') \mathbf{E}(t')\, dt'.
 \end{equation}
 
-From this, we can easily see that $\chi(t)$ is necessarily real, as complex
-numbers only show up in the frequency domain after the introduction of phasors.
-From this, one can derive that for its Fourier transform $\chi(-\omega) =
-\chi^*(\omega)$, which in turn has some implications on the even and odd
-character of the real and the imaginary parts of $\chi(\omega)$. These can be
-used to reformulate the Kramers--Kronig relations in another common form:
+From this, we can easily see that $\chi(t)$ is necessarily real, as complex numbers only show up in the frequency domain after the introduction of phasors. From this, one can derive that for its Fourier transform $\chi(-\omega) = \chi^*(\omega)$, which in turn has some implications on the even and odd character of the real and the imaginary parts of $\chi(\omega)$. These can be used to reformulate the Kramers--Kronig relations in another common form:
 
 \begin{exer}
   % difficulty: normal
@@ -1596,17 +1583,20 @@ Finally, it's important to note that one can prove that there is a relation betw
 
 \subsection*{Angle--preserving transformations}
 
-A complex function $w = f(z) = u(x,y)+jv(x,y)$ can be seen as a mapping from the
-complex $z$--plane to the complex $w$--plane. A typical way to visualise this is
-to plot how a curve $C_z$ in the $z$--plane is transformed to a curve $C_w$ in
-the $w$--plane (see Fig.~\ref{fig-conformal}).
-
-\begin{figure}
+\begin{marginfigure}
 \centering
-\includegraphics[width=10cm]{complex/figures/conformal}
+\includegraphics{complex/figures/conformal_portrait}
 \caption{Conformal transformation.}
 \label{fig-conformal}
-\end{figure}
+\end{marginfigure}
+
+A complex function $w = f(z) = u(x,y)+jv(x,y)$ can be seen as a mapping from the complex $z$--plane to the complex $w$--plane. One way to visualise this is to plot how a curve $C_z$ in the $z$--plane is transformed to a curve $C_w$ in the $w$--plane (see Fig.~\ref{fig-conformal}).
+
+We can play this transformation game using two specific neighbouring points on $C_z$, e.g. $z_0$ and $z_0+\Delta z$. They get transformed to two neighbouring points on $C_w$, which we'll call imaginatively $w_0$ and $w_0+\Delta w$. In the limit of $\Delta z \to 0$, this will allow us to same something about the relationship between the tangents at the points $z_0$ and $w_0$.
+
+\begin{cue}
+Relate $\frac{df}{dz}$ to $\Delta z$ and $\Delta w$. Then look at the angles of the resulting expression to determine how the tangents rotate.
+\end{cue}
 
 As long as $w=f(z)$ is an analytic function, we have
 
@@ -1614,70 +1604,59 @@ As long as $w=f(z)$ is an analytic function, we have
 \frac{df}{dz} = \frac{dw}{dz} = \lim_{\Delta z \to 0} \frac{\Delta w}{\Delta z}
 \end{equation}
 
-By putting this expression in polar form and looking at the angle, we can derive
-an expression relating the angles of the tangents at the points $z_0$ and $w_0$:
+By putting this expression in polar form and looking at the angle, we can derive an expression relating the angles of the tangents at $z_0$ and $w_0$:
 
 \begin{equation}
 \arg \frac{df}{dz} = \arg \lim_{\Delta z \to 0} \frac{\Delta w}{\Delta z} = \arg
 \lim_{\Delta z   \to 0} \Delta w - \arg \lim_{\Delta z \to 0} \Delta z
 \end{equation} 
 
-For an analytic function $\arg df / dz = \alpha$ (the angle of the derivative)
-depends on $z$, but for a given $z$ it is independent of the direction of
-approach. So, if in Fig.~\ref{fig-conformal} the angle of the increment $\Delta
-z$ with respect to the $x$--axis is $\theta$, and the increment $\Delta w$ forms
-an angle $\phi$ with the $u$ axis, we can relate these angles by
+For an analytic function $\arg df / dz = \alpha$ (the angle of the derivative) depends on $z$, but for a given $z$ it is independent of the direction of approach. So, if in Fig.~\ref{fig-conformal} the angle of the increment $\Delta z$ with respect to the $x$--axis is $\theta$, and the increment $\Delta w$ forms an angle $\phi$ with the $u$ axis, we can relate these angles by
 
 \begin{equation}
 \phi = \theta + \alpha
 \end{equation}
 
-This means that an analytic transformation will rotate any line in the
-$z$--plane over an angle of $\alpha$ in the $w$--plane.
-Since this result holds for any line through $z_0$, it holds for any pair of
-lines, such that for the angle between these two lines we get
+This also means that an analytic transformation will rotate any line in the $z$--plane over an angle of $\alpha$ in the $w$--plane. Since this result holds for any line through $z_0$, it obviously also holds for any \emph{pair} of lines. This means that for the angle between these two lines we get
 
 \begin{equation}
 \phi_2 - \phi_1 = (\theta_2 + \alpha) - (\theta_1 + \alpha) = \theta_2 -
 \theta_1
 \end{equation} 
 
-which means that such a transformation preserves the angle between any pair of
-lines.
-
-If such an angle--preserving transformation defined by an analytic function is also injective between two domains, it is
-called a \emph{conformal transformation}.
+From this we can see that such a transformation preserves the angle between any pair of lines. If such an angle--preserving transformation defined by an analytic function is also injective between two domains, it is called a \emph{conformal transformation}.
 
 \subsection*{Conformal transformations and the Helmholtz equation}
 
-Conformal transformations can be useful to solve the Helmholtz equation in a
-'difficult' coordinate system. The idea is to use a conformal mapping to
-transform the coordinate system to a different one where the solution is more
-tractable. In this section, we will investigate what form the Helmholtz equation
-takes in the new domain.
+Conformal transformations can be useful to solve the Helmholtz equation in a 'difficult' coordinate system. The idea is to use a conformal mapping to transform the coordinate system to a different one where the solution is more tractable. In this section, we will investigate what form the Helmholtz equation takes in the new domain.
 
-Suppose our old $(x,y)$--coordinate system is related to a new
-$(u,v)$--coordinate system by a conformal transformation $f$:
+Suppose our old $(x,y)$--coordinate system is related to a new $(u,v)$--coordinate system by a conformal transformation $f$:
 
 \begin{equation}
 u+jv = w = f(z) = f(x+jy)
 \end{equation} 
 
-In the $z$--plane, the Helmholtz equation in media with piecewise constant
-refractive index has the following form:
+In the $z$--plane, the Helmholtz equation in media with piecewise constant refractive index has the following form:
 
 \begin{equation}
-\frac{\partial^2 \psi(x,y)}{\partial x^2} + \frac{\partial^2 \psi(x,y)}{\partial
-y^2} + k_0^2 n^2(x,y) \psi(x,y) = 0
-\end{equation} 
+\frac{\partial^2 \psi(x,y)}{\partial x^2} + \frac{\partial^2 \psi(x,y)}{\partial y^2} + k_0^2 n^2(x,y) \psi(x,y) = 0
+\end{equation}
 
-To transform this to the $w$--plane, we use the chain rule:
+\begin{cue}
+Use the chain rule to express $\frac{\partial \psi}{\partial x}$ using partial derivatives with respect to $u$ and $v$.
+\end{cue}
+
+Application of the chain rule leads to
 
 \begin{equation}
 \frac{\partial \psi}{\partial x} = \frac{\partial \psi}{\partial u}
 \frac{\partial u}{\partial x} + \frac{\partial \psi}{\partial v} \frac{\partial
 v}{\partial x}
 \end{equation} 
+
+\begin{cue}
+Now calculate $\frac{\partial^2 \psi}{\partial x^2}$.
+\end{cue}
 
 For the second derivative this becomes
 
@@ -1692,42 +1671,39 @@ v}\frac{\partial^2 v}{\partial x^2}
 
 Or
 
-\begin{equation}
-\frac{\partial^2 \psi}{\partial x^2} = \left[ \frac{\partial^2 \psi}{\partial
-u^2 } \frac{\partial u}{\partial x} +  \frac{\partial^2 \psi}{\partial u
-\partial v} \frac{\partial v}{\partial x} \right] \frac{\partial u}{\partial x}
- + \frac{\partial \psi}{\partial u}\frac{\partial^2 u}{\partial x^2} 
-+ \left[ \frac{\partial^2 \psi}{\partial v^2 } \frac{\partial v}{\partial x} + 
+\begin{align}
+\frac{\partial^2 \psi}{\partial x^2} = &\left[ \frac{\partial^2 \psi}{\partial u^2 } \frac{\partial u}{\partial x} +  \frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial v}{\partial x} \right] \frac{\partial u}{\partial x}  + \frac{\partial \psi}{\partial u}\frac{\partial^2 u}{\partial x^2} \nonumber \\ 
++ &\left[ \frac{\partial^2 \psi}{\partial v^2 } \frac{\partial v}{\partial x} + 
 \frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial u}{\partial x}
-\right] \frac{\partial v}{\partial x}  
-+ \frac{\partial \psi}{\partial v}\frac{\partial^2 v}{\partial x^2}
-\end{equation} 
+\right] \frac{\partial v}{\partial x} + \frac{\partial \psi}{\partial v}\frac{\partial^2 v}{\partial x^2}
+\end{align} 
+
+\begin{cue}
+Now add these two second-order derivatives and go on a term-cancelling spree. Remember that the Cauchy-Riemann conditions hold. Also, note that for a holomorphic function $\nabla^2 u = \nabla^2 v=0$.
+\end{cue}
 
 For the total Laplacian we get
 
 \begin{align}
-\frac{\partial^2 \psi}{\partial x^2} + \frac{\partial^2 \psi}{\partial y^2}=& 
-\frac{\partial^2 \psi}{\partial u^2 }  \left [ \left(\frac{\partial u}{\partial
-x}\right)^2 
-+ \left(\frac{\partial u}{\partial y}\right)^2\right]+ \frac{\partial
-\psi}{\partial u} \left[ \frac{\partial^2 u}{\partial x^2} 
-+ \frac{\partial^2 u}{\partial y^2} \right] 
-+ 2\frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial u}{\partial x}
-\frac{\partial v}{\partial x}    \nonumber \\  
-+& \frac{\partial^2 \psi}{\partial v^2}  \left[ \left(\frac{\partial v}{\partial
-x}\right)^2  
-+ \left(\frac{\partial v}{\partial y}\right)^2\right] + \frac{\partial
-\psi}{\partial v} \left[ \frac{\partial^2 v}{\partial x^2} 
-+ \frac{\partial^2 v}{\partial y^2} \right]
-+ 2\frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial u}{\partial y}
-\frac{\partial v}{\partial y}
+\frac{\partial^2 \psi}{\partial x^2} &+ \frac{\partial^2 \psi}{\partial y^2}= \nonumber \\
+  &\frac{\partial^2 \psi}{\partial u^2 }  \left [ \left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial y}\right)^2\right]+ \frac{\partial \psi}{\partial u} \left[ \frac{\partial^2 u}{\partial x^2}  + \frac{\partial^2 u}{\partial y^2} \right] + 2\frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial u}{\partial x} \frac{\partial v}{\partial x}    \nonumber \\  
++ &\frac{\partial^2 \psi}{\partial v^2}  \left[ \left(\frac{\partial v}{\partial
+x}\right)^2 + \left(\frac{\partial v}{\partial y}\right)^2\right] + \frac{\partial
+\psi}{\partial v} \left[ \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} \right] + 2\frac{\partial^2 \psi}{\partial u \partial v} \frac{\partial u}{\partial y} \frac{\partial v}{\partial y}
 \label{eq-conf-trans-1}
 \end{align} 
 
+It is easy to see that terms three and six cancel because of the Cauchy--Riemann conditions.
+
 We know from Ex.~\ref{ex-harmonic} that for a holomorphic function $\nabla^2 u =
 \nabla^2 v=0$, so the second and the fifth term on the right--hand--side of
-Eq.~\ref{eq-conf-trans-1} vanish. Also, because of the Cauchy--Riemann equations
-we can write
+Eq.~\ref{eq-conf-trans-1} vanish as well.
+
+\begin{cue}
+What does Cauchy--Riemann teach us about the factors in square brackets in terms one and four?
+\end{cue}
+
+Because of the Cauchy--Riemann equations, we can write
 
 \begin{equation}
 \left(\frac{\partial u}{\partial x}\right)^2 + \left(\frac{\partial u}{\partial
@@ -1738,9 +1714,6 @@ x}\right)^2
  \stackrel{def}{=} \frac{1}{T(u,v)^2} \label{eq-T-factor}
 \end{equation} 
 
-It is easy to see that terms three and six cancel as well because of the
-Cauchy--Riemann conditions.
-
 So finally, we can write the Helmholtz equation in the transformed domain as
 
 \begin{equation}
@@ -1748,93 +1721,103 @@ So finally, we can write the Helmholtz equation in the transformed domain as
 v^2} + k_0^2 T^2(u,v)n^2(u,v) \psi(u,v) = 0
 \end{equation} 
 
-Formally, this is identical to the Helmholtz equation in the $z$--plane, except
-that \emph{the index distribution $n$ has been replaced by a transformed index
-distribution $T \cdot n$}.
+Formally, this is identical to the Helmholtz equation in the $z$--plane, except that \emph{the index distribution $n$ has been replaced by a transformed index distribution $T \cdot n$}.
 
 \subsection*{Application: bent waveguides}
 
-To give an example of the power of conformal transformations, we will use it to
-find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). We
-consider the system to be invariant in the $z$--direction.
-
-\begin{figure}
+\begin{marginfigure}[-6cm]
 \centering
-\includegraphics[width=8cm, angle=270]{complex/figures/bends}
+\includegraphics{complex/figures/bends_portrait}
 \caption{Calculating bend modes using conformal transformation.}
 \label{fig-bends}
-\end{figure}
+\end{marginfigure}
+
+To give an example of the power of conformal transformations, we will use it to find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). We consider the system to be invariant in the $z$--direction.
 
 To tackle this problem, we could formulate the Helmholtz equation in cylindrical
-coordinates, and the solution would involve Bessel functions which we will
-introduce in the next chapter. Here however, we will use the following conformal
-transformation to convert the curved geometry to a straight one:
+coordinates, and the solution would involve Bessel functions. Here however, we will use the following conformal transformation to convert the curved geometry to a straight one:
 
 \begin{equation}
-w = R_t \ln \frac{z}{R_t}
+w = R_2 \ln \frac{z}{R_2}
 \end{equation} 
 
-$R_t$ is an arbitrary (real) scaling parameter. With $z=r e^{j \theta}$, we can
-write this as
+\begin{cue}
+Transform this to polar coordinates and verify that this indeed straightens the bend.  
+\end{cue}
+
+With $z=r e^{j \theta}$, we can write this as
 
 \begin{equation}
-u + jv = R_t \ln \frac{r}{R_t} + j R_t \theta
+u + jv = R_2 \ln \frac{r}{R_2} + j R_2 \theta
 \end{equation} 
 
-This clearly shows the effect of the transformation: a circular path in the
-$z$--plane with constant $r$ is transformed to a straight path in the $w$--plane
-with constant $u$ (see Fig.~\ref{fig-bends}).
+This clearly shows the effect of the transformation: a circular path in the $z$--plane with constant $r$ is transformed to a straight path in the $w$--plane with constant $u$ (see Fig.~\ref{fig-bends}).
 
-Let's now calculate the transformation factor $T$ as defined in
-Eq.~\ref{eq-T-factor}.
+\begin{cue}
+Calculate the transformation factor $T$. 
+\end{cue}
+
+Using the definition of the transformation factor $T$ from Eq.~\ref{eq-T-factor}, we get
 
 \begin{equation}
-\frac{\partial u}{\partial x} = \frac{R_t}{r}\frac{\partial r}{\partial x} = 
-\frac{R_t}{\sqrt{x^2+y^2}} \cdot \frac{2x}{2\sqrt{x^2+y^2}} = R_t
+\frac{\partial u}{\partial x} = \frac{R_2}{r}\frac{\partial r}{\partial x} = 
+\frac{R_2}{\sqrt{x^2+y^2}} \cdot \frac{2x}{2\sqrt{x^2+y^2}} = R_2
 \frac{x}{x^2+y^2}
 \end{equation} 
 
 Also,
 
 \begin{equation}
-\frac{\partial v}{\partial x} = R_t \frac{\partial}{\partial x} \arctan
-\frac{y}{x} = \frac{R_t}{1 + \frac{y^2}{x^2}} \cdot y \cdot \frac{-1}{x^2}= -R_t
+\frac{\partial v}{\partial x} = R_2 \frac{\partial}{\partial x} \arctan
+\frac{y}{x} = \frac{R_2}{1 + \frac{y^2}{x^2}} \cdot y \cdot \frac{-1}{x^2}= -R_2
 \frac{y}{x^2+y^2}
 \end{equation} 
 
 So finally
 
 \begin{equation}
-T = \frac{1}{\sqrt{u_x^2+v_x^2}} = \frac{\sqrt{x^2+y^2}}{R_t} =
-\frac{r}{R_t}=e^{\frac{u}{R_t}}
+T = \frac{1}{\sqrt{u_x^2+v_x^2}} = \frac{\sqrt{x^2+y^2}}{R_2} =
+\frac{r}{R_2}=e^{\frac{u}{R_2}}
 \end{equation} 
 
 In the new coordinate system, the transformed index profile looks like
 
 \begin{equation}
-n_t(u) = n(u)e^{\frac{u}{R_t}}
+n_t(u) = n(u)e^{\frac{u}{R_2}}
 \end{equation} 
 
-This profile is sketched in Fig.~\ref{fig-bends}. The rest of the solution now
-proceeds as follows. The continuous index profile is approximated by a stepwise
-constant profile with a large number of steps. The modes of such a waveguide can
-be readily found by using standard techniques (see e.g. the course
-'Microphotonics').
+This profile is sketched in Fig.~\ref{fig-bends}. The rest of the solution now proceeds as follows. The continuous index profile is approximated by a stepwise constant profile with a large number of steps. The modes of such a waveguide can be readily found by using standard techniques.
 
-Even without calculating the modes of the transformed waveguide explicitly, we
-can gain qualitative insight in their behaviour by looking at the new index
-profile. Because the refractive index  is higher near the outside of the bend,
-the mode will tend to be concentrated there. For very short bend radii, the mode
-will leak towards the outer cladding, where the index is even higher. This is
-the origin of the radiation loss in waveguide bends.
+When this way of calculating the modes of a bent waveguide was first proposed in the 1970s, the calculation power of computers was nothing to write home about, so any trick that could simplify a problem was very welcome. Today, the interest of these techniques is more instructional than practical, although it does allow us to get some physical insight.
 
+\begin{cue}
+Making use of the tendency of light to concentrate in regions with high refractive index, think about how light in these bent waveguides will behave. What happens if the radius of curvature decreases?  
+\end{cue}
 
-\pagebreak
+Because the refractive index is higher near the outside of the bend, the mode will tend to be concentrated there. There is also the opportunity for the light to tunnel towards the outer cladding, where the index is even higher. This is the origin of the radiation losses in waveguide bends. Tighter bends (i.e. shorter radii) will be more prone to this phenomenon, because the steeper exponential will reduce the tunneling distance.
+
 
 \section*{Review questions}
 
 \begin{itemize}
-\item TODO
+\item What is a holomorphic function?
+\item What are the Cauchy-Riemann conditions?
+\item What is Cauchy's theorem?
+\item What is Cauchy's formula?
+\item What is a Laurent series?
+\item What type of poles can a function have?
+\item What are branch points and branch cuts?
+\item What is the Riemann surface?
+\item What is a residue?
+\item How do you calculate the residue of a single pole?
+\item What is the residue theorem?
+\item What is Jordan's lemma?
+\item What are the big and small limit theorems?
+\item What is the principal value of an integral?
+\item How do you solve integrals of the type $\int_0^{2 \pi} f(\cos \theta, \sin \theta) d \theta$?
+\item How do you solve integrals of the type  $\int_\infty^{\infty} f(z) e^{jbz} dz$?
+\item What do the Kramers-Kronig relations express?
+\item What are conformal transformations and what are they used for?
 \end{itemize}
 
 %%% Local Variables:
