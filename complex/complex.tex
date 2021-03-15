@@ -509,7 +509,7 @@ Repeating the technique used in Ex. \ref{ex-cauchy-diff}.
 \label{fig-laurent}
 \end{marginfigure}
 
-Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$. In this region, we can construct a contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
+Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$. A simple circular contour would enclose the inner region where the function is not analytic, so we need to construct a more complicated contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
 
 \begin{cue}
   Apply Cauchy's formula, splitting up the contour into its different parts.
@@ -610,7 +610,7 @@ $$f(z)=\frac{1}{z} \cdot \frac{1 / z }{1-1/z} = \frac{1}{z^2} \sum_{m=0}^{\infty
 This series converges in the second ring, since $|1/z| < 1$ there.
 
 \begin{exer}
-% difficulty: trivial
+% difficulty: normal
 % ugent
 \label{ex_laurent_1}
 Develop
@@ -622,6 +622,8 @@ in a Laurent series around the origin for the ring $0 < | z | < 1$.
 $e^z$ is a function which is analytic in all of $\mathbb{C}$ and defined by
 
 $$e^z \stackrel{def}{=} \sum_{m=0}^{\infty} \frac{z^m}{m!} $$
+
+Can you also think of a graphical representation that helps you take the product of the two series expansions? (It's helpful to look at the solution video here.)
 
 \begin{sol}
 $$f(z)= - \sum_{k=0}^{\infty} \left(\sum _{m=0}^k \frac{1}{m!} \right) z^k $$
@@ -696,6 +698,8 @@ Consider the relation
 \begin{equation}
 w = f(z) = z^{1/2} \label{eq-sqrt}
 \end{equation}
+
+(As a notational oddity, the complex square root is designated by the power $1/2$, to distinguish it from the real-valued square root.)
 
 \begin{cue}
 For a given value of $z$, how many solutions $w$ does the complex square root have? 
@@ -919,7 +923,10 @@ The residue theorem is of enormous practical importance, as it allows us to repl
 % difficulty: normal
 % ugent
   If $z_0$ is a simple pole of $f(z)$, use the Laurent series to prove that
-$$\mathrm{Res}_{z_0} = \left[f(z)(z-z_0)\right]_{z=z_0}$$
+  $$\mathrm{Res}_{z_0} = \left[f(z)(z-z_0)\right]_{z=z_0}$$
+
+  (Explicitly writing down the first few terms of the Laurent series makes this slightly easier to solve.)
+  
 \label{ex-res1}
 \end{exer}
 
@@ -1154,7 +1161,7 @@ The poles of this function are
 z = - \frac{1}{\epsilon} \pm \frac{1}{\epsilon} \sqrt{1 - \epsilon^2}
 \end{equation} 
 
-Only the pole with the plus sign lies within the unit circle. By using the formula from Ex. \ref{ex-res1} to calculate the residue there, we get
+Only the pole with the plus sign lies within the unit circle, as can be verified e.g. by a series expansion for small values of $\epsilon$. By using the formula from Ex. \ref{ex-res1} to calculate the residue there, we get
 
 \begin{equation}
 I = -\frac{2j}{\epsilon} \cdot 2 \pi j \left[\frac{1}{z - (-\frac{1}{\epsilon} -
@@ -1202,7 +1209,7 @@ I = \oint_{{C}} \frac{e^{j \lambda z}}{1 + z^2} dz
 \label{fig-example-2}
 \end{marginfigure}
 
-Evaluating the part of this contour on the real axis, and then taking the real part will recover the required cosine in the integral.
+Evaluating the part of this contour on the positive real axis, and then taking the real part will recover the required cosine in the integral. It is true that we are only interested in the contribution from the positive real axis, but as you'll see, we'll be able to deal with the other contributions in due course.
 
 \begin{cue}
 Use residue calculus to evaluate the contour integral.
@@ -1534,7 +1541,7 @@ n(\omega)^2 -1$. $\chi(\omega)$ is a material's susceptibility and relates the p
 
 \begin{exer}
 % difficulty: normal
-  What is the mathematical reason we used $f(z) = \chi(\omega)$ here, and not e.g. $f(z) = n(\omega)$? Link this to the physics of the problem. 
+What is the mathematical reason we used $f(z) = \chi(\omega)$ here, and not e.g. $f(z) = n(\omega)$? Link this to the physics of the problem. 
 \end{exer}
 
 Replacing $x_0$ by $\omega$, and $x$ by $\omega'$, we get
@@ -1556,6 +1563,11 @@ As you might remember, the imaginary part of the refractive index $n$ is a measu
 \begin{exer}
   % difficulty: normal
 Suppose you have a material without dispersion, i.e. where the real part of the squared refractive index is constant. Show that such a material is lossless, i.e. the imaginary part of the squared refractive index is zero.
+\end{exer}
+
+\begin{exer}
+  % difficulty: trivial
+From basic logic and the result above, conclude that as soon as you have loss in a material, the material is necessarily dispersive. Also, convince yourself that the only non-dispersive material is vacuum.
 \end{exer}
 
 Recall the definition of the susceptibility in the time domain:
