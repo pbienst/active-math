@@ -25,6 +25,47 @@ fontsize=11pt, % Base font size
 
 % Own modifications
 
+%\usepackage{minitoc}
+%\setcounter{minitocdepth}{1}
+%\dominitoc
+
+\usepackage{etoc}
+
+%\newcommand{\chaptertoc}[1][Contents]{%
+%  \etocsettocstyle{%\addsec*{#1}}{}%
+%  \addsec*{\rule{\textwidth}{0.4pt}\\#1}}{}%
+%  \localtableofcontents%
+%}
+
+% see https://tex.stackexchange.com/a/359758, https://tex.stackexchange.com/questions/501018/how-to-write-a-minitoc-with-plain-koma-script/502077#502077
+%\usepackage{scrwfile}
+%\usepackage{hyperref}
+
+%\makeatletter
+%\newif\ifusechaptertoc% Switch to tell \addtocentrydefault to not only make %entries to the toc-file but also to the current section-toc-file
+%\newcommand*{\chaptertoc}[1][\thechapter]{% new command to generate and %show a chapter toc
+%  \usechaptertoctrue% switch on chapter-toc-entries
+  \edef\ext@subtoc{toc#1}% extension of the section-toc-file, e.g., toc1
+%  \DeclareNewTOC{\ext@subtoc}% declare a new toc file
+%  \addsec*{Contents}% header of the chaptertoc
+%  \begin{minipage}{.9\linewidth}
+%    \value{tocdepth}=\sectiontocdepth% we want entries down to subsection
+%    \listoftoc*{\ext@subtoc}% show the toc without header
+%  \end{minipage}\par
+%  \rule
+%  \bigskip\noindent\ignorespaces% add some vertical space after the toc and %do not indent the following text
+%}
+%\usepackage{xpatch}
+%\xapptocmd\addtocentrydefault{% patch the KOMA-Script's generic toc entry %generator
+%  \ifusechaptertoc% if chapter toc entries should be generated
+    %\expandafter\tocbasic@addxcontentsline\expandafter{\ext@subtoc}{#1}{#2}{#3}%% do it
+%  \fi
+%}{}{}
+%\xpretocmd\chapter{\usechaptertocfalse}{}{}% automatically switch of %chapter toc entries at start of every \chapter
+%\makeatother
+
+
+
 \hyphenation{wave-guide}
 
 \definecolor{headingbordeaux}{HTML}{AF2E46}
@@ -254,9 +295,9 @@ fontsize=11pt, % Base font size
 \mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 \setchapterstyle{kao} % Choose the default chapter heading style
 
-\input{helmholtz/helmholtz}
-\input{complex/complex}
-%\input{special/special}
+%\input{helmholtz/helmholtz}
+%\input{complex/complex}
+\input{special/special}
 %\input{numeric/numeric}
 %\input{periodic/periodic}
 %\input{dynamic/dynamic}
