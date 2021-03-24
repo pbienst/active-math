@@ -91,7 +91,8 @@ def build():
         shutil.rmtree(build_dir)
     os.mkdir(build_dir)
     # Copy directories.
-    chapter_dirs = ["preamble", "helmholtz", "complex", "special", "numeric",
+    chapter_dirs = ["preamble", "helmholtz", "complex", "bessel",
+                    "hermite", "numeric",
                     "periodic", "dynamic", "postamble"]
     other_dirs = ["styles", "icons"]
     for chapter_dir in chapter_dirs + other_dirs:

@@ -1,0 +1,467 @@
+\chapter{Hermite polynomials}
+\label{h:hermite}
+
+\begin{quote}
+We are servants rather than masters in mathematics.
+
+--- Charles Hermite
+\end{quote}
+
+\chaptertoc
+
+In this chapter, we will look at Hermite polynomials, which are an example of a family of so-called orthogonal polynomials. They appear in the higher-order solutions of the paraxial wave equation.
+
+After presenting the corresponding differential equations, we introduce their generating function and look at integrals involving these polynomials. We will also derive their orthogonality, as well as use them in series expansions.
+
+\pagebreak
+
+\sectionugent{Hermite's differential equation}
+
+In the Bachelor's level Photonics course, Gaussian beams were introduced as solutions to the paraxial wave equation. We will briefly review this material, and then go on to look for higher--order solutions to this equation. In this process, Hermite polynomials will pop up and we will study their properties as a model for other orthogonal polynomials.
+
+The paraxial wave equation is an approximation to the Helmholtz equation under the so--called slowly varying envelope approximation (SVEA). This approximation looks for solutions which are essentially plane waves propagating along the $z$--direction, but which are modulated by a slowly varying function $A({\bf r})$:
+
+\begin{equation}
+\psi({\bf r}) = A({\bf r})e^{-jkz}
+\end{equation} 
+
+So,
+
+\begin{equation}
+\frac{\partial \psi({\bf r})}{\partial z} = \frac {\partial A({\bf r})}{\partial z}e^{-jkz} -j k A({\bf r})e^{-jkz}
+\end{equation} 
+
+and
+
+\begin{equation}
+\frac{\partial^2 \psi({\bf r})}{\partial z^2} = \frac{\partial^2 A({\bf r})}{\partial z^2}e^{-jkz} - 2 j k \frac{\partial A({\bf r})}{\partial z}e^{-jkz} - k^2 A({\bf r})e^{-jkz}
+\end{equation} 
+
+The fact that $A({\bf r})$ is a slowly varying function of $z$ means that we can neglect $\partial^2 A / \partial z^2$ with respect to $j k \partial A / \partial z$in the previous equation. With this, the Helmholtz equation reduces to
+
+\begin{equation}
+\fbox{$\displaystyle
+\nabla_T^2 A({\bf r}) -2jk \frac{\partial A({\bf r})}{\partial z} = 0
+$}
+\label{eq-paraxial}
+\end{equation} 
+
+Here, $\nabla_T^2$ stands for the transverse part $(\partial^2 / \partial x^2) + (\partial^2 / \partial y^2)$ of the Laplacian operator.
+
+A solution to this equation is the Gaussian beam, which is given by
+
+\begin{equation}
+A_G({\bf r}) = \frac{1}{q(z)}e^{-\frac{jk\rho^2}{2q(z)}} \label{eq-gauss}
+\end{equation}   
+
+where $q(z)=z+jb_0$. 
+
+In this context, the function $W(z)$ is defined as
+
+\begin{equation}
+W(z)=\sqrt{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)} \label{eq-W}
+\end{equation} 
+
+$W(z)$ can be interpreted as the beam width of the Gaussian beam.
+
+\subsection*{Higher--order solutions of the paraxial wave equation}
+
+Let's try to find a modulated version of the Gaussian beam which also satisfies the paraxial wave equation:
+
+\begin{equation}
+A(x,y,z) = X\left({\frac{\sqrt{2}x}{W(z)}}\right) Y\left({\frac{\sqrt{2}y}{W(z)}}\right) e^{-jZ(z)} A_G(x,y,z) \label{eq-gauss-higher}
+\end{equation} 
+
+Here, $A_G$ is the Gaussian beam from Eq.~\ref{eq-gauss} and $X()$, $Y()$ and $Z()$ are three real--valued functions that we still need to determine such that Eq.~\ref{eq-gauss-higher} satisfies the paraxial Helmholtz equation.
+
+For the derivatives of Eq.~\ref{eq-gauss-higher} we get
+
+\begin{equation}
+\frac{\partial A}{\partial x} = \frac{\sqrt{2}}{W}X'Ye^{-jZ} A_G + XYe^{-jZ} \frac{\partial A_G}{\partial x} 
+\end{equation} 
+
+and
+
+\begin{equation}
+\frac{\partial^2 A}{\partial x^2} = \frac{2}{W^2}X''Ye^{-jZ} A_G  + 2\frac{\sqrt{2}}{W}X'Ye^{-jZ} \frac{\partial A_G}{\partial x}  + XYe^{-jZ} \frac{\partial^2 A_G}{\partial x^2}
+\end{equation} 
+
+Or, using Eq.~\ref{eq-gauss} to calculate $\partial A_G / \partial x$:
+
+\begin{equation}
+\frac{\partial^2 A}{\partial x^2} = \frac{2}{W^2}X''Ye^{-jZ} A_G  - 2j k x \frac{\sqrt{2}}{qW}X'Ye^{-jZ}A_G  + XYe^{-jZ} \frac{\partial^2 A_G}{\partial x^2} \label{eq-hermite-gauss-1}
+\end{equation} 
+
+and similar equations for the $y$--derivatives. For the $z$--derivative we get
+
+\begin{align}
+\frac{\partial A}{\partial z} =  -\frac{\sqrt{2}x W'}{W^2}X'Ye^{-jZ} A_G -\frac{\sqrt{2}y W'}{W^2}XY'e^{-jZ} A_G \nonumber \\ 
++ XY\left(-jZ'\right)e^{-jZ} A_G + XYe^{-jZ}\frac{\partial A_G}{\partial z} \label{eq-hermite-gauss-2}
+\end{align} 
+
+Let's substitute this in the paraxial equation Eq.~\ref{eq-paraxial}. Because $A_G$ is itself a solution of this equation, the last terms from Eq.~\ref{eq-hermite-gauss-1} and \ref{eq-hermite-gauss-2} cancel and we get:
+
+\begin{align}
+\frac{2}{W^2}\left(X''Y+XY''\right)e^{-jZ} A_G   \nonumber \\
+-2jk \frac{\sqrt{2}}{Wq}\left(xX'Y+yXY'\right)e^{-jZ}A_G \nonumber \\
++2jk \frac{\sqrt{2} W'}{W^2}\left(xX'Y+yXY'\right)e^{-jZ}A_G \nonumber \\
+-2jk XY\left(-jZ'\right)e^{-jZ} A_G = 0
+\end{align}
+
+Getting rid of the common factors and dividing by $XY$, we get
+
+\begin{equation}
+\frac{1}{W^2}\left(\frac{X''}{X}+\frac{Y''}{Y}\right)  
+- j k \left(\frac{\sqrt{2}}{Wq} - \frac{\sqrt{2}W'}{W^2}\right)\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right)
+-kZ' = 0
+\end{equation} 
+
+or
+\begin{equation}
+\left(\frac{X''}{X}+\frac{Y''}{Y}\right)  
+- j k  \left(\frac{W^2}{q} - W'W\right)\frac{\sqrt{2}}{W}\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right)
+-kW^2Z' = 0
+\end{equation} 
+
+Using the definitions for $W$ and $q$, it follows that $W^2/q - W'W = -j \lambda / \pi$. If we now perform the change of variables $u = \sqrt(2) x / W(z)$ and  $v = \sqrt(2) y / W(z)$, we get
+
+\begin{equation}
+\left[{\frac{X''(u)}{X(u)} - 2 u\frac{X'(u)}{X(u)}}\right] + 
+\left[{\frac{Y''(v)}{Y(v)} - 2 v\frac{Y'(v)}{Y(v)}}\right] -kW^2(z)Z'(z) = 0
+\end{equation} 
+
+The left--hand side of this equation is a sum a three terms, each of which is a function of a single independent variable ($u$, $v$ and $z$ respectively). Therefore, each of these terms must be equal to a constant. Equating the first term to $-2\mu_1$ and the second to $-2\mu_2$, the third must be equal to $2(\mu_1+\mu_2)$. This separation of variables leads to the following ordinary differential equations:
+
+\begin{equation}
+X''(u) - 2 u X'(u) = - 2 \mu_1 X(u) \label{eq-diff-hermite-0}
+\end{equation} 
+
+\begin{equation}
+Y''(v) - 2 v Y'(v) = - 2 \mu_2 Y(v)
+\end{equation} 
+
+\begin{equation}
+b_0\left(1 + \frac{z^2}{b_0^2}\right)Z'(z) = -(\mu_1+\mu_2)
+\end{equation} 
+
+From this, it follows immediately that $Z(z) = -(\mu_1+\mu_2) \arctan(z/b_0)$. However, the differential equations for $X$ and $Y$ have no obvious solutions at first sight. In the next sections, we will show that their solutions are \emph{Hermite polynomials}, and that $\mu_1$ and $\mu_2$ are integers.
+
+In similar vein to the treatment of Bessel functions, we will start by introducing a generating function and then continue to derive recurrence relations which will lead to a differential equation.
+
+\sectionugent{Generating function for Hermite polynomials}
+
+The generating function of the Hermite polynomials takes the following form:
+
+\begin{equation}
+g(x,t) = e^{-t^2 + 2tx} \label{eq-gen-hermite}
+\end{equation}
+
+The Hermite polynomials $H_n(x)$ are \emph{defined} from the the Laurent series in $t$ of $g(x,t)$ as 
+
+\begin{equation}
+e^{-t^2 + 2tx}= \sum_{n = 0}^{\infty} H_n(x)\frac{t^n}{n!} \label{eq-g-hermite}
+\end{equation} 
+
+Note the absence of a superscript in $H_n(x)$, which distinguishes them from the unrelated Hankel functions.
+
+\begin{sidebar}
+\begin{ex}
+Show that
+$$H_n(x) = \sum_{r=0}^{\lfloor n/2 \rfloor}(-1)^r {(2x)}^{n-2r} \frac{n!}{(n-2r)! r!}$$
+\end{ex}
+\end{sidebar}
+
+\sectionugent{Recurrence relations for Hermite polynomials}
+
+Similar to the treatment of Bessel functions, we can derive recurrence relations by differentiating the generating function.
+
+E.g. by differentiating Eq.~\ref{eq-g-hermite} with respect to $t$, we get
+
+\begin{equation}
+(-2t+2x)e^{-t^2 + 2tx} = \sum_{n = 0}^{\infty} H_n(x) \frac{nt^{n-1}}{n!}
+\end{equation} 
+
+Substituting Eq.~\ref{eq-g-hermite} back in this, we get
+
+\begin{equation}
+(-2t+2x) \sum_{n = 0}^{\infty} H_n(x)\frac{t^n}{n!} = \sum_{n = 0}^{\infty} H_n(x) \frac{nt^{n-1}}{n!}
+\end{equation} 
+
+This leads to
+
+\begin{equation}
+-2  \frac{H_{n-1}(x)}{(n-1)!} + 2 x \frac{H_n(x)}{n!} = H_{n+1}(x) \frac{n+1}{(n+1)!}
+\end{equation} 
+
+where $n \geq 1$, or
+
+\begin{equation}
+\fbox{$\displaystyle
+H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x)
+$} \label{eq-recur-hermite-1}
+\end{equation} 
+
+Direct expansion of the generating function yields that $H_0(x) = 1$ and that $H_1(x) = 2x$. With this and Eq.~\ref{eq-recur-hermite-1}, we can iteratively construct all the Hermite polynomials. For reference, Table \ref{tab-hermite} lists the first Hermite polynomials. Fig.~\ref{fig-hermite} plots the first three Hermite polynomials.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.7]{special/figures/hermite}
+\caption{The Hermite polynomials $H_0(x)$, $H_1(x)$, $H_2(x)$.}
+\label{fig-hermite}
+\end{figure}
+
+\begin{table}
+\begin{align}
+H_0(x) = & 1 \nonumber \\
+H_1(x) = & 2x \nonumber \\
+H_2(x) = & 4x^2-2 \nonumber \\
+H_3(x) = & 8x^3-12x \nonumber \\
+H_4(x) = & 16x^4-48x^2+12 \nonumber \\
+H_5(x) = & 32x^5-160x^3+120x \nonumber \\
+H_6(x) = & 64x^6-480x^4+720x^2-120 \nonumber
+\end{align}
+\caption{Hermite polynomials}
+\label{tab-hermite}
+\end{table}  
+
+\begin{sidebar}
+\begin{ex}
+Show that
+$$\fbox{$\displaystyle H_n'(x) = 2nH_{n-1}(x)$}$$ \label{eq-recur-hermite-2}
+\end{ex}
+\end{sidebar}
+
+\sectionugent{Hermite's differential equation revisited}
+
+Differentiating Eq.~\ref{eq-recur-hermite-1} with respect to $x$, we get
+
+\begin{equation}
+H_{n+1}'(x) = 2  H_n(x) + 2 x H_n'(x)- 2 n H_{n-1}'(x)
+\end{equation} 
+
+Using the results from  Ex. \ref{eq-recur-hermite-2}, we have $H_{n+1}'(x) = 2(n+1)H_n(x)$ and $2 n H_{n-1}'(x) = H_n''(x)$:
+
+\begin{equation}
+2(n+1)H_n(x) = 2  H_n(x) + 2 x H_n'(x)- H_n''(x)
+\end{equation} 
+
+This reduces to
+
+\begin{equation}
+\fbox{$\displaystyle
+H_n''(x) - 2 x H_n'(x) + 2n H_n(x) = 0 \label{eq-diff-hermite-1}
+$}
+\end{equation} 
+
+which is indeed Eq.~\ref{eq-diff-hermite-0}, with $\mu_1=n$.
+
+Returning to our higher--order solutions of the paraxial wave equation, Fig.~\ref{fig-gauss-hermite} plots the field profile of some of these so--called \emph{Gauss--Hermite modes}. They are characterised by two integer indices, indicating the order of the Hermite polynomials for the $x$ and $y$ direction.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{special/figures/gauss}
+\caption{Some Gauss--Hermite modes.}
+\label{fig-gauss-hermite}
+\end{figure}
+
+\sectionugent{Series expansion using Hermite polynomials}
+
+Just as we did with Bessel functions, we can use Hermite polynomials to expand a function in a series. In order to do that, we will need to establish the correct orthogonality relation between Hermite polynomials and normalise them.
+
+Consider the following two differential equations:
+
+\begin{equation}
+\phi'' - 2 x \phi' + 2m \phi = 0 \label{eq-hermite-ortho-1}
+\end{equation}
+\begin{equation}
+\psi'' - 2 x \psi' + 2n \psi = 0 \label{eq-hermite-ortho-2}
+\end{equation}
+
+The solutions of these are $H_m(x)$ and $H_n(x)$ respectively. Multiplying Eq.~\ref{eq-hermite-ortho-1} by $\psi e^{-x^2}$, Eq.~\ref{eq-hermite-ortho-2} by $\phi e^{-x^2}$ and subtracting, we get
+
+\begin{equation}
+e^{-x^2}\left(\phi''\psi -\psi''\phi\right)- e^{-x^2} 2 x \left(\phi'\psi -\psi'\phi\right)+ e^{-x^2}2(m-n)\phi\psi = 0
+\end{equation} 
+
+This can be written as
+
+\begin{equation}
+\left[e^{-x^2}\left(\phi'\psi -\psi'\phi\right)\right]' = e^{-x^2}2(n-m)\phi\psi
+\end{equation} 
+
+Integrating this between $-\infty$ and $\infty$ we get
+
+\begin{equation}
+2(n-m)\int_{-\infty}^{\infty}e^{-x^2}\phi\psi dx = \left[e^{-x^2}\left(\phi'\psi -\psi'\phi\right)\right]_{-\infty}^{+\infty}
+\end{equation} 
+
+The right hand side is equal to zero, because $e^{-{\infty}^2}$ goes to zero more quickly than any polynomial.
+
+So in the end we get
+
+\begin{equation}
+\fbox{$\displaystyle
+\int_{-\infty}^{\infty}e^{-x^2}H_n(x)H_m(x)dx = 0, \hspace{0.5cm} n \ne m \label{eq-hermite-ortho}
+$}
+\end{equation} 
+
+This is the orthogonality relation for Hermite polynomials: they are orthogonal over the interval $[-\infty, \infty]$ with the weighting function $e^{-x^2}$.
+
+
+To normalise the Hermite polynomials, we need to calculate
+
+\begin{equation}
+I = \int_{-\infty}^{\infty}e^{-x^2}H_n^2(x)dx
+\end{equation}
+
+We do this by multiplying the generating function Eq.~\ref{eq-g-hermite} by itself and by  $e^{-x^2}$:
+
+\begin{equation}
+e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx}= \sum_{m, n = 0}^{\infty}e^{-x^2} H_n(x)\frac{t^n}{n!}H_m(x)\frac{s^m}{m!}
+\end{equation} 
+
+When we integrate this over $x$ from $-\infty$ to $\infty$, the terms with $m \ne n$ on the right--hand side drop out because of the orthogonality relation Eq.~\ref{eq-hermite-ortho}:
+
+\begin{equation}
+\int_{-\infty}^{\infty} e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} dx= \sum_{n = 0}^{\infty} \int_{-\infty}^{\infty} e^{-x^2} H_n^2(x)\frac{(st)^n}{n!n!} dx \label{eq-hermite-norm-1}
+\end{equation} 
+
+For the integral on the left--hand side, we get \footnote{To calculate $\int_{-\infty}^{\infty}e^{-x^2}dx$, write it as $\sqrt{\int_{-\infty}^{\infty} e^{-x^2}dx\int_{-\infty}^{\infty} e^{-y^2}dy}$ and transform it to polar coordinates with $x^2+y^2=r^2$ and $dxdy = r dr d\theta$.}
+
+\begin{align}
+\int_{-\infty}^{\infty} e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} dx 
+  = & \int_{-\infty}^{\infty} e^{-(x-s-t)^2} e^{2st}dx \nonumber \\
+  = & \sqrt{\pi} e^{2st} \nonumber \\
+  = & \sqrt{\pi} \sum_{n = 0}^{\infty} \frac{2^n{(st)}^n}{n!}  \label{eq-hermite-norm-2}
+\end{align} 
+
+By equating like powers of $st$ in the the right--hand sides of Eq.~\ref{eq-hermite-norm-1} and \ref{eq-hermite-norm-2} we get the value of the normalisation integral:
+
+\begin{equation}
+\int_{-\infty}^{\infty} e^{-x^2} H_n^2(x) dx = 2^n n! \sqrt{\pi}
+\end{equation} 
+
+With this we can finally write the complete expression to expand a function $f(x)$ in a series of Hermite polynomials:
+
+\begin{equation}
+f(x) = \sum_{n=0}^{\infty}a_n H_n(x)
+\end{equation} 
+
+with
+
+\begin{equation}
+\fbox{$\displaystyle
+a_n = \frac{1}{2^n n!\sqrt{\pi}} \int_{-\infty}^{\infty} e^{-x^2} H_n(x) f(x) dx
+$}
+\end{equation} 
+
+
+\begin{sidebar}
+\begin{ex}
+Prove the following parity relation:
+$$H_n(x) = (-1)^nH_n(-x)$$
+a) by using the series expansion of Hermite polynomials
+b) by replacing $t$ by $-t$ and $x$ by $-x$ in the generating function
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Use the definition of the generating function for Hermite polynomials to prove that
+$$H_{2n}(0) = (-1)^n \frac{(2n)!}{n!}$$
+$$H_{2n+1}(0) = 0$$
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Prove the Rodriguez formula for Hermite polynomials:
+$$H_n(x) = (-1)^n e^{x^2}\frac{d^n}{d x^n}\left(e^{-x^2}\right)$$
+\emph{Hint}: verify this formula for a few values of $n$ to get a feeling for how it works, and then use mathematical induction.
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+For $0 \leq m \leq n-1$, use the Rodriguez formula to show that 
+$$\int_{-\infty}^{\infty}x^m e^{-x^2} H_n(x) dx = 0$$
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Prove that 
+$$ | H_n(x) | \le  | H_n(jx) | $$
+\emph{Hint}: remove factors from the series expansion of $ H_n(jx) $ so that it contains only positive terms.
+\end{ex}
+\end{sidebar}
+
+
+\begin{sidebar}
+\begin{ex}
+Show that 
+$$\left( 2x - \frac{d}{dx} \right)^n 1 = H_n(x)$$
+\emph{Hint}: verify this formula for a few values of $n$ to get a feeling for how it works, and then use mathematical induction.
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Show that
+$$ \int_{-\infty}^{\infty} e^{-x^2} x^2 H_n^2(x) dx = 2^{n-1} (2n + 1) n! \sqrt{\pi} $$
+\emph{Hint}: expand $x H_n(x)$ using a recurrence relation and apply the orthogonality conditions.
+This integral occurs in the calculation of the mean-square displacement of a quantum oscillator.
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Expand the following integral in a power series in $t$
+
+$$ \int_{-\infty}^{\infty} e^{-x^2/2} g(x,t) dx$$
+
+and use the result to show that
+
+$$\int_{-\infty}^{\infty} e^{-x^2/2} H_{2m}(x) dx = \frac{(2m)!}{m!} \sqrt{2\pi} $$
+$$\int_{-\infty}^{\infty} e^{-x^2/2} H_{2m+1}(x) dx = 0 $$
+\end{ex}
+\end{sidebar}
+
+
+\begin{sidebar}
+\begin{ex}
+Multiply the generating function by $t^{-k-1}$ and integrate over the unit circle in the complex $t$-plane to show that
+
+$$H_k(x) =\frac{k!}{2 \pi j} \oint \frac{e^{-t^2 +2tx}}{t^{k+1}}dt $$
+
+Then, show by direct substitution that this expression satisfies Hermite's differential equation. \emph{Hint}: try to write the integrand as a total differential.
+\end{ex}
+\end{sidebar}
+
+\begin{sidebar}
+\begin{ex}
+Assume that based only on Hermite's differential equation, we managed to derive the recurrence relation involving $H_n'(x)$, as well as the values of $H_n(0)$. Based only on this information, derive the explicit form of the generating function $g(x,t)$ defined as
+
+$$g(x,t) = \sum_{n = 0}^{\infty} H_n(x)\frac{t^n}{n!} $$
+
+a) Take the derivative of $g(x,t)$ above with respect to $x$, use the recurrence relationship, and derive a first-order differential equation for $g(x,t)$.\\
+
+b) Solve this equation to give
+
+$$g(x,t) = e^{2tx} f(t)$$
+
+c) Derive $f(t)$ by evaluating the expression for $x=0$.
+\end{ex}
+\end{sidebar}
+
+\section*{Review questions}
+
+\begin{itemize}
+\item TODO
+\end{itemize}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
