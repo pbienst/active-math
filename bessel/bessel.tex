@@ -628,11 +628,11 @@ where $\xi_i$ are the zeros of $J_0(x)$.
 
 \sectionugent{Neumann and Hankel functions}
 
-\begin{marginfigure}[7.0cm]
+\begin{marginfigure}[0.3cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Franz_Ernst_Neumann
   \includegraphics{bessel/figures/f_neumann}
-  \caption{Franz Ernst Neumann (1798 – 1895)}
+  \caption{Franz Ernst (not John von) Neumann (1798 – 1895)}
 \end{marginfigure}
 
 From the theory of differential equations, it can be derived that Bessel's equation has two linearly independent solutions. One of them is the Bessel function of the first kind $J_\nu(x)$. It can be shown that a second independent solution is given by the Bessel function of the second kind defined by
@@ -643,9 +643,14 @@ Y_\nu(x) = \frac{\cos(\nu \pi)J_\nu(x) - J_{-\nu}(x)}{\sin(\nu \pi)}
 $}
 \end{equation} 
 
-\noindent\marginnote{Franz Ernst, not John von.}This function is also called the \emph{Neumann} function, and is sometimes symbolised by $N_\nu(x)$.
+This function is also called the \emph{Neumann} function, and is sometimes symbolised by $N_\nu(x)$.
 
 Fig.~\ref{fig-bessel-Y} plots the Neumann functions of the lowest three orders. Note the logarithmic type singularity at $x=0$.
+
+\begin{exer}
+% difficulty: hard
+The Neumann functions are supposed to be linearly independent from the Bessel functions. However, it seems like they are defined as linear combination of Bessel functions, as $\cos(\nu \pi)$ and $\sin(\nu \pi)$ are just numbers. What is going on? Focus your efforts on the case where $\nu$ is an integer.
+\end{exer}
 
 \begin{figure}
 \centering
@@ -660,13 +665,13 @@ So the general solution of Bessel's equation can be written as
 f(x) = A J_{\nu}(x) + B Y_{\nu}(x)
 \end{equation} 
 
-Of course, any other linearly independent combination of $J_{\nu}(x)$ and $Y_{\nu}(x)$ can also be used to express the solution, e.g.
+Obviously, any other linearly independent combination of $J_{\nu}(x)$ and $Y_{\nu}(x)$ can also be used to express the solution, e.g.
 
 \begin{equation}
 f(x) = C H_{\nu}^{(1)}(x) + D H_{\nu}^{(2)}(x)
 \end{equation} 
 
-\begin{marginfigure}[0.3cm]
+\begin{marginfigure}[-1cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Hermann_Hankel
   \includegraphics{bessel/figures/h_hankel}
@@ -685,7 +690,13 @@ Here, $H_{\nu}^{(1)}(x)$ and $H_{\nu}^{(2)}(x)$ are the \emph{Hankel} functions 
 \label{eq-hankel}
 \end{subequations} 
 
-Of course, if we are solving Eq.~\ref{eq-helmholtz-cyl} instead of Eq.~\ref{eq-bessel}, the arguments of the functions above are $k_t r$ instead of $x$. It is instructive to compare these functions to the solutions of the Helmholtz equation in a 1D Cartesian coordinate system:
+Of course, if we are solving Eq.~\ref{eq-helmholtz-cyl} instead of Eq.~\ref{eq-bessel}, the arguments of the functions above are $k_t r$ instead of $x$.
+
+\pagebreak
+
+\sectionugent{Cylindrical vs Cartesian wave solutions}
+
+It is instructive to compare the Neumann and the Hankel functions to the solutions of the Helmholtz equation in a 1D Cartesian coordinate system:
 
 \begin{equation}
 f''(x) + k^2 f(x) = 0 \label{eq-helmholtz-1D}
@@ -697,7 +708,20 @@ The solutions of Eq.~\ref{eq-helmholtz-1D} are
 f(x) = A \cos(kx) + B \sin(kx)
 \end{equation} 
 
-The sine and cosine solutions are oscillating solutions which can be interpreted physically as standing waves. Note the correspondence to $J_n(x)$ and $Y_n(x)$ which are also oscillating functions. Therefore, they can be thought of as the representation of standing waves in a circular coordinate system, with the only difference that $Y_n(x)$ diverges at the origin.
+The sine and cosine solutions are oscillating solutions which can be interpreted physically as standing waves. Note the correspondence to $J_n(x)$ and $Y_n(x)$, which are also oscillating functions. Therefore, \textbf{Bessel and Neumann functions can be thought of as standing waves in a cylindrical coordinate system}. An important difference with respect to the geometric functions is of course that $Y_n(x)$ diverges at the origin.
+
+\begin{exer}
+% difficulty: trivial
+% ugent
+  It can be shown that for large arguments, the following asymptotic forms hold:
+\begin{align}
+J_\nu(x) \approx & \, \sqrt{\frac{2}{\pi x}} \cos \left( x - \left(\nu + \frac{1}{2}\right)\frac{\pi}{2} \right) \nonumber \\
+Y_\nu(x) \approx & \, \sqrt{\frac{2}{\pi x}} \sin \left( x - \left(\nu + \frac{1}{2}\right) \frac{\pi}{2} \right)   
+\end{align}
+
+Purely based on the physics and the geometry of the problem, explain why it is plausible that sines and cosines appear here. If a source in the middle of a very large circular resonator excites a cylindrical standing wave, what will the wavefronts look like far from the source?
+
+\end{exer}
 
 Another way of writing the solutions of Eq.~\ref{eq-helmholtz-1D} is
 
@@ -707,12 +731,33 @@ f(x) = C e^{jkx} + D e^{-jkx}
 
 because $e^{\pm j \theta} = \cos \theta \pm j \sin \theta$ (compare this to Eq.~\ref{eq-hankel}).
 
-\noindent\marginnote{This is for a choice of $e^{j \omega t}$ as time dependence in the definition of phasors. Some authors choose $e^{-j \omega t}$ as time dependence, and then $e^{-jkx}$ is an incoming wave.}Physically, $e^{-jkx}$ corresponds to an outgoing wave travelling towards $x=+\infty$, while $e^{jkx}$ is an incoming wave from $x=+\infty$.
+\pagebreak
 
-It can be proven that for large $x$ the following asymptotic expansions hold:
-$H_{\nu}^{(1)}(x) \sim e^{jx}$ and  $H_{\nu}^{(2)}(x) \sim e^{-jx}$. So, $H_{\nu}^{(2)}(x)$ is the cylindrical equivalent of an outgoing plane wave, while $H_{\nu}^{(1)}(x)$ is an incoming plane wave.
+\begin{exer}
+% difficulty: trivial
+% ugent
+Does $e^{-jkx}$ correspond to an outgoing wave travelling towards $x=+\infty$, or to an incoming wave travelling towards $x=-\infty$?
 
-Whether to use Bessel/Neumann functions or rather Hankel functions to represent the solution of Bessel's differential equation, is usually determined by physical and/or practical considerations, as we will illustrate next for the case of finding eigenmodes in an optical fibre.
+How does the conclusion change if instead of  $e^{j \omega t}$ as time dependence in the definition of phasors, you chose $e^{-j \omega t}$?
+\end{exer}
+
+
+\begin{exer}
+% difficulty: normal
+% ugent
+Show that for large arguments, the following asymptotic forms hold:
+\begin{align}
+H_{\nu}^{(1)} \approx & \, \sqrt{\frac{2}{\pi x}} e^{j \left( x - \left(\nu + \frac{1}{2}\right)\frac{\pi}{2} \right)} \nonumber \\
+  H_{\nu}^{(2)} \approx & \, \sqrt{\frac{2}{\pi x}} e^{-j \left( x - \left(\nu + \frac{1}{2}\right)\frac{\pi}{2} \right)}
+\end{align}
+
+Based on physical and energy arguments, explain why the factor $1/\sqrt{x}$ is plausible. Remember that these functions will make up the electric and magnetic field components of solutions to the wave equation in cylindrical coordinates.
+                          
+\end{exer}
+
+So, based on these observations, the \textbf{Hankel functions are the equivalent of travelling plane waves in a cylindrical coordinate system}.   $H_{\nu}^{(2)}(x)$ corresponds to an outgoing plane wave, while $H_{\nu}^{(1)}(x)$ \is an incoming plane wave (at least for our choice of time dependence).
+
+Whether to use Bessel/Neumann functions or rather Hankel functions of the first and second kind to represent the solution of Bessel's differential equation, is usually determined by physical and/or practical considerations, as we will illustrate next for the case of finding eigenmodes in an optical fibre.
 
 
 \pagebreak
@@ -720,7 +765,6 @@ Whether to use Bessel/Neumann functions or rather Hankel functions to represent 
 
 \sectionugent{Application: the eigenmodes of an optical fibre}
 
-Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius $R$ made of a material with refractive index $n_1$, surrounded by a cladding with refractive index $n_2 < n_1$. The cladding is taken to be infinitely thick. 
 
 \begin{marginfigure}
 \centering
@@ -729,13 +773,19 @@ Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius
 \label{fig-fibre}
 \end{marginfigure}
 
+Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius $R$ made of a material with refractive index $n_1$, surrounded by a cladding with refractive index $n_2 < n_1$. The cladding is taken to be infinitely thick. 
+
 Fields in the optical fibre have to satisfy the Helmholtz equation. Just like in Section~\ref{sec-bessel-eq}, we propose solutions of the form 
 
 \begin{equation}
 \psi(r,\theta,z) = R(r)e^{-j k_\theta \theta }e^{-j k_z z} \\
-\end{equation}  
+\end{equation}
 
-These kinds of solutions are actually the eigenmodes of this particular waveguide, because of the form of their $z$--dependence\footnote{These eigenmodes propagate along $z$. Contrast this with the treatment of bent waveguides in the previous chapter, where the $z$--dimension didn't come in play because of the 2D nature of the problem and where the propagation was essentially along $\theta$.}.  Also, the fields must be periodic in the $\theta$--direction with period $2 \pi$. This means $k_\theta$ has to be an integer, which we will call $l = 0, \pm 1, \pm 2, \ldots$.
+\begin{cue}
+What is the physical interpretation of $k_z$? Also based on the physics of the problem, what can you say about $k_\theta $? Can it take any value?  
+\end{cue}
+
+These kinds of solutions are the eigenmodes of this particular waveguide, because of the form of their $z$--dependence\footnote{These eigenmodes propagate along $z$. Contrast this with the treatment of bent waveguides in the previous chapter, where the $z$--dimension didn't come in play because of the 2D nature of the problem and where the propagation was essentially along $\theta$.}.  Also, physics dictates that the fields must be periodic in the $\theta$--direction with period $2 \pi$. This means that the 'angular propagation constant' $k_\theta$ has to be an integer, which we will call $l = 0, \pm 1, \pm 2, \ldots$.
 
 As we've seen before, $R$ has to satisfy this equation:
 
@@ -745,7 +795,17 @@ r^2\frac{d^2 R(r)}{d r^2} + r \frac{d R(r)}{d r} + \left[{r^2 \left(k_0^2 n^2(r)
 
 We define $k_{t,i}^2=k_0^2 n_i^2 - k_z^2$, where $i=1$ for the core and $i=2$ for the cladding.
 
-We already know that in each of the regions $i$ the solutions of Eq.~\ref{eq-fibre-0} are Bessel functions of order $l$ with argument $k_{t,i} r$.
+\begin{exer}
+% difficulty: trivial
+% ugent
+What is the physical meaning behind $k_t$? Draw a diagram. Contrast the diagram with Fig.~\ref{fig-fibre}.
+\end{exer}
+
+We already know that in each of the regions $i$, the solutions of Eq.~\ref{eq-fibre-0} are Bessel, Neumann or Hankel functions of order $l$ with argument $k_{t,i} r$.
+
+\begin{cue}
+For both the core and the cladding, what is the optimal way to represent the most general solution of the wave equation? In other words, which two linearly independent solutions in the family of Bessel, Neumann and Hankel functions should you choose, so that you can already put one contribution to zero because of the physics of the problem?
+\end{cue}
 
 For the core, we write the general solution as
 
@@ -753,7 +813,7 @@ For the core, we write the general solution as
 R(r) = A J_l\left(k_{t,1}r\right) + B Y_l\left(k_{t,1}r\right), \hspace{0.5 cm} r<R \label{eq-fibre-1}
 \end{equation} 
 
-But since the Neumann functions diverge at $r=0$, it immediately follows that $B=0$.
+But since the Neumann functions diverge at $r=0$, and we don't observe any infinite fields in the centre of an optical fibre, it immediately follows that $B=0$.
 
 For the cladding, it is more advantageous to write the general solution in terms of Hankel functions:
 
@@ -761,9 +821,19 @@ For the cladding, it is more advantageous to write the general solution in terms
 R(r) = C H_l^{(1)}\left(k_{t,2}r\right) + D H_l^{(2)}\left(k_{t,2}r\right), \hspace{0.5 cm} r>R \label{eq-fibre-2}
 \end{equation} 
 
-For physical reasons, there can only be outgoing waves towards infinity, so $C=0$. Note that contrary to $k_{t,1}$, $k_{t,2}$ is imaginary for $k_0 n_2 < k_z < k_0 n_1$, so the fields for guided modes are exponentially decaying in the cladding.
+For physical reasons, there can only be outgoing waves towards infinity, not incoming waves from infinity. Indeed, there are neither sources nor reflectors at infinity in our situation. So, this means that $C=0$.
 
-So far, the treatment has been fully vectorial because solutions of the form (\ref{eq-fibre-1}) and (\ref{eq-fibre-2}) have to written both for $E_z$ and $H_z$, and these two fields couple because of the continuity conditions at $r=R$. For the sake of simplicity, we will only consider a scalar approximation here, where the modes are approximately TEM and the continuity conditions are simplified to the continuity of $R$ and $d R / d r$. This approximation turns out to be valid for weakly guided fibres where $n_1 \approx n_2$.
+\begin{exer}
+% difficulty: trivial
+% ugent
+For guided modes, where $k_0 n_2 < k_z < k_0 n_1$, use the asymptotic expansion of the Hankel functions to show that the fields are exponentially decaying in the cladding.
+\end{exer}
+
+If we have weakly guided fibres where $n_1 \approx n_2$, it turns out that the continuity conditions of the electric and the magnetic fields can be approximated by imposing the continuity of $R$ and $d R / d r$.
+
+\begin{cue}
+Impose these conditions, and derive an expression from which we can calculate the propagation constants $k_z$. 
+\end{cue}
 
 Imposing the continuity of $R$ and $d R / dr$ leads to
 
@@ -781,7 +851,9 @@ This only has non--trivial solutions if
 \frac{J_l\left(k_{t,1}R\right)}{k_{t,1} J'_l\left(k_{t,1}R\right)} = \frac{H_l^{(2)}\left(k_{t,2}R\right)}{k_{t,2} H_l'^{(2)}\left(k_{t,2}R\right)} \label{eq-disp-fibre}
 \end{equation}
 
-Since $k_{t,1}$ and $k_{t,2}$ are functions of $k_z$, Eq.~\ref{eq-disp-fibre} can be used to calculate the $k_z$'s of the eigenmodes of the fibre. After that, the field profiles can be calculated from Eq.~\ref{eq-fibre-1} and \ref{eq-fibre-2}.
+Since $k_{t,1}$ and $k_{t,2}$ are functions of $k_z$, Eq.~\ref{eq-disp-fibre} has effectively only a single unknown $k_z$ for a given geometry. We can therefore use that equation to calculate the propagation constants of the eigenmodes of the fibre.
+
+Once the propagation constants are found, the field profiles can be calculated from Eq.~\ref{eq-fibre-1} and \ref{eq-fibre-2}.
 
 
 \begin{exer}
@@ -794,7 +866,13 @@ Solve the Helmholtz equation in free space in cylindrical coordinates. Look at t
 \section*{Review questions}
 
 \begin{itemize}
-\item TODO
+\item What are Bessel functions?  
+\item How can a generating function be used to define Bessel functions?
+\item What techniques can you use to solve integrals of the product of Bessel functions with a polynomial?
+\item What is a Fourier-Bessel series expansion and how can it be used?
+\item What are Neumann functions?
+\item What are Hankel functions?
+\item What is the correspondence between solutions of the Cartesian wave equation and the cylindrical one?   
 \end{itemize}
 
 %%% Local Variables:
