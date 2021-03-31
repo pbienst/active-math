@@ -107,18 +107,15 @@ def build():
     subprocess.run(["pdflatex", "-file-line-error",
                     "-interaction=nonstopmode",
                     os.path.join("main.tex")],
-                   cwd=build_dir)
+                    cwd=build_dir)
     subprocess.run(["biber",
                     os.path.join(build_dir, "main.bcf")],
-                   cwd=build_dir)
-    subprocess.run(["pdflatex", "-file-line-error",
+                    cwd=build_dir)
+    for i in range(3):
+        subprocess.run(["pdflatex", "-file-line-error",
                     "-interaction=nonstopmode",
                     os.path.join("main.tex")],
-                   cwd=build_dir)
-    subprocess.run(["pdflatex", "-file-line-error",
-                    "-interaction=nonstopmode",
-                    os.path.join("main.tex")],
-                   cwd=build_dir)
+                    cwd=build_dir)
     shutil.copy(os.path.join(build_dir, "main.pdf"),
                 "Mathematics for Photonics - ebook.pdf")
 
