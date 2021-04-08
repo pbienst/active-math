@@ -16,21 +16,39 @@ Understanding grows only logarithmically with the number of floating point opera
 \chaptertoc
 
 
-In this chapter, we will briefly touch upon a number of techniques to numerically solve the wave equation in cases where no analytic solution is available. Different methods will be introduced: finite differences, finite elements, eigenmode expansion, and finally a more abstract framework, namely the method of the weighted residuals. Each of these subjects could be the topic of an entire course in its own right, so we will only be able to introduce the basic principle of these methods without going into any level of detail.
+In this chapter, we will briefly touch upon a number of techniques to numerically solve the wave equation in cases where no analytic solution is available. Four different classes of methods will be introduced.
+
+First, in \textbf{finite difference} methods, we will replace continuous derivatives with discrete approximations on a grid. When applying this to the wave equation in the frequency domain, this results in a linear system, which can be solved in a number of ways. Doing this discretisation in the time domain results in the popular finite-difference time-domain method (FDTD).
+
+The \textbf{finite element} method does not directly solve a differential equation. Rather, it tackles the problem obliquely by converting it into a minimisation procedure. This so-called variational approach has advantages when it comes to e.g. sensitivity to rounding errors.
+
+\textbf{Eigenmode expansion} methods are used in layered photonic structures, in which the fields are expanded in the basis set formed by the eigenmodes of each layer. Thanks to this choice of basis functions that incorporate a lot of the physics of the problem, this approach can be very efficient.
+
+Finally, a more abstract framework is presented, namely the \textbf{method of the weighted residuals}. This framework can be used to generalise a number of individual approaches, like point matching or the Galkerkin method.
+
+Each of these subjects could be the topic of an entire course in its own right, so we will only be able to introduce the basic principle of these methods, without going into any level of detail.
 
 
 \pagebreak
 
 \sectionugent{Finite difference approximation of derivatives}
 
-In this method, we do not seek to find the solution to the wave equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \emph{mesh}, and the distance between discretisation points is called the \emph{mesh size}. Obviously the hope is that as the mesh becomes finer and finer, the solution that we obtain converges to the true solution of the wave equation.
+Let's say we are not interested in the solution to a certain differential equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \emph{mesh}, and the distance between discretisation points is called the \emph{mesh size}. Obviously the hope is that as the mesh becomes finer and finer, the solution that we obtain converges to the true solution of the wave equation.
 
-Since we only have information about the solution at discrete points, we will need to approximate the derivatives that figure in the wave equation using data from those discrete points. To develop these so--called \emph{finite difference} approximations for derivatives, we start from the following truncated Taylor expansions (for a 1D case):
+Since we only have information about the solution at discrete points, we will need to approximate the derivatives that appear in the differential equation using data from those discrete points. To write down these so--called \emph{finite difference} approximations for derivatives, we will develop e.g. an unknown 1D function $f(x)$ in a Taylor series.
+
+\begin{cue}
+\noindent\marginnote[2.0cm]{The symbol $\mathcal{O}$ relates to the \emph{order} of the remaining terms, i.e. how they scale as a function of $\Delta x$. Here, $\mathcal{O}\left(\Delta x^4\right)$ should really be interpreted as $\mathcal{O}\left((\Delta x)^4\right)$, i.e. if the grid size becomes twice as small, the sum of the remaining terms becomes roughly 16 times as small.}Write down Taylor expansions of $f(x+\Delta x)$ and $f(x-\Delta x)$ up till the third derivative. 
+\end{cue}
 
 \begin{gather}
 f(x+\Delta x) = f(x) + \Delta x \frac{d f}{d x} + \frac{{(\Delta x)}^2}{2} \frac{d^2 f}{d x^2} + \frac{{(\Delta x)}^3}{6} \frac{d^3 f}{d x^3} + \mathcal{O}\left(\Delta x^4\right) \label{eq-taylor-plus} \\
 f(x-\Delta x) = f(x) - \Delta x \frac{d f}{d x} + \frac{{(\Delta x)}^2}{2} \frac{d^2 f}{d x^2} - \frac{{(\Delta x)}^3}{6} \frac{d^3 f}{d x^3} + \mathcal{O}\left(\Delta x^4\right) \label{eq-taylor-min}
 \end{gather} 
+
+\begin{cue}
+Neglecting all the terms including $\left(\Delta x\right)^2$ or higher, use Eq.~\ref{eq-taylor-plus} to approximate the first derivative of $f$.
+\end{cue}
 
 From Eq.~\ref{eq-taylor-plus} we get
 
@@ -40,6 +58,10 @@ From Eq.~\ref{eq-taylor-plus} we get
 
 This is called the \emph{forward difference} approximation of $df / dx$. Since the error term is $\mathcal{O}(\Delta x)$, this is called a first order approximation.
 
+\begin{cue}
+Do the same, but start from Eq.~\ref{eq-taylor-min}.
+\end{cue}
+
 Similarly from Eq.~\ref{eq-taylor-min}:
 
 \begin{equation}
@@ -48,7 +70,11 @@ Similarly from Eq.~\ref{eq-taylor-min}:
 
 This so--called \emph{backward difference} is also first--order accurate.
 
-By subtracting Eq.~\ref{eq-taylor-plus} from Eq.~\ref{eq-taylor-min}, we get a \emph{central difference} formula, which now however is second--order accurate:
+\begin{cue}
+Now subtract Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}. What is the order of accuracy of the approximation of the derivative now? Can you explain this intuitively?
+\end{cue}
+
+By subtracting Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get a \emph{central difference} formula, which now however is second--order accurate:
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -56,9 +82,9 @@ By subtracting Eq.~\ref{eq-taylor-plus} from Eq.~\ref{eq-taylor-min}, we get a \
 $}
 \end{equation} 
 
-This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at this is that the central difference involves both neighbouring points, so there is more balanced information on the local behaviour of the function, which makes it more accurate.
+This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at is that the central difference involves not one but both neighbouring points, so it encorporates more information on the local behaviour of the function, which makes it more accurate.
 
-Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}.
+Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}. From this figure, you can clearly see that the central difference is more accurate.
 
 \begin{marginfigure}
 \centering
@@ -66,6 +92,10 @@ Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}.
 \caption{The arc AB represents backward differences, BC forward differences and AC central differences.}
 \label{fig-fd}
 \end{marginfigure}
+
+\begin{cue}
+Construct an approximation for the second derivative $f''$, this time adding Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}. What is the order of approximation? 
+\end{cue}
 
 By adding Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get an approximation for the second derivative:
 
@@ -77,8 +107,16 @@ $}
 
 If we want to get more accurate results, we could either use a finer mesh or add more information by including higher order neighbours like $f(x-2\Delta x)$ and $f(x+2\Delta x)$.
 
+Another way of looking at the second derivative is by rewriting the approximation as
+
+\begin{equation}
+\frac{d^2 f}{d x^2} \sim  \frac{f(x + \Delta x) + f(x - \Delta x)}{2} - f(x)
+\end{equation}
+
+\noindent\marginnote{Drawing a function with an inflection point, where $f''=0$, allows you to verify that there the function is indeed equal to the average of its surroundings.}This shows that the second derivative (or the Laplacian for that matter) is all about the difference between the value of a function at a certain point and the average value of that function around that point.
 
 \begin{exer}
+% difficulty: normal  
 Construct a finite-difference scheme that will allow you to integrate the following differential equation:
 
 $$\frac{du(t)}{dt} = -a u(t)$$
@@ -99,11 +137,16 @@ Which $\theta$-values correspond to which methods?
 
 \end{exer}
 
-
+\pagebreak
 
 \begin{exer}
+% difficulty: normal
 Derive the following higher-order approximation of the second derivative:
-$$\frac{d^2 f}{d x^2} = \frac{-f(x + 2 \Delta x) + 16 f(x + \Delta x) -30 f(x) + 16 f(x- \Delta x) - f(x - 2 \Delta x)}{12 \Delta x^2} + \mathcal{O}\left(\Delta x^4\right) $$
+
+\begin{align}  
+  \frac{d^2 f}{d x^2} = \frac{1}{12 \Delta x^2} \big[& -f(x + 2 \Delta x) + 16 f(x + \Delta x) -30 f(x) \nonumber \\
+  &  - f(x - 2 \Delta x) + 16 f(x- \Delta x) \big] + \mathcal{O}\left(\Delta x^4\right)
+\end{align} 
 \end{exer}
 
 
@@ -131,11 +174,11 @@ We still need to determine the following unknowns: $f(2)$, $f(3)$ and $f(4)$.
 The discretised version of Eq.~\ref{eq-helmholtz-1d}, including the boundary conditions, reads
 
 \begin{align}
-f(1)=&f_1 \\
-f(1) -2f(2) + f(3) + k^2 f(2) =& 0 \\
-f(2) -2f(3) + f(4) + k^2 f(3) =& 0\\
-f(3) -2f(4) + f(5) + k^2 f(4) =& 0\\
-f(5)=&f_5
+f(1)=& \, f_1 \\
+f(1) -2f(2) + f(3) + k^2 f(2) =& \, 0 \\
+f(2) -2f(3) + f(4) + k^2 f(3) =& \, 0\\
+f(3) -2f(4) + f(5) + k^2 f(4) =& \, 0\\
+f(5)=& \, f_5
 \end{align} 
 
 Using matrix notation, this becomes
@@ -248,12 +291,12 @@ Without going into any detail, we finally want to mention the existence of a ver
 
 It uses a staggered grid, i.e. the electric field and the magnetic field are not discretised at the same point in space, but are arranged in a \emph{Yee cell} (Fig.~\ref{fig-yee}). The arrangement of the field components in a Yee cell is such that the discretised curl laws of Maxwell's equations can be written out in a natural form.
 
-\begin{marginfigure}
+\begin{figure}
 \centering
 \includegraphics{numeric/figures/yeecell}
 \caption{The Yee cell in the FDTD algorithm.}
 \label{fig-yee}
-\end{marginfigure}
+\end{figure}
 
 As for the time evolution of the fields, FDTD uses a leap--frogging scheme, where the electric fields calculated at $t=0$ are used to determine the magnetic fields at $t=0.5$. These are subsequently used to calculate the electric fields at $t=1$ and so on.
 
@@ -853,21 +896,6 @@ Construct an example where the Galerkin method and the least-squares residual me
 \end{exer}
 
 
-\subsection{Relation with finite elements, eigenmode expansion and finite differences}
-
-Although there is no exact one--to--one correspondence, finite elements and eigenmode expansion share a similar philosophy with the method of weighted residuals, most notably the concept of projecting an unknown function using a set of basis functions.
-
-In the finite element method, basis functions are the interpolation or shape functions. Because they are non--zero only in a limited area of the computational domain (the finite element), they are called \emph{subdomain basis functions}. Weighting functions are chosen identical to test functions. 
-
-In the eigenmode expansion method, basis and test functions are also equal and are chosen to be the eigenmodes of each layer. The scalar product used is defined as the overlap integral 
-
-\begin{equation}
-\left\langle \mathbf{E}_{m},\mathbf{H}_{n}\right\rangle \equiv \iint _{s}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}
-\end{equation}
-
-As far as finite differences are concerned, one could say that the basis functions are a set of delta functions at each grid point, however this is perhaps stretching the analogy a bit too far.
-
-Another interesting comparison between finite differences, finite elements and eigenmode expansion is how they differ in terms of what we could loosely call ``local extent''. A second order finite difference approach only looks at neighbouring points in order to calculate derivatives. For a finite element approach, information from a larger spatial area is taken into account, namely the behaviour of the function over a single element. Finally, eigenmode expansion is like finite elements in the limit of a single element spanning the entire domain, and has the largest spatial extent.
 
 \section*{Review questions}
 
