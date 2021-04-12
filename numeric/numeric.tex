@@ -425,8 +425,8 @@ Looking at Eq.~\ref{eq-fe-2}, what would be the set of basis functions we use in
 Comparing Eq.~\ref{eq-fe-1} and \ref{eq-fe-2}, we get that $M=2$, $u_i$ is $\psi_i$ and
 
 \begin{align}
-b_1(x) =& \frac{x_2 - x}{x_2 - x_1} \\
-b_2(x) =& \frac{x - x_1}{x_2 - x_1}
+b_1(x) =& \, \frac{x_2 - x}{x_2 - x_1} \\
+b_2(x) =& \, \frac{x - x_1}{x_2 - x_1}
 \end{align} 
 
 \begin{marginfigure}
@@ -482,7 +482,7 @@ The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} o
 
 \subsection{An expression for $J$}
 
-In order to keep the method physically interpretable, let's use the total energy of the system as an expression for $J$. From the complex Poynting theorem, we know that the time--averaged stored energy in a system is given by
+In order to keep the method physically interpretable, let's use the total energy of the system as an expression for $J$. Assume that each element has constant refractive index. From the complex Poynting theorem, we know that the time--averaged stored energy in a system is given by
 
 \begin{align}
 J =& \, \frac{1}{2} \int ( {\mathbf E} \cdot {\mathbf D}^* - {\mathbf H} \cdot {\mathbf B}^* ) dx \\
@@ -564,9 +564,19 @@ In theory, the outline of the finite element method that we have given so far is
 
 To do this, let's introduce some terminology first.
 
-A \textbf{functional} is a mapping from a function to a scalar value, unlike a function, which just maps one or more scalars to a scalar. The entity $J$ that we have introduced is a functional \footnote{Note that in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a standard function $J(\psi(\psi_i))$, albeit one of multiple arguments.}, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $J=J(\psi)$.
+A \textbf{functional} is a mapping from a function to a scalar value, unlike a function, which just maps one or more scalars to a scalar.
 
-A \textbf{variational expression} comes from minimising a functional over a set of admissible functions. E.g. in our case we have been solving the following variational expression:
+\begin{cue}
+Can you think of examples of a functional?  
+\end{cue}
+
+\noindent\marginnote{Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a standard function $J(\psi(\psi_i))$, albeit one of multiple arguments.}The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $P=J(\psi)$.
+
+Another way of looking at the difference between a function and a functional, is that the input to a function is finite-dimensional (a set of numbers you plug into a black box that spits out a number), whereas the input to a functional is infinite-dimensional (as it takes an infinite set of numbers to specify an arbitrary function).
+
+A \textbf{variational expression} comes from minimising a functional over a set of admissible functions. Indeed, every input $\psi$ to the functional will result in a different number $J(\psi)$ at the output, and we are looking for the special $\psi$ that will result in the smallest possible output.
+
+In the case of finite elements, we have been solving the following variational expression:
 
 \begin{equation}
 P = \min_\psi J(\psi)
@@ -574,32 +584,58 @@ P = \min_\psi J(\psi)
 
 where $P$ is the total power in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
 
-The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a number of known basis functions, and then determine the expansion coefficients such that the functional is minimised.
+The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a finite number of known basis functions, and then determine the expansion coefficients such that the functional is minimised. This turns the infinite-dimensional problem into a much more tractable finite-dimensional one.
 
-So far we don't seem to have done anything useful except introducing some new terminology. However, by looking at the power $P$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $P$, since $\delta J=0$ at the minimum of the functional. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
+\begin{cue}
+What can you say about the sensitivity of $P$ to e.g. rounding errors, given that we are working at minimum of the functional? 
+\end{cue}
 
-Now, the power $P$ is a decidedly uninteresting quantity for practical applications. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
+So far we don't seem to have done anything useful except introducing some new terminology. However, by looking at the power $P$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $P$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
 
-To conclude this section on finite elements, we wish to provide some extra proof that a function that minimises the functional from Eq.~\ref{eq-J-power} is indeed a solution to the Helmholtz equation. So far, this was only made acceptable by invoking physical arguments based on minimum energy, but a mathematical proof for this was lacking. At the same time, let's extend the method to three dimensions:
+All of this is the infinite-dimensional analog to the fact that the value of a 1D function $f(x)$ does not vary at a minimum, so $\delta f=0$ there for all possible directions $\delta x$ (although in the 1D case, there are only two trivial directions, i.e. $+x$ and $-x$). For a 2D function $f(x,y)$, this condition is less trivial, as $\delta f$ should be zero for all possible directions $\delta x \mathbf{1}_x  + \delta y\mathbf{1}_y$.
+
+Now, the power $P$ is a decidedly uninteresting quantity for practical applications, so the fact that we can calculate it without being very sensitive to rounding errors is of limited use. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
+
+\pagebreak
+
+
+\sectionugent{Variational form for the 3D Helmholtz equation}
+
+In this section, we wish to provide some extra proof that a function that minimises the functional from Eq.~\ref{eq-J-power} is indeed a solution to the Helmholtz equation. So far, this was only made acceptable by invoking physical arguments based on minimum energy, but a mathematical proof for this was lacking. At the same time, let's extend the method to three dimensions:
 
 \begin{equation}
 J = \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV \label{eq-variational1}
 \end{equation} 
 
-If a function $\psi$ minimises the functional $J$, then $\delta J$ has to be zero for $\psi$. For $\delta J$ (also called the \textbf{first variation} of $J$) we get
+\noindent\marginnote{$\delta J=0$ can obviously also give us a maximum, but these situations are rare in practice and can be easily identified by exploring $J$ in the neighbourhood of the potential solution.}If a function $\psi$ minimises the functional $J$, then $\delta J$ has to be zero for $\psi$.
+
+\begin{cue}
+Calculate $\delta J$ for this functional, neglecting second-order terms in $\delta \psi$.
+\end{cue}
+
+\noindent\marginnote[3.3cm]{Don't get confused: $\left( \nabla \psi \right)^2 = \nabla \psi \cdot \nabla \psi \ne \nabla^2 \psi $}For $\delta J$ (also called the \textbf{first variation} of $J$) we get
 
 \begin{align}
-\delta J =& J(\psi + \delta \psi) - J(\psi) \\
-         =& \iiint \left( (\nabla (\psi + \delta \psi))^2 - k^2 (\psi + \delta \psi)^2 \right) dV - \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV
+\delta J =& \, J(\psi + \delta \psi) - J(\psi) \nonumber \\
+  =& \, \iiint \left( (\nabla (\psi + \delta \psi))^2 - k^2 (\psi + \delta \psi)^2 \right) dV \nonumber   \\
+  -& \, \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV
 \end{align} 
 
-If we neglect second order terms in $\delta \psi$, we get
+If we neglect second-order terms in $\delta \psi$, we get
 
 \begin{equation}
 \delta J = \iiint \left( 2 \nabla \psi \cdot \nabla (\delta \psi) - 2 k^2 \psi \delta \psi \right) dV
 \end{equation}
 
-By using one of the incarnations of Green's theorem, we can write \footnote{Apply the divergence theorem to the vector identity $\nabla \cdot (u \nabla v) = u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v)$}
+Now, let's make use of the following vector identitity:
+
+$$\nabla \cdot (u \nabla v) = u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v)$$ \label{eq-vector-id-green-other}
+
+\begin{cue}
+Take the volume integral of this identity and apply the divergence theorem. Next, use this expression to transform $\delta J$. Figure out how to best assign $u$, $v$ to $\psi$, $\delta \psi$, bearing in mind that the ultimate goal is to bring out the Helmholtz equation.
+\end{cue}
+
+By integrating Eq.~\ref{eq-vector-id-green-other}, we actually get one of the many incarnations of Green's theorem:
 
 \begin{equation}
 \iiint \nabla \psi \cdot \nabla (\delta \psi) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - \iiint \delta \psi \cdot \nabla^2 \psi dV
@@ -611,13 +647,21 @@ So,
 \delta J = 2\iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - 2\iiint \delta \psi \cdot \nabla^2 \psi dV - 2 \iiint k^2 \psi \delta \psi dV
 \end{equation} 
 
+\begin{cue}
+Now, impose the condition that says that $\psi$ should minimise $J$.  
+\end{cue}
+
 Demanding that $\delta J = 0$ (a condition which is called \textbf{stationarity}), we get
 
 \begin{equation}
 \iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS \label{eq-euler-lagrange-1}
 \end{equation}
 
-Suppose that our boundary conditions are of the Dirichlet type such that $\psi=0$ on the boundary. Then, in order to be an admissible function, $\delta \psi$ also has to be zero on the boundary, so the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will be zero.
+\begin{cue}
+Think about how to deal with the term involving the boundary condition, i.e. the 2D integral.  
+\end{cue}
+
+Suppose that our boundary conditions are of the Dirichlet type such that $\psi=0$ on the boundary. In other words, we are restricting our search to only include functions that vanish at the boundary. Then, in order to be an admissible function that satisfies the boundary condition, $\delta \psi$ also has to be zero on the boundary, so that the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will be zero.
 
 Similarly, for Neumann--type boundary conditions where $\partial \psi / \partial n = 0$ on the boundary, the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will also be zero.
 
@@ -638,9 +682,9 @@ This is of course the Helmholtz equation.
 Eq.~\ref{eq-euler-lagrange-2} is called the \textbf{Euler} or the \textbf{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}.
 
 
-\pagebreak
-
 \begin{exer}
+% difficulty: trivial
+% ugent  
 Show that demanding that the 1D Helmholtz equation is orthogonal to any arbitrary function leads to the variational form 
 
 $$J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx$$
@@ -648,8 +692,9 @@ $$J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx$$
 \end{exer}
 
 
-
 \begin{exer}
+% difficulty: normal
+  
 Show that $10x-38/3$ is the best least-squares approximation to the parabola 
 
 $$f(x) = 10(x-1)^2 -1$$ 
@@ -660,26 +705,34 @@ in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
 
 
 \begin{exer}
-Consider an arbitrarily shaped waveguide filled with air but bounded by perfectly conducting metal walls. As we know, its modes will satisfy the following equation:
+% difficulty: normal
+% ugent
+  Consider an arbitrarily shaped waveguide filled with air but bounded by perfectly conducting metal walls.
 
-$$ \nabla_{xy}^2 \psi + \left( k^2 - k_z^2 \right)\psi = 0 $$
+  a) Show that the eigenmodes of the waveguide, i.e. solutions which have a $z$-dependence of $\exp{(-j k_z z)}$, satisfy the following equation:
 
-We are interested in finding the value of $k$ at cut--off ($k_z^2=0$), because we can get the cut-off wavelength from that. Show that the following is a variational expression for this cut--off wavevector $k_{cut}$:
+$$ \nabla_{xy}^2 \psi + \left( k^2 - k_z^2 \right)\psi = 0 $$ 
 
-$$ k_{cut}^2 = \frac{\iint_S (\nabla_{xy} \psi)^2 dS}{\iint_S \psi^2 dS}$$
-where $S$ is the cross--section of the waveguide.
+\noindent\marginnote{Note the difference between this cut-off condition for closed metal waveguides and the one for open waveguides, which is $k=k_{\mathrm{clad}}$} b) We are interested in finding the value of $k$ at cut--off ($k_z^2=0$), because we can get the cut-off wavelength from that. Show that the following is a variational expression for this cut--off wavevector $k_{\mathrm{cut}}$:
+
+$$ k_{\mathrm{cut}}^2 = \frac{\iint_S (\nabla_{xy} \psi)^2 dS}{\iint_S \psi^2 dS}$$
+
+Here $S$ is the cross--section of the waveguide.
+
+c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy of such a mode at cut-off?
+
 \end{exer}
 
 
 \begin{exer}
-
+% difficulty: normal
 Use the identity
 
-$$\int \int_S p \nabla q \cdot \nabla r dS= - \int \int_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
+$$\iint_S p \nabla q \cdot \nabla r dS= - \iint_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
 
 to show that the following variational expression
 
-$$J(\phi)=\int \int_S f(x,y) (\nabla \phi)^2 dS$$
+$$J(\phi)=\iint_S f(x,y) (\nabla \phi)^2 dS$$
 
 with $f(x,y)$ a given scalar function, has this Euler-Langrange equation:
 
@@ -889,7 +942,7 @@ Because of the linearity of Eq.~\ref{eq-weighted-res}, it can be put into a comp
 {\mathbf L} \cdot {\mathbf u} = {\mathbf v}
 \end{equation} 
 
-Here, {\mathbf u} denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. {\mathbf v} denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\mathbf L}$ is a known $N \times N$ matrix with $(i,j)$th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
+Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. $\mathbf v$ denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\mathbf L}$ is a known $N \times N$ matrix with $(i,j)$th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
 
 So, our equation $Lu=v$ has been \textbf{projected} by approximation into the matrix equation ${\mathbf L} \cdot {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
 
