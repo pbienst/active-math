@@ -33,13 +33,20 @@ Each of these subjects could be the topic of an entire course in its own right, 
 
 \sectionugent{Finite difference approximation of derivatives}
 
-Let's say we are not interested in the solution to a certain differential equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \textbf{mesh}, and the distance between discretisation points is called the \textbf{mesh size}.
+Let's say we are not interested in the solution to a certain differential equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \textbf{mesh}, and the distance between discretisation points is called the \textbf{mesh size}. A typical choice of 2D mesh is a rectangular one, where you only consider points of the form $(i \Delta x, j \Delta y)$, with $i$ and $j$ integers.
 
 \begin{cue}
 What do you think are some advantages and disadvantages of having a small mesh size?  
 \end{cue}
 
 Obviously the hope is that as the mesh becomes finer and finer, the solution that we obtain converges more and more to the true solution of the wave equation. However, the price we pay for this consists of increased computational resources (time, memory, ...).
+
+\begin{marginfigure}[-2.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Brook_Taylor
+  \includegraphics{numeric/figures/b_taylor}
+  \caption{Brook Taylor (1685-1731)}
+\end{marginfigure}
 
 Since we only have information about the solution at discrete points, we will need to approximate the derivatives that appear in the differential equation using data from those discrete points. To write down these so--called \textbf{finite difference} approximations for derivatives, we will develop e.g. an unknown 1D function $f(x)$ in a Taylor series.
 
@@ -120,6 +127,21 @@ Another way of looking at the second derivative is by rewriting the approximatio
 \end{equation}
 
 \noindent\marginnote{Drawing a function with an inflection point, where $f''=0$, allows you to verify that there the function is indeed equal to the average of its surroundings.}This shows that the second derivative (or the Laplacian for that matter) is all about the difference between the value of a function at a certain point and the average value of that function around that point.
+
+
+\begin{marginfigure}[1.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/John_Crank
+  \includegraphics{numeric/figures/j_crank}
+  \caption{John Crank (1916-2006)}
+\end{marginfigure}
+
+\begin{marginfigure}[8.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Phyllis_Nicolson
+  \includegraphics{numeric/figures/p_nicolson}
+  \caption{Phyllis Nicolson (1917-1968)}
+\end{marginfigure}
 
 \begin{exer}
 % difficulty: normal  
@@ -250,6 +272,13 @@ A way of constructing such an approximate solution is to use an \textbf{iterativ
 
 \section{The Jacobi method}
 
+\begin{marginfigure}[0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Carl_Gustav_Jacob_Jacobi
+  \includegraphics{numeric/figures/c_jacobi}
+  \caption{Carl Gustav Jacob Jacobi (1804-1851)}
+\end{marginfigure}
+
 Let's return to the discretised version of the Helmholtz equation Eq.~\ref{eq-hh-diff}:
 
 \begin{equation}
@@ -374,7 +403,6 @@ All finite element methods more or less share the same philosophy, which is outl
 
 \begin{itemize}
 \item
-Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods. An additional advantage is that you can use more triangles are used where higher resolution is required. See e.g. the grid in Fig.~\ref{fig-grid}.
 
 \begin{marginfigure}
 \centering
@@ -382,14 +410,27 @@ Subdivide the structure you want to model into $K$ finite subsections (hence the
 \caption{Example of a triangular grid.}
 \label{fig-grid}
 \end{marginfigure}
+
+Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods. An additional advantage is that you can use more triangles are used where higher resolution is required. See e.g. the grid in Fig.~\ref{fig-grid}.
+  
+
 \item
 Approximate the unknown function using a separate approximation expression for each element of the form
 \begin{equation}
 \psi(x,y) = \sum_{i=1}^M u_i b_i(x,y) \label{eq-fe-1}
-\end{equation}  
+\end{equation}
+
 Here the $b_i(x,y)$ are some convenient set of known basis functions. In order to solve the problem, the $M$ unknown coefficients $u_i$ per element still need to be determined.
 \item
-Introduce some constraint on the $MK$ number of unknowns, e.g. to ensure that $\psi$ is continuous across the elements.
+  Introduce some constraint on the $MK$ number of unknowns, e.g. to ensure that $\psi$ is continuous across the elements.
+
+\begin{marginfigure}[-1.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
+  \includegraphics{numeric/figures/Rayleigh}
+  \caption{John William Strutt, 3rd Baron Rayleigh (1842-1919)}
+\end{marginfigure}
+
 \item
 Write down an expression $J$ containing the approximating functions $b_i$ and the coefficients $u_i$. Because the $b_i$ are chosen in advance and therefore known, $J$ is function of the unknown $u_i$ only. The precise form of $J$ differs from problem to problem, but is often related to the total energy in the system.
 \item
@@ -535,11 +576,11 @@ C & D
 \label{eq-J-power-i}
 \end{equation} 
 
-The total power is just the sum of the contributions from all elements, which can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
+The total energy is just the sum of the contributions from all elements, which can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
 
 \begin{exer}
 % difficulty: trivial
-Explicitly write down this total power $\sum J_i$ using a block diagonal matrix.
+Explicitly write down this total energy $\sum J_i$ using a block diagonal matrix.
 \end{exer}
 
 Finally, the expressions in terms of disconnected nodal values can be transformed in terms of connected values using the connection matrix, like e.g. the one from Eq.~\ref{eq-con-matrix}. In this way, all the continuity conditions are imposed.
@@ -562,39 +603,46 @@ and this for all $i$. Since $J$ is a bilinear form, Eq.~\ref{eq-rayleigh-ritz} t
 
 In theory, the outline of the finite element method that we have given so far is perfectly adequate to describe it. However, it yields additional insight to cast it in the framework of a variational method.
 
-To do this, let's introduce some terminology first.
+Before doing that, let's recap same well-known facts, but in such a way that will make it easier for us to generalise to the new terminology.
 
-A \textbf{functional} is a mapping from a function to a scalar value, unlike a function, which just maps one or more scalars to a scalar.
+A function $f(x)$ of one variable takes a number $x$ as input, and delivers another number as output. Suppose this function has a minimum for some value of $x$. At that point, the output of the function does not change to first order, i.e. $\delta f=0$ for all possible directions $\delta x$ around that point. Obviously, in this 1D case, there are only two trivial directions, i.e. $+x$ and $-x$.
+
+A function $f(x,y)$ of two variables takes two numbers $x$ and $y$ as input, and spits out another number as output. Also here, when there is a minimum, the output of the function does not change, i.e. $\delta f=0$ for all possible directions  $\delta x \mathbf{1}_x  + \delta y\mathbf{1}_y$ you might explore in the neighbourhood of the minimum.
+
+Now, let's introduce a \textbf{functional}. This is an object that consumes as input a function $f(x)$ and delivers a number as output. In contrast to functions, you could say that the input of a functional is not finite dimensional, but infinite dimensional, as it takes an infinite set of numbers to specify an arbitrary function. All of these objects however have a single number as output.
 
 \begin{cue}
 Can you think of examples of a functional?  
 \end{cue}
 
-\noindent\marginnote{Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a standard function $J(\psi(\psi_i))$, albeit one of multiple arguments.}The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $P=J(\psi)$.
-
-Another way of looking at the difference between a function and a functional, is that the input to a function is finite-dimensional (a set of numbers you plug into a black box that spits out a number), whereas the input to a functional is infinite-dimensional (as it takes an infinite set of numbers to specify an arbitrary function).
+\noindent\marginnote{Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a vanilla function $J(\psi(\psi_i))$, albeit one of multiple arguments.}The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $E=J(\psi)$.
 
 A \textbf{variational expression} comes from minimising a functional over a set of admissible functions. Indeed, every input $\psi$ to the functional will result in a different number $J(\psi)$ at the output, and we are looking for the special $\psi$ that will result in the smallest possible output.
 
 In the case of finite elements, we have been solving the following variational expression:
 
 \begin{equation}
-P = \min_\psi J(\psi)
+E = \min_\psi J(\psi)
 \end{equation} 
 
-where $P$ is the total power in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
+where $E$ is the total energy in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
+
+\begin{marginfigure}[0.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Walther_Ritz
+  \includegraphics{numeric/figures/w_ritz}
+  \caption{Walther Ritz (1878-1909)}
+\end{marginfigure}
 
 The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a finite number of known basis functions, and then determine the expansion coefficients such that the functional is minimised. This turns the infinite-dimensional problem into a much more tractable finite-dimensional one.
 
 \begin{cue}
-What can you say about the sensitivity of $P$ to e.g. rounding errors, given that we are working at minimum of the functional? 
+What can you say about the sensitivity of $E$ to e.g. rounding errors, given that we are working at the minimum of the functional? 
 \end{cue}
 
-So far we don't seem to have done anything useful except introducing some new terminology. However, by looking at the power $P$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $P$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
+So far, we don't seem to have done anything useful except introducing some new terminology. However, by looking at the energy $E$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $E$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
 
-All of this is the infinite-dimensional analog to the fact that the value of a 1D function $f(x)$ does not vary at a minimum, so $\delta f=0$ there for all possible directions $\delta x$ (although in the 1D case, there are only two trivial directions, i.e. $+x$ and $-x$). For a 2D function $f(x,y)$, this condition is less trivial, as $\delta f$ should be zero for all possible directions $\delta x \mathbf{1}_x  + \delta y\mathbf{1}_y$.
-
-Now, the power $P$ is a decidedly uninteresting quantity for practical applications, so the fact that we can calculate it without being very sensitive to rounding errors is of limited use. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
+Now, the energy $E$ is a decidedly uninteresting quantity for practical applications, so the fact that we can calculate it without being very sensitive to rounding errors is of limited use. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
 
 \pagebreak
 
@@ -661,6 +709,13 @@ Demanding that $\delta J = 0$ (a condition which is called \textbf{stationarity}
 Think about how to deal with the term involving the boundary condition, i.e. the 2D integral.  
 \end{cue}
 
+\begin{marginfigure}[0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Peter_Gustav_Lejeune_Dirichlet
+  \includegraphics{numeric/figures/p_dirichlet}
+  \caption{Peter Gustav Lejeune Dirichlet (1805-1859)}
+\end{marginfigure}
+
 Suppose that our boundary conditions are of the Dirichlet type such that $\psi=0$ on the boundary. In other words, we are restricting our search to only include functions that vanish at the boundary. Then, in order to be an admissible function that satisfies the boundary condition, $\delta \psi$ also has to be zero on the boundary, so that the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will be zero.
 
 Similarly, for Neumann--type boundary conditions where $\partial \psi / \partial n = 0$ on the boundary, the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will also be zero.
@@ -713,7 +768,9 @@ in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
 
 $$ \nabla_{xy}^2 \psi + \left( k^2 - k_z^2 \right)\psi = 0 $$ 
 
-\noindent\marginnote{Note the difference between this cut-off condition for closed metal waveguides and the one for open waveguides, which is $k=k_{\mathrm{clad}}$} b) We are interested in finding the value of $k$ at cut--off ($k_z^2=0$), because we can get the cut-off wavelength from that. Show that the following is a variational expression for this cut--off wavevector $k_{\mathrm{cut}}$:
+Here, $\nabla_{xy}$ is the transverse differential operator, which does not contain derivatives in the $z$-direction.
+
+\noindent\marginnote{Note the difference between this cut-off condition for closed metal wave-guides and the one for open wave-guides, which is $k=k_{\mathrm{clad}}$} b) We are interested in finding the value of $k$ at cut--off ($k_z^2=0$), because we can get the cut-off wavelength from that. Show that the following is a variational expression for this cut--off wavevector $k_{\mathrm{cut}}$:
 
 $$ k_{\mathrm{cut}}^2 = \frac{\iint_S (\nabla_{xy} \psi)^2 dS}{\iint_S \psi^2 dS}$$
 
@@ -722,6 +779,24 @@ Here $S$ is the cross--section of the waveguide.
 c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy of such a mode at cut-off?
 
 \end{exer}
+
+\pagebreak
+
+% Sorry Leonard, no space here.
+
+%\begin{marginfigure}[3.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Leonhard_Euler
+%  \includegraphics{numeric/figures/l_euler}
+%  \caption{Leonhard Euler (1707-1783)}
+%\end{marginfigure}
+
+\begin{marginfigure}[1.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange 
+  \includegraphics{numeric/figures/j_lagrange}
+  \caption{Joseph-Louis Lagrange (1736-1813)}
+\end{marginfigure}
 
 
 \begin{exer}
@@ -748,7 +823,7 @@ $$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
 
 In eigenmode expansion, we slice up the structure that we want to model in a number of layers where the refractive index profile does not change in the propagation direction (often taken to be the $z$--direction). A typical example is given in Fig.~\ref{fig-interface}, which shows the interface between two waveguides I and II.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \includegraphics{numeric/figures/interface}
 \caption{Interface between two layers.}
@@ -757,39 +832,46 @@ In eigenmode expansion, we slice up the structure that we want to model in a num
 
 We will expand the field in each waveguide using the eigenmodes of that waveguide. It can be shown that these eigenmodes form a \textbf{complete} set, i.e. they can be used to expand any arbitrary field in that layer. Also, by enclosing the structure that we want to model in a metal box, this set of eigenmodes is a discrete set rather than a continuum.
 
-The interface is placed at $z=0$ and a single mode with index $p$ is incident
-from medium I. This incident mode will give rise to a backward--propagating field
-in medium I, which we expand in terms of the eigenmodes of this medium. Likewise,
-we expand the transmitted field in the eigenmodes of medium II. We now apply the well--known \textbf{mode--matching} technique. It starts off by imposing the continuity of the tangential components of the
-total field: 
+The interface is placed at $z=0$ and a single mode with index $p$ is incident from medium I. This incident mode will give rise to a backward--propagating field in medium I, which we expand in terms of the eigenmodes of this medium. Likewise, we expand the transmitted field in the eigenmodes of medium II.
+
+Before continuiting, we need to determine a relationship between the fields of the forward and the backward propagating modes.
+
+\begin{exer}
+% difficulty: trivial
+Assume you solve Maxwell's equations to find a certain eigenmode solution, i.e. a solution with a $z$-dependence of $\exp{(-j \beta z)}$. Let's say this solution is characterised by the following tangential ($x$ and $y$) and normal ($z$) components:
+
+$$\left( \mathbf{E}_{t},\mathbf{E}_{z},\mathbf{H}_{t},\mathbf{H}_{z},\beta \right)$$
+
+By writing down the different components of Maxwell's curl equations, show that there also exists another solution:
+
+$$  \left( \mathbf{E}_{t},-\mathbf{E}_{z},-\mathbf{H}_{t},\mathbf{H}_{z},-\beta \right) $$
+
+Because of the negative propagation constant, this is the backward propagating version of the same eigenmode.
+
+\end{exer}
+
+Now that we know this, we can start applying the well--known \textbf{mode--matching} technique.
+
+\begin{cue}
+Impose the continuity of the tangential components of the total field on both sides of the interface in Fig.~\ref{fig-interface}.  
+\end{cue}
+
+Demanding continuity leads to: 
 
 \begin{eqnarray}
 \mathbf{E}^{I}_{p,t}+\sum _{j}R_{j,p}\mathbf{E}^{I}_{j,t} & = & \sum _{j}T_{j,p}\mathbf{E}^{II}_{j,t}\label{Eq:MM 1a} \\
 \mathbf{H}^{I}_{p,t}-\sum _{j}R_{j,p}\mathbf{H}^{I}_{j,t} & = & \sum _{j}T_{j,p}\mathbf{H}^{II}_{j,t}\label{Eq:MM 1b} 
 \end{eqnarray}
 
-The minus sign for the reflected ${\mathbf H}$ field deserves some additional clarification. It is relatively easy to show by splitting Maxwell's curl equations into their transverse and $z$--components, that for any eigenmode solution 
+(The minus sign for the reflected tangential ${\mathbf H}$ field comes from the explicit form of the backward eigenmode we derived above.)
 
-\begin{equation}
-\label{Eq:eigen fw}
-\left( \mathbf{E}_{n,t},\mathbf{E}_{n,z},\mathbf{H}_{n,t},\mathbf{H}_{n,z},\beta _{n}\right) 
-\end{equation}
+To calculate the unknown expansion coefficients $R_{j,p}$ and $T_{j,p}$ (which can be seen as reflection and transmission coefficients), we take the right cross product of Eq.~\ref{Eq:MM 1a} with $\mathbf{H}^{I}_{i,t}$ and the left cross product of Eq.~\ref{Eq:MM 1b} with $\mathbf{E}^{I}_{i,t}$. Here, $i$ is an arbitrary index. Afterwards, we integrate over the cross--section.
 
-there exists also a second solution corresponding to a backward propagating eigenmode:
+\begin{cue}
+  Perform these operations.
+\end{cue}
 
-\begin{equation}
-\label{Eq:eigen bw}
-\left( \mathbf{E}_{n,t},-\mathbf{E}_{n,z},-\mathbf{H}_{n,t},\mathbf{H}_{n,z},-\beta _{n}\right) 
-\end{equation}
-
-This explains the minus sign in the reflected ${\mathbf H}$ field.
-
-To calculate the unknown expansion coefficients $R_{j,p}$ and $T_{j,p}$
-(which can be seen as reflection and transmission coefficients), we take the
-right cross product of Eq.~\ref{Eq:MM 1a} with $\mathbf{H}^{I}_{i,t}$
-and the left cross product of Eq.~\ref{Eq:MM 1b} with $\mathbf{E}^{I}_{i,t}$.
-Here, $i$ is an arbitrary index. After integrating over the cross--section,
-we get:
+We get:
 
 \begin{eqnarray}
 \left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{i}\right\rangle +\sum _{j}R_{j,p}\left\langle \mathbf{E}^{I}_{j},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \label{Eq:MM 2a} \\
@@ -802,45 +884,44 @@ where the scalar product is defined as the following overlap integral:
 \left\langle \mathbf{E}_{m},\mathbf{H}_{n}\right\rangle \equiv \iint _{s}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}
 \end{equation} 
 
-If we decide to truncate the series expansion after $N$ terms, we have
-$2N$ unknowns: $N$ reflection coefficients and $N$ transmission
-coefficients. Eq.~\ref{Eq:MM 2a} and \ref{Eq:MM 2b} provide us exactly with
-$2N$ equations, since we can write them for all $i$ in $1 \cdots N$.
-However, we can reduce the dimensionality of this linear system by invoking
-the orthogonality relation $\iint_{S}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}=0$:
+If we decide to truncate the series expansion after $N$ terms, we have $2N$ unknowns: $N$ reflection coefficients and $N$ transmission coefficients. Eq.~\ref{Eq:MM 2a} and \ref{Eq:MM 2b} provide us exactly with $2N$ equations, since we can write them for all $i$ in $1 \cdots N$.
 
+\begin{cue}
+Reduce the dimensionality of this linear system by invoking the orthogonality relation $\iint_{S}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}=0$, followed by adding and subtracting the resulting equations.
+\end{cue}
+
+The orthogonality condition leads to
+  
 \begin{eqnarray}
 \delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle +R_{i,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \label{Eq:MM 3a} \\
 \delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle -R_{i,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:MM 3b} 
 \end{eqnarray}
 
-Adding and subtracting these equations yields:
+Adding and subtracting these equations yields
 
 \begin{eqnarray}
 \sum _{j}\left[ \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle +\left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle \right] T_{j,p}=2\delta _{ip}\left\langle \mathbf{E}^{I}_{p},\mathbf{H}^{I}_{p}\right\rangle  &  & \label{Eq:MM 4a} \\
 R_{i,p}=\frac{1}{2\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle }\sum _{j}\left[ \left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle -\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \right] T_{j,p} &  & \label{Eq:MM 4b} 
 \end{eqnarray}
 
-This shows that we can first calculate the transmission coefficients by solving
-an $N \times N$ linear system, and then obtain the reflection coefficients
-by a simple matrix multiplication.
+This shows that we can first calculate the transmission coefficients by solving an $N \times N$ linear system, and then obtain the reflection coefficients by a simple matrix multiplication.
 
-After obtaining $R$ and $T$ upon incidence of mode $p$, we can
-of course repeat the whole procedure using all modes $p$ in $ 1 \cdots N$.
-Important to note is that this changes only the right--hand side in the linear system in Eq.~\ref{Eq:MM 4a}, so that we do not have to invert\footnote{%
-Actually, when solving the system even an explicit inverse is not required,
-as we can use the LU decomposition of the system matrix.
-} another system matrix. 
+After obtaining $R$ and $T$ upon incidence of mode $p$, we can of course repeat the whole procedure using all modes $p$ in $ 1 \cdots N$.
+
+\noindent\marginnote{Actually, when solving the system even an explicit inverse is not required, as we can use the LU decomposition of the system matrix.}Important to note is that this changes only the right--hand side in the linear system in Eq.~\ref{Eq:MM 4a}, so that we do not have to invert another system matrix. 
 
 Usually, we will choose to normalise our modes such that \( \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle =1 \).
-We can then write Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b} more compactly after
-defining the following overlap matrices:
+
+Let's now defining the following overlap matrices:
 
 \begin{eqnarray}
 \mathbf{O}_{I,II}\left( i,j\right)  & \equiv  & \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:O_I_II} \\
 \mathbf{O}_{II,I}\left( i,j\right)  & \equiv  & \left\langle \mathbf{E}^{II}_{i},\mathbf{H}^{I}_{j}\right\rangle \label{Eq:O_II_I} 
 \end{eqnarray}
 
+\begin{cue}
+Use these matrices to write Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b} more compactly.   
+\end{cue}
 
 With the superscript $T$ denoting transpose, we finally get:
 
@@ -849,45 +930,42 @@ With the superscript $T$ denoting transpose, we finally get:
 \mathbf{R}_{I,II} & = & \frac{1}{2}\left( \mathbf{O}^{T}_{II,I}-\mathbf{O}_{I,II}\right) \cdot \mathbf{T}_{I,II}\label{Eq:MM 5b} 
 \end{eqnarray}
 
-
-In these expressions $\mathbf{T}_{I,II}$ and $\mathbf{R}_{I,II}$ are
-the so--called transmission and reflection matrices. Their \( p \)--th columns
-consist of the $T_{j,p}$ and $R_{j,p}$ from Eq.~\ref{Eq:MM 4a} and
-\ref{Eq:MM 4b}. If we collect the expansion coefficients of an arbitrary incident
-field in a column vector $\mathbf{A}_{inc}$, we can write very compactly
-for the reflected and transmitted fields: 
+In these expressions $\mathbf{T}_{I,II}$ and $\mathbf{R}_{I,II}$ are the so--called transmission and reflection matrices. Their \( p \)--th columns consist of the $T_{j,p}$ and $R_{j,p}$ from Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b}. If we collect the expansion coefficients of an arbitrary incident field in a column vector $\mathbf{A}_{inc}$, we can write very compactly for the reflected and transmitted fields: 
 
 \begin{eqnarray}
 \mathbf{A}_{refl} & = & \mathbf{R}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:R matrix} \\
 \mathbf{A}_{trans} & = & \mathbf{T}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:T matrix} 
 \end{eqnarray}
 
-Obviously, we can repeat the entire procedure for incidence from medium II,
-which gives us the matrices $\mathbf{R}_{II,I}$ and $\mathbf{T}_{II,I}$.
-These four matrices completely characterise the scattering that occurs at an
-interface.
+Obviously, we can repeat the entire procedure for incidence from medium II, which gives us the matrices $\mathbf{R}_{II,I}$ and $\mathbf{T}_{II,I}$.
 
-Finally, we want to point out the similarity in structure between Eq.~\ref{Eq:MM 5a}
-and \ref{Eq:MM 5b} and the well--known Fresnel equations to calculate reflection
-and transmission for normal incidence of a plane wave upon the interface between
-two semi--infinite media:
+These four matrices completely characterise the scattering that occurs at an interface.
+
+\begin{cue}
+Study the structure of Eq.~\ref{Eq:MM 5a} and \ref{Eq:MM 5b}. Do they remind you of something?  
+\end{cue}
+
+\begin{marginfigure}[0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Augustin-Jean_Fresnel
+  \includegraphics{numeric/figures/a_fresnel}
+  \caption{Augustin-Jean Fresnel (1788-1827)}
+\end{marginfigure}
+
+Finally, we want to point out the similarity in structure between Eq.~\ref{Eq:MM 5a} and \ref{Eq:MM 5b} and the well--known Fresnel equations to calculate reflection and transmission for normal incidence of a plane wave upon the interface between two semi--infinite media:
 
 \begin{eqnarray}
 T & = & \frac{2n_{1}}{n_{1}+n_{2}}\label{Eq:T normal} \\
 R & = & \frac{n_{1}-n_{2}}{n_{1}+n_{2}}\label{Eq:R normal} 
 \end{eqnarray}
 
-In fact, Eq.~\ref{Eq:T normal} and \ref{Eq:R normal} can also be derived
-from the more general treatment presented here. For homogeneous layers, where
-the refractive index does not vary in the transverse direction, it turns out
-that the overlap matrices are diagonal, meaning that there is no cross--coupling
-between the different modes. Further evaluation of the formula's reveals that
-the Fresnel equations are indeed recovered.
+In fact, Eq.~\ref{Eq:T normal} and \ref{Eq:R normal} can also be derived from the more general treatment presented here. For homogeneous layers, where the refractive index does not vary in the transverse direction, it turns out that the overlap matrices are diagonal, meaning that there is no cross--coupling between the different modes. Further evaluation of the formula's reveals that the Fresnel equations are indeed recovered.
 
-Obviously, a realistic structure will consist of more than one interface, but that problem is outside the scope of this course.
+Obviously, a realistic structure will consist of more than one interface, but that problem is outside the scope of this text.
 
 
 \begin{exer}
+% difficulty: normal  
 Show that when working with basis functions which are not orthogonal, the eigenmode expansion equations for the reflection and the transmission matrix at an interface become
 
 $$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,II} & \mathbf{O}_{I,I} \end{bmatrix} \begin{bmatrix} \mathbf{T}_{I,II} \\ \mathbf{R}_{I,II} \end{bmatrix} =  \begin{bmatrix} \mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,I} \end{bmatrix} $$
