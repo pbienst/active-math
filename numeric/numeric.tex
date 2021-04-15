@@ -26,7 +26,7 @@ The \textbf{finite element} method does not directly solve a differential equati
 
 Finally, a more abstract framework is presented, namely the \textbf{method of the weighted residuals}. This framework can be used to generalise a number of individual approaches, like point matching or the Galkerkin method.
 
-Each of these subjects could be the topic of an entire course in its own right, so we will only be able to introduce the basic principle of these methods, without going into any level of detail.
+Each of these subjects could be the topic of an entire course in its own right, so we will only be able to introduce the basic principle of these methods, without going into any level of detail. What is important however, is to get a feeling for each of these methods, to get to know their strengths and weaknesses, so that you can make the correct choice of tool for any given problem.
 
 
 \pagebreak
@@ -127,7 +127,6 @@ Another way of looking at the second derivative is by rewriting the approximatio
 \end{equation}
 
 \noindent\marginnote{Drawing a function with an inflection point, where $f''=0$, allows you to verify that there the function is indeed equal to the average of its surroundings.}This shows that the second derivative (or the Laplacian for that matter) is all about the difference between the value of a function at a certain point and the average value of that function around that point.
-
 
 \begin{marginfigure}[1.0cm]
   % credits: Wikipedia
@@ -406,12 +405,21 @@ All finite element methods more or less share the same philosophy, which is outl
 
 \begin{marginfigure}
 \centering
+\includegraphics[width=3cm]{numeric/figures/staircase}
+\caption{A triangular mesh follows a curved boundary much better than a square grid.}
+\label{fig-staircasing}
+\end{marginfigure}
+
+\begin{marginfigure}
+\centering
 \includegraphics[scale=0.5]{numeric/figures/grid}
-\caption{Example of a triangular grid.}
+\caption{A triangular mesh can be locally refined.}
 \label{fig-grid}
 \end{marginfigure}
 
-Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods. An additional advantage is that you can use more triangles are used where higher resolution is required. See e.g. the grid in Fig.~\ref{fig-grid}.
+
+
+Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods (Fig.~\ref{fig-staircasing}). An additional advantage is that you can use more triangles are used where higher resolution is required (Fig.~\ref{fig-grid}). Such a local refinement of the grid turns out to be much more complicated in a finite-difference method.
   
 
 \item
@@ -424,12 +432,7 @@ Here the $b_i(x,y)$ are some convenient set of known basis functions. In order t
 \item
   Introduce some constraint on the $MK$ number of unknowns, e.g. to ensure that $\psi$ is continuous across the elements.
 
-\begin{marginfigure}[-1.5cm]
-  % credits: Wikipedia
-  % url: https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
-  \includegraphics{numeric/figures/Rayleigh}
-  \caption{John William Strutt, 3rd Baron Rayleigh (1842-1919)}
-\end{marginfigure}
+
 
 \item
 Write down an expression $J$ containing the approximating functions $b_i$ and the coefficients $u_i$. Because the $b_i$ are chosen in advance and therefore known, $J$ is function of the unknown $u_i$ only. The precise form of $J$ differs from problem to problem, but is often related to the total energy in the system.
@@ -442,6 +445,13 @@ Find the coefficients $u_i$ such that $J$ is minimised. In a popular method due 
 
 
 \sectionugent{Solving the 1D wave equation with finite elements}
+
+\begin{marginfigure}[0.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
+  \includegraphics{numeric/figures/Rayleigh}
+  \caption{John William Strutt, 3rd Baron Rayleigh (1842-1919)}
+\end{marginfigure}
 
 In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite element methods can be used to solve the 1D Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrated the concept of finite differences:
 
@@ -609,7 +619,13 @@ A function $f(x)$ of one variable takes a number $x$ as input, and delivers anot
 
 A function $f(x,y)$ of two variables takes two numbers $x$ and $y$ as input, and spits out another number as output. Also here, when there is a minimum, the output of the function does not change, i.e. $\delta f=0$ for all possible directions  $\delta x \mathbf{1}_x  + \delta y\mathbf{1}_y$ you might explore in the neighbourhood of the minimum.
 
-Now, let's introduce a \textbf{functional}. This is an object that consumes as input a function $f(x)$ and delivers a number as output. In contrast to functions, you could say that the input of a functional is not finite dimensional, but infinite dimensional, as it takes an infinite set of numbers to specify an arbitrary function. All of these objects however have a single number as output.
+\begin{marginfigure}[-1.5cm]
+  \includegraphics{numeric/figures/function_functional}
+  \caption{Function vs. functional}
+  \label{fig-function-functional}
+\end{marginfigure}
+
+Now, let's introduce a \textbf{functional}. This is an object $F(f(x))$ that consumes as input a function $f(x)$ and delivers a number as output (Fig.~\ref{fig-function-functional}). In contrast to functions, you could say that the input of a functional is not finite dimensional, but infinite dimensional, as it takes an infinite set of numbers to specify an arbitrary function. All of these objects however have a single number as output.
 
 \begin{cue}
 Can you think of examples of a functional?  
@@ -627,7 +643,7 @@ E = \min_\psi J(\psi)
 
 where $E$ is the total energy in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
 
-\begin{marginfigure}[0.5cm]
+\begin{marginfigure}[-1.5cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Walther_Ritz
   \includegraphics{numeric/figures/w_ritz}
@@ -639,6 +655,12 @@ The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ 
 \begin{cue}
 What can you say about the sensitivity of $E$ to e.g. rounding errors, given that we are working at the minimum of the functional? 
 \end{cue}
+
+\begin{marginfigure}[1.5cm]
+  \includegraphics{numeric/figures/minimum}
+  \caption{A function (or functional) does not vary to first order at its minimum.}
+  \label{fig-functional-min}
+\end{marginfigure}
 
 So far, we don't seem to have done anything useful except introducing some new terminology. However, by looking at the energy $E$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $E$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
 
@@ -750,12 +772,15 @@ $$J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx$$
 \begin{exer}
 % difficulty: normal
   
-Show that $10x-38/3$ is the best least-squares approximation to the parabola 
+Construct the best least-squares approximation to the parabola 
 
 $$f(x) = 10(x-1)^2 -1$$ 
 
 in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
 
+\begin{sol}
+$$f(x) = 10(x-1)^2 -1$$   
+\end{sol}
 \end{exer}
 
 
@@ -805,14 +830,15 @@ Use the identity
 
 $$\iint_S p \nabla q \cdot \nabla r dS= - \iint_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
 
-to show that the following variational expression
+to find the Euler-Lagrange equation of the following variational expression
 
 $$J(\phi)=\iint_S f(x,y) (\nabla \phi)^2 dS$$
 
-with $f(x,y)$ a given scalar function, has this Euler-Langrange equation:
+with $f(x,y)$ a given scalar function.
 
+\begin{sol}
 $$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
-
+\end{sol}
 \end{exer}
 
 
@@ -965,10 +991,12 @@ Obviously, a realistic structure will consist of more than one interface, but th
 
 
 \begin{exer}
-% difficulty: normal  
-Show that when working with basis functions which are not orthogonal, the eigenmode expansion equations for the reflection and the transmission matrix at an interface become
+% difficulty: hard
+Derive the matrix form for the eigenmode expansion equations for the reflection and the transmission matrix at an interface, in case the basis functions are not orthogonal.
 
+\begin{sol}
 $$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,II} & \mathbf{O}_{I,I} \end{bmatrix} \begin{bmatrix} \mathbf{T}_{I,II} \\ \mathbf{R}_{I,II} \end{bmatrix} =  \begin{bmatrix} \mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,I} \end{bmatrix} $$
+\end{sol}
 
 \end{exer}
 
@@ -978,17 +1006,21 @@ $$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{
 
 \sectionugent{Method of weighted residuals}
 
-To conclude this section, we will now present a rather abstract framework for solving Maxwell's equations numerically, which has the advantage of allowing for a unified approach which shows more clearly the similarities and the differences between several numerical methods.
+To conclude this chapter, we will present the method of weighted residuals, a very general scheme for converting linear differential and integral equations into a form suitable for numerical solution by standard matrix methods.
 
-The method of \textbf{weighted residuals} is a very general scheme for projecting Maxwell's equations into a form suitable for numerical solution by standard matrix methods.
-
-We start from a problem of the form
+We start from a problem of the type
 
 \begin{equation}
 L u = v \label{eq-operator}
 \end{equation}
 
-where $v$ represents some known excitation and $u$ is the unknown and wanted field. $L$ is a linear operator involving differentiation, integration or both. For the Helmholtz equation, $v=0$ and $L=\nabla^2 + k^2$. 
+where $v$ represents some known excitation and $u$ is the unknown and wanted field. $L$ is a linear operator involving differentiation, integration or both.
+
+\begin{cue}
+Cast the Helmholtz equation in this form.  
+\end{cue}
+
+For the Helmholtz equation, $v=0$ and $L=\nabla^2 + k^2$. 
 
 Suppose we approximate the unknown $u$ by
 
@@ -996,17 +1028,43 @@ Suppose we approximate the unknown $u$ by
 \tilde{u}(x) = \sum_{i=1}^N u_i b_i(x) \label{eq-expansion}
 \end{equation} 
 
-where $b_i(x)$ are a complete set of known basis functions. The general problem is now to choose the coefficients $u_i$ to approximate as well as possible the unknown solution $u$ to Eq.~\ref{eq-operator} with a finite number of basis functions. In general, it will be impossible to satisfy Eq.~\ref{eq-operator} exactly, so how are we to define "approximate as well as possible"? We do not know the exact solution $u$ and so cannot even discuss any error in its approximation $\tilde{u}$. We can however define what is called the \textbf{error residual}:
+where $b_i(x)$ are a complete set of known basis functions. The general problem is now to choose the coefficients $u_i$ to approximate as well as possible the unknown solution $u$ to Eq.~\ref{eq-operator} with a \emph{finite} number $N$ of basis functions.
+
+\begin{cue}
+How would you quantify 'as well as possible'? Is the method you propose useful in practice?  
+\end{cue}
+
+Your first hunch could be to try and minimise the difference between the exact solution $u$ and its approximation $\tilde{u}$. However, this will get you nowhere in practice: you don't know the exact solution, so you cannot evaluate the difference.
+
+\begin{cue}
+What happens if you apply $L$ to the difference between $u$ and $\tilde{u}$? 
+\end{cue}
+
+Doing this, leads to the definition of the \textbf{error residual}:
 
 \begin{equation}
 R(x) = L\tilde{u} - v = L \sum_{i=1}^N u_i b_i(x) - v(x)
 \end{equation} 
 
-which is clearly zero if and only if we have an exact solution to Eq.~\ref{eq-operator}. Now we have a realistic objective: trying to make the residual as small as possible.
+which is clearly zero if and only if we have an exact solution to Eq.~\ref{eq-operator}. Moreover, apart from the coefficients $u_i$, all the other quantities can be calculated. Now we have a realistic objective: trying to make the residual as small as possible.
 
-To proceed, we choose another set of functions, the so--called \textbf{test} or \textbf{weight} functions $w_i$. We also introduce an inner product (scalar product) formally written as $\langle f(x),g(x) \rangle$. The definition of the inner product is in a sense arbitrary and often follows from the specifics of the problem considered.
+\begin{cue}
+Think about how you would quantify and minimise the size of this residual. 
+\end{cue}
 
-Rather than asking the impossible that $R(x)=0$ for all $x$, we insist that $R(x)$ be orthogonal to each of the weight functions under the scalar product considered. This results in the following $N$ equations for $N$ unknowns:
+There are many approaches you could take here, e.g. asking that the energy of the residual is minimised, or imposing that the residual vanishes at a set of predefined points.
+
+Here however, we will introduce a more general approach, of which the examples listed above are special cases.
+
+\noindent\marginnote{Don't confuse the weight functions $w_i$ with the weight function you could choose to define your scalar product, e.g. $r$ in the scalar product of Bessel functions. These are completely independent choices.}To proceed, we choose another set of functions, the so--called \textbf{test} or \textbf{weight} functions $w_i$. We also introduce an inner product (scalar product) formally written as $\langle f(x),g(x) \rangle$. The definition of the inner product is in a sense arbitrary and often follows from the specifics of the problem considered.
+
+Rather than asking the impossible that $R(x)=0$ for all $x$, we insist that $R(x)$ be orthogonal to each of the weight functions under the scalar product considered.
+
+\begin{cue}
+Impose this condition and put it in matrix form.  
+\end{cue}
+
+This results in the following $N$ equations for $N$ unknowns:
 
 \begin{equation}
 \left\langle \left\{ L \sum_{i=1}^N u_i b_i(x) - v(x)  \right\}, w_j(x) \right\rangle = 0 \hspace{0.5cm} j=1,2\cdots,N \label{eq-weighted-res}
@@ -1020,11 +1078,13 @@ Because of the linearity of Eq.~\ref{eq-weighted-res}, it can be put into a comp
 {\mathbf L} \cdot {\mathbf u} = {\mathbf v}
 \end{equation} 
 
-Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. $\mathbf v$ denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\mathbf L}$ is a known $N \times N$ matrix with $(i,j)$th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
+Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. $\mathbf v$ denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\mathbf L}$ is a known $N \times N$ matrix with $(i,j)$-th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
 
-So, our equation $Lu=v$ has been \textbf{projected} by approximation into the matrix equation ${\mathbf L} \cdot {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
+So, our equation $Lu=v$ has been \emph{projected} by approximation into the matrix equation ${\mathbf L} \cdot {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
 
 Apart from the the weighted residuals method, the above procedure is also called the \textbf{method of moments} or the \textbf{generalised Galerkin method}.
+
+\subsection{Choice of basis and test functions}
 
 \begin{marginfigure}[-.0cm]
   % credits: Wikipedia
@@ -1032,8 +1092,6 @@ Apart from the the weighted residuals method, the above procedure is also called
   \includegraphics{numeric/figures/b_galerkin}
   \caption{Boris Grigoryevich Galerkin (1871-1945)}
 \end{marginfigure}
-
-\subsection{Choice of basis and test functions}
 
 Starting from the general procedure outlined above, different numerical methods can be derived that are catalogued according to their choice of basis and test functions.
 
@@ -1045,6 +1103,10 @@ Another choice is
 w_j(x) = \delta(x-x_j)
 \end{equation} 
 
+\begin{cue}
+What will be the effect of choosing the test functions that way?  
+\end{cue}
+
 This corresponds to demanding the the error residual vanishes exactly at the points $x_j$ when the scalar product is defined as the integral of the product:
 
 \begin{equation}
@@ -1053,6 +1115,7 @@ This corresponds to demanding the the error residual vanishes exactly at the poi
 
 This is called the \textbf{point matching} or \textbf{collocation method}.
 
+Another interesting choice is explored in the following exercise:
 
 \begin{exer}
 Assuming a commutative scalar product, show that the choice 
@@ -1066,7 +1129,7 @@ $$\left\langle R(x), R(x) \right\rangle$$
 Because of this property, this choice is called the \textbf{least-squares residual} method.
 \end{exer}
 
-
+\pagebreak
 
 \begin{exer}
 In the least-squares residual method, what is the geometrical interpretation of imposing that 
@@ -1087,7 +1150,15 @@ Construct an example where the Galerkin method and the least-squares residual me
 \section*{Review questions}
 
 \begin{itemize}
-\item TODO
+\item What are the advantages and disadvantages of the different numerical methods for photonics? In what circumstances would you use them?
+\item What is the difference between forward, backward and central difference approximations to the derivative?
+\item How does the finite-element method distinguish itself from other methods?
+\item What is the Rayleigh-Ritz method?
+\item What is a functional?
+\item What is a variational problem? Stationarity? First variation?
+\item What is the Euler-Lagrange equation of a variational problem?
+\item For what problems is eigenmode expansion best used?
+\item What are some common choices for test functions in the method of weighted residuals?  
 \end{itemize}
 
 %%% Local Variables:
