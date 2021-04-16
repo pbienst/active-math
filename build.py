@@ -93,7 +93,7 @@ def build():
     # Copy directories.
     chapter_dirs = ["preamble", "helmholtz", "complex", "bessel",
                     "hermite", "numeric",
-                    "periodic", "dynamic", "postamble"]
+                    "symmetry", "dynamic", "postamble"]
     other_dirs = ["styles", "icons"]
     for chapter_dir in chapter_dirs + other_dirs:
         shutil.copytree(chapter_dir, os.path.join(build_dir, chapter_dir))
