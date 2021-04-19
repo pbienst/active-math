@@ -17,11 +17,11 @@ Attaching significance to invariants is an effort to recognise what, because of 
 
 Systems which exhibit symmetry and periodicity are important in many areas of physics. One example are the periodic lattices in solid-state physics that can give rise to semiconductors. A similar phenomenon appears in photonics, as e.g. in so--called photonic crystals, which are artificial media where the refractive index has a periodicity on a scale of the order of the wavelength. This chapter introduces some concepts which are important for the study of these systems.
 
-First, the scalar Helmholtz equation will be generalised to a vectorial equation which can also be used in the case of continuous index variations. We will interpret this as an eigenvalue problem, introduce the concept of a Hermitian operator and discuss some of its properties. This problem will also be cast in a variational framework, which will enable us to explain more of the physics of the eigenmodes.
+First, the scalar Helmholtz equation will be generalised to a vectorial equation which can also be used in the case of continuous index variations. We will interpret this as an eigenvalue problem, introduce the concept of a Hermitian operator and discuss some of the properties of such operators. This problem will also be cast in a variational framework, which will enable us to explain more of the physics of the eigenmodes.
 
-Next, we will analyse how we can use symmetries to classify these eigenmodes, using the example of inversion symmetry. Continuous translation symmetry is very relevant when studying e.g. waveguides. Finally, another important symmetry is discrete translational symmetry or periodicity. This will allow us to talk about Bloch's theorem, Brillouin zones and band diagrams. 
+Next, we will analyse how we can use symmetries to classify these eigenmodes, using the example of inversion symmetry. We will also discuss continuous translation symmetry, which is very relevant when studying e.g. waveguides. Finally, we will treat discrete translational symmetry or periodicity. This will allow us to talk about Bloch's theorem, Brillouin zones and band diagrams. 
 
-To end, we will discuss some applications of photonic crystals, and show how they can be used to localise light in a cavity, or guide it along a waveguide.
+To end, we will discuss time-reversal symmetry, as well as some applications of photonic crystals. We will briefly show how these periodic structures can be used to localise light in a cavity, or guide it along a waveguide.
 
 \pagebreak
 
@@ -45,7 +45,11 @@ We will first derive the most general form of the Helmholtz equation which is al
 \frac{1}{\varepsilon({\mathbf r})}\nabla \times {\mathbf H({\mathbf r})} = j \omega {\mathbf E({\mathbf r})} \label{eq-maxwell-2}
 \end{equation}
 
-Direct substitution of Eq.~\ref{eq-maxwell-2} into Eq.~\ref{eq-maxwell-1} yields
+\begin{cue}
+Do a direct substitution of Eq.~\ref{eq-maxwell-2} into Eq.~\ref{eq-maxwell-1}.  
+\end{cue}
+
+Combining these equations results in
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -61,6 +65,10 @@ Let's define the following linear differential operator:
 \Theta \stackrel{def}{=} \nabla \times  \frac{1}{\varepsilon({\mathbf r})}\nabla \times
 \end{equation} 
 
+\begin{cue}
+Use this operator to rewrite Eq.~\ref{eq-master}. What type of equation is this?   
+\end{cue}
+
 This operator takes the curl, divides by $\varepsilon({\mathbf r})$ and then takes the curl again. Using this notation, we can easily write Eq.~\ref{eq-master} as an eigenvalue problem:
 
 \begin{equation}
@@ -73,18 +81,11 @@ For physical reasons, we would obviously like these eigenvalues to be real and p
 
 To prove this, one of the concepts that we will need to use is that of \emph{Hermitian} operators.
 
-\pagebreak
 
 \sectionugent{Hermitian operators}
 
-\begin{marginfigure}[0cm]
-% credits: Wikipedia
-% url: https://en.wikipedia.org/wiki/Charles_Hermite
-\includegraphics{hermite/figures/c_hermite}
-\caption{Charles Hermite (1822–1901)}
-\end{marginfigure}
 
-To define what it means for an operator to be Hermitian, we first need to introduce a scalar product (also called inner product). Let's define this inner product between two vector functions ${\mathbf F({\mathbf r})}$ and ${\mathbf G({\mathbf r})}$ as
+\noindent\marginnote{As should have become clear from earlier chapters, the choice of scalar product is somewhat arbitrary. Another choice would have been to omit the complex conjugate in the definition, but this would lose the link to a physical interpretition of the norm of a vector function as a real-valued power.}To define what it means for an operator to be Hermitian, we first need to introduce a scalar product (also called inner product). Let's define this inner product between two vector functions ${\mathbf F({\mathbf r})}$ and ${\mathbf G({\mathbf r})}$ as
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -92,7 +93,11 @@ To define what it means for an operator to be Hermitian, we first need to introd
 $}
 \end{equation} 
 
-From this simple definition. we immediately get that $\left\langle {\mathbf F}, {\mathbf G}\right\rangle = \left\langle {\mathbf G}, {\mathbf F}\right\rangle ^*$. We also see that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real, even if ${\mathbf F}$ itself is complex.
+\begin{cue}
+What can you say about $\left\langle {\mathbf G}, {\mathbf F}\right\rangle$? And what about $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$? 
+\end{cue}
+
+From this simple definition. we immediately get that $\left\langle {\mathbf G}, {\mathbf F}\right\rangle = \left\langle {\mathbf F}, {\mathbf G}\right\rangle ^*$. We also see that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real, even if ${\mathbf F}$ itself is complex.
 
 Now, an operator $\Xi$ is said to be Hermitian if
 
@@ -104,13 +109,24 @@ $}
 
 This means that it doesn't matter which function is operated upon before taking the inner product. Clearly this is a special property which not all operators have. Before showing that our operator $\Theta$ has this property, let's first derive an auxiliary result to help us manipulate the integrals involved in taking the scalar product. 
 
-Starting from
+Let's start from
 
 \begin{equation}
 \nabla \cdot ({\mathbf a} \times {\mathbf b}) = {\mathbf b} \cdot ( \nabla \times {\mathbf a}) - {\mathbf a}  \cdot (\nabla \times {\mathbf b})
 \end{equation} 
 
+\begin{cue}
+Integrate this over a volume and apply the divergence theorem.  
+\end{cue}
+
 we immediately get
+
+\begin{marginfigure}[0cm]
+% credits: Wikipedia
+% url: https://en.wikipedia.org/wiki/Charles_Hermite
+\includegraphics{hermite/figures/c_hermite}
+\caption{Charles Hermite (1822–1901)}
+\end{marginfigure}
 
 \begin{equation}
 \iiint {\mathbf a}  \cdot (\nabla \times {\mathbf b}) dV = \iiint {\mathbf b} \cdot ( \nabla \times {\mathbf a}) dV - \iiint \nabla \cdot ({\mathbf a} \times {\mathbf b}) dV 
@@ -122,7 +138,13 @@ With the divergence theorem, this can be written as
 \iiint {\mathbf a}  \cdot (\nabla \times {\mathbf b}) dV = \iiint {\mathbf b} \cdot ( \nabla \times {\mathbf a}) dV - \iint  {\mathbf a} \times {\mathbf b} \cdot d{\mathbf S} \label{eq-part-int}
 \end{equation} 
 
-Now, back to our proof of the hermiticity of $\Theta$. Simply applying definitions, we get
+This result allows us to move a curl operator from one factor of a scalar product to another factor, which will come in handy when we try to move our $\Theta$ operator in a similar way to prove hermiticity. 
+
+\begin{cue}
+Use the definition of  $\Theta$ in  $\left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle$ and apply the lemma we just derived.  
+\end{cue}
+
+Simply making use of definitions, we get
 
 \begin{equation}
 \left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint {\mathbf F}^* \cdot\nabla \times \left[ \frac{1}{\varepsilon({\mathbf r})}\nabla \times {\mathbf G({\mathbf r})}  \right ] dV 
@@ -137,11 +159,19 @@ By applying our lemma Eq.~\ref{eq-part-int}, we get
 
 The term related to the surface integral was dropped because in all practical cases, one of two things will be true. Either the fields at infinity will decay to zero, or the fields are periodic on the surface. In both cases, the surface term will vanish.
 
+\begin{cue}
+The second ingredient of $\Theta$ we need to bring over to operate on $ {\mathbf F}$ is  $\varepsilon$. Under which conditions are we allowed to do this?   
+\end{cue}
+
 If $\varepsilon$ is real (which will be the case for lossless media), we can write
 
 \begin{equation}
 \left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint \left [\frac{1}{\varepsilon({\mathbf r})} \nabla \times {\mathbf F}\right]^* \cdot \left[ \nabla \times {\mathbf G({\mathbf r})}  \right ] dV 
 \end{equation} 
+
+\begin{cue}
+Finally, bring the last curl operator over.
+\end{cue}
 
 Applying our lemma Eq.~\ref{eq-part-int} one more time, we get
 
@@ -150,6 +180,22 @@ Applying our lemma Eq.~\ref{eq-part-int} one more time, we get
 \end{equation} 
 
 This proves that our operator is indeed Hermitian.
+
+\begin{exer}
+% difficulty: trivial
+% ugent  
+  Are the following operators Hermitian?
+
+  a) $1$
+  
+  b) $j$
+  
+  c) $d/dx$
+
+  \begin{sol}
+    a) yes b) no c) yes
+  \end{sol}
+\end{exer}
 
 \begin{exer}
 % difficulty: trivial
@@ -168,6 +214,7 @@ Now show that the operator defined by matrix multiplication by ${\mathbf A}$ is 
 From Maxwell's curl equations, derive an eigenvalue problem for the electric field. Is the operator Hermitian?
 \end{exer}
 
+\pagebreak
 
 \sectionugent{Properties of a Hermitian operator}
 
@@ -179,6 +226,10 @@ Let's return to our eigenvalue problem:
 \Theta {\mathbf H} = \omega^2 \mu {\mathbf H}
 \end{equation} 
 
+\begin{cue}
+Show that $\omega^2 \mu$ has to real. Start by taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, followed by taking the complex conjugate. Then apply what you know about the scalar product and about Hermitian operators.    
+\end{cue}
+
 Taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, we get
 
 \begin{equation}
@@ -188,8 +239,10 @@ Taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, we ge
 Now, taking the complex conjugate and using the fact that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real, we get
 
 \begin{equation}
-\left\langle{\mathbf H} , \Theta {\mathbf H}\right\rangle^*  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
+{\left\langle{\mathbf H} , \Theta {\mathbf H}\right\rangle^*  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
 \end{equation} 
+
+Resist the temptation to say that $(\omega^2 \mu)^*= \omega^2 \mu $ for physical reasons, because that's exactly what we want to prove using only mathematical arguments.
 
 For any operator $\left\langle {\mathbf G}, {\mathbf F}\right\rangle ^*  = \left\langle {\mathbf F}, {\mathbf G}\right\rangle$ such that
 
@@ -207,7 +260,13 @@ Comparing Eq.~\ref{eq-real-eigen-1} and Eq.~\ref{eq-real-eigen-2}, we get that $
 
 \subsection{Positive $\omega^2$}
 
-Using a different argument, we can show that not only is $\omega^2$ real, it is also always positive. Setting ${\mathbf F}={\mathbf G}={\mathbf H}$ in Eq.~\ref{eq-pos-omega}, we get
+Using a different argument, we can show that not only is $\omega^2$ real, it is also positive, at least for our operator $\Theta$.
+
+\begin{cue}
+Set ${\mathbf F}={\mathbf G}={\mathbf H}$ in Eq.~\ref{eq-pos-omega} and use the fact that $\mathbf H$ is an eigenfunction of $\Theta$. Assume we are working with lossless dielectrics.
+\end{cue}
+
+Setting ${\mathbf F}={\mathbf G}={\mathbf H}$ in Eq.~\ref{eq-pos-omega}, we get
 
 \begin{equation}
 \left\langle {\mathbf H}, \Theta {\mathbf H}\right\rangle = \iiint \frac{1}{\varepsilon({\mathbf r})} \left | \nabla \times {\mathbf H({\mathbf r})} \right |^2  dV 
@@ -222,11 +281,19 @@ With Eq.~\ref{eq-real-eigen-1} this becomes
 
 For lossless dielectrics $\varepsilon$ is real and positive. Since now all terms in Eq.~\ref{eq-omega-pos} are positive, $\omega^2$ must be positive too. So, we can pick the positive square root, leading to a positive $\omega$ and a physical interpretation.
 
-Note that the fact that the eigenvalues are positive here, is due to the special form of our operator. It is \emph{not} a general property of Hermitian operators.
+Let's stress again that the fact that the eigenvalues are positive here, is due to the special form of our operator. It is \emph{not} a general property of Hermitian operators.
+
+\pagebreak
 
 \subsection{Orthogonality}
 
-Consider two modes ${\mathbf H}_1$ and ${\mathbf H}_2$ with frequencies $\omega_1$ and $\omega_2$. Because these are eigenfunctions of $\Theta$ we can write
+Consider two modes ${\mathbf H}_1$ and ${\mathbf H}_2$ with frequencies $\omega_1$ and $\omega_2$.
+
+\begin{cue}
+Using the fact that these are eigenmodes of $\Theta$, calculate $\left\langle {\mathbf H}_1 , \Theta {\mathbf H}_2\right\rangle$ and $\left\langle \Theta {\mathbf H}_1 , {\mathbf H}_2\right\rangle$. 
+\end{cue}
+  
+Because ${\mathbf H}_1$ and ${\mathbf H}_2$ are eigenfunctions of $\Theta$ we can write
 
 \begin{equation}
  \left\langle {\mathbf H}_1 , \Theta {\mathbf H}_2\right\rangle = \omega_2^2 \mu \left\langle {\mathbf H}_1 , {\mathbf H}_2\right\rangle 
@@ -240,15 +307,21 @@ and
 \label{eq-ortho-2}
 \end{equation}
 
+\begin{cue}
+Subtract these two equations. When are the modes ${\mathbf H}_1$ and ${\mathbf H}_2$ orthogonal? 
+\end{cue}
+
 Because $\Theta$ is hermitian, the left--hand sides of Eq.~\ref{eq-ortho-1} and Eq.~\ref{eq-ortho-2} are equal, so we get
 
 \begin{equation}
 (\omega_2^2 - \omega_1^2) \left\langle {\mathbf H}_1 , {\mathbf H}_2\right\rangle = 0
 \end{equation} 
 
-If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\right\rangle = 0$ and we say that ${\mathbf H}_1$ and ${\mathbf H}_2$ are orthogonal modes.
+If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\right\rangle = 0$ and we can conclude that ${\mathbf H}_1$ and ${\mathbf H}_2$ are orthogonal modes.
 
-\noindent\marginnote{Solutions which only differ by a propertionality constant are not considered to be degenerate, but rather, they are considered to be the ``same'' mode.}In the special case where two different modes have the same frequency $\omega_1 = \omega_2$, we call them \textbf{degenerate} modes}, which are not necessarily orthogonal. However, since $\Theta$ is a linear operator, any linear combination of these degenerate eigenmodes will also be an eigenmode with the same frequency. This means that we can always choose to work with linear combinations that are orthogonal. These combinations can be obtained by e.g. a Gram--Schmidt orthogonalisation procedure.
+\noindent\marginnote{Solutions which only differ by a proportionality constant are not considered to be degenerate, but rather, they are considered to be the ``same'' mode.}In the special case where two different modes have the same frequency $\omega_1 = \omega_2$, we call them \textbf{degenerate} modes}, which are not necessarily orthogonal. However, since $\Theta$ is a linear operator, any linear combination of these degenerate eigenmodes will also be an eigenmode with the same frequency. This means that we can always choose to work with linear combinations that are orthogonal. These combinations can be obtained by e.g. a Gram--Schmidt orthogonalisation procedure.
+
+\pagebreak
 
 \sectionugent{A variational form of the eigenvalue problem}
 
@@ -898,7 +971,7 @@ For a 2D square lattice of dielectric rods, some solutions will be polarised wit
  
 \pagebreak
 
-\section{Time reversal symmetry}
+\section{Time-reversal symmetry}
 
 \begin{exer}
 Band diagrams are symmetric around $k=0$, i.e. if there is a mode at frequency $\omega$ with wave vector $k$, there is always a mode at that same frequency with wave vector $-k$. This is true even if the crystal itself does not have inversion symmetry. The mode at $-k$ can be thought of as the backward version of the mode at $k$ and is a consequence of the time reversal symmetry of Maxwell's equations. Make this plausible by taking the following steps:

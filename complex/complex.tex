@@ -416,7 +416,7 @@ If $z_0$ were outside of the contour, then the integrand of Eq.~\ref{eq-cauchy-2
 To prove Eq.~\ref{eq-cauchy-2}, we note that although the function $f(z)$ is analytic, $f(z)/(z-z_0)$ is not, because is has a singularity at $z=z_0$. However, if we deform ${C}$ to exclude the singularity as in Fig.~\ref{fig-cauchy-II}, we end up with a contour where Cauchy's theorem does apply.
 
 \begin{cue}
-Apply Cauchy's theorem to this extended contour, splitting up the contributions from its different parts.
+Apply Cauchy's theorem to this extended contour, splitting up the contributions from its different parts. What happens to the contributions of the straight lines?
 \end{cue}
 
 The result is
@@ -511,7 +511,13 @@ Repeating the technique used in Ex. \ref{ex-cauchy-diff}.
 \label{fig-laurent}
 \end{marginfigure}
 
-Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$. A simple circular contour would enclose the inner region where the function is not analytic, so we need to construct a more complicated contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
+Let's try to come up with a series expansion for complex functions. Here, special care has to be taken with respect to the convergence area. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$.
+
+\begin{cue}
+Would a circular contour work in this situation, if we want to apply Cauchy's formula?
+\end{cue}
+
+A simple circular contour would enclose the inner region where the function is not analytic, so we need to construct a more complicated contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent})
 
 \begin{cue}
   Apply Cauchy's formula, splitting up the contour into its different parts.
@@ -575,7 +581,7 @@ This means that we can expand $f(z)$ in a power series containing both negative 
 f(z)= \sum_{m=-\infty}^{\infty} a_m z^m
 \end{equation} 
 
-\begin{marginfigure}[-.0cm]
+\begin{marginfigure}[-2.0cm]
   % credits: Wikipedia
   % url: https://upload.wikimedia.org/wikipedia/commons/d/d8/Pierre_Alphonse_Laurent.jpeg
   \includegraphics{complex/figures/pierre_laurent}
@@ -610,6 +616,8 @@ We can write
 $$f(z)=\frac{1}{z} \cdot \frac{1 / z }{1-1/z} = \frac{1}{z^2} \sum_{m=0}^{\infty} \frac{1}{z^m} =\cdots+\frac{1}{z^4}+\frac{1}{z^3} + \frac{1}{z^2}$$
 
 This series converges in the second ring, since $|1/z| < 1$ there.
+
+\pagebreak
 
 \begin{exer}
 % difficulty: normal

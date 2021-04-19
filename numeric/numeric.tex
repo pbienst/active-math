@@ -631,7 +631,20 @@ Now, let's introduce a \textbf{functional}. This is an object $F(f(x))$ that con
 Can you think of examples of a functional?  
 \end{cue}
 
-\noindent\marginnote{Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a vanilla function $J(\psi(\psi_i))$, albeit one of multiple arguments.}The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $E=J(\psi)$.
+The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $E=J(\psi)$. (Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a vanilla function $J(\psi(\psi_i))$, albeit one of multiple arguments.)
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+  Function or functional?
+
+  a) $f(x)=\int_0^x t^2 dt$
+
+  b) $f(x)=\int_0^1 x^2(t) dt$
+  \begin{sol}
+    a) function b) functional
+  \end{sol}
+\end{exer}
 
 A \textbf{variational expression} comes from minimising a functional over a set of admissible functions. Indeed, every input $\psi$ to the functional will result in a different number $J(\psi)$ at the output, and we are looking for the special $\psi$ that will result in the smallest possible output.
 
