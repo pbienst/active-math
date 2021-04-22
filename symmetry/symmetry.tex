@@ -184,17 +184,17 @@ This proves that our operator is indeed Hermitian.
 \begin{exer}
 % difficulty: trivial
 % ugent  
-  Are the following operators Hermitian?
+Are the following operators Hermitian?
 
-  a) $1$
+a) $1$
   
-  b) $j$
+b) $j$
   
-  c) $d/dx$
+c) $d/dx$
 
-  \begin{sol}
-    a) yes b) no c) yes
-  \end{sol}
+\begin{sol}
+a) yes b) no c) yes
+\end{sol}
 \end{exer}
 
 \begin{exer}
@@ -239,7 +239,7 @@ Taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, we ge
 Now, taking the complex conjugate and using the fact that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real, we get
 
 \begin{equation}
-{\left\langle{\mathbf H} , \Theta {\mathbf H}\right\rangle^*  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
+\left\langle{\mathbf H} , \Theta {\mathbf H}\right\rangle^*  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
 \end{equation} 
 
 Resist the temptation to say that $(\omega^2 \mu)^*= \omega^2 \mu $ for physical reasons, because that's exactly what we want to prove using only mathematical arguments.
@@ -319,7 +319,7 @@ Because $\Theta$ is hermitian, the left--hand sides of Eq.~\ref{eq-ortho-1} and 
 
 If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\right\rangle = 0$ and we can conclude that ${\mathbf H}_1$ and ${\mathbf H}_2$ are orthogonal modes.
 
-\noindent\marginnote{Solutions which only differ by a proportionality constant are not considered to be degenerate, but rather, they are considered to be the ``same'' mode.}In the special case where two different modes have the same frequency $\omega_1 = \omega_2$, we call them \textbf{degenerate} modes}, which are not necessarily orthogonal. However, since $\Theta$ is a linear operator, any linear combination of these degenerate eigenmodes will also be an eigenmode with the same frequency. This means that we can always choose to work with linear combinations that are orthogonal. These combinations can be obtained by e.g. a Gram--Schmidt orthogonalisation procedure.
+\noindent\marginnote{Solutions which only differ by a proportionality constant are not considered to be degenerate, but rather, they are considered to be the ``same'' mode.}In the special case where two different modes have the same frequency $\omega_1 = \omega_2$, we call them \textbf{degenerate modes}, which are not necessarily orthogonal. However, since $\Theta$ is a linear operator, any linear combination of these degenerate eigenmodes will also be an eigenmode with the same frequency. This means that we can always choose to work with linear combinations that are orthogonal. These combinations can be obtained by e.g. a Gram--Schmidt orthogonalisation procedure.
 
 \pagebreak
 
@@ -339,12 +339,19 @@ We can calculate the first variation of $J$ directly from Eq.~\ref{eq-variationa
 \left\langle {\mathbf H},{\mathbf H} \right\rangle J = \left\langle {\mathbf H},\Theta {\mathbf H} \right\rangle \label{eq-variational-1}
 \end{equation} 
 
-Replacing ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by $J+ \delta J$, we get:
-\begin{equation}
-\left\langle {\mathbf H+\delta {\mathbf H}},{\mathbf H}+\delta {\mathbf H} \right\rangle J + \left\langle {\mathbf H}+\delta {\mathbf H},{\mathbf H+\delta {\mathbf H}} \right\rangle \delta  J= \left\langle {\mathbf H}+\delta {\mathbf H},\Theta {\mathbf H} + \Theta \delta {\mathbf H} \right\rangle \label{eq-variational-2}
-\end{equation} 
+\begin{cue}
+'Perturb' this equation, i.e. replace ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by a corresponding $J+ \delta J$. Then, subtract the original from the perturbed equation, and neglect higher-order terms.  
+\end{cue}
 
-Subtracting Eq.~\ref{eq-variational-1} from Eq.~\ref{eq-variational-2} and neglecting higher order variations gives
+Replacing ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by $J+ \delta J$, we get:
+
+\begin{align}
+\left\langle {\mathbf H + \delta {\mathbf H}},{\mathbf H}+\delta {\mathbf H} \right\rangle J + \left\langle {\mathbf H}+\delta {\mathbf H},{\mathbf H+\delta {\mathbf H}} \right\rangle \delta  J \nonumber  \\
+  = \left\langle {\mathbf H}+\delta {\mathbf H},\Theta {\mathbf H} + \Theta \delta {\mathbf H} \right\rangle
+\label{eq-variational-2}
+\end{align} 
+
+Subtracting Eq.~\ref{eq-variational-1} from Eq.~\ref{eq-variational-2} and neglecting higher-order variations gives
 
 \begin{equation}
 \left\langle \delta {\mathbf H},{\mathbf H} \right\rangle J + \left\langle {\mathbf H},\delta {\mathbf H} \right\rangle J + \left\langle {\mathbf H}, {\mathbf H} \right\rangle \delta J = \left\langle {\mathbf H},\Theta \delta {\mathbf H} \right\rangle + \left\langle \delta {\mathbf H},\Theta {\mathbf H} \right\rangle \label{eq-variational-3}
@@ -362,6 +369,9 @@ with
 $${\mathbf G} \stackrel{def}{=} \frac{2}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle } \left[ \Theta {\mathbf H} - \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} {\mathbf H} \right]  $$
 \end{exer}
 
+\begin{cue}
+Use this expression to find the Euler-Lagrange equation for this variational form.  
+\end{cue}
 
 Now, if $\delta J$ needs to be zero for all possible ${\delta \mathbf H}$, this means that ${\mathbf G}$ should be equal to zero, or
 
@@ -371,22 +381,31 @@ Now, if $\delta J$ needs to be zero for all possible ${\delta \mathbf H}$, this 
 
 Bearing in mind that the quotient on the right hand side is just a number, Eq.~\ref{eq-variational-4} can only be fulfilled if ${\mathbf H}$ is indeed an eigenvector of $\Theta$. Incidentally, we have also proven that its eigenvalue is $J$.
 
-Having survived the gory mathematical details of verifying that Eq.~\ref{eq-variational} is indeed variational, it's time to do something useful with it and derive a physical heuristic for the modes in our system.
+Having survived the gory mathematical details of verifying that Eq.~\ref{eq-variational} is indeed the variational expression of our eigenvalue problem, it's time to do something useful with it and derive a physical heuristic for the modes in our system.
 
-First of all, let's evaluate $J$ for the case where ${\mathbf H}$ is a solution to the eigenvalue problem:
+\begin{cue}
+Evaluate $J$ if ${\mathbf H}$ is a solution to the eigenvalue problem. What does the result mean for the frequency of the modes?  
+\end{cue}
+  
+In case ${\mathbf H}$ is a solution to the eigenvalue problem, $J$ becomes
 
 \begin{equation}
 J =  \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} = \frac{\left\langle {\mathbf H} , \omega^2 \mu {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} = \omega^2 \mu
 \end{equation}
 
-This shows that solutions ${\mathbf H}$ which have low values of $J$ will tend to have a low frequency $\omega$.
+This shows that solutions ${\mathbf H}$ which have low values of $J$ will tend to have a low frequency $\omega$. So, lower-order solutions will have lower frequencies/energies in comparison to higher-order solutions.
 
-Second, using Eq.~\ref{eq-rot-H-bis}, we can write the functional Eq.~\ref {eq-variational} as
+\begin{cue}
+Use Eq.~\ref{eq-rot-H-bis} to write Eq.~\ref {eq-variational} as an expression containing a volume integral of $ \nabla \times {\mathbf H({\mathbf r})}$ in the numerator.   
+\end{cue}
+
+Second, using Eq.~\ref{eq-rot-H-bis}, we can write the functional as
 
 \begin{align}
 J =& \frac{1}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle}  \iiint \frac{1}{\varepsilon({\mathbf r})} \left | \nabla \times {\mathbf H({\mathbf r})} \right |^2  dV  \label{eq-variational-HH}
 \end{align} 
 
+\pagebreak
 
 \begin{exer}
 % difficulty: normal  
@@ -394,6 +413,9 @@ When ${\mathbf H}$ is a solution to the eigenvalue problem, transform Eq.~\ref{e
 $$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} {\iiint \epsilon \left | {\mathbf E({\mathbf r})} \right |^2  dV} $$
 \end{exer}
 
+\begin{cue}
+Looking separately at the numerator and the denominator of this expression, what properties does ${\mathbf E}$ need to have in order to minimise $J$?   
+\end{cue}
 
 From this equation, we can see that $J$ is minimised if the electric field ${\mathbf E}$ is concentrated in regions where the refractive index is high. So, to minimise $J$, a mode will try to concentrate its field in regions of high dielectric, while remaining orthogonal to the modes below it in frequency. With this heuristic we can e.g. explain why it is that dielectric waveguides do indeed work: the field likes to be concentrated in regions where the refractive index is high. Also, because of the link between $J$ and $\omega$, concentrating a mode in regions of high refractive index (thus lowering $J$) will tend to lower its frequency.
 
@@ -401,6 +423,7 @@ The same equation also suggests that to minimise $J$, is is advantageous to keep
 
 We will use these heuristics in a later section to explain the peculiar behaviour of certain periodic structures.
 
+\pagebreak
 
 \begin{exer}
 % difficulty: normal
@@ -613,7 +636,7 @@ The second variant of systems with translational symmetry, namely that of discre
 
 \begin{figure}
 \centering
-\includegraphics[width=10]{symmetry/figures/periodic}
+\includegraphics[width=10cm]{symmetry/figures/periodic}
 \caption{A 1D periodic structure with periodicity $a$ in the $z$--direction.}
 \label{fig-1d-periodic}
 \end{figure}
@@ -957,7 +980,7 @@ As such a 3D plot quickly becomes difficult to interpret, people usually only pl
 
 \begin{figure}
 \centering
-\includegraphics[width=8]{symmetry/figures/square_bands}
+\includegraphics[width=8cm]{symmetry/figures/square_bands}
 \caption{Projected band diagram for a square lattice of dielectric rods. Dotted band are TM, full lines are TE polarisation.}
 \label{fig-bands-rods}
 \end{figure}
