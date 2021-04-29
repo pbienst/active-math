@@ -19,7 +19,7 @@ Systems which exhibit symmetry and periodicity are important in many areas of ph
 
 First, the scalar Helmholtz equation will be generalised to a vectorial equation which can also be used in the case of continuous index variations. We will interpret this as an eigenvalue problem, introduce the concept of a Hermitian operator and discuss some of the properties of such operators. This problem will also be cast in a variational framework, which will enable us to explain more of the physics of the eigenmodes.
 
-Next, we will analyse how we can use symmetries to classify these eigenmodes, using the example of inversion symmetry. We will also discuss continuous translation symmetry, which is very relevant when studying e.g. waveguides. Finally, we will treat discrete translational symmetry or periodicity. This will allow us to talk about Bloch's theorem, Brillouin zones and band diagrams. 
+Next, we will analyse how we can use symmetries to classify these eigenmodes, using the example of inversion symmetry. We will see that commuting operators play a key role when expressing symmetry. We will also discuss continuous translation symmetry, which is very relevant when studying e.g. waveguides. Finally, we will treat discrete translational symmetry or periodicity. This will allow us to talk about Bloch's theorem, Brillouin zones and band diagrams. 
 
 To end, we will discuss time-reversal symmetry, as well as some applications of photonic crystals. We will briefly show how these periodic structures can be used to localise light in a cavity, or guide it along a waveguide.
 
@@ -321,6 +321,25 @@ If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\
 
 \noindent\marginnote{Solutions which only differ by a proportionality constant are not considered to be degenerate, but rather, they are considered to be the ``same'' mode.}In the special case where two different modes have the same frequency $\omega_1 = \omega_2$, we call them \textbf{degenerate modes}, which are not necessarily orthogonal. However, since $\Theta$ is a linear operator, any linear combination of these degenerate eigenmodes will also be an eigenmode with the same frequency. This means that we can always choose to work with linear combinations that are orthogonal. These combinations can be obtained by e.g. a Gram--Schmidt orthogonalisation procedure.
 
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+  Which of the following statements are true for a Hermitian eigenvalue problem?
+
+  a) All eigenvalues are real.
+
+  b) All eigenvalues are positive.
+
+  c) All eigenfunctions are orthogonal.
+
+  d) Two eigenfunctions $\mathbf H$ and $\alpha\mathbf H$, with $\alpha$ a scalar, are considered to be degenerate.
+  
+  \begin{sol}
+    a) true b) false c) false (you can construct an orthogonal set, but they are in general not orthogonal, e.g. when you have degeneracy.) d) false
+  \end{sol}
+
+\end{exer}
+
 \pagebreak
 
 \sectionugent{A variational form of the eigenvalue problem}
@@ -411,6 +430,7 @@ J =& \frac{1}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle}  \iiint \frac
 % difficulty: normal  
 When ${\mathbf H}$ is a solution to the eigenvalue problem, transform Eq.~\ref{eq-variational-HH} into the following form, which contains only the electric field:
 $$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} {\iiint \epsilon \left | {\mathbf E({\mathbf r})} \right |^2  dV} $$
+\label{ex-eigenvalue-e}
 \end{exer}
 
 \begin{cue}
@@ -419,7 +439,9 @@ Looking separately at the numerator and the denominator of this expression, what
 
 From this equation, we can see that $J$ is minimised if the electric field ${\mathbf E}$ is concentrated in regions where the refractive index is high. So, to minimise $J$, a mode will try to concentrate its field in regions of high dielectric, while remaining orthogonal to the modes below it in frequency. With this heuristic we can e.g. explain why it is that dielectric waveguides do indeed work: the field likes to be concentrated in regions where the refractive index is high. Also, because of the link between $J$ and $\omega$, concentrating a mode in regions of high refractive index (thus lowering $J$) will tend to lower its frequency.
 
-The same equation also suggests that to minimise $J$, is is advantageous to keep spatial variations in the field as low as possible so as to keep  $\left| \nabla \times {\mathbf E({\mathbf r})} \right |$ small. Indeed, the fundamental mode has much slower spatial variations than the higher order modes.
+The same equation also suggests that to minimise $J$, is is advantageous to keep spatial variations in the field as low as possible so as to keep  $\left| \nabla \times {\mathbf E({\mathbf r})} \right |$ small. Indeed, the fundamental mode has much slower spatial variations than the higher-order modes.
+
+Finally, remember that all modes are orthogonal to each other, so e.g. the first-order mode 'finds' the most energetically favourable solution in the subspace perpendicular to the fundamental mode.
 
 We will use these heuristics in a later section to explain the peculiar behaviour of certain periodic structures.
 
@@ -434,11 +456,14 @@ $$J = \frac{\left\langle {\mathbf H} , A {\mathbf H}\right\rangle}{\left\langle 
 
 What is $\lambda$? \\
 
-b) Derive a generalised eigenvalue problem for $\mathbf E$. Is it Hermitian, i.e. are the two operators $A$ and $B$ involved in the generalised eigenvalue problem Hermitian? Note that it should be a true generalised eigenvalue problem, i.e. with $B$ not equal to the identity operator.  \\
+b) Derive a generalised eigenvalue problem for $\mathbf E$. Under what conditions is it Hermitian, i.e. are the two operators $A$ and $B$ involved in the generalised eigenvalue problem Hermitian? Note that it should be a true generalised eigenvalue problem, i.e. with $B$ not equal to the identity operator.  \\
 
 c) Show based on the previous two results that minimising the following variational expression is equivalent to solving Maxwell's equations: \\
 
 $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} {\iiint \epsilon \left| {\mathbf E ({\mathbf r})} \right| ^2  dV}$$
+
+
+(This is the same result as in Ex.~\ref{ex-eigenvalue-e}, but the derivation there assumed that we were starting from an existing solution $\mathbf H$. The approach here is much more general.)
 
 \end{exer}
 
@@ -448,7 +473,13 @@ $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} 
 
 \sectionugent{Inversion symmetry}
 
-In this section the use of symmetries to classify the solutions of Eq.~\ref{eq-master} is discussed.  A symmetry is a change of coordinates which leaves the form of Eq.~\ref{eq-master} intact.  
+In this section, we start discussing how symmetries can be helpful to classify the solutions of Eq.~\ref{eq-master}. We'll do this using the example of inversion symmetry.
+
+\begin{cue}
+What other symmetries do you know? How would you define a symmetry mathematically?  
+\end{cue}
+
+In general, a symmetry is any change of coordinates which leaves the form of Eq.~\ref{eq-master} intact. E.g., suppose you have a circular cavity, then any rotation of the coordinate system around the central axis will result in an identical situation. Other examples of symmetries are mirror symmetry, translational symmetry, etc. 
 
 \begin{marginfigure}
 \centering
@@ -457,33 +488,96 @@ In this section the use of symmetries to classify the solutions of Eq.~\ref{eq-m
 \label{fig-symmcav}
 \end{marginfigure}
 
-To clarify this, we start with the structure from Fig.~\ref{fig-symmcav}. This structure is inversion symmetric around its centre, i.e. invariant under the coordinate change ${\mathbf r}' = -{\mathbf r}$. Later in this section, we will consider other symmetries, like e.g. systems invariant under the transformation ${\mathbf r}' = {\mathbf r} + {\mathbf R}$, which is called translation symmetry.
+To illustrate what symmetries can teach us about the existence of certain families of solutions, we will focus on the example of inversion symmetry. Let's look at the structure from Fig.~\ref{fig-symmcav}, a creatively shaped metal cavity that is inversion symmetric around its centre $\mathbf{r}=0$.
 
-Suppose we want to find the modes of the cavity from Fig.~\ref{fig-symmcav}. Solving Maxwell's equations for such a cavity will not be possible analytically, but the cavity has an important symmetry: by inverting it about its centre, you end up with the same shape. So, if somehow we find that a particular pattern ${\mathbf H({\mathbf r})}$ is a mode of the cavity with frequency $\omega$, then ${\mathbf H({\mathbf -r})}$ must also be a mode with frequency $\omega$, since the cavity cannot tell ${\mathbf r}$ from ${\mathbf -r}$.
+\begin{cue}
+Under what coordinate transformation is Fig.~\ref{fig-symmcav} invariant?   
+\end{cue}
 
-Now suppose ${\mathbf H({\mathbf r})}$ is not degenerate, so that it is the only mode at frequency $\omega$. Then, since ${\mathbf H({\mathbf -r})}$ is also a mode with frequency $\omega$, it must really be the same mode, which means that it must be a simple multiple of ${\mathbf H({\mathbf r})}$:
+This structure is invariant under the coordinate change ${\mathbf r}' = -{\mathbf r}$.
+
+Suppose we want to find the modes (i.e. the solutions to Maxwell's equation for a certain frequency $\omega$) of the cavity from Fig.~\ref{fig-symmcav}. Solving Maxwell's equations for such a cavity will not be possible analytically, but we know that the structure posseses symmetry: by inverting it about its centre, you end up with the same shape.
+
+\begin{cue}
+How would you formulate this in terms of the field pattern ${\mathbf H({\mathbf r})}$ of a solution to Maxwell's equation?    
+\end{cue}
+
+If somehow we find that a particular pattern ${\mathbf H({\mathbf r})}$ is a mode of the cavity with frequency $\omega$, then ${\mathbf H({\mathbf -r})}$ must also be a mode with frequency $\omega$, since the cavity cannot tell ${\mathbf r}$ from ${-\mathbf{r}}$.
+
+\begin{cue}
+In case there is no degeneracy, what does that mean for the relation between ${\mathbf H({\mathbf r})}$ and ${\mathbf H({\mathbf{-r}})}$?    
+\end{cue}
+
+Suppose ${\mathbf H({\mathbf r})}$ is not degenerate, so that it is the only mode at frequency $\omega$. Then, since ${\mathbf H({\mathbf{-r}})}$ is also a mode with frequency $\omega$, it must really be the same mode! This means that it must be a straightforward multiple of ${\mathbf H({\mathbf r})}$:
 
 \begin{equation}
-{\mathbf H({\mathbf -r})} = \alpha {\mathbf H({\mathbf r})}
+{\mathbf H(-{\mathbf{r}})} = \alpha {\mathbf H({\mathbf r})}
 \end{equation} 
+
+\begin{cue}
+Repeat the inversion and figure out the possible values for $\alpha$.    
+\end{cue}
 
 To determine $\alpha$, we can invert the system twice, meaning that we return to the original function ${\mathbf H({\mathbf r})}$ and pick up another factor $\alpha$ in the process. So
 
 \begin{equation}
-\alpha^2 {\mathbf H({\mathbf r})} = {\mathbf H({\mathbf r})}
+{\mathbf H(-(-{\mathbf{r}}))} = \alpha {\mathbf H(-{\mathbf r})} = \alpha^2 {\mathbf H({\mathbf r})}
 \end{equation} 
 
-\noindent\marginnote{This is not true for degenerate modes. But, although we do not prove it here, we can always form new modes which \emph{are} even or odd, by taking appropriate linear combinations of degenerate modes.}This means that $\alpha$ is either 1 or -1. So, a given nondegenerate mode must be one of two types: either it is invariant under inversion, ${\mathbf H({\mathbf -r})} = {\mathbf H({\mathbf r})}$, and we call it \emph{even}, or it becomes its own opposite, ${\mathbf H({\mathbf -r})} = - {\mathbf H({\mathbf r})}$ and we call it \emph{odd}.
+\noindent\marginnote{This is not true for degenerate modes. But, although we do not prove it here, we can always form new modes which \emph{are} even or odd, by taking appropriate linear combinations of degenerate modes.}This means that $\alpha$ is either 1 or -1. So, a given nondegenerate mode must be one of two types: either it is invariant under inversion, ${\mathbf H(-{\mathbf r})} = {\mathbf H({\mathbf r})}$, and we call it \textbf{even}, or it becomes its own opposite under inversion, ${\mathbf H(-{\mathbf r})} = - {\mathbf H({\mathbf r})}$ and we call it \textbf{odd}.
+
+\vspace{1cm}
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+  For a system with inversion symmetry, and in case you have degenerate modes, is it still the case that if ${\mathbf H({\mathbf r})}$ is a mode of the cavity, then ${\mathbf H(-{\mathbf r})}$ is always a mode as well?  
+
+\begin{sol}
+Yes
+\end{sol}
+\end{exer}
+
+\pagebreak
+
+\sectionugent{Commutators and symmetry}
 
 So, we have classified the modes on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing. 
 
-Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we operate with $\Theta$, or first invert the coordinates, then operate with $\Theta$ and then change the coordinates back:
+Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we do one of the two following things:
+
+\begin{itemize}
+\item
+ We operate with $\Theta$ on a certain function.
+\item
+We first invert the coordinates, then operate with $\Theta$ and then change the coordinates back. (We do have to change the coordinates back, otherwise we're comparing apples to oranges.)
+\end{itemize}
+
+Graphically, this corresponds to the diagram in Fig.~\ref{fig-commutator}.
+
+\begin{cue}
+How would you translate the observations above in a formula?
+\end{cue}
+
+Expressing this mathematically, we get:
 
 \begin{equation}
-\Theta = O_I^{-1} \Theta O_I
+  \Theta = O_I^{-1} \Theta O_I
+  \label{eq-operator-symmetry}
 \end{equation} 
 
-This can be rearranged as $O_I \Theta - \Theta O_I = 0$. Just like in quantum mechanics, we can define the \emph{commutator} $[A,B]$ of two operators $A$ and $B$ as
+When looking at the right-hand side of the equation, note that operators are being evaluated from right to left, because by definition the argument of an operator is always placed to its right.
+
+Eq.~\label{eq-operator-symmetry} can trivially be rearranged as
+
+$$O_I \Theta - \Theta O_I = 0$$
+
+\begin{exer}
+% difficulty: trivial
+Draw a diagram similar to Fig.~\ref{fig-commutator} that expresses this relation.
+\end{exer}
+
+Just like in quantum mechanics, we can define the \textbf{commutator} $[A,B]$ of two operators $A$ and $B$ as
 
 \begin{equation}
 [A,B] \stackrel{def}{=} AB - BA
@@ -515,8 +609,16 @@ But what if there is degeneracy in the system? In that case, two modes might hav
 
 So, generally speaking, \emph{if two operators commute, it is possible to construct simultaneous eigenfunctions ${\mathbf H}$ of both operators}, i.e. functions ${\mathbf H}$ that are solutions of both eigenproblems $\Theta {\mathbf H} = \omega^2 \mu {\mathbf H}$ and $O_I {\mathbf H} = \alpha {\mathbf H}$.
 
-This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So we can classify the solutions according to the properties of the symmetry operation.
+This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the different classes of solutions, based on the properties of the symmetry operation.
 
+
+\begin{exer}
+% difficulty: trivial
+  Do $2x$ and $d/dx$ commute?
+  \begin{sol}
+    No
+\end{sol}  
+\end{exer}
 
 \begin{exer}
 % difficulty: normal 
@@ -528,6 +630,14 @@ For which exercise from chapter \ref{h:special} is this relevant?
 \begin{sol}
 When $\mathbf A$ and $\mathbf B$ commute.
 \end{sol}
+\end{exer}
+
+\begin{exer}
+% difficulty: normal
+True or false: if a system described by an operator $\Theta$ has a symmetry described by an operator $O$, then all eigenfunctions of $\Theta$ and $O$ are common.
+  \begin{sol}
+    False
+\end{sol}  
 \end{exer}
 
 \pagebreak
