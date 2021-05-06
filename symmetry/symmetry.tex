@@ -496,19 +496,19 @@ Under what coordinate transformation is Fig.~\ref{fig-symmcav} invariant?
 
 This structure is invariant under the coordinate change ${\mathbf r}' = -{\mathbf r}$.
 
-Suppose we want to find the modes (i.e. the solutions to Maxwell's equation for a certain frequency $\omega$) of the cavity from Fig.~\ref{fig-symmcav}. Solving Maxwell's equations for such a cavity will not be possible analytically, but we know that the structure posseses symmetry: by inverting it about its centre, you end up with the same shape.
+Suppose we want to find the modes (i.e. the solutions to Maxwell's equations for a certain frequency $\omega$) of the cavity from Fig.~\ref{fig-symmcav}. Solving Maxwell's equations for such a cavity will not be possible analytically, but we know that the structure possesses symmetry: by inverting it about its centre, you end up with the same shape.
 
 \begin{cue}
-How would you formulate this in terms of the field pattern ${\mathbf H({\mathbf r})}$ of a solution to Maxwell's equation?    
+How would you formulate this in terms of the field pattern ${\mathbf H({\mathbf r})}$ of a solution to Maxwell's equations?    
 \end{cue}
 
-If somehow we find that a particular pattern ${\mathbf H({\mathbf r})}$ is a mode of the cavity with frequency $\omega$, then ${\mathbf H({\mathbf -r})}$ must also be a mode with frequency $\omega$, since the cavity cannot tell ${\mathbf r}$ from ${-\mathbf{r}}$.
+If somehow we find that a particular pattern ${\mathbf H({\mathbf r})}$ is a mode of the cavity with frequency $\omega$, then ${-\mathbf H({\mathbf r})}$ must also be a mode with frequency $\omega$, since the cavity cannot tell ${\mathbf r}$ from ${-\mathbf{r}}$.
 
 \begin{cue}
 In case there is no degeneracy, what does that mean for the relation between ${\mathbf H({\mathbf r})}$ and ${\mathbf H({\mathbf{-r}})}$?    
 \end{cue}
 
-Suppose ${\mathbf H({\mathbf r})}$ is not degenerate, so that it is the only mode at frequency $\omega$. Then, since ${\mathbf H({\mathbf{-r}})}$ is also a mode with frequency $\omega$, it must really be the same mode! This means that it must be a straightforward multiple of ${\mathbf H({\mathbf r})}$:
+Suppose ${\mathbf H({\mathbf r})}$ is not degenerate, so that it is the only mode at frequency $\omega$. Then, since ${\mathbf H(-{\mathbf{r}})}$ is also a mode with frequency $\omega$, it must really be the same mode! This means that it must be a straightforward multiple of ${\mathbf H({\mathbf r})}$:
 
 \begin{equation}
 {\mathbf H(-{\mathbf{r}})} = \alpha {\mathbf H({\mathbf r})}
@@ -542,18 +542,24 @@ Yes
 
 \sectionugent{Commutators and symmetry}
 
-So, we have classified the modes on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing. 
+We have classified the modes based on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing. 
 
-Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we do one of the two following things:
+Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we do one of the following two things:
 
 \begin{itemize}
 \item
  We operate with $\Theta$ on a certain function.
 \item
-We first invert the coordinates, then operate with $\Theta$ and then change the coordinates back. (We do have to change the coordinates back, otherwise we're comparing apples to oranges.)
+\noindent\marginnote{We do have to change the coordinates back, otherwise we're comparing apples to oranges.}We first invert the coordinates, then operate with $\Theta$ and then change the coordinates back.
 \end{itemize}
 
 Graphically, this corresponds to the diagram in Fig.~\ref{fig-commutator}.
+
+\begin{marginfigure}[1.0cm]
+ \includegraphics{symmetry/figures/commutator}
+ \caption{Using operators to express that a system has symmetry.}
+ \label{fig-commutator} 
+\end{marginfigure}
 
 \begin{cue}
 How would you translate the observations above in a formula?
@@ -568,7 +574,7 @@ Expressing this mathematically, we get:
 
 When looking at the right-hand side of the equation, note that operators are being evaluated from right to left, because by definition the argument of an operator is always placed to its right.
 
-Eq.~\label{eq-operator-symmetry} can trivially be rearranged as
+Eq.~\ref{eq-operator-symmetry} can trivially be rearranged as
 
 $$O_I \Theta - \Theta O_I = 0$$
 
@@ -580,10 +586,20 @@ Draw a diagram similar to Fig.~\ref{fig-commutator} that expresses this relation
 Just like in quantum mechanics, we can define the \textbf{commutator} $[A,B]$ of two operators $A$ and $B$ as
 
 \begin{equation}
-[A,B] \stackrel{def}{=} AB - BA
+ \fbox{$\displaystyle
+   [A,B] \stackrel{def}{=} AB - BA
+ $}
 \end{equation} 
 
-Note that the commutator is itself an operator. So, we have shown that our system is symmetric under inversion only if the inversion operator commutes with $\Theta$. If we now operate with this commutator on any mode ${\mathbf H({\mathbf r})}$ of the system, we get
+Note that the commutator is itself an operator. So, we have shown that our system is symmetric under inversion only if the inversion operator commutes with $\Theta$.
+
+\pagebreak
+
+\begin{cue}
+Operate with this commutator on a solution ${\mathbf H({\mathbf r})}$, making use of the fact that this is an eigenmode of $\Theta$. Can you use the result to identify a new eigenmode for $\Theta$? 
+\end{cue}
+
+If we now operate with this commutator on any mode ${\mathbf H({\mathbf r})}$ of the system, we get
 
 \begin{equation}
 [O_I, \Theta] {\mathbf H}= O_I(\Theta {\mathbf H}) - \Theta (O_I {\mathbf H} ) = 0
@@ -601,16 +617,32 @@ Or
 \Theta (O_I {\mathbf H} ) =  \omega^2 \mu (O_I {\mathbf H})
 \end{equation} 
 
-This is nothing other than saying that if ${\mathbf H}$ is mode with frequency $\omega$, then $O_I {\mathbf H}$ is also a mode with the same frequency. But in the absence of degeneracy there can only be one mode per frequency, so ${\mathbf H}$ and $O_I {\mathbf H}$ can only differ by a multiplicative factor: $O_I {\mathbf H} = \alpha {\mathbf H}$. This is an eigenvalue equation for $O_I$, and we already know that the eigenvalues $\alpha$ are 1 and -1. 
+This is nothing other than saying that if ${\mathbf H}$ is mode with frequency $\omega$, then $O_I {\mathbf H}$ is also a mode with the same frequency.
 
-Tracing back, we see that we started from a function ${\mathbf H}$ that was an eigenvector of $\Theta$ and ended up by showing that the same ${\mathbf H}$ was also an eigenvector of $O_I$ in the absence of degeneracy. 
+\begin{cue}
+Assuming no degeneracy, what does this mean?
+\end{cue}
+
+In the absence of degeneracy there can only be one mode per frequency, so ${\mathbf H}$ and $O_I {\mathbf H}$ can only differ by a multiplicative factor.
+
+\begin{cue}
+Formulate this mathematically. What kind of an equation is this?
+\end{cue}
+
+This means $O_I {\mathbf H} = \alpha {\mathbf H}$. This is actually an eigenvalue equation for $O_I$, and we already know from the previous section that its eigenvalues $\alpha$ are 1 and -1. 
+
+Tracing back, we see that we started from a function ${\mathbf H}$ that was an eigenvector of $\Theta$ and ended up by showing that the same ${\mathbf H}$ was also an eigenvector of $O_I$ (at least in the absence of degeneracy). 
 
 But what if there is degeneracy in the system? In that case, two modes might have the same frequency, even though they are not related by a simple multiplier. Although we won't show it here, in that case it will still by possible to construct different linear combinations of these degenerate modes to make new modes which themselves are even or odd.
 
 So, generally speaking, \emph{if two operators commute, it is possible to construct simultaneous eigenfunctions ${\mathbf H}$ of both operators}, i.e. functions ${\mathbf H}$ that are solutions of both eigenproblems $\Theta {\mathbf H} = \omega^2 \mu {\mathbf H}$ and $O_I {\mathbf H} = \alpha {\mathbf H}$.
 
-This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the different classes of solutions, based on the properties of the symmetry operation.
+This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the existence of different classes of solutions, based on the properties of the symmetry operation.
 
+\begin{exer}
+% difficulty: trivial
+Given that you have eigenfunctions which are common between two operators, show that these operators commute. (In the main text, we studied the opposite direction.)  
+\end{exer}
 
 \begin{exer}
 % difficulty: trivial
@@ -658,13 +690,23 @@ T_{\mathbf d} \varepsilon ({\mathbf r}) \stackrel{def}{=} \varepsilon ({\mathbf 
 
 Just like before, saying that our system in invariant under that operator amounts to $[\Theta, T_{\mathbf d}] = 0$.
 
-A system with \emph{continuous} translation symmetry in the $z$--direction is invariant for all $T_{\mathbf d}$ in that direction. So, $\Theta$ must commute with all the translation operators over a distance ${\mathbf d} = d {\mathbf 1}_z$. In order not to make the notation too heavy, we will limit ourselves here to scalar fields which only vary in the $z$--direction.  We know that we can construct modes of $\Theta$ that are eigenfunctions of these translation operators $T_d$ as well:
+A system with \emph{continuous} translation symmetry in the $z$--direction is invariant for all $T_{\mathbf d}$ in that direction. So, $\Theta$ must commute with all the translation operators over a distance ${\mathbf d} = d {\mathbf 1}_z$. In order not to make the notation too heavy, we will limit ourselves here to scalar fields which only vary in the $z$--direction.
+
+\begin{cue}
+  Using what you know about eigenfunctions of operators that commute, what can you say? Be careful to make your statements general enough so that they hold for translations over all ${d}$.
+\end{cue}
+
+We know that we can construct modes of $\Theta$ that are eigenfunctions of these translation operators $T_d$ as well:
 
 \begin{equation}
 T_d H(z) = H(z + d) = \lambda(d) H(z)
 \end{equation} 
 
 This has to be true for all possible $d$, but the eigenvalues $\lambda$ can be different for each $d$, which is why we write them as $\lambda(d)$. 
+
+\begin{cue}
+Compare a single translation over $d+d'$ to a sequence of two translations, first over $d$, then over $d'$. What does this teach you about the dependence of $\lambda$ on $d$?
+\end{cue}
 
 Geometrically it is obvious that a translation over $d$ followed by a translation over $d'$ is equivalent to a single translation over $d+d'$:
 
@@ -678,13 +720,21 @@ This means that
 \lambda(d + d')=\lambda(d')\lambda(d)
 \end{equation} 
 
-A function which has this property of converting sums to products is the exponential. Therefore there has to exist a number $k_z$ such that
+\begin{cue}
+What is the most general function that converts sums to products like that?
+\end{cue}
+
+\noindent\marginnote[2cm]{The factor $-j$ is there to satisfy conventions.}A function which behaves that way is the exponential. However, $e^d$ is not general enough. Actually, there has to exist a number $k_z$ such that
 
 \begin{equation}
 \lambda(d) = e^{-j k_z d}
 \end{equation} 
 
-(The factor $-j$ is there to satisfy conventions.)
+So, we can use this number $k_z$ as a label to classify the different modes, just like we classified modes with inversion symmetry based on whether their eigenvalue for $O_I$ was $+1$ or $-1$.
+
+\begin{cue}
+Bring all of this together to write down a relationship between $H(z + d)$ and $H(z)$. Based on that, derive the general form of the  $z$--dependence of the modes. 
+\end{cue}
 
 Therefore, we can write, for all possible $d$, 
 
@@ -698,18 +748,28 @@ So, the $z$--dependence of the field can only be
 H(z) = H_0 e^{-j k_z z}
 \end{equation} 
 
-Let's now take a closer look a two systems with continuous translation symmetry.
-
-The first one is free space $\varepsilon({\mathbf r})=1$. This system has translation symmetry in all three dimensions. Following a similar line of reasoning as before, we conclude that the modes are of the form
+Let's look at the example of free space $\varepsilon({\mathbf r})=1$. This system has translation symmetry in all three dimensions. Following a similar line of reasoning as before, we conclude that the modes are of the form
 
 \begin{equation}
 {\mathbf H}_{\mathbf k}({\mathbf r}) = {\mathbf H}_0 e^{-j {\mathbf k} \cdot {\mathbf r}} \label{eq-plane-wave}
 \end{equation} 
 
-with ${\mathbf H}_0$ a constant vector. So, we have retrieved the plane wave solutions of Maxwell's equations based on symmetry arguments alone! Substituting the form of Eq.~\ref{eq-plane-wave} into Maxwell's equations, we can derive that $k^2 = \omega^2 / c^2$.
+with ${\mathbf H}_0$ a constant vector. So, we have retrieved the plane wave solutions of Maxwell's equations based on symmetry arguments alone!
 
+Of course, this does not mean Maxwell is now obsolete, as we still don't know the relationship between $k$ and $\omega$ for example. Substituting the form of Eq.~\ref{eq-plane-wave} into Maxwell's equations, we can derive that $k^2 = \omega^2 / c^2$.
 
-A second interesting system is that of a slab waveguide. In this case, the dielectric constant only varies on the $x$--direction and the system has continuous translation symmetry in the $z$-- and $y$--directions (Fig.~\ref{fig-slab-wg}). 
+\begin{cue}
+The fact the symmetry of free space results in plane waves is obviously not unique to Maxwell. Can you think of other physical systems to illustrate this?
+\end{cue}
+
+% Does not fit on the page...
+%Plane waves also make their appearance in e.g. acoustics and quantum mechanics.
+
+\pagebreak
+
+\sectionugent{Application: the slab waveguide}
+
+An interesting system which has continuous translation symmetry is that of a slab waveguide. In this case, the dielectric constant only varies on the $x$--direction and the system has continuous translation symmetry in the $z$-- and $y$--directions (Fig.~\ref{fig-slab-wg}). 
 
 \begin{marginfigure}
 \centering
@@ -718,27 +778,70 @@ A second interesting system is that of a slab waveguide. In this case, the diele
 \label{fig-slab-wg}
 \end{marginfigure}
 
+\begin{cue}
+Based on these symmetries, what should be the general form of the eigenmodes of such a structure?
+\end{cue}
+
 This means the modes must have the following form:
 
 \begin{equation}
 {\mathbf H}_{\mathbf k}({\mathbf r}) = {\mathbf h}(x) e^{-j k_y y} e^{-j k_z z} 
 \end{equation} 
 
-Just like we did for the case of inversions, we can classify the modes by their eigenvalue of the symmetry operator, i.e. by their value of ${\mathbf k} = k_y {\mathbf 1}_y + k_z {\mathbf 1}_z$. Although we cannot say anything yet about ${\mathbf h}(x)$, we can nevertheless line up the modes in order of increasing frequency. For a given ${\mathbf k}$, we call $n$ the number indicating that mode's place in the line of increasing frequency, so we can identify each mode by its name $({\mathbf k},n)$.
-$n$ is called the \emph{band number}\marginnote{Don't confuse the band number with the refractive index $n$.}. If there is a countable number of modes, $n$ is an integer, but sometimes $n$ may be a continuous variable. 
-
-If we make a plot of wave vector versus frequency for the slab waveguide, the different bands correspond to different lines that rise uniformly in frequency. This \emph{band structure} is shown in Fig.~\ref{fig-slab-disp}\footnote{Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_{eff}$ is plotted against $\lambda$, and such a plot is called a dispersion relation.}. It has been computed by solving Maxwell's equations numerically.
+Just like we did for the case of inversions, we can classify the modes by their eigenvalue of the symmetry operator, i.e. by their value of ${\mathbf k} = k_y {\mathbf 1}_y + k_z {\mathbf 1}_z$. Although we cannot say anything yet about ${\mathbf h}(x)$ (we need Maxwell for that), we can nevertheless line up the modes in order of increasing frequency. For a given ${\mathbf k}$, we call $n$ the number indicating that mode's place in the line of increasing frequency, so we can identify each mode by its name $({\mathbf k},n)$.
+$n$ is called the \textbf{band number}\marginnote{Don't confuse the band number with the refractive index $n$.}. If there is a countable number of modes, $n$ is an integer, but sometimes $n$ may be a continuous variable. 
 
 \begin{marginfigure}
 \centering
 \includegraphics{symmetry/figures/slabdisp}
-\caption{Dispersion relation of a slab waveguide.}
+\caption{Band structure of a slab waveguide.}
 \label{fig-slab-disp}
 \end{marginfigure}
 
-We know that a slab waveguide has a discrete set of guided modes (which correspond to the lines in the band diagram), and also a continuous set of radiation modes (which corresponds to the shaded region in the band diagram). The boundary between these two sets of solutions is called the \emph{light line}.
+If we make a plot of wave vector (spatial behaviour) versus frequency (temporal behaviour) for the slab waveguide, the different bands correspond to different lines that rise uniformly in frequency. This \texbf{band structure} is shown in Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically.
 
-The second variant of systems with translational symmetry, namely that of discrete translational symmetry is so important that it warrants its own section. We will start with 1D systems and later on move to higher dimensional systems.
+Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
+
+
+\begin{cue}
+  Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) form a discrete set?
+\end{cue}
+
+\begin{marginfigure}
+\centering
+\includegraphics{symmetry/figures/guided}
+\caption{Plane wave picture of a guided mode.}
+\label{fig-guided}
+\end{marginfigure}
+
+You might recall from basic electromagnetism that a guided mode is basically a plane wave that bounces up and down in the core region, reflecting an infinite number of times at the interfaces with the cladding (Fig.~\ref{fig-guided}). The angle this plane wave makes with the horizontal is related to the propagation constant. Saying that the mode spectrum is discretised, is equivalent to saying that only a specific set of angles of this bouncing plane wave gives rise to an eigenmode, i.e. a field distribution that does not change its shape during propagation. We can only achieve this for special angles where we have a roundtrip phase of $2 \pi$. In other words, this resonance condition discretises the mode spectrum.
+
+With respect to the cladding, some of the light of this bouncing plane wave evanescently leaks out of the core, which explains the exponential decay of the guided modes in the cladding.
+
+Again from basic waveguide theory, you'll recall that for radiation modes on the other hand, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in oposite directions in the cladding.
+
+\begin{cue}
+Why do the guided modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
+\end{cue}
+
+\begin{marginfigure}
+\centering
+\includegraphics{symmetry/figures/radiation}
+\caption{Plane wave picture of a radiation mode.}
+\label{fig-radiation}
+\end{marginfigure}
+
+A way to explain this is to first enclose the entire slab waveguide between two metallic mirrors (Fig.~\ref{fig-radiation}), and then study what happens when you move these plates towards infinity, so that you recover the situation of an infinite cladding.
+
+Initially, for a finite distance between the plates, the plates will impose another resonance condition: the plane wave propagating upwards in e.g. the top cladding will be reflected downwards, pass through the core into the bottom cladding, and be reflected upwards again. Again, after one roundtrip, the phase change should be 2 $\pi$ again.
+
+\begin{cue}
+What will happen to the separation between the radiation modes in $k$-space as the plates move more and more towards infinity? As an approximation, consider what happens if the space between plates is just filled with air.
+\end{cue}
+
+Neglecting the presence of the core, as well as phase shifts upon reflection at the plates, the resonance condition for the phase looks something like $2 d k_x =  2 N \pi$, with $d$ the distance between the plates, $k_x$ the transverse wavevector and $N$ an integer describing the order of the resonance. This shows you that if $d$ goes up, the $k_x$ to realise resonance should go down. In other words, the $k$-vectors get spaced closer together as the distance $d$ increases. In the limit of infinite distance, they will merge together in a single continuum.
+
+A final piece of terminology: the boundary between the discrete guided modes and the continuous radiation modes in the band diagram is called the \textbf{light line}.
 
 \pagebreak
 
