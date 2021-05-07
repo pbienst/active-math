@@ -94,6 +94,20 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
          id="path880-8" />
     </marker>
+    <marker
+       id="endMarker1"
+       markerUnits="strokeWidth"
+       orient="auto"
+       markerWidth="8"
+       markerHeight="6"
+       viewBox="0 0 10 10"
+       refX="1"
+       refY="5">
+      <polyline
+         points="0,0 10,5 0,10 1,5"
+         fill="solid"
+         id="polyline9095" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
