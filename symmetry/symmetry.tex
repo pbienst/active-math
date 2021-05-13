@@ -659,7 +659,7 @@ Given two linear operators $\mathbf A$ and $\mathbf B$, under which circumstance
 
 $$\left ( {\mathbf A} + {\mathbf B} \right ) ^2 =  {\mathbf A}^2 + 2 {\mathbf A}{\mathbf B}  + {\mathbf B}^2$$
 
-For which exercise from chapter \ref{h:special} is this relevant?
+For which exercise from chapter \ref{h:hermite} is this relevant?
 \begin{sol}
 When $\mathbf A$ and $\mathbf B$ commute.
 \end{sol}
@@ -1185,10 +1185,17 @@ f({\mathbf r}) = \iiint g({\mathbf k}) e ^ {-j {\mathbf k} \cdot {\mathbf r}} d{
 
 Physically, this means we write $f$ as a sum of plane waves $e ^ {-j {\mathbf k} \cdot {\mathbf r}}$ with wavevectors ${\mathbf k}$ and expansion coefficients $g({\mathbf k})$.
 
-An expansion like this can be performed on \emph{any} function. But $f$ is not just any function, it is periodic.
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+Make a graphical representation of a plane wave, both in real space and in k-space. What objects live in both spaces? What are the units in each case?
+\end{exer}
+
+A Fourier transform like this can be performed on \emph{any} function. But $f$ is not just any function, it is periodic.
 
 \begin{cue}
-  Exploit the periodicity of $f$ to derive properties of $g$. 
+Exploit the periodicity of $f$ to derive properties of $g$. 
 \end{cue}
 
 Periodicity means that
@@ -1205,28 +1212,66 @@ g({\mathbf k}) = g({\mathbf k}) e ^ {-j {\mathbf k} \cdot {\mathbf R}}
 
 But this is impossible, unless either $g({\mathbf k}) = 0$ or $e ^ {-j {\mathbf k} \cdot {\mathbf R}} = 1$. In other words, the transform $g$ is zero everywhere, except for discrete spikes at ${\mathbf k}$--values where $e ^ {-j {\mathbf k} \cdot {\mathbf R}} = 1$ for all ${\mathbf R}$.
 
-So, what we have just discovered is that if we construct a periodic function using plane waves, we only need to consider those plane waves with wave vectors ${\mathbf k}$ such that $e ^ {-j {\mathbf k} \cdot {\mathbf R}} = 1$ for all lattice vectors ${\mathbf R}$. These ${\mathbf k}$--vectors are called the \textbf{reciprocal lattice vectors} and are usually indicated by ${\mathbf G}$. They form a lattice of their own: i.e. adding two reciprocal lattice vectors yields another reciprocal lattice vector.
+So, what we have just discovered is that if we construct a periodic function using plane waves, we only need to consider those plane waves with wave vectors ${\mathbf k}$ such that $e ^ {-j {\mathbf k} \cdot {\mathbf R}} = 1$ for all lattice vectors ${\mathbf R}$. These ${\mathbf k}$--vectors are called the \textbf{reciprocal lattice vectors} and are usually indicated by ${\mathbf G}$.
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+Verify that the  ${\mathbf G}$-vectors form a lattice of their own, i.e. adding two reciprocal lattice vectors yields another reciprocal lattice vector.
+\end{exer}
 
 We still need to answer the question of how to build the set of all ${\mathbf G}$--vectors given the set of ${\mathbf R}$--vectors, i.e. find all ${\mathbf G}$ such that ${\mathbf G} \cdot {\mathbf R} = N 2 \pi$ for all ${\mathbf R}$ and for an integer $N$.
 
-Every lattice vector ${\mathbf R}$ can be written as a linear combination of the so--called \textbf{primitive lattice vectors}, which are the smallest vectors pointing from one lattice point to another. E.g. for a simple cubic lattice with spacing $a$, all ${\mathbf R}$s are of the form ${\mathbf R} = la {\mathbf 1}_x + ma {\mathbf 1}_y + na {\mathbf 1}_z$, with $(l,m,n)$ integers. In general, we call the primitive lattice vectors ${\mathbf a}_1$, ${\mathbf a}_2$ and ${\mathbf a}_3$. They don't need to be of unit length.
+Every lattice vector ${\mathbf R}$ can be written as a linear combination of the so--called \textbf{primitive lattice vectors}, which are the smallest vectors pointing from one lattice point to another.
 
-Since the reciprocal lattice vectors ${\mathbf G}$ also form a lattice, they have a set of primitive vectors ${\mathbf b}_i$ as well, such that ${\mathbf G} = l' {\mathbf b}_1 + m' {\mathbf b}_2 + n' {\mathbf b}_3$. Our requirement that ${\mathbf G} \cdot {\mathbf R} = N 2 \pi$ can now be written as
+\begin{cue}
+  What are the primitive lattice vectors for a cubic lattice?
+\end{cue}
+
+For a simple cubic lattice with spacing $a$, all ${\mathbf R}$s are of the form ${\mathbf R} = la {\mathbf 1}_x + ma {\mathbf 1}_y + na {\mathbf 1}_z$, with $(l,m,n)$ integers.
+
+In general, we call the primitive lattice vectors ${\mathbf a}_1$, ${\mathbf a}_2$ and ${\mathbf a}_3$. They don't need to be of unit length.
+
+Since the reciprocal lattice vectors ${\mathbf G}$ also form a lattice, they have a set of primitive vectors ${\mathbf b}_i$ as well, such that ${\mathbf G} = l' {\mathbf b}_1 + m' {\mathbf b}_2 + n' {\mathbf b}_3$.
+
+\begin{cue}
+Write the requirement that ${\mathbf G} \cdot {\mathbf R} = N 2 \pi$ in terms of these primitive reciprocal lattice vectors.
+\end{cue}
+
+Using the primitive reciprocal lattice vectors, this condition can be recast as
 
 \begin{equation}
 {\mathbf G} \cdot {\mathbf R} = ( l' {\mathbf b}_1 + m' {\mathbf b}_2 + n' {\mathbf b}_3) \cdot (l {\mathbf a}_1 + m {\mathbf a}_2 + n {\mathbf a}_3)  = N 2 \pi 
 \end{equation} 
 
-For all choices of $(l,m,n)$, this must hold for some $N$. We can satisfy this if we construct the ${\mathbf b}_i$ such that ${\mathbf a}_i \cdot {\mathbf b}_j = 2 \pi \delta_{ij}$, where $\delta_{ij}$ is non--zero only if $i=j$. We can do this by exploiting the fact that $ {\mathbf x} \cdot ({\mathbf x} \times {\mathbf y}) = 0$ for all vectors ${\mathbf x}$ and ${\mathbf y}$:
+For all choices of $(l,m,n)$, this must hold for some $N$. That's a lot of different integer combinations here! Let's see if we can come up with an elegant approach to deal with this.
+
+
+\begin{cue}
+Verify that we can satisfy the condition if we happen to find ${\mathbf b}_i$ vectors such that ${\mathbf a}_i \cdot {\mathbf b}_j = 2 \pi \delta_{ij}$, where $\delta_{ij}$ is non--zero only if $i=j$.
+\end{cue}
+
+The final question is how to construct these ${\mathbf b}_i$ vectors. We can do this by exploiting the fact that $ {\mathbf x} \cdot ({\mathbf x} \times {\mathbf y}) = 0$ for all vectors ${\mathbf x}$ and ${\mathbf y}$:
 
 \begin{align}
-{\mathbf b}_1 =& 2 \pi \frac{{\mathbf a}_2 \times {\mathbf a}_3}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3} \nonumber \\
-{\mathbf b}_2 =& 2 \pi \frac{{\mathbf a}_3 \times {\mathbf a}_1}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3} \nonumber \\
-{\mathbf b}_3 =& 2 \pi \frac{{\mathbf a}_1 \times {\mathbf a}_2}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3}
+{\mathbf b}_1 =&  \, 2 \pi \frac{{\mathbf a}_2 \times {\mathbf a}_3}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3} \nonumber \\
+  {\mathbf b}_2 =& \, 2 \pi \frac{{\mathbf a}_3 \times {\mathbf a}_1}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3} \nonumber \\
+  {\mathbf b}_3 =& \, 2 \pi \frac{{\mathbf a}_1 \times {\mathbf a}_2}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3}
 \label{eq-recip}
 \end{align} 
 
+\begin{cue}
+Verify that with this construction, the condition  ${\mathbf a}_i \cdot {\mathbf b}_j = 2 \pi \delta_{ij}$ indeed holds. 
+\end{cue}
+
 To summarise, when we build the Fourier transform of a periodic function, we only need to include plane waves with wave vectors that are reciprocal lattice vectors. To construct these reciprocal lattice vectors, we take the primitive lattice vectors and apply Eq.~\ref{eq-recip}.
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+In the denominators of Eq.~\ref{eq-recip}, should you evaluate the scalar or the vector product first?
+\end{exer}
+
 
 \pagebreak
 
@@ -1238,20 +1283,34 @@ We already know that for a Bloch mode there exists a vector ${\mathbf k}$ such t
 {\mathbf H} ({\mathbf r}+ {\mathbf R}) = e^{-j {\mathbf k} \cdot {\mathbf R}} {\mathbf H} ({\mathbf r})
 \end{equation} 
 
+\begin{cue}
+  Use this formula and what you know about the reciprocal lattice to figure out how to define the Brillouin zone in 3D
+\end{cue}
+
 If ${\mathbf k}$ is incremented by a reciprocal lattice vector ${\mathbf G}$, then $e^{-j {\mathbf k} \cdot {\mathbf R}}$ is unchanged by the very definition of reciprocal lattice vector. So, incrementing ${\mathbf k}$ by ${\mathbf G}$ results in the same physical mode.
 
 Therefore, we can restrict our attention to a region in ${\mathbf k}$--space where you cannot get from any point in that region to another in that region by adding a reciprocal lattice vector. This region is the Brillouin zone and consists of all the ${\mathbf k}$--vectors around the origin in reciprocal space that are closer to the origin than to any other neighbouring lattice point in the reciprocal lattice.
 
 These two definitions are equivalent. If a particular ${\mathbf k}$ is closer to a neighbouring lattice point, you can always reach it by staying close to the original point and then translating it by the ${\mathbf G}$ that reaches from one lattice point to the other (Fig.~\ref{fig-bril-bisector}).
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics{symmetry/figures/bisector}
 \caption{Construction of the Brillouin zone using bisectors of lines joining two lattice points. Any vector ${\mathbf k}'$ that reaches to an arbitrary point on the other side from $A$ can be expressed as the sum of a vector ${\mathbf k}$ on the same side and a lattice vector ${\mathbf G}$.}
 \label{fig-bril-bisector}
 \end{figure}
 
-To make this more concrete, let's consider the case of a 2D square lattice (Fig.~\ref{fig-bril-square}). Its lattice vectors are ${\mathbf a}_1 = a {\mathbf 1}_x$ and ${\mathbf a}_2 = a {\mathbf 1}_y$. In order to use Eq.~\ref{eq-recip}, we need a third basis vector in the $z$--direction, but for that we can choose one of any length, since the structure is uniform in the $z$--direction. For the reciprocal lattice, we end up with  ${\mathbf b}_1 = 2 \pi / a {\mathbf 1}_x$ and ${\mathbf b}_2 = 2 \pi / a {\mathbf 1}_y$. So, the reciprocal lattice is also a square lattice, but with spacing $2 \pi / a$ instead of $a$.
+To make this more concrete, let's consider the case of a 2D square lattice (Fig.~\ref{fig-bril-square}). Its lattice vectors are ${\mathbf a}_1 = a {\mathbf 1}_x$ and ${\mathbf a}_2 = a {\mathbf 1}_y$.
+
+\begin{cue}
+  What is the reciprocal lattice of this square lattice?
+\end{cue}
+
+In order to use Eq.~\ref{eq-recip}, we need a third basis vector in the $z$--direction, but for that we can choose one of any length, since the structure is uniform in the $z$--direction. For the reciprocal lattice, we end up with  ${\mathbf b}_1 = 2 \pi / a {\mathbf 1}_x$ and ${\mathbf b}_2 = 2 \pi / a {\mathbf 1}_y$. So, the reciprocal lattice is also a square lattice, but with spacing $2 \pi / a$ instead of $a$.
+
+\begin{cue}
+Now construct the Brillouin zone.
+\end{cue}
 
 To construct the Brillouin zone, we focus our attention on a particular point (the origin), and draw the lattice vectors that start at the origin. For each of these vectors, we draw the perpendicular bisectors, which divide the lattice into two half--planes (like in Fig.~ \ref{fig-bril-square}), one of which contains the origin. The intersection of all these half--planes forms the Brillouin zone (Fig.~\ref{fig-bril-square}).
 
@@ -1266,33 +1325,47 @@ To construct the Brillouin zone, we focus our attention on a particular point (t
 \begin{exer}
 % difficulty: normal
 % ugent  
-For a triangular lattice, what are the lattice vectors, reciprocal lattice vectors and Brillouin zone?
+For a triangular (hexagonal) lattice, what are the lattice vectors, reciprocal lattice vectors and Brillouin zone?
 \end{exer}
 
 \pagebreak
  
 \sectionugent{The irreducible Brillouin zone}
 
-Often, a photonic crystal will have additional symmetries. E.g. the square lattice we considered earlier stays invariant for rotations over 90, 180 and 270 degrees. Another symmetry for the square crystal is mirror symmetry about the 45 degrees diagonal. The collection of symmetry operations (rotations, reflections, inversion) for which the crystal is invariant is called the \emph{point group} of the crystal.
+Often, a photonic crystal will have additional symmetries. E.g. the square lattice we considered earlier stays invariant for rotations over 90, 180 and 270 degrees. Another symmetry for the square crystal is mirror symmetry about the 45 degrees diagonal. The collection of symmetry operations (rotations, reflections, inversion) for which the crystal is invariant is called the \textbf{point group} of the crystal.
 
 \begin{marginfigure}
 \centering
-\includegraphics[width=5cm]{symmetry/figures/irred_bril}
+\includegraphics[width=4cm]{symmetry/figures/irred_bril}
 \caption{The irreducible Brillouin zone for the square lattice}
 \label{fig-irred-bril}
 \end{marginfigure}
 
-All of these symmetries mean that there is additional redundancy in the Brillouin zone. The smallest region in the Brillouin zone for which the bands are not related by symmetry is called the \emph{irreducible Brillouin zone}. As shown in Fig.~\ref{fig-irred-bril}, the irreducible Brillouin zone for the square lattice is a triangular wedge $1/8$ the size of the full Brillouin zone. Also indicated in Fig.~\ref{fig-irred-bril} are some special high--symmetry points of the Brillouin zone. The origin is called the $\Gamma$--point, $X$ is in the direction along the shortest lattice vector and $M$ is in the direction of the diagonal. 
+All of these symmetries mean that there is additional redundancy in the Brillouin zone. The smallest region in the Brillouin zone for which the bands are not related by symmetry is called the \textbf{irreducible Brillouin zone}. As shown in Fig.~\ref{fig-irred-bril}, the irreducible Brillouin zone for the square lattice is a triangular wedge $1/8$ the size of the full Brillouin zone. Also indicated in Fig.~\ref{fig-irred-bril} are some special high--symmetry points of the Brillouin zone. The origin is called the $\Gamma$--point, $X$ is in the direction along the shortest lattice vector and $M$ is in the direction of the diagonal.
 
+Don't get confused: the irreducible Brillouin zone has further symmetries of its own (e.g. drop a line from $X$ perpendicular onto $\Gamma M$), but these are not symmetries of the original crystal, so they can't be used to reduce the Brillouin zone.
+
+Also note that when people talk about a $\Gamma X$ direction, they don't mean just the direction from the origin to the right in Fig.~\ref{fig-irred-bril}, but all the directions that are equivalent because of symmetry.
+
+\begin{exer}
+  % difficulty: trivial
+  % ugent
+How many $\Gamma M$ and $\Gamma X$ directions are there in the square crystal? Which of these correspond to directions from the origin to nearest neighbours, and which of them to directions from the origin to the second nearest neighbours?
+\end{exer}
+
+\pagebreak
 
 \sectionugent{Example: 2D square lattice of dielectric rods}
 
+As we have seen, with a 1D periodic structure, we have a band gap for normal incidence regardless of the index contrast. However, if we want to have a gap for oblique incidence too, we will need more--dimensional periodicity: carefully designed 2D structures can have a band gap for all propagation angles in a plane, whereas carefully designed 3D photonic crystals can have a gap for any propagation direction.
 
-TODO: If we want to have a gap for oblique incidence too, we will need more--dimensional periodicity: carefully designed 2D structures can have a band gap for all propagation angles in a plane, whereas carefully designed 3D photonic crystals can have a gap for any propagation direction.
+We say 'carefully designed structures', because in more dimensions, it is not the case that any periodic structure will automatically give rise to a band gap.
 
-We say 'carefully designed structures' because in more dimensions it is not the case that any periodic structure will give rise to a band gap. This is in contrast to the 1D case, where a gap opens up for normal incidence as soon as there is any index contrast.
+\begin{cue}
+Would you prefer a higher or lower index contrast in order to create an omnidirection band gap?
+\end{cue}
 
-TODO: mention index contrast, exercises on triangular lattice
+Obviously, a higher index contrast will help, because it will create stronger reflections for a larger range of incidence angles. Also the nature of the lattice and the shape of the scatterers will play a role. To study the interplay between all these effects, numerical simulations are required.
 
 \begin{marginfigure}
 \centering
@@ -1312,6 +1385,10 @@ As such a 3D plot quickly becomes difficult to interpret, people usually only pl
 \label{fig-bands-rods}
 \end{figure}
 
+\begin{exer}
+% difficulty: normal
+Based on symmetry arguments, do you think it will be easier to create a 2D omnidirectional bandgap for a square lattice or for a triagular lattice?
+\end{exer}
 
 \begin{exer}
 % difficulty: normal  
@@ -1337,20 +1414,46 @@ Band diagrams are symmetric around $k=0$, i.e. if there is a mode at frequency $
 
 \sectionugent{Applications of photonic crystals}
 
+Photonic crystals have a lot of similarities compared to electronic crystals, but also some differences. These are summarised in Table~\ref{tab-phot-cryst}.
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{c|c|c} 
+      \textbf{Property} & \textbf{Electronic} & \textbf{Photonic}\\
+      \hline
+      Particle & Electron & Photon \\
+      Periodicity & Electron potential & Refractive index \\
+      Equation & Schr\"{o}dinger, scalar & Maxwell, vectorial \\
+      Bands & Valence, conduction & Dielectric, air \\
+      Period & $\sim$ 0.1 nm & $\sim$ 100s of nm \\
+      Material & Naturally occurring & Mostly man-made \\
+    \end{tabular}
+  \end{center}
+  \caption{Comparison between electronic crystals and photonic crystals.}
+  \label{tab-phot-cryst}
+\end{table}
+
+
 Just as with semiconductors, photonic crystals only become truly useful when defects are introduced in the crystal lattice (Fig.~\ref{fig-defects}).
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics{symmetry/figures/2d_defects}
 \caption{Defects in a photonic crystal: a) point defect b) line defect c) surface defect }
 \label{fig-defects}
 \end{figure}
 
+\begin{cue}
+  How do you think light will behave in the presence of these defects?
+\end{cue}
+
 When we introduce a point defect in a crystal, we create a small region of space which is surrounded by a photonic crystal which acts as a perfect reflector. So, light has no way to escape from this region and we have created a resonating \emph{cavity}.
 
 Similarly, when we create a line defect, light cannot propagate into the crystal and therefore it has no choice but to follow the line defect. In this way, we have created a \emph{waveguide}.
 
 Finally, we can also create a surface defect, where we just exploit the \emph{mirror} properties of the photonic crystal.
+
+The nice thing about these structures is that they are very small, on the order of the wavelength of the light used. This is why they are often called \emph{nanophotonic} structures. They offer the possibility of miniaturising and integrating a variety of optical components (like e.g. the bends, splitters and filters from Fig.~\ref{fig-components}) onto a single photonic IC.
 
 \begin{figure}
 \centering
@@ -1359,13 +1462,34 @@ Finally, we can also create a surface defect, where we just exploit the \emph{mi
 \label{fig-components}
 \end{figure}
 
-The nice thing about these structures is that they are very small, on the order of the wavelength of the light used. This is why they are often called \emph{nanophotonic} structures. They offer the possibility of miniaturising and integrating a variety of optical components (like e.g. the bends, splitters and filters from Fig.~\ref{fig-components}) onto a single photonic IC.
-
 
 \section*{Review questions}
 
 \begin{itemize}
-\item TODO  
+\item How do you write the Helmholtz equation as an eigenvalue problem?
+\item What are Hermitian operators?
+\item What are some properties of Hermitian operators?
+\item What physical conclusions can you draw from the variational form of the Helmholtz equation?
+\item What is a symmetry?
+\item How can you use symmetries to classify modes?
+\item What can you say about eigenfunctions in the context of symmetry? 
+\item What are degenerate modes?
+\item What is a commutator? What does it express in relation to symmetry?
+\item What are the similarities and the differences between continuous and discrete translation symmetry?
+\item Why do guided modes of a waveguide form a discrete set?  
+\item Why do radiation modes of a waveguide form a continuous set?
+\item What is the light line?
+\item What are two forms of Bloch's theorem?
+\item What is a pseudoperiodic function?
+\item What is a lattice? Lattice vector? Primitive lattice vector?
+\item What is the Brillouin zone?
+\item How do you construct the Brillouin zone?  
+\item What is the irreducible Brillouin zone?  
+\item What is the reciprocal lattice?
+\item How do you construct the reciprocal lattice?
+\item What are photonic crystals?
+\item What do you need to create a photonic band gap?  
+\item What are some applications of photonic crystals?  
 \end{itemize}
 
 \pagebreak
