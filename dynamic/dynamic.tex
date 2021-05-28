@@ -30,13 +30,23 @@ Finally, we will talk about \textbf{continuous systems}, i.e. systems that are d
 \begin{marginfigure}
 \centering
 \includegraphics{dynamic/figures/CO2_chaos}
-\caption{Laser intensity as a function of modulator bias in a CO$_2$--laser.}
+\caption{Sampled laser intensity as a function of modulator bias in a CO$_2$--laser.}
 \label{fig-co2}
 \end{marginfigure}
 
-In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating current $I(t)=A+B \cos (\omega t)$ was applied to the modulator. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
+In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating current $I(t)=A+B \cos (\omega t)$ was applied to the modulator. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output power $P(t)$. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
 
-For low values of the DC offset, there is only a single branch, meaning that the laser intensity varies with the same frequency as the modulation current, which is just what you would expect. However, for larger DC offsets, there are suddenly two branches in the curves: the laser oscillation takes two periods of the modulation to repeat. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period. Increasing the DC offset even further leads to patterns which take 4, 8 or more modulation periods to repeat. There is even a certain range where the laser output varies between so many levels that it looks very chaotic.
+\begin{cue}
+For low values of the DC offset, there is only a single branch. What does this mean for the time evolution of the laser intensity?
+\end{cue}
+  
+For low values of the DC offset, for every offset value there is only a single value when sampling once per period. This means that the laser intensity varies with the same frequency as the modulation current, which is just what you would expect for a linear system.
+
+\begin{cue}
+For larger DC offsets, there are suddenly two branches in the curves. What can you say now about the time evolution?
+\end{cue}
+
+These two branches in the curves mean that e.g. for odd periods you get a certain sample value, whereas for even periods you get a different value. This means that the laser oscillation takes two periods of the modulation to repeat. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period. Increasing the DC offset even further leads to patterns which take 4, 8 or more modulation periods to repeat. There is even a certain range where the laser output varies between so many levels that it looks very chaotic.
 
 The combination of CO$_2$--laser plus absorber can be described by a set of relatively simple nonlinear rate equations (see e.g. the course 'High speed photonic components'). At first sight, it is very surprising that dynamical systems which are described by relatively simple--looking differential equations can exhibit such rich behaviour.
 
@@ -47,36 +57,53 @@ In this chapter, we will study some aspects of this complex behaviour of dynamic
 
 \sectionugent{Dynamical systems}
 
-A \textbf{dynamical system} consists of a set of possible states, together with a rule that determines the present state in terms of the past states. E.g., a simple model for growth of bacteria in a lab culture is that the population doubles each hour. So, the update rule of this system is
+A \textbf{dynamical system} consists of a set of possible states, together with a rule that determines the present state in terms of the past states. E.g., a simple model for growth of bacteria in a lab culture is that the population doubles each hour.
+
+\begin{cue}
+  What would the update rule of such a system look like?
+\end{cue}
+
+The update rule of this system is
 
 \begin{equation}
 x_n = f(x_{n-1}) = 2 x_{n-1} \label{eq-exp-growth}
 \end{equation}
 
- Here, the state $x$ designates the population size, and the subscript $n$ stands for the state at time step $n$, in this case the state after $n$ hours.  
+here, the state $x$ designates the population size, and the subscript $n$ stands for the state at time step $n$, in this case the state after $n$ hours.  
 
 Based on the properties of the update rule, we can distinguish several types of dynamical systems.
 
-Here, we require the rule to be \textbf{deterministic}, which means we can determine the present state uniquely from the past states.
+In this chapter, we require the rule to be \textbf{deterministic}, which means we can determine the present state uniquely from the past states. If we also consider randomness, e.g. in the presence of noise, our system is \textbf{stochastic}.
 
 If the update rule is applied at discrete times, the system is called a \textbf{discrete--time} system. In the limit of infinitesimally small time steps, the governing rules become a set of differential equations, and we end up with a \textbf{continuous--time} system.
 
 \pagebreak
 
-\sectionugent{1D maps}
+\sectionugent{1D maps - logistic growth}
 
 A function $f$ whose input and output space are the same is called a \textbf{map}. The evolution of a dynamical system is governed by multiple applications of the update rule $f$. Let us define $f^2(x)=f(f(x))$ and more generally define $f^k(x)$ as the results of applying $f$ to $x$ $k$ times. The set of points ${x_0, f(x_0), f^2(x_0), ...}$ is called the \textbf{orbit} of $x_0$ under $f$. The starting point $x_0$ is called the \textbf{initial value} of the orbit.
 
-Of interest in the study of dynamical systems is the limiting behaviour of $f^k(x)$ for large values of $k$. For the exponential growth scenario of Eq.~\ref{eq-exp-growth}, the population will clearly increase without bound, which is obviously not a realistic model. As you will show in the next exercise, an improved model might be given by
+Of interest in the study of dynamical systems is the limiting behaviour of $f^k(x)$ for large values of $k$. For the exponential growth scenario of Eq.~\ref{eq-exp-growth}, the population will clearly increase without bound, which is obviously not a realistic model.
+
+Let's build a slightly more realistic model, where e.g. competition for scarse resources will put brakes on growth as soon as the population gets too large.. First of all, rather than working with integer population values, we switch to a population size which is normalised between 0 and 1, with 1 representing some kind of reference value.
+
+\begin{cue}
+Instead of having a multiplication by 2 every time step, can you propose a simple model where this factor reduces the larger the population gets? 
+\end{cue}
+
+If we replace e.g. 2 by $2(1-x)$, we see that this factor is still close to 2 for low values of $x$, but reduces to 0 as $x$ starts approaching 1.
+
+The whole update rule then becomes
 
 \begin{equation}
 f(x) = 2 x (1-x) \label{eq-logistic-growth}
 \end{equation} 
 
-Here, the population size is normalised to lie between 0 and 1. Contrary to the exponential growth model, this so--called \textbf{logistic growth} model has a nonlinear update rule.
+Contrary to the exponential growth model, this so--called \textbf{logistic growth} model has a nonlinear update rule.
 
 \begin{exer}
-Show by using a calculator or a computer that populations evolving under the rule $f(x) = 2 x (1-x)$ tend to the population of 0.5 as time evolves. Do this for several initial values. You will find the size $x=0.5$ eventually 'attracts' any of these starting populations.
+% difficulty: trivial
+Show using computer simulations that populations evolving under the rule $f(x) = 2 x (1-x)$ tend to the population of 0.5 as time evolves. Do this for several initial values. You will find that the size $x=0.5$ eventually 'attracts' any of these starting populations.
 \end{exer}
 
 \pagebreak
@@ -92,17 +119,20 @@ A cobweb plot is a graphical representation of the orbit of an initial value und
 \label{fig-cobweb1}
 \end{marginfigure} 
 
+\begin{cue}
+Study this figure and convince yourself that this indeed represents an orbit. More specifically, explain why and when you use horizontal vs vertical lines, and whether they stop at the update rule or at the line under 45 degrees. Also, why is it important that this straight line has an angle of 45 degrees?
+\end{cue}
+
 Sketching the orbit of an initial point is done as follows. E.g., starting with the input value $x_0=0.1$ and $f(x)=2x(1-x)$ in Fig.~\ref{fig-cobweb1}, we can easily plot $f(0.1)$ by drawing a vertical line starting from $x_0=0.1$ to the curve $f(x)$, which gives us a value of $0.18$. Next, we need to turn this output value of $0.18$ to an input value to compute $f(0.18)$. This is done by drawing a horizontal line from the input--output pair $(0.1,0.18)$ until it reaches the diagonal $y=x$. Now, the process can be repeated by drawing a sequence of vertical and horizontal line segments between the curve of the update rule and the diagonal.
 
 From the cobweb plot, it is clear that the orbit will converge to the point $x=0.5$, which lies on the intersection of the graph of the update function and the diagonal.
 
 Such points where $f(x)=x$ are called \textbf{fixed points}. They are of extreme importance when studying the dynamics of a system, as they contain information on the asymptotic behaviour of the system.
 
-
 \begin{exer}
 % difficulty: normal
 % ugent
-Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Draw cobweb plots for orbits with initial values $x=1.6$ and $x=1.8$. Calculate the fixed points of this map. What happens with orbits starting out in the vicinity of each of these fixed points?
+Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Use your favourite tool to help you visualise what this function looks like. Draw cobweb plots for orbits with initial values $x=1.6$ and $x=1.8$. Calculate the fixed points of this map. What happens with orbits starting out in the vicinity of each of these fixed points?
 \end{exer}
 
 \pagebreak
@@ -123,11 +153,27 @@ To formulate this more precisely, let's first introduce the concept of an \textb
 N_\epsilon(p) = \{x \in \mathbb{R} ; |x-p| < \epsilon\}
 \end{equation} 
 
-A fixed point is called a sink if there exists an $\epsilon > 0$ such that for all points $x$ in the epsilon neighbourhood $N_\epsilon(p)$, $\lim_{k \to \infty} f^k(x) = p$.
+\begin{cue}
+Try and come up with a definition of a sink. How does the epsilon neighbourhood come into play? 
+\end{cue}
+
+We need to account for the fact that in general, only points that are 'close enough' to the sink will eventually end up there. So, we can say that a fixed point is a sink if there exists an $\epsilon > 0$ such that for all points $x$ in the epsilon neighbourhood $N_\epsilon(p)$, $\lim_{k \to \infty} f^k(x) = p$.
 
 Similarly, a fixed point is called a source if there is an epsilon neighbourhood $N_\epsilon(p)$ such that each $x$ in $N_\epsilon(p)$ except $p$ eventually maps outside of $N_\epsilon(p)$.
 
-How can we determine from the shape of $f$ whether a fixed point is a source or a sink? The answer lies in the following theorem:
+\begin{cue}
+Why do we need to exclude $p$ from this definition?
+\end{cue}
+
+Since $p$ is a fixed point, it will always map to itself, rather than running away outside of the epsilon neighbourhood.
+
+\begin{cue}
+Why don't we say for the definition of the source simply that $\lim_{k \to \infty} f^k(x) \ne p$, in analogy with the definition of the sink?
+\end{cue}
+
+For the source, we cannot use the limit of the orbit in the definition, for the simple reason that perhaps this limit is not defined! Indeed, later we'll see plenty of examples where orbits do not settle. Therefore, we demand instead that the orbit leaves the epsilon neighbourhood.
+
+Next question: how can we determine from the shape of $f$ whether a fixed point is a source or a sink? The answer lies in the following theorem:
 
 Let $f$ be a smooth map of $\mathbb{R}$ with fixed point $p$. 
 \begin{enumerate}
@@ -138,7 +184,11 @@ If $|f'(p)| > 1$, then $p$ is a source.
 \end{enumerate}
 
 
-We only prove the first part, as the second is completely analogous.
+We only prove the first part, as the second is very similar.
+
+\begin{cue}
+Since the theorem involves derivatives, write down $|f'(p)|$ as a limit involving a neighbouring point $x$.  
+\end{cue}
 
 From the definition of the derivative, we get (for points $x \ne p$)
 
@@ -146,11 +196,21 @@ From the definition of the derivative, we get (for points $x \ne p$)
 \lim_{x \to p} \frac{\left|f(x)-f(p)\right|}{|x-p|} = \left|f'(p)\right|
 \end{equation} 
 
-Since $|f'(p)| < 1$ there is number $a$ between $|f'(p)|$ and 1. This means that there must be a neighbourhood $N_\epsilon(p)$ where
+Since $|f'(p)| < 1$, you can always squeeze in an extra number $a$ between $|f'(p)|$ and 1.
+
+\begin{cue}
+Consider $\frac{\left|f(x)-f(p)\right|}{|x-p|}$ as a new function $g(x)$, for which we know the value at $x=p$. What can you say about the values of $g(x)$ for points close to $x=p$?  
+\end{cue}
+
+Assuming continuous functions, this means that there must be a neighbourhood $N_\epsilon(p)$ where
 
 \begin{equation}
 \frac{\left|f(x)-f(p)\right|}{|x-p|} < a, \hspace{.5cm} \forall x \in N_\epsilon(p)
 \end{equation}
+
+\begin{cue}
+Will $f(x)$ also be in $N_\epsilon(p)$ or not? Don't forget that $p$ is a fixed point. 
+\end{cue}
 
 Using the fact that $p$ is a fixed point, we get
 
@@ -166,11 +226,19 @@ Let's rewrite Eq.~\ref{eq-stab-fix} slightly:
 \left|f^1(x)-p\right| < a \left|f^0(x)-p\right|,  \hspace{.5cm} \forall x \in N_\epsilon(p)
 \end{equation} 
 
+\begin{cue}
+Why can we apply this procedure again? Do so!  
+\end{cue}
+
 Since $f^1(x)$ is also in $N_\epsilon(p)$, we can repeat the above procedure to get
 
 \begin{equation}
 \left|f^k(x)-p\right| < a\left|f^{k-1}(x)-p\right| < a^2\left|f^{k-2}(x)-p\right|< ... < a^k |x-p| 
 \end{equation}  
+
+\begin{cue}
+Finally, take the limit of $k \to \infty$.
+\end{cue}
 
 Since $a<1$, we get eventually that
 
@@ -180,22 +248,25 @@ Since $a<1$, we get eventually that
 
 This proves that $p$ is a sink.
 
-The set of initial conditions that is attracted to the sink is called the \textbf{basin} of the sink. From the proof of the stability theorem, we get that the basin of a sink contains at least a small epsilon neighbourhood, but in practise sinks often attract a large set of initial conditions.
+The set of initial conditions that is attracted to the sink is called the \textbf{basin} of the sink. From the proof of the stability theorem, we get that the basin of a sink contains at least a small epsilon neighbourhood, but in practice sinks often attract a large set of initial conditions.
 
 Finally, note that the stability theorem does not say anything about the case $|f'(p)|=1$.
 
 \begin{exer}
-% difficulty: normal
+% difficulty: trivial
 % ugent
 Discuss the stability of the fixed points of the map $f(x) = (3x-x^3)/2$.
 \end{exer}
-
 
 \begin{exer}
 % difficulty: normal
 Discuss the stability of the fixed points of the map $f(x) = x^3 + x$.
 \end{exer}
 
+\begin{exer}
+% difficulty: normal
+Prove the stability theorem explicitly for the case of a source.
+\end{exer}
 
 \pagebreak
 
@@ -256,7 +327,7 @@ Verify that the map $f(x)=2x^2-5x$ has fixed points at 0 at 3. Use this informat
 
 We have already seen that the scaling parameter $a$ in the family of logistic maps $f_a(x)=ax(1-x)$ can have a large influence on the behaviour of the system: for some ranges of $a$ there is only one attracting solution, for other ranges there is a stable period--2 orbit.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=10cm]{dynamic/figures/bifurcation}
 \caption{Bifurcation diagram for the family of logistic maps for $f(x)=ax(1-x)$.}
@@ -278,7 +349,14 @@ What do you observe as $n$ tends towards infinity? Repeat the experiment for the
 The number 4.669201609 is called \textbf{Feigenbaum's constant}.
 \end{exer}
 
-\begin{marginfigure}
+\begin{marginfigure}[-2.5cm]
+% credits: Rockefeller University
+% url: https://www.rockefeller.edu/news/26289-mitchell-feigenbaum-physicist-pioneered-chaos-theory-died/
+\includegraphics{dynamic/figures/m_feigenbaum}
+\caption{Mitchell Feigenbaum (1944-2019)}
+\end{marginfigure}
+
+\begin{marginfigure}[6.5cm]
 \centering
 \includegraphics{dynamic/figures/cobweb3}
 \caption{Cobweb plot for the logistic map in the case of a chaotic attractor.}
@@ -294,7 +372,7 @@ So are these non--periodic attractors what we mean by 'chaos'? Partly. Another i
 
 \sectionugent{Sensitive dependence on initial conditions}
 
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
@@ -330,6 +408,13 @@ ${\mathbf n}$  & ${\mathbf f_n(0.3)}$ & ${\mathbf f_n(0.301)}$  \\
 Table~\ref{table-sens} shows the orbits of two points 0.3000 and 0.3010 under the map $f(x)=4x(1-x)$. Although these points start out close together, they quickly diverge. In fact, no matter how close together we choose these two points, they will eventually move apart. This sensitive dependence on initial conditions has some far--reaching implications. If a dynamic system exhibits these chaotic properties, it means we can never hope to accurately predict the long--term behaviour of the system, even though it is governed by deterministic and well--known rules. Sensitive dependence on initial conditions means that small variations in the initial state of the system (e.g. due to measurement errors or finite numerical precision), will always get amplified to such a degree that it is impossible to make long--term predictions on the evolution of the system. This is the hallmark of \textbf{chaos}.
 
 To quantify how sensitive an orbit is to variations in initial conditions, we will now introduce the concept of Lyapunov numbers and Lyapunov exponents.
+
+\begin{marginfigure}
+% credits: Wikipedia
+% url: https://upload.wikimedia.org/wikipedia/commons/f/f5/Alexander_Ljapunow_jung.jpg
+\includegraphics{dynamic/figures/a_lyapunov}
+\caption{Aleksandr Lyapunov (1857–1918)}
+\end{marginfigure}
 
 We already learnt that for fixed points, stability is heavily influenced by the derivative of the map. E.g., if $p$ is a fixed point and $f'(p)=a > 1$, then the orbit of a point near $p$ will move away at a multiplicative rate of approximately $a$ per iteration. This also means that the difference between two points will by amplified at the same rate. Starting from these observations, we generalise this to arbitrary orbits by defining the \textbf{Lyapunov number} of an orbit $\{x_0, x_1, x_2, ... \}$ as
 
@@ -377,7 +462,14 @@ Is this a useful formula from a computational point of view?
 
 \pagebreak
 
-\sectionugent{2D discrete systems - the H\'{e}non map}
+\sectionugent{2D maps - the H\'{e}non map}
+
+\begin{marginfigure}
+% credits: CNRS
+% url: https://images.math.cnrs.fr/Michel-Henon-et-le-systeme-de-Henon-Heiles.html?lang=fr
+\includegraphics{dynamic/figures/m_henon}
+\caption{Michel H\'{e}non (1931-2013)}
+\end{marginfigure}
 
 The H\'{e}non map is to two--dimensional systems what the logistic map is to one--dimensional systems. It is governed by simple--looking equations, yet already exhibits most of the rich dynamic behaviour seen in more complicated systems. The version of the H\'{e}non map that we will study is
 
@@ -387,7 +479,7 @@ f(x,y) = (a-x^2+by, x)
  
 For now, set $a=1.28$ and $b=-0.3$. If we start with the initial condition $(x,y)=(0,0)$, we find that the orbit moves towards a period--2 sink. The left part of Fig.~\ref{fig-henon-basin} shows an analysis of the results of iteration with general initial values. Points in black represent initial conditions whose orbits diverge towards infinity, white points are initial conditions which converge to the period--2 sink. For $a=1.28$ the boundary of the basin, which moves in and out of the rectangle of initial values shown here, is smooth.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=11cm]{dynamic/figures/henon_basin}
 \caption{Influence of initial conditions for the H\'{e}non map with $b=-0.3$. Initial values whose trajectories diverge to infinity are coloured black. The squares show the location of a period--2 sink, which attracts white initial conditions. On the left, $a=1.28$ and the basin boundary is smooth. On the right, $a=1.4$, and the boundary is fractal.}
@@ -396,7 +488,7 @@ For now, set $a=1.28$ and $b=-0.3$. If we start with the initial condition $(x,y
 
 For $a=1.4$ and $b=-0.3$, we get a completely different picture: the boundary of the basin is no longer smooth, but is in a sense infinitely complicated: if we were to zoom in on it, we would still see the same level of complexity, no matter how deep we would zoom. This is illustrated in Fig.~\ref{fig-henon-zoom}, which shows successive zooms of a small region of the basin boundary, indicated by a rectangle in the picture. The \textbf{self--similarity} at different zoom levels is apparent. We call such a self--similar structure with infinite complexity a \textbf{fractal}.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=8cm]{dynamic/figures/henon_zoom}
 \caption{Self--similarity of the H\'{e}non basin boundary for $a=1.4$ and $b=-0.3$. The left picture corresponds to $[-1.88,-1.6] \times [-0.52,-0.24]$, which was indicated by the box in Fig.~~\ref{fig-henon-basin}. The right picture corresponds to the box in the left picture.}
@@ -420,6 +512,12 @@ $$P_c(z)=z^2+c$$
 For each value of $c$, check numerically if the orbit of the initial point $z=0$ diverges towards infinity. Plot the points $c$ for which this orbit stays bounded. The set of these points is called the \textbf{Mandelbrot set} and is plotted in Fig.~\ref{fig-mandelbrot}.
 \end{exer}
 
+\begin{marginfigure}[]
+% credits: Wikipedia
+% url: https://en.wikipedia.org/wiki/Benoit_Mandelbrot#/media/File:Benoit_Mandelbrot,_TED_2010.jpg
+\includegraphics{dynamic/figures/b_mandelbrot}
+\caption{Benoit Mandelbrot (1924-2010)}
+\end{marginfigure}
 
 \begin{marginfigure}
 \centering
@@ -578,6 +676,13 @@ $$\lim_{n \to \infty}\begin{bmatrix}4.5 & 8 \\ -2 & -3.5 \end{bmatrix} ^ n \begi
 
 \sectionugent{Nonlinear maps and the Jacobian matrix}
 
+\begin{marginfigure}[0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Carl_Gustav_Jacob_Jacobi
+  \includegraphics{numeric/figures/c_jacobi}
+  \caption{Carl Gustav Jacob Jacobi (1804-1851)}
+\end{marginfigure}
+
 To construct the linearisation around a fixed point, we now have to calculate a matrix rather than a single derivative. This matrix is called the \textbf{Jacobian} and is defined as follows.
 
 Let ${\mathbf f}=(f_1,f_2, ... ,f_n)$ be a map on $\mathbb{R}^n$ and let ${\mathbf p} \in \mathbb{R}^n$. The Jacobian matrix of ${\mathbf f}$ at ${\mathbf p}$, denoted as ${\mathbf Df}({\mathbf p})$, is defined as
@@ -591,7 +696,7 @@ Let ${\mathbf f}=(f_1,f_2, ... ,f_n)$ be a map on $\mathbb{R}^n$ and let ${\math
 \end{bmatrix} 
 \end{equation} 
 
-Given a vector ${\mathbf p}$ and a small increment {\mathbf h}, the increment in ${\mathbf f}$ due to ${\mathbf h}$ is given by
+Given a vector ${\mathbf p}$ and a small increment ${\mathbf h}$, the increment in ${\mathbf f}$ due to ${\mathbf h}$ is given by
 
 \begin{equation}
 {\mathbf f}({\mathbf p} + {\mathbf h}) - {\mathbf f}({\mathbf p}) = {\mathbf Df}({\mathbf p}) \cdot {\mathbf h} + O\left(|{\mathbf h}|^2\right)
@@ -694,6 +799,14 @@ For linear maps, the stable and unstable manifolds are easily determined, and ar
 
 The shape of these curves should look familiar. Indeed, the following properties hold:
 
+
+\begin{marginfigure}[-.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Henri_Poincar%C3%A9#/media/File:PSM_V82_D416_Henri_Poincare.png
+  \includegraphics{dynamic/figures/poincare_photo}
+  \caption{Henri Poincaré (1854-1912)}
+\end{marginfigure}
+
 \begin{enumerate}
 \item
 The stable manifold forms the boundary between the basin of the sink and the basin at infinity.
@@ -702,6 +815,7 @@ The attractor of the map lies along the unstable manifold (which can be either a
 \end{enumerate}
 
 A further important aspect of the unstable and stable manifold is the following: if they cross (at another point than the saddle of course), there are automatically an infinite numbers of such crossings. Also, the system will show chaotic behaviour in such a case.
+
 
 These insights are mainly due to Poincar\'{e}, who developed much of the theory underlying chaotic systems when studying the dynamics of three bodies moving under the force of gravity.
 
@@ -792,12 +906,19 @@ $$\frac{dx}{dt} = a x (1-x)$$
 
 \sectionugent{Example: the Lorenz attractor}
 
+\begin{marginfigure}[0.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Edward_Norton_Lorenz#/media/File:Edward_lorenz.jpg
+  \includegraphics{dynamic/figures/e_lorenz}
+  \caption{Edward Norton Lorenz (1917-2008)}
+\end{marginfigure}
+
 We finish the chapter by looking at the most famous set of differential equations which exhibit chaotic behaviour. They were formulated in the early 1960s by Lorenz, in the context of weather forecasting:
 
 \begin{align}
-\frac{dx}{dt} =& -\sigma x + \sigma y \\
-\frac{dy}{dt} =& -xz + r y - y \\
-\frac{dz}{dt} =& xy - bz
+\frac{dx}{dt} =& \, -\sigma x + \sigma y \\
+\frac{dy}{dt} =& \, -xz + r y - y \\
+\frac{dz}{dt} =& \, xy - bz
 \end{align} 
 
 For $\sigma=10$ and $b=8/3$, Lorenz found that the system behaves 'chaotically' whenever $r$ exceeds the critical value of $24.74$. In that case, all solutions appear to be extremely sensitive to initial conditions, and almost all of them are apparently neither periodic solutions nor convergent to periodic solutions or equilibria. Instead, he found found one of the very first chaotic attractors, which is now called the Lorenz attractor. This attractor is plotted in Fig.~\ref{fig-lorenz}.
