@@ -30,29 +30,37 @@ Finally, we will talk about \textbf{continuous systems}, i.e. systems that are d
 \begin{marginfigure}
 \centering
 \includegraphics{dynamic/figures/CO2_chaos}
-\caption{Sampled laser intensity as a function of modulator bias in a CO$_2$--laser.}
+\caption{Sampled laser intensity as a function of the DC bias $A$ in a CO$_2$--laser.}
 \label{fig-co2}
 \end{marginfigure}
 
-In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating current $I(t)=A+B \cos (\omega t)$ was applied to the modulator. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output power $P(t)$. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
+In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating current $I(t)=A+B \sin (\omega t)$ was applied to the modulator. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output power $P(t)$. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
 
 \begin{cue}
-For low values of the DC offset, there is only a single branch. What does this mean for the time evolution of the laser intensity?
+For low values of the DC bias, there is only a single branch. What does this mean for the time evolution of the laser intensity?
 \end{cue}
-  
-For low values of the DC offset, for every offset value there is only a single value when sampling once per period. This means that the laser intensity varies with the same frequency as the modulation current, which is just what you would expect for a linear system.
+
+\begin{marginfigure}
+\centering
+% -.5*sin(x)+0.9+.5*sin(0.5*x)
+\includegraphics{dynamic/figures/lille}
+\caption{Time evolution of the modulator current (top), of the laser output for low DC bias (middle) and of the laser output for higher DC bias.}
+\label{fig-lille}
+\end{marginfigure}
+
+For low values of the DC bias, for every bias value there is only a single value when sampling once per period. This means that the laser intensity varies with the same frequency as the modulation current, which is just what you would expect for a linear system (Fig. \ref{fig-lille} middle).
 
 \begin{cue}
-For larger DC offsets, there are suddenly two branches in the curves. What can you say now about the time evolution?
+For larger DC bias, there are suddenly two branches in the curves. What can you say now about the time evolution?
 \end{cue}
 
-These two branches in the curves mean that e.g. for odd periods you get a certain sample value, whereas for even periods you get a different value. This means that the laser oscillation takes two periods of the modulation to repeat. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period. Increasing the DC offset even further leads to patterns which take 4, 8 or more modulation periods to repeat. There is even a certain range where the laser output varies between so many levels that it looks very chaotic.
+These two branches in the curves mean that e.g. for odd periods you get a certain sample value, whereas for even periods you get a different value. This means that the laser oscillation takes two periods of the modulation to repeat. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period (Fig. \ref{fig-lille} bottom).
+
+Increasing the DC bias even further leads to patterns which take 4, 8 or more modulation periods to repeat. There is even a certain range where the laser output varies between so many levels that it looks very chaotic.
 
 The combination of CO$_2$--laser plus absorber can be described by a set of relatively simple nonlinear rate equations (see e.g. the course 'High speed photonic components'). At first sight, it is very surprising that dynamical systems which are described by relatively simple--looking differential equations can exhibit such rich behaviour.
 
 In this chapter, we will study some aspects of this complex behaviour of dynamical systems, starting from very simple 1D models described by difference equations. Higher dimensional systems and systems described by differential equations instead of difference equations will also be treated.
-
-\pagebreak
 
 
 \sectionugent{Dynamical systems}
@@ -132,8 +140,16 @@ Such points where $f(x)=x$ are called \textbf{fixed points}. They are of extreme
 \begin{exer}
 % difficulty: normal
 % ugent
-Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Use your favourite tool to help you visualise what this function looks like. Draw cobweb plots for orbits with initial values $x=1.6$ and $x=1.8$. Calculate the fixed points of this map. What happens with orbits starting out in the vicinity of each of these fixed points?
+Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Draw cobweb plots for orbits with initial values $x=1.6$ and $x=1.8$ (Fig. \ref{fig-cobweb-ex}). Calculate the fixed points of this map. What happens with orbits starting out in the vicinity of each of these fixed points?
 \end{exer}
+
+\begin{figure}
+\centering
+\includegraphics{dynamic/figures/cobweb_ex}
+\caption{For $f(x) = (3x-x^3)/2$, draw cobweb plots for orbits with initial values $x=1.6$ and $x=1.8$.}
+\label{fig-cobweb-ex}
+\end{figure} 
+
 
 \pagebreak
 
@@ -157,9 +173,33 @@ N_\epsilon(p) = \{x \in \mathbb{R} ; |x-p| < \epsilon\}
 Try and come up with a definition of a sink. How does the epsilon neighbourhood come into play? 
 \end{cue}
 
-We need to account for the fact that in general, only points that are 'close enough' to the sink will eventually end up there. So, we can say that a fixed point is a sink if there exists an $\epsilon > 0$ such that for all points $x$ in the epsilon neighbourhood $N_\epsilon(p)$, $\lim_{k \to \infty} f^k(x) = p$.
+\begin{marginfigure}
+\centering
+\includegraphics{dynamic/figures/sink}
+\caption{All points in the neigbourhood of a sink $p$ eventually end up at $p$ after applying the map.}
+\label{fig-sink}
+\end{marginfigure}
 
-Similarly, a fixed point is called a source if there is an epsilon neighbourhood $N_\epsilon(p)$ such that each $x$ in $N_\epsilon(p)$ except $p$ eventually maps outside of $N_\epsilon(p)$.
+We need to account for the fact that in general, only points that are 'close enough' to the sink will eventually end up there. So, we can say that a fixed point is a sink if there exists an $\epsilon > 0$ such that for all points $x$ in the epsilon neighbourhood the map will eventually take that point to fixed point $p$.
+
+Or, in symbols:
+
+\begin{equation}
+\exists \, \epsilon : \forall x \in  N_\epsilon(p) : \lim_{k \to \infty} f^k(x) = p
+\end{equation}
+
+\begin{marginfigure}
+\centering
+\includegraphics{dynamic/figures/source}
+\caption{All points in the neigbourhood of a sink $p$ (except for $p$ itself) eventually end up outside of that neighbourhood after applying the map.}
+\label{fig-source}
+\end{marginfigure}
+
+Similarly, a fixed point is called a source if there exists an epsilon neighbourhood $N_\epsilon(p)$ such that each $x$ in $N_\epsilon(p)$ except $p$ eventually maps outside of $N_\epsilon(p)$:
+
+\begin{equation}
+\exists \, \epsilon : \forall x \in  N_\epsilon(p) \setminus \{p\} : \exists \, K : \forall k > K : f^k(x) \notin  N_\epsilon(p)
+\end{equation}
 
 \begin{cue}
 Why do we need to exclude $p$ from this definition?
@@ -237,7 +277,7 @@ Since $f^1(x)$ is also in $N_\epsilon(p)$, we can repeat the above procedure to 
 \end{equation}  
 
 \begin{cue}
-Finally, take the limit of $k \to \infty$.
+Finally, take the limit of $k \to \infty$. Why did we need to introduce the variable $a$?
 \end{cue}
 
 Since $a<1$, we get eventually that
