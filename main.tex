@@ -29,6 +29,9 @@ fontsize=11pt, % Base font size
 
 % Minitoc
 
+\usepackage{tikz}
+\usepackage{tikzpagenodes}
+
 \usepackage{etoc}
 
 \etocsetstyle{section}
@@ -197,7 +200,7 @@ fontsize=11pt, % Base font size
 %----------------------------------------------------------------------------------------
 
 \KOMAoptions{twoside=semi}
-%\input{preamble/frontpage}
+\input{preamble/frontpage}
 \KOMAoptions{twoside=false}
 
 \frontmatter % Denotes the start of the pre-document content, uses roman numerals
@@ -321,6 +324,7 @@ fontsize=11pt, % Base font size
 
 \input{solutions}
 \input{hints}
+\input{postamble/credits}
 % Manually created biobliograhpy:
 \input{postamble/bibliography}
 
