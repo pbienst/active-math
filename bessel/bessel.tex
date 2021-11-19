@@ -158,8 +158,9 @@ This series expansion can be used to numerically calculate the Bessel functions.
 \end{figure}
 
 \begin{exer}
-% difficulty: normal
-Use the series expansion of Bessel functions to show that
+  % difficulty: normal
+  % youtube: vUUSHMYSgTo
+Use the series expansion of Bessel functions Eq.~\ref{eq-bessel-series}, to show that
 $$\lim_{x \to 0} \frac{J_1(x)}{x}= \frac{1}{2}$$
 \end{exer}
 
@@ -172,7 +173,8 @@ $$J_{-n}(x)=(-1)^nJ _n(x)$$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: Uqi-QP5UWnQ
 Use the product of the generating functions $g(x,t)$ and $g(x,-t)$ to show that
 $$\left[ J_0(x) \right]^2 + 2 \sum_{n=1}^\infty \left[ J_n(x) \right]^2 = 1 $$
 \end{exer}
@@ -180,12 +182,13 @@ $$\left[ J_0(x) \right]^2 + 2 \sum_{n=1}^\infty \left[ J_n(x) \right]^2 = 1 $$
 \pagebreak
 
 \begin{exer}
-% difficulty: normal
-Evaluate the following contour integral along the unit circle in the complex $t$-plane:
+  % difficulty: normal
+  % youtube: fv8YeVfvu-k
+Evaluate the following contour integral along the unit circle in the complex $t$-plane, making use of what you know about integrals of powers:
 
 $$ \oint_C t^{-n-1} g(x,t) dt $$
 
-In doing so, derive the following equations:
+Rewrite the integral using parametrisation. In doing so, derive the following equations:
 
 $$J_n(x) = \frac {1}{2\pi} \int_0 ^ {2 \pi} \cos (n \theta - x \sin \theta ) d\theta $$
 
@@ -193,7 +196,8 @@ $$ J_0(x) =  \frac {1}{2\pi} \int_0 ^ {2 \pi}  e^{j x \cos \theta} d \theta $$
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: stDsIYKna3k
 By evaluating the generation function in a suitable point, prove the following
 $$ \cos x =  J_0(x) + 2 \sum_{n=1}^\infty (-1)^n J_{2n}(x)  $$
 $$ \sin x =  2 \sum_{n=0}^\infty (-1)^n J_{2n+1}(x)  $$
@@ -225,7 +229,7 @@ Substituting Eq.~\ref{eq-g-bessel} back into this, we get
 \end{equation}
 
 \begin{cue}
-Use this to derive a relationship between $J_{n-1}(x)$, $J_{n-1}(x)$ and  $J_{n+1}(x)$. 
+Use this to derive a relationship between $J_{n-1}(x)$, $J_{n}(x)$ and  $J_{n+1}(x)$. 
 \end{cue}
 
 \noindent\marginnote{If you'd like more intermediate steps here, have a look at the video.}Equating the coefficients of like powers of $t$, we get
@@ -260,8 +264,9 @@ $$\begin{array}{lcll}a) & J_{n-1}(x) = \frac{n}{x}J_n(x) + J_n'(x) \\b) & J_{n+1
 \pagebreak
 
 \begin{exer}
-% difficulty: normal
-First, show that
+  % difficulty: normal
+  % youtube: eDrL8rdb7Wc
+First, using results from Ex.~\ref{ex-recurrence}, show that
 $$\int_0^\infty J_1( x) dx =  1$$
 Then, extend this to show that
 $$\int_0^\infty J_1( x) dx = \int_0^\infty J_3( x) dx = \int_0^\infty J_5( x) dx = \cdots = 1$$
@@ -278,7 +283,8 @@ $$\frac{J_1(k)}{k^3}\left(k^2-4\right)$$
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: _I8YltCGsnI
 Fraunhofer diffraction is governed by the following equation:
 
 $$U(x_0, y_0) \sim \iint_{-\infty}^{\infty} U(x_1, y_1) e ^{j \frac{2\pi}{\lambda z} (x_0 x_1 + y_0 y_1)} dx_1 dy_1  $$
@@ -304,7 +310,7 @@ $$U(\rho_0) \sim  \int_0^{\infty} \int_0^{2 \pi} U(\rho_1)  e ^{j \frac{2\pi}{\l
 
 Then, proceed to calculate the so-called Airy diffraction pattern for a circular aperture of radius $a$:
 
-$$U(\rho_0) \sim \frac {J_1\left( 2 \pi \frac {\rho_0 a}{\lambda z} \right)}{\frac{\rho_0}{\lambda z a}}$$
+$$U(\rho_0) \sim \frac {J_1\left( 2 \pi \frac {\rho_0 a}{\lambda z} \right)}{ 2 \pi \frac{\rho_0}{\lambda z a}}$$
 
 \end{exer}
 
@@ -577,14 +583,15 @@ Replace $t$ with $kx$ again and perform some cleaning.
 This is equal to
 
 \begin{equation}
-\int x J_n^2(k x) dx = \frac{x^2}{2}\left[{J_n'^2(kx) + \left(1 - \frac{n^2}{k^2x^2}\right) J_n^2(kx)}\right] + C
+  \int x J_n^2(k x) dx = \frac{x^2}{2}\left[{J_n'^2(kx) + \left(1 - \frac{n^2}{k^2x^2}\right) J_n^2(kx)}\right] + C
+\label{eq-fourier-bessel-2b}
 \end{equation} 
 
 \begin{cue}
 Use this to calculate our normalisation integral. Fall back on the recurrence relations and don't forget that $\xi_m$ is a zero of $J_n(x)$.
 \end{cue}
 
-Returning to our normalisation integral in Eq.~\ref{eq-fourier-bessel-2}, we get that
+Returning to our normalisation integral in the right-hand side of Eq.~\ref{eq-fourier-bessel-2}, we get from \ref{eq-fourier-bessel-2b} that
 
 \begin{equation}
 \int_0^1 x J_n^2(\xi_m x) dx = \frac{1}{2}\left[{J_n'^2(\xi_m) + \left(1 - \frac{n^2}{\xi_m^2}\right) J_n^2(\xi_m)}\right] + \frac{n^2}{2\xi_m^2} J_n^2(0)
@@ -654,7 +661,8 @@ This function is also called the \emph{Neumann} function, and is sometimes symbo
 Fig.~\ref{fig-bessel-Y} plots the Neumann functions of the lowest three orders. Note the logarithmic type singularity at $x=0$.
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: oBU4pRG-J1E
 The Neumann functions are supposed to be linearly independent from the Bessel functions. However, it seems like they are defined as linear combination of Bessel functions, as $\cos(\nu \pi)$ and $\sin(\nu \pi)$ are just numbers. What is going on? Focus your efforts on the case where $\nu$ is an integer.
 \end{exer}
 
@@ -872,7 +880,8 @@ Once the propagation constants are found, the field profiles can be calculated f
 
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: oEhrn4SiskU
 Solve the Helmholtz equation in free space in cylindrical coordinates. Look at the evolution of the intensity of the solution as a function of $z$. What do you notice? These modes are called \emph{Bessel beams}.
 \end{exer}
 

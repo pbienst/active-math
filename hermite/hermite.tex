@@ -117,7 +117,7 @@ Let's look for higher-order solutions to the paraxial wave equation. To achieve 
 A(x,y,z) = X\left({\frac{\sqrt{2}x}{W(z)}}\right) Y\left({\frac{\sqrt{2}y}{W(z)}}\right) e^{-jZ(z)} A_G(x,y,z) \label{eq-gauss-higher}
 \end{equation} 
 
-Here, $A_G$ is the Gaussian beam from Eq.~\ref{eq-gauss} and $X()$, $Y()$ and $Z()$ are three real--valued functions that we still need to determine such that Eq.~\ref{eq-gauss-higher} satisfies the paraxial Helmholtz equation.
+Here, $A_G$ is the Gaussian beam from Eq.~\ref{eq-gauss} and $X$, $Y$ and $Z$ are three real--valued functions that we still need to determine such that Eq.~\ref{eq-gauss-higher} satisfies the paraxial Helmholtz equation.
 
 \begin{cue}
 Calculate $\partial A^2 / \partial x^2$. Use the definition of the Gaussian beam Eq.~\ref{eq-gauss}. 
@@ -284,17 +284,20 @@ H_6(x) = & \, 64x^6-480x^4+720x^2-120 \nonumber
 \pagebreak
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: lu0xs5Aky00
 Compared to the generating function of the Bessel functions, what feature of the generating function of the Hermite polynomials makes that Hermite polynomials are actually polynomials, i.e. that their series expansion terminates?
 \end{exer}
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: KiTa5xbfMd4
 In Eq.~\ref{eq-g-hermite}, why are there no terms for negative powers of $t$?
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: HS-UnSI-8ck 
 Show that the coefficients of $H_n(x)$ are all integers.
 \begin{hnt}
 Factor out $n \choose r$.  
@@ -384,7 +387,7 @@ Returning to our higher--order solutions of the paraxial wave equation, Fig.~\re
 \begin{figure}
 \centering
 \includegraphics[width=5.5cm]{hermite/figures/gauss}
-\caption{Some Gauss--Hermite modes.}
+\caption{Cross-sections of some Gauss--Hermite modes in the $xy$ plane. Numbers $(n,m)$ above the modes correspond to the order of the polynomials in the $x$ resp. $y$-direction.}
 \label{fig-gauss-hermite}
 \end{figure}
 
@@ -480,7 +483,8 @@ When we integrate this over $x$ from $-\infty$ to $\infty$, the terms with $m \n
 \end{equation}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: 7ZOG3fnD584
 Show that $\int_{-\infty}^{\infty}e^{-x^2}dx = \sqrt{\pi}$
 \begin{hnt}
 Write the integral as
@@ -575,14 +579,16 @@ Verify this formula for a few values of $n$ to get a feeling for how it works, a
 \pagebreak
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: _hZR2ao4RO4
 For $0 \leq m \leq n-1$, use the Rodriguez formula to show that 
 $$\int_{-\infty}^{\infty}x^m e^{-x^2} H_n(x) dx = 0$$
 \end{exer}
 
 
 \begin{exer}
-% difficulty: normal 
+  % difficulty: normal
+  % youtube: STRe4B6eZv0
 Assume that based only on Hermite's differential equation, we managed to derive the recurrence relation involving $H_n'(x)$, as well as the values of $H_n(0)$. Based only on this information, derive the explicit form of the generating function $g(x,t)$ defined as
 
 $$g(x,t) = \sum_{n = 0}^{\infty} H_n(x)\frac{t^n}{n!} $$
@@ -597,7 +603,8 @@ c) Derive $f(t)$ by evaluating the expression for $x=0$.
 \end{exer}
 
 \begin{exer}
-% difficulty: hard  
+  % difficulty: hard
+  % youtube: -Rykwhjj1JA
 Prove that 
 $$ | H_n(x) | \le  | H_n(jx) | $$
 \begin{hnt}
@@ -607,7 +614,8 @@ $$ | H_n(x) | \le  | H_n(jx) | $$
 
 
 \begin{exer}
-% difficulty: hard 
+  % difficulty: hard
+  % youtube: R5saFe_skGw 
 Show that 
 $$\left( 2x - \frac{d}{dx} \right)^n 1 = H_n(x)$$
 \begin{hnt}
@@ -617,7 +625,8 @@ $$\left( 2x - \frac{d}{dx} \right)^n 1 = H_n(x)$$
 
 
 \begin{exer}
-% difficulty: hard 
+  % difficulty: hard
+  % youtube: g5kU_N383Dc
 Calculate
 $$ \int_{-\infty}^{\infty} e^{-x^2} x^2 H_n^2(x) dx $$
 This integral occurs in the calculation of the mean-square displacement of a quantum oscillator.
@@ -632,7 +641,8 @@ Expand $x H_n(x)$ using a recurrence relation and apply the orthogonality condit
 \pagebreak
 
 \begin{exer}
-% difficulty: hard  
+  % difficulty: hard
+  % youtube: LxtS5QezdyQ 
 Expand the following integral in a power series in $t$
 
 $$ \int_{-\infty}^{\infty} e^{-x^2/2} g(x,t) dx$$
@@ -649,7 +659,8 @@ $$\int_{-\infty}^{\infty} e^{-x^2/2} H_{2m+1}(x) dx = 0 $$
 
 
 \begin{exer}
-% difficulty: hard  
+  % difficulty: hard
+  % youtube: DP4aVSd3YBY
 Multiply the generating function by $t^{-k-1}$ and integrate over the unit circle in the complex $t$-plane to show that
 
 $$H_k(x) =\frac{k!}{2 \pi j} \oint \frac{e^{-t^2 +2tx}}{t^{k+1}}dt $$
@@ -657,25 +668,4 @@ $$H_k(x) =\frac{k!}{2 \pi j} \oint \frac{e^{-t^2 +2tx}}{t^{k+1}}dt $$
 Then, show by direct substitution that this expression satisfies Hermite's differential equation.
 
 \begin{hnt}
-Try to write the integrand as a total differential.
-\end{hnt}
-  
-\end{exer}
-
-
-\section*{Review questions}
-
-\begin{itemize}
-\item What are Hermite polynomials?  
-\item How can a generating function be used to define Hermite polynomials?
-\item What is the relationship between Hermite polynomials and Gauss-Hermite modes?  
-\item Under what scalar product are Hermite polynomials orthogonal?
-\item For which physical systems would you use a series expansion based on Hermite polynomials?  
-\end{itemize}
-
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../main"
-%%% End:
+Try to write the integrand as a total differential of an exponential divided by $t^k

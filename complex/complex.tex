@@ -87,7 +87,7 @@ Use this definition to find the derivative of $f(z)=z^2$.
 
 To calculate the derivative of  $f(z)=z^2$, we find that
 
-$$f'(z)=\lim_{\Delta z \to 0} \frac{(z+\Delta z)^2 - z^2}{\Delta z} = \lim_{\Delta z \to 0} \frac{2 z \Delta z - (\Delta z)^2}{\Delta z}=2z $$
+$$f'(z)=\lim_{\Delta z \to 0} \frac{(z+\Delta z)^2 - z^2}{\Delta z} = \lim_{\Delta z \to 0} \frac{2 z \Delta z + (\Delta z)^2}{\Delta z}=2z $$
 
 This gives the same result as in the real-valued case.
 
@@ -492,14 +492,15 @@ Apply Cauchy's formula to each of the terms of $$\frac{f(z_0+\Delta z_0) - f(z_0
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: tyNs5agWKZw
 Show that
 
   $$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
   
 This also means that if a function is analytic, then the derivatives of any order automatically exist.
 \begin{hnt}
-Repeating the technique used in Ex. \ref{ex-cauchy-diff}.
+Use induction and repeat the technique used in Ex. \ref{ex-cauchy-diff}.
 \end{hnt}  
 \end{exer}
 
@@ -544,7 +545,7 @@ Our aim is to transform this formula into a series expansion. One can prove that
 \end{equation}
 
 \begin{cue}
-Manipulate the different terms in Eq.~\ref{laurent_0} so that we are able to use the geometric series. Pay special attention to the radius of convergenc, by dividing the numerator and denominator by $z$ or $z'$.
+Manipulate the different terms in Eq.~\ref{laurent_0} so that we are able to use the geometric series. Pay special attention to the radius of convergence, by dividing the numerator and denominator by $z$ or $z'$.
 \end{cue}
 
 Simple manipulation of Eq.~\ref{laurent_0} yields
@@ -648,7 +649,8 @@ $$f(z)= - \sum_{k=0}^{\infty} \left(\sum _{m=0}^k \frac{1}{m!} \right) z^k $$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: Jo_c_zza3aA
   Same as Exercise \ref{ex_laurent_1}, but for the outer ring  $1 < | z |$.
 
 \begin{sol}
@@ -659,12 +661,14 @@ $$f(z)=  \sum_{k=-\infty}^{\infty} \left(\sum_{m=k+1}^\infty \frac{1}{m!} \right
 
 \begin{exer}
   % difficulty: normal
-  Show that the exact location of the contours to derive Laurent series does not matter, as long as the contours don't cross any singularities.
+  % youtube: KRT-6y-UJjQ
+  Show that you can change the radii of the contours used to derive the Laurent series, as long as they stay in the holomorphic region and keep their relative position with respect to $z$.
 
 \end{exer}
 
 \begin{exer}
   % difficulty: hard
+  % youtube: _O9GqRJrZuM
   What is the relationship between a Fourier and a Laurent series?
   \begin{hnt}
   Transform a Fourier series in exponential notation to a Laurent series.
@@ -811,12 +815,14 @@ Verify that it is possible to establish a single--valued function using this cut
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
-What does the Riemann surface of $w=\ln(z)$ look like?
+  % difficulty: normal
+  % youtube: 2jV5xidyl2o
+How many sheets does the Riemann surface of $w=\ln(z)$ have?
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: siBBZMkJrB8
 \begin{marginfigure}[0.cm]
 \centering
 \includegraphics[width=4cm]{complex/figures/riemann3}
@@ -869,12 +875,14 @@ $z=0$ is an essential singularity of $f(z)=e^{1/z}$ with residue 1, since
 $$e^{1/z} = \sum_{m=0}^{\infty} \frac{1}{z^m m!} $$
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: 3yTQUc3fZSU
   Integrate the Laurent series around a singularity term-by-term. What formula do you recover?
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: B5Il6eMovPg
   Use a series expansion to calculate the residue at $z=0$ of
   $$z \cos \frac{1}{z}$$
   \begin{sol}
@@ -883,7 +891,8 @@ $$e^{1/z} = \sum_{m=0}^{\infty} \frac{1}{z^m m!} $$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: IZGlLE09wOQ
   Use a series expansion to calculate the residue at $z=0$ of
 
   $$\frac{z - \sin z}{z}$$
@@ -950,7 +959,8 @@ The residue theorem is of enormous practical importance, as it allows us to repl
 \end{exer}
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: UUbcQvMs134
   Calculate the residue at $z=0$ of
 
    $$\frac{1}{z+z^2}$$ 
@@ -971,9 +981,10 @@ Write $h(z)$ as $r(z)(z-z_0)$, and apply the result from Ex.~\ref{ex-res1}.
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: LQNlwXZKlQo
 If $z_0$ is a pole of order $M$ of $f(z)$, prove that
-$$\mathrm{Res}_{z_0} = \frac{1}{(M-1)!}{\left[D^{M-1}[f(z)(z-z_0)^M]\right]}_{z=z_0}$$
+$$\mathrm{Res}_{z_0} = \frac{1}{(M-1)!}{\left[\frac{d^{M-1}}{dz^{M-1}}[f(z)(z-z_0)^M]\right]}_{z=z_0}$$
 \end{exer}
 
 
@@ -1062,6 +1073,7 @@ then
 
 \begin{exer}
   % difficulty: hard
+  % youtube: kv1-JzPvAwI
   Prove the small limit theorem for the special case where $f(z)$ has a single pole at $z=a$.
   \begin{hnt}
     Integrate the Laurent series term by term.
@@ -1380,8 +1392,9 @@ $$\frac{\pi}{2}$$
 \end{exer}
 
 \begin{exer}
-% difficulty: trivial
-Repeat Ex.~\ref{ex-contour-integral-1}, but show that you get the same result if you close the contour in a different half plane, and/or change its orientation.
+  % difficulty: trivial
+  % youtube: YhbD-ye_RTE
+Repeat Ex.~\ref{ex-contour-integral-1}, but show that you get the same result if you close the contour in a different half plane.
 \end{exer}
 
 \begin{exer}
@@ -1411,7 +1424,8 @@ $$\frac{\pi}{2}$$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: 46bqZ-w-rSI
 Use complex contour integration to calculate
 $$ \int_0^{\infty} \frac{1}{\left(x^2 + a^2\right)^2} dx$$
 Here $a$ is a positive real-valued number.
@@ -1421,7 +1435,8 @@ $$\frac{\pi}{4 a^3}$$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: tQnHZ3Oa4XI
 Use complex contour integration to calculate
 $$ \int_{-\infty}^{\infty} \frac{\sin \pi x}{x (x-1) (x-2)} dx$$
 \begin{sol}
@@ -1430,7 +1445,8 @@ $$2 \pi$$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+ % youtube: PudvMdmpljw 
 Use complex contour integration to calculate
 $$ \int_0^{2\pi} \frac{\cos^2 \theta d \theta}{13-5\cos 2 \theta}$$
 \begin{sol}
@@ -1439,7 +1455,8 @@ $$\frac{\pi}{10}$$
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: K6vOAX72XwM 
 Use complex contour integration to calculate
 $$ \int_0^\pi \sin^{2n} \theta d \theta$$
 Here, $n \ge 1$.
@@ -1449,7 +1466,8 @@ $$\frac{(2n)!}{ 2^{2n}(n!)^2} \pi$$
 \end{exer}
 
 \begin{exer}
-% difficulty: hard
+  % difficulty: hard
+  % youtube: xwUzDDkHVnY
 Use complex contour integration to calculate
 $$ \int_0^\infty \frac{x ^ {2m}}{x^{2n} + 1} dx$$
 Here $m$ and $n$ are integers and $0 \le m < n$.
@@ -1508,7 +1526,8 @@ f(x_0) = \frac{1}{\pi j} PV \int_{- \infty}^{\infty} \frac{f(x)}{x-x_0}dx
 If you squint a bit, you could say that the singularity $x_0$ lies more or less on our contour (although we avoided it with the small semicircle). You could therefore say that it's halfway between a singularity outside of the contour (Cauchy's theorem) and one inside the contour (Cauchy's formula). This is also reflected in the result of the integral, which is the average of these two cases, with an extra principal value thrown in for good measure.
 
 \begin{exer}
-% difficulty: trivial 
+  % difficulty: trivial
+  % youtube: lSqZlxCTX-s
 Show that Eq.~\ref{eq-kk-1} can also be obtained by choosing a contour that circles around $x_0$ in the lower half of the complex plane.
 \end{exer}
 
@@ -1560,7 +1579,8 @@ Let's now apply this to the field of material dispersion by applying these relat
 n(\omega)^2 -1$. $\chi(\omega)$ is a material's susceptibility and relates the polarisation $\mathbf{P}$ to the incident electric field $\mathbf{E}$ according to $\mathbf{P}(\omega)=\varepsilon_0 \chi(\omega) \mathbf{E}(\omega)$).
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: e5txdhhmaKI
 What is the mathematical reason we used $f(z) = \chi(\omega)$ here, and not e.g. $f(z) = n(\omega)$? Link this to the physics of the problem. 
 \end{exer}
 
@@ -1582,11 +1602,13 @@ As you might remember, the imaginary part of the refractive index $n$ is a measu
 
 \begin{exer}
   % difficulty: normal
+  % youtube: 4p0u-OYVqz8
 Suppose you have a material without dispersion, i.e. where the real part of the squared refractive index is constant. Show that such a material is lossless, i.e. the imaginary part of the squared refractive index is zero.
 \end{exer}
 
 \begin{exer}
   % difficulty: trivial
+  % youtube: RpV0_aDx9Gk
 From basic logic and the result above, conclude that as soon as you have loss in a material, the material is necessarily dispersive. Also, convince yourself that the only non-dispersive material is vacuum.
 \end{exer}
 
@@ -1599,10 +1621,15 @@ Recall the definition of the susceptibility in the time domain:
 From this, we can easily see that $\chi(t)$ is necessarily real, as complex numbers only show up in the frequency domain after the introduction of phasors. From this, one can derive that for its Fourier transform $\chi(-\omega) = \chi^*(\omega)$, which in turn has some implications on the even and odd character of the real and the imaginary parts of $\chi(\omega)$. These can be used to reformulate the Kramers--Kronig relations in another common form:
 
 \begin{exer}
-  % difficulty: normal
+  % difficulty: hard
+  % youtube: Goi6ApUWzbQ 
 Given that $\chi(t)$ is real-valued, show that the Kramers--Kronig dispersion relations reduce to
 $$\Re \chi(\omega) =  \frac{2}{\pi} PV \int_{0}^{\infty}{ \frac{\omega'\Im \chi(\omega')}{\omega'^2-\omega^2}d\omega'}$$
 $$\Im \chi(\omega) = -\frac{2}{\pi} PV \int_{0}^{\infty}{ \frac{\omega \Re \chi(\omega')}{\omega'^2-\omega^2}d\omega'}$$
+
+  \begin{hnt}
+    Figure out whether $u(\omega)$ and $v(\omega)$ are even or odd, and split up the integral in contributions for positive and negative frequencies.
+  \end{hnt}
 \end{exer}
 
 Finally, it's important to note that one can prove that there is a relation between the Kramers--Kronig dispersion relations and the fact that the systems considered are \emph{causal} (i.e. effect cannot precede cause)\noindent\marginnote{This is one of the subjects of the Titchmarsh theorem.}. Thus, there is an immediate physical significance of the Kramers--Kronig dispersion relations.
@@ -1625,7 +1652,7 @@ Finally, it's important to note that one can prove that there is a relation betw
 
 A complex function $w = f(z) = u(x,y)+jv(x,y)$ can be seen as a mapping from the complex $z$--plane to the complex $w$--plane. One way to visualise this is to plot how a curve $C_z$ in the $z$--plane is transformed to a curve $C_w$ in the $w$--plane (see Fig.~\ref{fig-conformal}).
 
-We can play this transformation game using two specific neighbouring points on $C_z$, e.g. $z_0$ and $z_0+\Delta z$. They get transformed to two neighbouring points on $C_w$, which we'll call imaginatively $w_0$ and $w_0+\Delta w$. In the limit of $\Delta z \to 0$, this will allow us to same something about the relationship between the tangents at the points $z_0$ and $w_0$.
+We can play this transformation game using two specific neighbouring points on $C_z$, e.g. $z_0$ and $z_0+\Delta z$. They get transformed to two neighbouring points on $C_w$, which we'll call imaginatively $w_0$ and $w_0+\Delta w$. In the limit of $\Delta z \to 0$, this will allow us to say something about the relationship between the tangents at the points $z_0$ and $w_0$.
 
 \begin{cue}
 Relate $\frac{df}{dz}$ to $\Delta z$ and $\Delta w$. Then look at the angles of the resulting expression to determine how the tangents rotate.

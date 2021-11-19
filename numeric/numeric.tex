@@ -143,7 +143,8 @@ Another way of looking at the second derivative is by rewriting the approximatio
 \end{marginfigure}
 
 \begin{exer}
-% difficulty: normal  
+  % difficulty: normal
+  % youtube: tU5OXUS6DxM
 Construct a finite-difference scheme that will allow you to integrate the following differential equation:
 
 $$\frac{du(t)}{dt} = -a u(t)$$
@@ -420,7 +421,7 @@ All finite element methods more or less share the same philosophy, which is outl
 
 
 
-Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods (Fig.~\ref{fig-staircasing}). An additional advantage is that you can use more triangles are used where higher resolution is required (Fig.~\ref{fig-grid}). Such a local refinement of the grid turns out to be much more complicated in a finite-difference method.
+Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods (Fig.~\ref{fig-staircasing}). An additional advantage is that you can use more triangles where higher resolution is required (Fig.~\ref{fig-grid}). Such a local refinement of the grid turns out to be much more complicated in a finite-difference method.
   
 
 \item
@@ -797,7 +798,7 @@ $$f(x) = 10(x-1)^2 -1$$
 in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
 
 \begin{sol}
-$$f(x) = 10(x-1)^2 -1$$   
+$$-\frac{38}{3} + 10x$$   
 \end{sol}
 \end{exer}
 
