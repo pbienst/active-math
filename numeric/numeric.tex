@@ -167,8 +167,18 @@ Which $\theta$-values correspond to which methods?
 
 \pagebreak
 
-\begin{exer}
+%\begin{exer}
 % difficulty: normal
+%Derive the following higher-order approximation of the second derivative:
+
+%$$ \frac{d^2 f}{d x^2} = \frac{1}{12 \Delta x^2} \big[& -f(x + 2 \Delta x) + 16 f(x + \Delta x) -30 f(x) - f(x - 2 \Delta x) + 16 f(x- \Delta x) \big] + \mathcal{O}\left(\Delta x^4\right)$$
+
+%\end{exer}
+
+
+\begin{exer}
+  % difficulty: normal
+  % youtube: P6Fc_rOF_A0
 Derive the following higher-order approximation of the second derivative:
 
 \begin{align}  
@@ -497,14 +507,14 @@ These shape functions or interpolation functions are sketched in Fig.~\ref{fig-s
 
 The elements are not independent but are usually coupled through some continuity condition. In the case of our problem, $\psi$ needs to be continuous across elements. The effect of this is that the number of unknowns is reduced.
 
-To see how this is done in practice, consider Fig.~\ref{fig-connect}  with on one hand a \textbf{disconnected} local numbering scheme of the nodes, and on the other hand a \textbf{connected} global numbering scheme, which already takes the continuity conditions into account.
-
-\begin{marginfigure}
+\begin{marginfigure}[0.5cm]
 \centering
 \includegraphics{numeric/figures/connect}
 \caption{\textbf{Top}: disconnected local numbering. \textbf{Bottom}: connected global numbering.}
 \label{fig-connect}
 \end{marginfigure}
+
+To see how this is done in practice, consider Fig.~\ref{fig-connect} with on one hand a \textbf{disconnected} local numbering scheme of the nodes (where the two nodes of each element are always given a new number), and on the other hand a \textbf{connected} global numbering scheme, which already takes the continuity conditions into account. I.e. nodes with a different number in the disconnected scheme but which are physically the same, are merged and only given a single number.
 
 \begin{cue}
 For the example in Fig.~\ref{fig-connect}, use a matrix to express the relation between $\psi_{i, \mathrm{disc}}$ in the disconnected numbering scheme and  $\psi_{i, \mathrm{con}}$ in the connected numbering scheme.
@@ -591,7 +601,8 @@ C & D
 The total energy is just the sum of the contributions from all elements, which can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: MLrrcDAmzzg 
 Explicitly write down this total energy $\sum J_i$ using a block diagonal matrix.
 \end{exer}
 
@@ -789,13 +800,14 @@ $$J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx$$
 
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: 7Y6LC9GMrO8
   
 Construct the best least-squares approximation to the parabola 
 
 $$f(x) = 10(x-1)^2 -1$$ 
 
-in the interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
+in the entire interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
 
 \begin{sol}
 $$-\frac{38}{3} + 10x$$   
@@ -826,8 +838,6 @@ c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy 
 
 \end{exer}
 
-\pagebreak
-
 % Sorry Leonard, no space here.
 
 %\begin{marginfigure}[3.0cm]
@@ -846,7 +856,8 @@ c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy 
 
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: cwMI8XAVfCQ 
 Use the identity
 
 $$\iint_S p \nabla q \cdot \nabla r dS= - \iint_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
@@ -885,7 +896,8 @@ The interface is placed at $z=0$ and a single mode with index $p$ is incident fr
 Before continuiting, we need to determine a relationship between the fields of the forward and the backward propagating modes.
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: W2p1YCQ6Ra0
 Assume you solve Maxwell's equations to find a certain eigenmode solution, i.e. a solution with a $z$-dependence of $\exp{(-j \beta z)}$. Let's say this solution is characterised by the following tangential ($x$ and $y$) and normal ($z$) components:
 
 $$\left( \mathbf{E}_{t},\mathbf{E}_{z},\mathbf{H}_{t},\mathbf{H}_{z},\beta \right)$$
@@ -1013,8 +1025,9 @@ Obviously, a realistic structure will consist of more than one interface, but th
 
 
 \begin{exer}
-% difficulty: hard
-Derive the matrix form for the eigenmode expansion equations for the reflection and the transmission matrix at an interface, in case the basis functions are not orthogonal.
+  % difficulty: hard
+  % youtube: 6fDVdWvl09c
+Derive the matrix form for the eigenmode expansion equations for the reflection and the transmission matrix at an interface, in case the basis functions are not orthogonal. Write them using a block matrix involving the overlap matrices.
 
 \begin{sol}
 $$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,II} & \mathbf{O}_{I,I} \end{bmatrix} \begin{bmatrix} \mathbf{T}_{I,II} \\ \mathbf{R}_{I,II} \end{bmatrix} =  \begin{bmatrix} \mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{I,I} \end{bmatrix} $$
@@ -1157,10 +1170,11 @@ Because of this property, this choice is called the \textbf{least-squares residu
 \pagebreak
 
 \begin{exer}
-% difficulty: normal   
+  % difficulty: normal
+  % youtube: yydWxzjMjUw
 In the least-squares residual method, what is the geometrical interpretation of imposing that 
 
-$$\left\langle R(x), w_j(x) \right\rangle$$ 
+$$\left\langle R(x), w_j(x) \right\rangle = 0$$ 
 
 for all values of $j$?
 \end{exer}
@@ -1168,7 +1182,8 @@ for all values of $j$?
 
 
 \begin{exer}
-% difficulty: normal  
+  % difficulty: normal
+  % youtube: hcwf0jV7Xd4
 Construct an example where the Galerkin method and the least-squares residual method are identical.
 \end{exer}
 

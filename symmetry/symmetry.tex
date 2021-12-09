@@ -346,7 +346,6 @@ If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\
 
 \end{exer}
 
-\pagebreak
 
 \sectionugent{A variational form of the eigenvalue problem}
 \label{sec-sym-var}
@@ -654,7 +653,7 @@ Given that you have eigenfunctions which are common between two operators, show 
 
 \begin{exer}
 % difficulty: normal
-What is the commutator of $x$ and $d/dx$?}  
+What is the commutator of $x$ and $d/dx$?  
 \end{exer}
 
 \begin{exer}
@@ -803,10 +802,9 @@ $n$ is called the \textbf{band number}\marginnote{Don't confuse the band number 
 \label{fig-slab-disp}
 \end{marginfigure}
 
-If we make a plot of wave vector (spatial behaviour) versus frequency (temporal behaviour) for the slab waveguide, the different bands correspond to different lines that rise uniformly in frequency. This \textbf{band structure} is shown in Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically.
+If for each modal solution that we find, we indicate its wave vector (spatial behaviour) and frequency (temporal behaviour) in a 2D diagram, we notice a continuous evolution if we change wave vector or frequency. What we get is the so-called \textbf{band structure} from Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically. The lowest curved line corresponds to the fundamental guided mode of the waveguide (band number $n=0$), the one above that to the first-order mode (band number $n=1$), and so on. The dashed straight lines $\omega=kc/n$ are there to help visualise that the wavevector of a guided mode always lies between the free-space wavevectors of the core and the cladding with the highest index.
 
-Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
-
+Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}= k \frac {\lambda}{ 2\pi}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
 
 \begin{cue}
   Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) form a discrete set?
@@ -848,7 +846,6 @@ Neglecting the presence of the core, as well as phase shifts upon reflection at 
 
 A final piece of terminology: the boundary between the discrete guided modes and the continuous radiation modes in the band diagram is called the \textbf{light line}.
 
-\pagebreak
 
 \sectionugent{1D discrete translational symmetry and Bloch's theorem}
 
@@ -884,7 +881,6 @@ We can follow exactly the same argument that led to Eq.~\ref{eq-bloch-degenerate
 H(z + la) = e^{-j k_z la} H(z)
 \end{equation} 
 
-\pagebreak
 
 \begin{marginfigure}[0.5cm]
   % credits: Nobel Prize
