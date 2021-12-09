@@ -475,6 +475,8 @@ In order to make the recipe from the previous section more concrete, we will now
 
 To describe the unknown function $\psi$, we will use a very simple but common approach, which is that of a piecewise straight approximation. We will subdivide our domain into $K$ finite elements being line segments of identical length. In each segment, we will assume that $\psi$ varies linearly between the end points $x_1$ and $x_2$ of that segment:
 
+\noindent\marginnote[1cm]{To see that this is a linear interpolation, just substitute $x$ with $x_1$ and $x_2$ and check what happens.}
+
 \begin{equation}
 \psi(x) = \frac{x_2 - x}{x_2 - x_1} \psi_1 + \frac{x - x_1}{x_2 - x_1} \psi_2 \label{eq-fe-2}
 \end{equation} 

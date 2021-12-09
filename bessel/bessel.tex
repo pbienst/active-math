@@ -102,11 +102,12 @@ One way of figuring out what these Bessel functions look like, would be to propo
 
 However, here we'll shift gears and take a completely different approach to define Bessel functions (at least for integer order). This will put an extra tool in our box that will help us derive some useful identities. Later on, we'll show that this new approach is equivalent to the original differential equation.
 
-\noindent\marginnote{This is a purely mathematical trick. $t$ does not represent time, and in fact has no physical meaning at all.}Let's introduce a function of two variables, a so-called \emph{generating function}:
+\noindent\marginnote{This is a purely mathematical trick. $t$ does not represent time, and in fact has no physical meaning at all. Also, if you think the form of this function falls out of the sky at this moment, then you'd be right! However, be aware that it's possible to derive this exponential based on the differential equation and some other assumptions.}Let's introduce a function of two variables, a so-called \emph{generating function}:
 
 \begin{equation}
 g(x,t) \stackrel{def}{=} e^{x/2(t-1/t)} \label{eq-gen-bessel}
 \end{equation}
+
 
 When we expand this function in a Laurent series in $t$, we \emph{define} the coefficients as being the Bessel functions:
 
