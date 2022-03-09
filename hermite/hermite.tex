@@ -23,14 +23,16 @@ Wave propagation is governed by the Helmholtz equation:
 \nabla^2 \psi({\mathbf r}) + k^2 \psi({\mathbf r}) = 0
 \end{equation}
 
-The paraxial wave equation is an approximation to the Helmholtz equation under the so--called slowly varying envelope approximation (SVEA). This approximation looks for solutions which are essentially plane waves propagating along the $z$--direction, but which are modulated by a slowly varying function $A({\mathbf r})$:
+The paraxial wave equation is an approximation to the Helmholtz equation when studying systems which have a well-defined optical axis, along which most of the light is propagating, like in a lens system.
+
+Mathematically, we will express this by saying that the $z$-dependence of the field is mostly a plane wave $e^{-jkz}$ propagating along the $z$--direction. However, we will allow some other minor variations as a function of $z$, which should vary much slower compared to the plane-wave component:
 
 \begin{equation}
 \psi({\mathbf r}) = A({\mathbf r})e^{-jkz}
 \label{eq-svea-ansatz}
 \end{equation}
 
-This is typically done when studying systems which have a well-defined optical axis, along which most of the light is propagating, like in a lens system.
+Since the envelope $A$ is varying slowly as a function of $z$, this is called the 'slowly varying envelope approximation' (SVEA).
 
 \begin{cue}
 Calculate $\partial \psi^2 / \partial z^2$.
@@ -422,7 +424,7 @@ Consider the following two differential equations:
 The solutions of these are $H_m(x)$ and $H_n(x)$ respectively.
 
 \begin{cue}
-Multiplying Eq.~\ref{eq-hermite-ortho-1} by $\psi e^{-x^2}$, Eq.~\ref{eq-hermite-ortho-2} by $\phi e^{-x^2}$ and subtract the two equations.
+Multiply Eq.~\ref{eq-hermite-ortho-1} by $\psi e^{-x^2}$, Eq.~\ref{eq-hermite-ortho-2} by $\phi e^{-x^2}$ and subtract the two equations.
 \end{cue}
 
 Performing these manipulations, we get
@@ -467,7 +469,7 @@ I = \int_{-\infty}^{\infty}e^{-x^2}H_n^2(x)dx
 \end{equation}
 
 \begin{cue}
-Multiplying the generating function by itself and by $e^{-x^2}$. Careful: can you use $t$ in both copies of the generating function? Afterwards, integrate from $-\infty$ to $\infty$ and simplify. 
+Multiply the generating function by itself and by $e^{-x^2}$. Careful: can you use $t$ in both copies of the generating function? Afterwards, integrate from $-\infty$ to $\infty$ and simplify. 
 \end{cue}
 
 We first multiply the generating function Eq.~\ref{eq-g-hermite} by itself and by $e^{-x^2}$:

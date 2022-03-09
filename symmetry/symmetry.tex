@@ -231,7 +231,7 @@ Let's return to our eigenvalue problem:
 \end{equation} 
 
 \begin{cue}
-Show that $\omega^2 \mu$ has to real. Start by taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, followed by taking the complex conjugate. Then apply what you know about the scalar product and about Hermitian operators.    
+Show that $\omega^2 \mu$ has to be real. Start by taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, followed by taking the complex conjugate. Then apply what you know about the scalar product and about Hermitian operators.    
 \end{cue}
 
 Taking the inner product of this equation with ${\mathbf H({\mathbf r})}$, we get
@@ -384,7 +384,8 @@ Subtracting Eq.~\ref{eq-variational-1} from Eq.~\ref{eq-variational-2} and negle
 
 
 \begin{exer}
-% difficulty: trivial  
+% difficulty: trivial
+% youtube: ODn9Gr2xdVY
 Show that we can transform Eq.~\ref{eq-variational-3} to
 
 $$\delta J = \frac {\left\langle \delta {\mathbf H} , {\mathbf G} \right\rangle + \left\langle {\mathbf G} , \delta {\mathbf H} \right\rangle}{2}$$
@@ -433,7 +434,8 @@ J =& \frac{1}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle}  \iiint \frac
 \pagebreak
 
 \begin{exer}
-% difficulty: normal  
+  % difficulty: normal
+  % youtube: Tw5EOfN30mY
 When ${\mathbf H}$ is a solution to the eigenvalue problem, transform Eq.~\ref{eq-variational-HH} into the following form, which contains only the electric field:
 $$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} {\iiint \epsilon \left | {\mathbf E({\mathbf r})} \right |^2  dV} $$
 \label{ex-eigenvalue-e}
@@ -454,20 +456,29 @@ We will use these heuristics in a later section to explain the peculiar behaviou
 \pagebreak
 
 \begin{exer}
-% difficulty: normal
-   
-a) Show that, if you have two Hermitian operators $A$ and $B$, the generalised eigenvalue problem $A {\mathbf H} = \lambda B {\mathbf H}$ is the Euler-Langrange equation of the following variational expression: \\
+  % difficulty: normal
+  % youtube: pE88UxlZaUA
+Show that, if you have two Hermitian operators $A$ and $B$, the generalised eigenvalue problem $A {\mathbf H} = \lambda B {\mathbf H}$ is the Euler-Lagrange equation of the following variational expression: \\
 
 $$J = \frac{\left\langle {\mathbf H} , A {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , B {\mathbf H}\right\rangle}$$
 
-What is $\lambda$? \\
+What is $\lambda$? (Note that ${\mathbf H}$ is a general vector function, not per se the magnetic field.)
 
-b) Derive a generalised eigenvalue problem for $\mathbf E$. Under what conditions is it Hermitian, i.e. are the two operators $A$ and $B$ involved in the generalised eigenvalue problem Hermitian? Note that it should be a true generalised eigenvalue problem, i.e. with $B$ not equal to the identity operator.  \\
+\end{exer}
 
-c) Show based on the previous two results that minimising the following variational expression is equivalent to solving Maxwell's equations: \\
+\begin{exer}
+  % difficulty: normal
+  % youtube: GQGkpIUZUso
+Derive a generalised eigenvalue problem for $\mathbf E$. Under what conditions is it Hermitian, i.e. are the two operators $A$ and $B$ involved in the generalised eigenvalue problem Hermitian? Note that it should be a true generalised eigenvalue problem, i.e. with $B$ not equal to the identity operator.
+
+\end{exer}
+
+\begin{exer}
+  % difficulty: trivial
+  % youtube: Iu1NIrRO7u4
+Show based on the previous two exercises that minimising the following variational expression is equivalent to solving Maxwell's equations: \\
 
 $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} {\iiint \epsilon \left| {\mathbf E ({\mathbf r})} \right| ^2  dV}$$
-
 
 (This is the same result as in Ex.~\ref{ex-eigenvalue-e}, but the derivation there assumed that we were starting from an existing solution $\mathbf H$. The approach here is much more general.)
 
@@ -586,7 +597,8 @@ Eq.~\ref{eq-operator-symmetry} can trivially be rearranged as
 $$O_I \Theta - \Theta O_I = 0$$
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: _ReuEQ6QMUs
 Draw a diagram similar to Fig.~\ref{fig-commutator} that expresses this relation.
 \end{exer}
 
@@ -640,24 +652,27 @@ This means $O_I {\mathbf H} = \alpha {\mathbf H}$. This is actually an eigenvalu
 
 Tracing back, we see that we started from a function ${\mathbf H}$ that was an eigenvector of $\Theta$ and ended up by showing that the same ${\mathbf H}$ was also an eigenvector of $O_I$ (at least in the absence of degeneracy). 
 
-But what if there is degeneracy in the system? In that case, two modes might have the same frequency, even though they are not related by a simple multiplier. Although we won't show it here, in that case it will still by possible to construct different linear combinations of these degenerate modes to make new modes which themselves are even or odd.
+But what if there is degeneracy in the system? In that case, two modes might have the same frequency, even though they are not related by a simple multiplier. Again, although we won't show it here, in that case it will still be possible to construct different linear combinations of these degenerate modes to make new modes which themselves are even or odd.
 
 So, generally speaking, \emph{if two operators commute, it is possible to construct simultaneous eigenfunctions ${\mathbf H}$ of both operators}, i.e. functions ${\mathbf H}$ that are solutions of both eigenproblems $\Theta {\mathbf H} = \omega^2 \mu {\mathbf H}$ and $O_I {\mathbf H} = \alpha {\mathbf H}$.
 
 This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the existence of different classes of solutions, based on the properties of the symmetry operation.
 
 \begin{exer}
-% difficulty: trivial
-Given that you have eigenfunctions which are common between two operators, show that these operators commute. (In the main text, we studied the opposite direction.)  
+  % difficulty: trivial
+  % youtube: H0vg0kd0aJc
+  If you have a function which is an eigenfunction of two operators, show that the commutator of these operators operating on that eigenfunction yields zero.
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: mTzBgy8nql8
 What is the commutator of $x$ and $d/dx$?  
 \end{exer}
 
 \begin{exer}
-% difficulty: normal 
+  % difficulty: normal
+  % youtube: -kdWUB_dYnM
 Given two linear operators $\mathbf A$ and $\mathbf B$, under which circumstances is
 
 $$\left ( {\mathbf A} + {\mathbf B} \right ) ^2 =  {\mathbf A}^2 + 2 {\mathbf A}{\mathbf B}  + {\mathbf B}^2$$
@@ -669,7 +684,8 @@ When $\mathbf A$ and $\mathbf B$ commute.
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: OzDu5ECj1dA
 True or false: if a system described by an operator $\Theta$ has a symmetry described by an operator $O$, then all eigenfunctions of $\Theta$ and $O$ are common.
   \begin{sol}
     False
@@ -807,7 +823,7 @@ If for each modal solution that we find, we indicate its wave vector (spatial be
 Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}= k \frac {\lambda}{ 2\pi}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
 
 \begin{cue}
-  Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) form a discrete set?
+Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) form a discrete set?
 \end{cue}
 
 \begin{marginfigure}
@@ -824,7 +840,7 @@ With respect to the cladding, some of the light of this bouncing plane wave evan
 Again from basic waveguide theory, you'll recall that for radiation modes on the other hand, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in oposite directions in the cladding.
 
 \begin{cue}
-Why do the guided modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
+Why do the radiation modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
 \end{cue}
 
 \begin{marginfigure}
@@ -1154,8 +1170,14 @@ The function ${\mathbf u}$ is periodic for all lattice vectors ${\mathbf R}$ of 
 
 
 \begin{exer}
-% difficulty: normal  
-By explicitly expanding in components, show that Bloch modes with wavevector $k$ satisfy the following equation:
+  % difficulty: normal
+  % youtube: qOITP-X6ti4
+
+Using
+
+$$ \nabla \times (\psi {\mathbf A}) = (\nabla \psi) \times {\mathbf A} + \psi (\nabla \times {\mathbf A}) $$
+  
+show that Bloch modes with wavevector $k$ satisfy the following equation:
 
 $$\Theta_{\mathbf k} {\mathbf u}_{\mathbf k} = \omega^2 \mu {\mathbf u}_{\mathbf k}$$
 
@@ -1381,6 +1403,8 @@ Obviously, a higher index contrast will help, because it will create stronger re
 \label{fig-bands-rods-3D}
 \end{marginfigure}
 
+Remember that in the 1D case, the band diagram plotted the frequency as a function of the 1D wavevector, where the bands were 1D curves. For the 2D case, the frequency is now plotted against the two components of the wavevector, so that we get surfaces instead of curves.
+
 As an example we plot the band structure of a 2D square lattice of dielectric rods in air, for waves propagating in the $xy$--plane. For each ${\mathbf k}$--point in the triangular irreducible Brillouin zone there are a number of bands with increasing frequency. Each band can be plotted as a surface over the irreducible Brillouin zone, as illustrated in Fig.~\ref{fig-bands-rods-3D}.
 
 As such a 3D plot quickly becomes difficult to interpret, people usually only plot the bands along the edges of the irreducible Brillouin zone, as is done in Fig.~\ref{fig-bands-rods}. We can see that there is a bandgap for modes with TM polarisation, but not for TE. In the context of photonic crystals, TM is defined as modes with the ${\mathbf E}$--vector along the rods in the $z$--direction.
@@ -1393,12 +1417,14 @@ As such a 3D plot quickly becomes difficult to interpret, people usually only pl
 \end{figure}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: _qb090Rsdmc
 Based on symmetry arguments, do you think it will be easier to create a 2D omnidirectional bandgap for a square lattice or for a triagular lattice?
 \end{exer}
 
 \begin{exer}
-% difficulty: normal  
+  % difficulty: normal
+  % youtube: Mr30Uwt45sQ
 For a 2D square lattice of dielectric rods, some solutions will be polarised with the electric field parallel to the rods, and some modes will have the electric field perpendicular to the rods. For both situations, calculate the ratio of the electric energy $\epsilon |E|^2$ just inside and just outside the rods. In which case will the electric field be more confined in the rods?
 \end{exer}
 
@@ -1408,10 +1434,12 @@ For a 2D square lattice of dielectric rods, some solutions will be polarised wit
 \section{Time-reversal symmetry}
 
 \begin{exer}
+  % difficulty: normal
+  % youtube: OknxfFsSkU4
 Band diagrams are symmetric around $k=0$, i.e. if there is a mode at frequency $\omega$ with wave vector $k$, there is always a mode at that same frequency with wave vector $-k$. This is true even if the crystal itself does not have inversion symmetry. The mode at $-k$ can be thought of as the backward version of the mode at $k$ and is a consequence of the time reversal symmetry of Maxwell's equations. Make this plausible by taking the following steps:
 \begin{itemize}
-\item Using the definition of phasors, show that if $H_x$ is the phasor corresponding to $ H_{x,0} \cos \left( \omega t + \phi \right)$, then the phasor $H^*_x$ corresponds to the time-reversed signal $ H_{x,0} \cos \left(- \omega t + \phi  \right)$.
 \item Show that for lossless systems ${\mathbf H}^*$ is also a eigenfunction if ${\mathbf H}$ is an eigenfunction. What is its eigenvalue?
+\item Using the definition of phasors, show that if $H_x$ is the phasor corresponding to $ H_{x,0} \cos \left( \omega t + \phi \right)$, then the phasor $H^*_x$ corresponds to the time-reversed signal $ H_{x,0} \cos \left(- \omega t + \phi  \right)$.
 \item From the second form of Bloch's theorem, associate ${\mathbf H}^*$ with a Bloch mode at $-k$. What is its corresponding ${\mathbf u}$ function?
 \end{itemize}
 

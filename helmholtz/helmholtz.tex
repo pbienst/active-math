@@ -101,13 +101,13 @@ How do you need to change Eq.~\ref{eq-phasor}, so that the time dependence of a 
 \sectionugent{The Helmholtz equation}
 
 \begin{cue}
-Take the curl of Eq.~\ref{eq-rot-E-phas} and use Eq.~\ref{eq-rot-H-phas}.
+Take the curl of Eq.~\ref{eq-rot-E-phas} (assume $\mu$ is constant) and use Eq.~\ref{eq-rot-H-phas}.
 \end{cue}
 
-By taking the curl of Eq.~\ref{eq-rot-E-phas} and plugging Eq.~\ref{eq-rot-H-phas} in the result, we get
+This results in
 
 \begin{equation}
-  \nabla \times \nabla \times {\mathbf E}({\mathbf r}) = \omega^2 \varepsilon({\mathbf r}) \mu({\mathbf r}) {\mathbf E}({\mathbf r})
+  \nabla \times \nabla \times {\mathbf E}({\mathbf r}) = \omega^2 \varepsilon({\mathbf r}) \mu {\mathbf E}({\mathbf r})
   \label{eq-helm-1}
 \end{equation}
 
@@ -136,7 +136,7 @@ where we have introduced the wave vector $k=\omega \sqrt{\varepsilon \mu}$.
   \caption{Hermann von Helmholtz (1821-1894)}
 \end{marginfigure}
 
-Eq.~\ref{eq-helmholtz} is called the (vectorial) Helmholtz equation. Note that the same equation can also be derived for the magnetic field ${\mathbf H}$. In Cartesian coordinates, each of the vectorial components of ${\mathbf E}$ and ${\mathbf H}$ satisfy a scalar Helmholtz equation:
+Eq.~\ref{eq-helmholtz} is called the (vectorial) Helmholtz equation. Note that the same equation can also be derived for the magnetic field ${\mathbf H}$. So, in Cartesian coordinates, each of the vectorial components of ${\mathbf E}$ and ${\mathbf H}$ satisfy a scalar Helmholtz equation:
 
 \begin{equation}
 \nabla^2 \psi({\mathbf r}) + k^2 \psi({\mathbf r}) = 0 \label{eq-helmholtz-1}
@@ -158,6 +158,13 @@ Since $\psi$ is a complex number, it seems worthwhile to study the calculus of f
 \begin{exer}
   % difficulty: trivial
   % youtube: SxAkISAwbuU
+Derive the vectorial Helmholtz equation for the magnetic field in a uniform medium.
+\end{exer}
+
+
+\begin{exer}
+  % difficulty: trivial
+  % youtube: SxAkISAwbuU
 Solve the Helmholtz equation in 1D in a single uniform medium.
 \end{exer}
 
@@ -168,7 +175,7 @@ What does the Helmholtz equation look like in case we use the time convention  $
 \end{exer}
 
 \begin{exer}
-  % difficulty: hard
+  % difficulty: normal
   % youtube: fjxPzYx4nmc
 The Helmholtz equation we derived here is only valid for uniform media. Exactly which step of the derivation breaks down in non-uniform (but still non-magnetic) media?
 \end{exer}

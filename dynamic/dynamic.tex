@@ -192,14 +192,14 @@ Or, in symbols:
 \begin{marginfigure}
 \centering
 \includegraphics{dynamic/figures/source}
-\caption{All points in the neigbourhood of a sink $p$ (except for $p$ itself) eventually end up outside of that neighbourhood after applying the map.}
+\caption{All points in the neigbourhood of a source $p$ (except for $p$ itself) eventually end up outside of that neighbourhood after applying the map.}
 \label{fig-source}
 \end{marginfigure}
 
 Similarly, a fixed point is called a source if there exists an epsilon neighbourhood $N_\epsilon(p)$ such that each $x$ in $N_\epsilon(p)$ except $p$ eventually maps outside of $N_\epsilon(p)$:
 
 \begin{equation}
-\exists \, \epsilon : \forall x \in  N_\epsilon(p) \setminus \{p\} : \exists \, K : \forall k > K : f^k(x) \notin  N_\epsilon(p)
+\exists \, \epsilon : \forall x \in  N_\epsilon(p) \setminus \{p\} : \exists \, K : f^K(x) \notin  N_\epsilon(p)
 \end{equation}
 
 \begin{cue}
@@ -311,12 +311,14 @@ Discuss the stability of the fixed points of the map $f(x) = (3x-x^3)/2$.
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: HrVSrgaw414
 Discuss the stability of the fixed points of the map $f(x) = x^3 + x$.
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: nP6Dxr8HX2E
 Prove the stability theorem explicitly for the case of a source.
 \end{exer}
 
@@ -347,7 +349,7 @@ Just like fixed points, period--$k$ orbits can be attracting (sinks) or repellin
 Since a period--$k$ point is a fixed point of $f^k$, apply the stability theorem to the map $f^k$,
 \end{cue}
 
-For a period--2 point, we need to evaluate $|f^2(p_1)|$, which can be done easily with the chain rule:
+For a period--2 point, we need to evaluate $|f^{2'}(p_1)|$, which can be done easily with the chain rule:
 
 \begin{equation}
 |f^{2'}(p_1)| = |f'(f(p_1)) f'(p_1)| = |f'(p_2) f'(p_1)|
@@ -373,7 +375,8 @@ $$|f'(p_1) f'(p_2) ... f'(p_k)| > 1$$
 Note that stability is a collective property of the periodic orbit, in the sense that $f^{k'}(p_i) = f^{k'}(p_j)$ for all values of $i$ and $j$.
 
 \begin{exer}
-% difficulty: trivial
+  % difficulty: trivial
+  % youtube: DQUCmkcFfUk
 Is any fixed point of $f^k$ a period--$k$ point of $f$?
 \begin{sol}
 No, there might be a smaller integer $n$ for which $f^n(p)=p$.  
@@ -381,7 +384,8 @@ No, there might be a smaller integer $n$ for which $f^n(p)=p$.
 \end{exer}
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: qkIEaDmgEdg
 % credits: Chaos - Alligood T1.5
 Verify that the map $f(x)=2x^2-5x$ has fixed points at 0 at 3. Use this information to more easily find a period-2 orbit for $f$, without needing to solve for the zeroes of a fourth-order polynomial.
 \end{exer}
@@ -534,7 +538,8 @@ An orbit is called a \textbf{chaotic orbit} if its Lyapunov number is greater th
 \pagebreak
 
 \begin{exer}
-% difficulty: hard  
+  % difficulty: hard
+  % youtube: 24emA1jsqVU
 The Lyapunov number of the orbit of $x_0$ under $f$ is $L$. What is the Lyapunov number of the orbit of $x_0$ under $f^k$? Also explain in words why this is plausible.
 \end{exer}
 
@@ -617,6 +622,9 @@ In a similar vein, don't get fooled by the continuous nature of the attractor. T
 \begin{exer}
 % difficulty: trivial
 Can you think of a self-silimar structure that appears in nature?
+\begin{sol}
+Cauliflower, trees, ferns, ... , i.e. anything where a subpart resembles the whole.
+\end{sol}
 \end{exer}
 
 \pagebreak
@@ -643,7 +651,8 @@ For each value of $c$, check numerically if the orbit of the initial point $z=0$
 
 
 \begin{exer}
-% difficulty: normal
+  % difficulty: normal
+  % youtube: oW50Ct3hYgo
 Show that the Mandelbrot set has mirror symmetry along the real axis.
 \end{exer}
 
@@ -777,15 +786,16 @@ b) $$\begin{bmatrix}1 & 1/2 \\ 1/4 & 3/4 \end{bmatrix}$$
 \end{exer}
 
 \begin{exer}
-% difficulty: normal 
+  % difficulty: normal
+  % youtube: 5lzSPFIqvEA
   Not all $2 \times 2$ matrices can be diagonalised. We know from linear algebra that when the eigenvalues are not distinct, a canonical form is
   
 \begin{equation}
 {\mathbf A} = 
-{\mathbf Q}^{-1}
+{\mathbf Q}
 \begin{bmatrix}
-\lambda_1 & 1 \\
-0 & \lambda_1
+\lambda & 1 \\
+0 & \lambda
 \end{bmatrix} 
 {\mathbf Q}^{-1}
 \end{equation} 
@@ -795,7 +805,8 @@ Show that in this case, the same conclusions with respect to stability of the fi
 
 
 \begin{exer}
-% difficulty: normal 
+  % difficulty: normal
+  % youtube: OlxxM2fR2wc
 Find
 
 $$\lim_{n \to \infty}\begin{bmatrix}4.5 & 8 \\ -2 & -3.5 \end{bmatrix} ^ n \begin{bmatrix} 6 \\ 9 \end{bmatrix}$$
@@ -903,6 +914,7 @@ Discuss the stability of the fixed points $(0,0)$ and $(-0.6,-0.6)$.
 \begin{exer}
 % difficulty: trivial 
 % credits: Chaos - Alligood
+% youtube: cK1roGIybOU
 Consider the map 
 
 $$f(x,y) = (x^2-5x+y, x^2)$$
@@ -912,17 +924,26 @@ Find the fixed points and discuss their stability.
 
 
 \begin{exer}
-% difficulty: hard  
-Consider the linear map defined as $f(x,y) = (2x+y, x+y)$ with a corresponding matrix $A$. Discuss the stability of its fixed point.\\
+  % difficulty: trivial
+  % credits: Martin Virte
+  % youtube: 6yNK1s8DlWE
+Consider the linear map defined as $f(x,y) = (2x+y, x+y)$ with a corresponding matrix $A$. Discuss the stability of its fixed point.
+\end{exer}
 
-Now, consider the nonlinear map defined as $g(x,y) = (2x+y, x+y)\, mod \, 1$, i.e. the same update rule as above but with an added modulo 1 operator. Show that $(1/3, 1/3)$ is a periodic point with period 4 of this nonlinear map.\\
+\begin{exer}
+  % difficulty: hard
+  % credits: Martin Virte
+  % youtube: hFDTvX39MlE
+Consider the nonlinear map defined as $g(x,y) = (2x+y, x+y)\, mod \, 1$, i.e. the same update rule as the previous exercise but with an added modulo 1 operator. Show that $(1/3, 1/3)$ is a periodic point with period 4 of this nonlinear map.\\
 
-Next, discuss the stability of this periodic point.\\
+\textit{Hint}: the modulo operator can be applied after several updates and will lead to the same result, e.g.  $g(g(x,y)) = f(f(x,y)) \, mod \, 1$ (no need to prove this).
+\end{exer}
 
-\textit{Hint}: the modulo operator can be applied after several updates and will lead to the same result, e.g.  $g(g(x,y)) = f(f(x,y)) \, mod \, 1$ (no need to prove this).\\
-\textit{Hint 2}: consider $A^4 \begin{bmatrix} 1/3 + \delta_x \\ 1/3 + \delta_y \end{bmatrix} \, mod \, 1$ and looks what happens to the perturbation, without calculating any new eigenvalues, but using what you've determined about the stability of the fixed point of $A$.\\
-
-Finally, you just showed that the point $(1/3, 1/3)$ is a periodic point, yet if we compute its evolution numerically we obtain a chaotic behaviour. Explain why.
+\begin{exer}
+  % difficulty: normal
+  % credits: Martin Virte
+  % youtube: AiWLmfC4ppc
+Discuss the stability of the periodic point from the previous exercise: consider $A^4 \begin{bmatrix} 1/3 + \delta_x \\ 1/3 + \delta_y \end{bmatrix} \, mod \, 1$ and looks what happens to the perturbation, without calculating any new eigenvalues, but using what you know about the stability of the fixed point of $A$.
 \end{exer}
 
 
@@ -1085,11 +1106,14 @@ Fig.~\ref{fig-phaseportrait} a) sketches several trajectories of $x$ for differe
 Often, a figure like Fig.~\ref{fig-phaseportrait}  a) contains too much information, as we are often only interested in the stability of the equilibrium. We are not so much interested in the different curves for different initial conditions, nor in the precise rate at which the equilibrium is approached. This leads to the \textbf{phase portrait} in Fig.~\ref{fig-phaseportrait} b), in which the $t$--axis is suppressed, and it is simply shown on the $x$--axis where trajectories are headed. The arrows indicate the direction of solutions (towards or away from equilibria) without graphing specific values of $t$. The phase portrait allows one to see at a glance where the equilibria are located and whether they are stable or not.
 
 
+\iffalse
 \begin{exer}
-% difficulty: trivial  
+% difficulty: normal 
 Construct a phase portrait for the logistic differential equation:
 $$\frac{dx}{dt} = a x (1-x)$$
+What are the stable points?
 \end{exer}
+\fi
 
 \pagebreak
 

@@ -135,7 +135,7 @@ Expanding the exponentials in Eq.~\ref{eq-g-bessel} gives us
 e^{xt/2} \cdot e^{-x/2t} = \sum_{r = 0}^{\infty} {\left(\frac{x}{2}\right)}^r \frac{t^r}{r!} \cdot \sum_{s = 0}^{\infty} {(-1)}^s { \left(\frac{x}{2}\right)}^s \frac{t^{-s}}{s!}
 \end{equation} 
 
-Note that it is important to have a separate summation index for the series expansion of each of the two exponentials in the product. These are completely independent, and should be treated at such.
+Note that it is important to have a separate summation index for the series expansion of each of the two exponentials in the product. These are completely independent, and should be treated as such.
 
 \noindent\marginnote{There is some subtlety in the lower bound of $s$, which is clear from e.g. the graphical interpretation of the product of the two series. See the video for more details.}Introducing a new variable $n = r - s$ and getting rid of $r$, we can reorganise this equation to give
 
@@ -396,7 +396,7 @@ This shows that any function satisfying the recurrence relations used, also sati
 
 \sectionugent{Lommel's integral}
 
-Bessel functions can be used as a basis set for a series expansion of an arbitrary function. Before we can tackle this, we require some orthogonality relations for which we need to calculate a certain type of integral.
+As we will discuss in the next section, Bessel functions can be used as a basis set for a series expansion. However, before we can tackle this, we require an auxiliary result based on the calculation of a certain integral.
 
 \begin{marginfigure}[-.0cm]
   % credits: Wikipedia
@@ -405,7 +405,7 @@ Bessel functions can be used as a basis set for a series expansion of an arbitra
   \caption{Eugen von Lommel (1837-1899)}
 \end{marginfigure}
 
-Consider the following two differential equations:
+To start with, consider the following two differential equations:
 
 \begin{equation}
 x^2 \frac{d^2 \phi}{dx^2}  + x \frac{d \phi}{dx} + \left(l^2x^2 - n^2\right) \phi = 0 \label{eq-bessel-orth-1}
@@ -421,8 +421,10 @@ What are the solutions to these equations?
 
 Solutions to these equations are $J_n(lx)$ and $J_n(kx)$ respectively.
 
+After staring long and hard at these equations, Lommel tried to perform the following manipulations on them:
+
 \begin{cue}
-Multiplying Eq.~\ref{eq-bessel-orth-1} with $\psi/x$, Eq.~\ref{eq-bessel-orth-2} with $\phi/x$ and subtract the two results.  
+Multiply Eq.~\ref{eq-bessel-orth-1} with $\psi/x$, Eq.~\ref{eq-bessel-orth-2} with $\phi/x$ and subtract the two results.  
 \end{cue}
 
 By multiplying Eq.~\ref{eq-bessel-orth-1} with $\psi/x$, Eq.~\ref{eq-bessel-orth-2} with $\phi/x$ and subtracting the two results, we get
@@ -489,7 +491,15 @@ Eq.~\ref{eq-lommel-2} is called Lommel's integral.
 \sectionugent{Fourier--Bessel series}
 \label{week4}
 
-Let's now play around with Lommel's integral.
+The ultimate goal of this section is to try and expand a function over the interval $[0,1]$ as a sum of Bessel functions, just like periodic functions can be expanded using sines and cosines.
+
+\begin{cue}
+But why would we want to use Bessel functions as a basis set?
+\end{cue}
+
+If you choose your basis functions smartly, such that they already incorporate some of the physics of your problem, you might need significantly fewer terms in the series expansion to reach a certain numerical precision. So, in case your problem involves cylindrical symmetry, Bessel functions are useful to consider as a basis set. In case you have periodicity, sines and cosines are your best friend.
+
+As we know from Fourier series, the fact that sines and cosines are orthogonal helps a lot in simplifying the formulas. Let's try to come up with an orthogonaly relation for Bessel functions by playing around with Lommel's integral.
 
 \begin{marginfigure}[-.3cm]
   % credits: Wikipedia
@@ -512,19 +522,21 @@ This can be seen as an orthogonality condition that $J_n(\xi_i x)$ and $J_n(\xi_
 \left<f(x),g(x)\right> \stackrel{def}{=} \int_0^1 x f(x) g(x) dx
 \end{equation} 
 
-\noindent\marginnote{One can prove that all zeros $\xi_i$ are real and that there is an infinite number of them.} Eq.~\ref{eq-bessel-ortho} can be used to expand functions in a so--called \emph{Fourier--Bessel} series. Suppose $\xi_i$ is the set of zeros of $J_n(x)$. For a function $f(x)$ defined in the interval $[0,1]$, we can write:
+\noindent\marginnote{One can prove that all zeros $\xi_i$ are real and that there is an infinite number of them.}Eq.~\ref{eq-bessel-ortho} can be used to expand functions in a so--called \emph{Fourier--Bessel} series. Suppose $\xi_i$ is the set of zeros of $J_n(x)$. For a function $f(x)$ defined in the interval $[0,1]$, we can propose the following series expansion:
 
 \begin{equation}
 f(x) = \sum_{i=0}^{\infty} a_i J_n(\xi_i x) \label{eq-fourier-bessel}
 \end{equation} 
 
-To determine the unknown coefficients $a_i$, we multiply Eq.~\ref{eq-fourier-bessel} by $x J_n(\xi_m x)$ and integrate over $[0,1]$.
+Here, the order $n$ is a free parameter which you can choose, either arbitrarily, or - in some cases - inspired by the physics of the problem you want to solve.
+
+To determine the unknown coefficients $a_i$, the orthogonality relations come in handy.
 
 \begin{cue}
-Perform these operations and make use of the orthogonality relation to determine the expansion coefficients.  
+Multiply Eq.~\ref{eq-fourier-bessel} by $x J_n(\xi_m x)$ and integrate over $[0,1]$. Make use of the orthogonality relations to determine the expansion coefficients.  
 \end{cue}
 
-Thanks to the orthogonality relations, we get
+We get
 
 \begin{equation}
 \int_0^1 x J_n(\xi_m x) f(x) dx = a_m \int_0^1 x J_n^2(\xi_m x) dx \label{eq-fourier-bessel-2}
@@ -623,8 +635,6 @@ f(x) \approx \sum_{i=0}^{N} a_i J_n(\xi_i x)
 \end{equation} 
 
 Substituting this into the differential equation and playing around with the orthogonality relation, will allow you to replace the differential equation with a linear system that allows you to determine the expansion coefficients.
-
-But one question still remains: why write your unknown function using a set of Bessel functions, and not e.g. as a sum of sines and cosines, like in vanilla Fourier series? The answer is that if you choose your basis functions smartly, such that they already incorporate some of the physics of your problem, you might need significantly fewer terms in the series expansion to reach a certain numerical precision. So, in case your problem involves cylindrical symmetry, Bessel functions are useful to consider as a basis set. In case you have periodicity, sines and cosines are your best friend.
 
 \begin{exer}
 % difficulty: hard
@@ -793,7 +803,7 @@ Whether to use Bessel/Neumann functions or rather Hankel functions of the first 
 
 Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius $R$ made of a material with refractive index $n_1$, surrounded by a cladding with refractive index $n_2 < n_1$. The cladding is taken to be infinitely thick. 
 
-Fields in the optical fibre have to satisfy the Helmholtz equation. Just like in Section~\ref{sec-bessel-eq}, we propose solutions of the form 
+Fields in the optical fibre have to satisfy the Helmholtz equation. Just like in Section~\ref{sec-bessel-eq}, we propose solutions of the form (where the function $R(r)$ unfortunately shares the same symbol with the unrelated radius $R$)
 
 \begin{equation}
 \psi(r,\theta,z) = R(r)e^{-j k_\theta \theta }e^{-j k_z z} \\

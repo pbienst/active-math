@@ -60,7 +60,7 @@ f(x-\Delta x) = f(x) - \Delta x \frac{d f}{d x} + \frac{{(\Delta x)}^2}{2} \frac
 \end{gather} 
 
 \begin{cue}
-Neglecting all the terms including $\left(\Delta x\right)^2$ or higher, use Eq.~\ref{eq-taylor-plus} to approximate the first derivative of $f$.
+Neglecting all the terms including $\left(\Delta x\right)^2$ or higher, use Eq.~\ref{eq-taylor-plus} to approximate the first derivative of $f$. How does the error term scale with $\Delta x$? 
 \end{cue}
 
 From Eq.~\ref{eq-taylor-plus} we get
@@ -69,7 +69,7 @@ From Eq.~\ref{eq-taylor-plus} we get
 \frac{d f}{d x} = \frac{f(x+\Delta x) - f(x)}{\Delta x} + \mathcal{O}\left(\Delta x\right)
 \end{equation} 
 
-This is called the \textbf{forward difference} approximation of $df / dx$. Since the error term is $\mathcal{O}(\Delta x)$, this is called a first order approximation.
+This is called the \textbf{forward difference} approximation of $df / dx$. Since the error term is $\mathcal{O}(\Delta x)$ (note that in deriving the equation above, we needed to divide by $\Delta x$), this is called a first order approximation.
 
 \begin{cue}
 Do the same, but start from Eq.~\ref{eq-taylor-min}.
@@ -95,7 +95,7 @@ By subtracting Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get a \t
 $}
 \end{equation} 
 
-This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at is that the central difference involves not one but both neighbouring points, so it encorporates more information on the local behaviour of the function, which makes it more accurate.
+This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at it is that the central difference involves not one but both neighbouring points, so it encorporates more information on the local behaviour of the function, which makes it more accurate.
 
 Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}. From this figure, you can clearly see that the central difference is more accurate.
 
@@ -588,14 +588,14 @@ The contribution of a single element to $J$ can now be calculated in terms of th
 
 \begin{equation}
 J_i = \begin{bmatrix}
-\psi_1 \psi_2 
+\psi_{1,i} \psi_{2,i} 
 \end{bmatrix}_{disc}
 \begin{bmatrix}
 A & B \\
 C & D 
 \end{bmatrix}
 \begin{bmatrix}
-\psi_1 \\ \psi_2
+\psi_{1,i} \\ \psi_{2,i}
 \end{bmatrix}_{disc}
 \label{eq-J-power-i}
 \end{equation} 
@@ -628,7 +628,7 @@ and this for all $i$. Since $J$ is a bilinear form, Eq.~\ref{eq-rayleigh-ritz} t
 
 In theory, the outline of the finite element method that we have given so far is perfectly adequate to describe it. However, it yields additional insight to cast it in the framework of a variational method.
 
-Before doing that, let's recap same well-known facts, but in such a way that will make it easier for us to generalise to the new terminology.
+Before doing that, let's recap some well-known facts, but in such a way that will make it easier for us to generalise to the new terminology.
 
 A function $f(x)$ of one variable takes a number $x$ as input, and delivers another number as output. Suppose this function has a minimum for some value of $x$. At that point, the output of the function does not change to first order, i.e. $\delta f=0$ for all possible directions $\delta x$ around that point. Obviously, in this 1D case, there are only two trivial directions, i.e. $+x$ and $-x$.
 
@@ -1119,7 +1119,7 @@ Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots
 
 So, our equation $Lu=v$ has been \emph{projected} by approximation into the matrix equation ${\mathbf L} \cdot {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
 
-Apart from the the weighted residuals method, the above procedure is also called the \textbf{method of moments} or the \textbf{generalised Galerkin method}.
+Apart from the weighted residuals method, the above procedure is also called the \textbf{method of moments} or the \textbf{generalised Galerkin method}.
 
 \subsection{Choice of basis and test functions}
 
@@ -1132,7 +1132,7 @@ Apart from the the weighted residuals method, the above procedure is also called
 
 Starting from the general procedure outlined above, different numerical methods can be derived that are catalogued according to their choice of basis and test functions.
 
-If basis and test functions are chosen equal, i.e. $b_i(x) = w_i(x)$, the the method is called the (non--generalised) \textbf{Galerkin method}. Often this leads to a formulation which can be cast in a variational form, having the advantages already outlined previously.
+If basis and test functions are chosen equal, i.e. $b_i(x) = w_i(x)$, the method is called the (non--generalised) \textbf{Galerkin method}. Often this leads to a formulation which can be cast in a variational form, having the advantages already outlined previously.
 
 Another choice is
 
