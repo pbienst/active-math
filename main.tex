@@ -185,6 +185,10 @@ fontsize=11pt, % Base font size
 \newcommand{\sectionyoutubeugent}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}\,\ugent}#1}}
 \newcommand{\sectionyoutube}[2]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}}#1}}
 \newcommand{\sectionugent}[1]{\section[#1]{\noindent\marginnote[\sectionmarginoffset]{\ugent}#1}}
+\newcommand{\subsectionyoutubeugent}[2]{\subsection[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}\,\ugent}#1}}
+\newcommand{\subsectionyoutube}[2]{\subsection[#1]{\noindent\marginnote[\sectionmarginoffset]{\href{https://youtu.be/#2}{\youtube}}#1}}
+\newcommand{\subsectionugent}[1]{\subsection[#1]{\noindent\marginnote[\sectionmarginoffset]{\ugent}#1}}
+
 
 \begin{document}
 
@@ -291,13 +295,13 @@ fontsize=11pt, % Base font size
 \mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 \setchapterstyle{kao} % Choose the default chapter heading style
 
-\input{helmholtz/helmholtz}
+%\input{helmholtz/helmholtz}
 \input{complex/complex}
 \input{bessel/bessel}
-\input{hermite/hermite}
-\input{numeric/numeric}
-\input{symmetry/symmetry}
-\input{dynamic/dynamic}
+%\input{hermite/hermite}
+%\input{numeric/numeric}
+%\input{symmetry/symmetry}
+%\input{dynamic/dynamic}
 
 % Old chapter, no longer used.
 % \input{stochastic/stochastic}

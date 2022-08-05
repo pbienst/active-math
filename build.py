@@ -4,6 +4,7 @@
 import os
 import re
 import glob
+import gzip
 import shutil
 import subprocess
 
@@ -90,6 +91,7 @@ def build():
     if os.path.exists(build_dir):
         shutil.rmtree(build_dir)
     os.mkdir(build_dir)
+
     # Copy directories.
     chapter_dirs = ["preamble", "helmholtz", "complex", "bessel",
                     "hermite", "numeric",
@@ -106,6 +108,8 @@ def build():
     # Build.
     subprocess.run(["pdflatex", "-file-line-error",
                     "-interaction=nonstopmode",
+                    "-synctex=-1",
+                    "-file-line-error",
                     os.path.join("main.tex")],
                     cwd=build_dir)
     subprocess.run(["biber",
@@ -114,13 +118,36 @@ def build():
     for i in range(3):
         subprocess.run(["pdflatex", "-file-line-error",
                     "-interaction=nonstopmode",
+                    "-synctex=-1",
+                    "-file-line-error",
                     os.path.join("main.tex")],
                     cwd=build_dir)
+
     shutil.copy(os.path.join(build_dir, "main.pdf"),
                 "Mathematics for Photonics - ebook.pdf")
 
-    
+    return 
+     
+    # Make sure synctex does not refer to the temporary files.
+    # Does not work, unfortunately, so I'm still missing something.
+    shutil.copy(os.path.join(build_dir, "main.mw"),
+                "Mathematics for Photonics - ebook.mw")
+    shutil.copy(os.path.join(build_dir, "main.aux"),
+                "Mathematics for Photonics - ebook.aux") 
+
+    with open(os.path.join(build_dir, "main.synctex"), 'r') as infile:
+        data = infile.read().replace("\\__build__", "")
+        data = data.replace("main.mw", "Mathematics for Photonics - ebook.mw" )
+        data = data.replace("main.aux", "Mathematics for Photonics - ebook.aux" )
+        with open("Mathematics for Photonics - ebook.synctex", 'w') as outfile:
+            outfile.write(data)
+      
+    #with gzip.open(os.path.join(build_dir, "main.synctex.gz"), 'rt') as #infile:
+    #    data = infile.read().replace("\\__build__", "")
+    #    data = data.replace("main.mw", "Mathematics for Photonics - ebook.#mw" )
+    #    data = data.replace("main.aux", "Mathematics for Photonics - ebook.#aux" )
+    #    with gzip.open("Mathematics for Photonics - ebook.synctex.gz", 'wt') #as outfile:
+    #        outfile.write(data)
+ 
 if __name__ == "__main__":
     build()
-
-    
