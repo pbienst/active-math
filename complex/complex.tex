@@ -1829,7 +1829,7 @@ From this we can see that such a transformation preserves the angle between any 
 
 Conformal transformations can be useful to solve the Helmholtz equation in a 'difficult' situation. The idea is to use a conformal mapping to move to a different domain, where the solution is more tractable. In this section, we will investigate what form the Helmholtz equation takes in the new domain.
 
-Suppose our original cartesian $(x,y)$--coordinate system is related to a new $(u,v)$--coordinate system by a conformal transformation $f$:
+Suppose our original Cartesian $(x,y)$--coordinate system is related to a new $(u,v)$--coordinate system by a conformal transformation $f$:
 
 \begin{equation}
 u+jv = w = f(z) = f(x+jy)
@@ -1934,7 +1934,7 @@ Finally, note that what we've done is not just any old coordinate transformation
 
 \pagebreak
 
-\subsectionyoutube{Application: bent waveguides}{}
+\subsectionyoutube{Application: radiation losses in bent waveguides}{fhIBO7Czxjs}
 
 \begin{marginfigure}[1cm]
 \centering
@@ -1943,19 +1943,21 @@ Finally, note that what we've done is not just any old coordinate transformation
 \label{fig-bends}
 \end{marginfigure}
 
-To give an example of the power of conformal transformations, we will use it to find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). We consider the system to be invariant in the $z$--direction.
+To give an example of the power of a conformal transformation, we will use one to find the eigenmodes of a bent dielectric waveguide (Fig.~\ref{fig-bends}). (We consider the system to be invariant in the third dimension.)
 
-To tackle this problem, we could use a 'traditional' coordinate transformation and move to cylindrical coordinates. In that case, the geometry of the refractive index distribution stays the same, we just use a more natural coordinate system to describe it. This will obviously change the form of the equation: a Laplacian in cylindrical coordinates looks completely different from one in cartesian coordinates.
+To tackle this problem, we could use a 'traditional' coordinate transformation and move to cylindrical coordinates. In that case, the geometry of the refractive index distribution stays the same, but we just use a more natural coordinate system to describe it. This will obviously change the form of the equation: a Laplacian in cylindrical coordinates looks completely different from one in Cartesian coordinates.
 
-In this section however, we will use a different approach: we will let a conformal transformation loose on the system! As we've seen in the previous section, that leaves the form of the Helmholtz equation intact (it still looks like a cartesian one), but the geometry of the refractive index profile changes. 
+In this section however, we will use a different approach: we will let a conformal transformation loose on the system! As we've seen in the previous section, that leaves the form of the Helmholtz equation intact (it still looks like a Cartesian one), but now the geometry of the refractive index profile changes. 
 
 Although both approaches involve a change of coordinates, their effect and interpretation is different: you could say that one is the dual of the other, in terms of whether it leaves the refractive index geometry or the equation intact.
 
-Let's now see if we can find a holomorphic function that will change the curved geometry to e.g. a straight one, which is easier to deal with. Look at the following conformal transformation:
+Let's now see if we can find a holomorphic function that will change the curved geometry to e.g. a straight one, which is easier to deal with. Look at the following conformal transformation, proposed in the 70s\footnote{M. Heiblum and J. Harris, ‘Analysis of curved optical waveguides by conformal transformation’, IEEE Journal of Quantum Electronics, vol. 11, no. 2, pp. 75–83, Feb. 1975.}:
 
 \begin{equation}
 w = R_2 \ln \frac{z}{R_2}
 \end{equation} 
+
+Here, $R_2$ is the outer radius of the bend.
 
 \begin{cue}
 Express this equation in polar coordinates and verify that this straightens the bend.  
@@ -2001,23 +2003,37 @@ But since from Eq.~\ref{eq-con-trans-bend}, $\frac{u}{R_2}=\ln{\frac{r}{R_2}}$, 
 T = \frac{r}{R_2} = e^{\frac{u}{R_2}}
 \end{equation} 
 
-
 So, in the new coordinate system, the transformed index profile looks like
 
 \begin{equation}
 n_t(u) = n(u)e^{\frac{u}{R_2}}
 \end{equation} 
 
-This profile is sketched in Fig.~\ref{fig-bends}. To find the modes of this straight waveguide with its complicated index profile, we proceed as follows: first, the continuous index profile is approximated by a stepwise constant profile with a large number of steps. Then, the modes of such a multilayered waveguide can be readily found using standard techniques.
+This profile is sketched in Fig.~\ref{fig-bends}. To find the modes of this straight waveguide with its complicated index profile, we proceed as follows: first, the continuous index profile is approximated by a stepwise constant profile with a large number of steps. Then, the modes of such a multilayered waveguide can be readily found using standard techniques (numerical, or approximated analytical).
 
-When this way of calculating the modes of a bent waveguide was first proposed in the 1970s, the calculation power of computers was nothing to write home about, so any trick that could simplify a problem was very welcome. Today, the interest of these techniques is more instructive than practical, although it does allow us to get some physical insight:
+When this way of calculating the modes of a bent waveguide was first proposed in the 1970s, the calculation power of computers was nothing to write home about, so any trick that could simplify a problem was very welcome. Today, the importance of these techniques is more pedagogical than practical. It does allow us to get some physical insight, though:
 
 \begin{cue}
-Making use of the tendency of light to concentrate in regions with high refractive index, think about how light in these bent waveguides will behave and where it will be concentrated. Also, what happens if the radius of curvature decreases?  
+Making use of the tendency of light to be concentrated in regions with high refractive index, think about how light in these bent waveguides will behave. One which side of the waveguide will the intensity be highest? What about loss due to the bend? 
 \end{cue}
 
-Because the refractive index is higher near the outside of the bend, the mode will tend to be concentrated there. As you can see from the transformed index profile, there is even the risk that the light tunnels towards the outer cladding, where the index is even higher. This leakage mechanism is a nice way to explain the origin of the radiation losses in waveguide bends. Tighter bends (i.e. shorter radii $R_2$) will be more prone to this phenomenon, because $T$ becomes a steeper exponential, which will reduce the tunneling distance and increase the leakage.
+Because the refractive index is higher near the outside of the bend, the mode will tend to be concentrated there. As you can see from the transformed index profile, there is even the risk that the light tunnels towards the outer cladding, where the index is even higher. This leakage mechanism is a nice way to explain the origin of the radiation losses in waveguide bends. 
 
+\begin{cue}
+What happens if the radius of curvature increases or decreases?
+\end{cue}    
+
+Physically, it makes sense that for large radii $R_2$, the bend will be straightened out, and the radiation losses will go down.
+
+It is tempting to support this mathematically using the following argument: tighter bends (i.e. shorter radii $R_2$) will be more lossy, because $T=e^{\frac{u}{R_2}$ becomes a steeper exponential, which will reduce the tunneling distance and increase the leakage.
+
+\begin{cue}
+What's missing in that argument? What would happen e.g. if you had simply used the transformation $w=\ln z$, which does not even depend on $R_2$?
+\end{cue}
+
+Looking at the steepness of the index profile in the cladding only tells part of the story. There are also aspects like how wide the waveguide becomes after transformation, how big is the index in the core, ... . So, it's the entire index profile that will determine the radiation losses, not just the steepness in the outer cladding.
+
+\pagebreak
 
 \section*{Review questions}
 

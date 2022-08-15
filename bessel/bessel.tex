@@ -17,7 +17,7 @@ After presenting their corresponding differential equation, we introduce a diffe
 \pagebreak
 
 
-\sectionugent{Bessel's differential equation}\label{sec-bessel-eq}
+\sectionyoutubeugent{Bessel's differential equation}{CQ_w23HgM6w}\label{sec-bessel-eq}
 
 \begin{marginfigure}[.3cm]
   % credits: Wikipedia
@@ -32,43 +32,44 @@ Let's take a look at the scalar Helmholtz equation, which describes wave propaga
 \nabla^2 \psi  + k_0^2 n^2 \psi = 0 
 \end{equation}
 
-Converting this to cylindrical coordinates gives us
+Let's say we're interested in solving this equation for objects which have a circular cross section and are infinitely long in the $z$-direction, e.g. optical fibres. In order to do so, let's convert the Helmholtz equation to cylindrical coordinates:
 
 \begin{equation}
 \frac{\partial^2 \psi}{\partial r^2} + \frac{1}{r} \frac{\partial \psi}{\partial r} +\frac{1}{r^2} \frac{\partial^2 \psi}{\partial \theta^2} + \frac{\partial^2 \psi}{\partial z^2} + k_0^2 n^2\psi = 0 \label{eq-helmholtz-cyl}
 \end{equation}
 
-Let's try a solution of the following form, with $k_\theta$ and $k_z$ constant: 
+Let's try separation of variables and a solution of the following form, with $k_\theta$ and $k_z$ constant: 
 
 \begin{equation}
 \psi(r,\theta,z) = R(r)e^{-j k_\theta \theta }e^{-j k_z z}
 \label{eq-bessel-ansatz}
 \end{equation}  
 
-(Later in this chapter, we will look at the physical interpretation behind this expression. For now, just assume that the form of this trial solution is a flash of divine inspiration.)
+(Later in this chapter, when we will actually look for the eigenmodes of an optical fibre, we will discuss the physical interpretation behind this expression. For now, just assume that the form of this trial solution is a flash of divine inspiration.)
 
 \begin{cue}
 Substitute Eq.~\ref{eq-bessel-ansatz} in Eq.~\ref{eq-helmholtz-cyl}.
 \end{cue}
 
-This leads to
+The exponentials will be present in every term, even after taking the derivatives, so let's leave them out from now on. This leads to
 
 \begin{equation}
-\frac{d^2 R(r)}{d r^2} + \frac{1}{r} \frac{d R(r)}{d r} + \left[k_0^2 n^2 - k_z^2 - \frac{k_\theta^2}{r^2} \right] R(r) = 0
+\frac{d^2 R(r)}{d r^2} + \frac{1}{r} \frac{d R(r)}{d r} + \left[ - \frac{k_\theta^2}{r^2} - k_z^2 + k_0^2 n^2\right] R(r) = 0
 \end{equation} 
-
 
 \begin{equation}
 r^2\frac{d^2 R(r)}{d r^2} + r \frac{d R(r)}{d r} + \left[ r^2 (k_0^2 n^2 - k_z^2)- k_\theta^2 \right] R(r) = 0
 \end{equation}
 
-Let's make this a little bit more generic, without explicit references to the Helmholtz equation.
+Let's make this a bit more generic, without explicit references to the Helmholtz equation.
 
-For that, we can rename $R$ to $X$ and $k_\theta$ to $\nu$, as well as make the following change of variables
+For that, we can rename $R$ to $X$ and $k_\theta$ to $\nu$, as well as make the following change of variables:
 
 \begin{equation}
 x = r \sqrt{k_0^2 n^2 - k_z^2} \stackrel{def}{=} k_t r
 \end{equation}
+
+(Again, for the physical interpretation behind $k_t$, see later in this chapter.)
 
 \begin{cue}
 Implement those changes.
@@ -96,48 +97,61 @@ In what follows, we will mostly consider the important special case where $\nu$ 
 \pagebreak
 
 
-\sectionugent{Generating function for Bessel functions}
+\sectionyoutubeugent{Generating function for Bessel functions}{4OhVDv6rlVY}
 
-One way of figuring out what these Bessel functions look like, would be to propose a Taylor series expansion, substitute that into the differential equation, and then derive the expansion coefficients.
-
-However, here we'll shift gears and take a completely different approach to define Bessel functions (at least for integer order). This will put an extra tool in our box that will help us derive some useful identities. Later on, we'll show that this new approach is equivalent to the original differential equation.
-
-\noindent\marginnote{This is a purely mathematical trick. $t$ does not represent time, and in fact has no physical meaning at all. Also, if you think the form of this function falls out of the sky at this moment, then you'd be right! However, be aware that it's possible to derive this exponential based on the differential equation and some other assumptions.}Let's introduce a function of two variables, a so-called \emph{generating function}:
-
-\begin{equation}
-g(x,t) \stackrel{def}{=} e^{x/2(t-1/t)} \label{eq-gen-bessel}
-\end{equation}
-
-
-When we expand this function in a Laurent series in $t$, we \emph{define} the coefficients as being the Bessel functions:
-
-\begin{equation}
-\fbox{$\displaystyle
- g(x,t) =   e^{x/2(t-1/t)}  \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n
-    $}
-  \label{eq-g-bessel}
-\end{equation}
-
-\begin{marginfigure}[-2cm]
+\begin{marginfigure}[-0cm]
   % credits: Wikimedia
   % url: https://commons.wikimedia.org/wiki/File:Friedrich_Wilhelm_Bessel_-_EESachse.jpg
   \includegraphics{bessel/figures/f_bessel}
   \caption{Friedrich Wilhelm Bessel (1784-1846)}
 \end{marginfigure}
 
+
+One way of figuring out what these Bessel functions look like, would be to propose a Taylor series expansion, substitute that into the differential equation, and then derive the expansion coefficients.
+
+However, here we'll shift gears and take a completely different approach to define Bessel functions (at least for integer order). This will put an extra tool in our box that will help us derive some useful identities. Later on, we'll show that this new approach is equivalent to the original differential equation.
+
+Let's introduce a function of two variables, a so-called \emph{generating function}:
+
+\begin{equation}
+g(x,t) \stackrel{def}{=} e^{x/2(t-1/t)} \label{eq-gen-bessel}
+\end{equation}
+
+When we expand this function in a Laurent series in $t$, we \emph{define} the coefficients as being the Bessel functions:
+
+\begin{equation}
+\fbox{$\displaystyle
+ g(x,t) = e^{x/2(t-1/t)} \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n
+    $}
+  \label{eq-g-bessel}
+\end{equation}
+
+The introduction of the generating function is a purely mathematical trick. $t$ does not represent time, and in fact has no physical meaning at all. Also, if you think the form of this function falls out of the sky at this moment, then you'd be right! However, be aware that it's possible to derive this exponential based on the differential equation and some other assumptions.
+
+
+\pagebreak
+
+\sectionyoutubeugent{Series expansion for Bessel functions}{J7utMBZ-ZZA}
+
+Remember our new definition: 
+
+$$g(x,t) = e^{x/2(t-1/t)}  \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
+
+Let's try to expand the generating function in a different series expansion, which we can then use to figure out a series expansion for $J_n(x)$.
+
 \begin{cue}
-By expanding the exponentials in the equation above, derive a series expansion for $J_n(x)$.  
+Write the generating function as a product of two exponentials. Then, expand each exponential in a series and use that to derive a series expansion for $J_n(x)$.  
 \end{cue}
 
 Expanding the exponentials in Eq.~\ref{eq-g-bessel} gives us
 
 \begin{equation}
-e^{xt/2} \cdot e^{-x/2t} = \sum_{r = 0}^{\infty} {\left(\frac{x}{2}\right)}^r \frac{t^r}{r!} \cdot \sum_{s = 0}^{\infty} {(-1)}^s { \left(\frac{x}{2}\right)}^s \frac{t^{-s}}{s!}
+e^{xt/2} \cdot e^{-x/2t} = \left[ \sum_{r = 0}^{\infty} {\left(\frac{x}{2}\right)}^r \frac{t^r}{r!} \right] \cdot \left [\sum_{s = 0}^{\infty} {(-1)}^s { \left(\frac{x}{2}\right)}^s \frac{t^{-s}}{s!} \right]
 \end{equation} 
 
 Note that it is important to have a separate summation index for the series expansion of each of the two exponentials in the product. These are completely independent, and should be treated as such.
 
-\noindent\marginnote{There is some subtlety in the lower bound of $s$, which is clear from e.g. the graphical interpretation of the product of the two series. See the video for more details.}Introducing a new variable $n = r - s$ and getting rid of $r$, we can reorganise this equation to give
+\noindent\marginnote{There is some subtlety in the lower bound of $s$, which is clear from e.g. the graphical interpretation of the product of the two series. See the video for more details.}Introducing a new variable $n = r - s$ and getting rid of $r$, we can reorganise this equation to give us an explicit formula for the coefficient of a given power of $t$:
 
 \begin{equation}
 e^{xt/2} \cdot e^{-x/2t} = \sum_{n = -\infty}^{\infty} \left[ \sum_{s = 0}^{\infty} {\left(\frac{x}{2}\right)}^{n+s} \frac{1}{(n+s)!} \cdot (-1)^s {\left(\frac{x}{2}\right)}^{s} \frac{1}{s!} \right] t^n
@@ -157,6 +171,9 @@ This series expansion can be used to numerically calculate the Bessel functions.
 \caption{The Bessel functions $J_0(x)$, $J_1(x)$ and $J_2(x)$.}
 \label{fig-bessel-J}
 \end{figure}
+
+\pagebreak 
+
 
 \begin{exer}
   % difficulty: normal
@@ -179,6 +196,7 @@ $$J_{-n}(x)=(-1)^nJ _n(x)$$
 Use the product of the generating functions $g(x,t)$ and $g(x,-t)$ to show that
 $$\left[ J_0(x) \right]^2 + 2 \sum_{n=1}^\infty \left[ J_n(x) \right]^2 = 1 $$
 \end{exer}
+
 
 \pagebreak
 
@@ -211,19 +229,23 @@ Put $t=j$, take the real and imaginary parts.
 \pagebreak
 
 
-\sectionugent{Recurrence relations for Bessel functions}
+\sectionyoutubeugent{Recurrence relations for Bessel functions}{vRmvYLsE93I}
+
+Let's look againt at Eq.~\ref{eq-g-bessel}:
+
+$$g(x,t) = e^{x/2(t-1/t)}  \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
 
 \begin{cue}
 Differentiate the generating function with respect to $t$, and then resubstitute the generating function into the resulting expression. 
 \end{cue}
 
-If we differentiate Eq.~\ref{eq-g-bessel} with respect to $t$, we get
+Differentiation gives us
 
 \begin{equation}
 \frac{x}{2}\left({1 + \frac{1}{t^2}}\right) e^{x/2(t-1/t)} = \sum_{n = - \infty}^{\infty} n J_n(x)t^{n-1}
 \end{equation}
 
-Substituting Eq.~\ref{eq-g-bessel} back into this, we get
+Substituting the definition of the generating function back into this, we get
 
 \begin{equation}
 \frac{x}{2}\left({1 + \frac{1}{t^2}}\right) \sum_{n = - \infty}^{\infty} J_n(x)t^n = \sum_{n = - \infty}^{\infty} n J_n(x)t^{n-1}
@@ -245,6 +267,10 @@ Or with the substitution $n+1 \to n$
 J_{n-1}(x) + J_{n+1}(x) = \frac{2n}{x} J_n(x)
 \end{equation} 
 
+Apart from being useful to derive other relationships, this equation is sometimes also used to calculate Bessel functions of very high orders recursively, as it turns out this can be more stable numerically.
+
+\pagebreak
+
 \begin{exer}
 % difficulty: trivial
 % ugent
@@ -253,7 +279,6 @@ Differentiate the generating function with respect to $x$ to show that
 $$ J_{n-1}(x) - J_{n+1}(x) = 2 J_n'(x)$$ \label{ex-recur}
 \end{exer}
 
-
 \begin{exer}
 % difficulty: trivial
 % ugent
@@ -261,8 +286,6 @@ $$ J_{n-1}(x) - J_{n+1}(x) = 2 J_n'(x)$$ \label{ex-recur}
 Show that
 $$\begin{array}{lcll}a) & J_{n-1}(x) = \frac{n}{x}J_n(x) + J_n'(x) \\b) & J_{n+1}(x) = \frac{n}{x}J_n(x) - J_n'(x) \\c) & \frac{d}{dx}\left[x^n J_n(x)\right] = x^n J_{n-1}(x) \\d) & \frac{d}{dx}\left[x^{-n} J_n(x)\right] = -x^{-n} J_{n+1}(x)\end{array}$$ \label{ex-recurrence}
 \end{exer}
-
-\pagebreak
 
 \begin{exer}
   % difficulty: normal
@@ -282,6 +305,8 @@ $$\int_0^1 x^3 J_0(k x) dx =  \frac{J_1(k)}{k} - 2 \frac{J_2(k)}{k^2}$$
 If $k$ is a zero of $J_0$, show that this integral is equal to
 $$\frac{J_1(k)}{k^3}\left(k^2-4\right)$$
 \end{exer}
+
+\pagebreak 
 
 \begin{exer}
   % difficulty: hard
@@ -315,10 +340,11 @@ $$U(\rho_0) \sim \frac {J_1\left( 2 \pi \frac {\rho_0 a}{\lambda z} \right)}{ 2 
 
 \end{exer}
 
+\pagebreak
 
-\section{Bessel's differential equation revisited}
+\sectionyoutube{Bessel's differential equation revisited}{0V0t55R-j88}
 
-The aim of this section is to show that a function defined using the generating function for Bessel functions, satisfies Bessel's differential equation. We will achieve this by doing some mathematical gymnastics, starting from the recurrence relationships we derived using the generating function.
+The aim of this section is to show that a function defined using the generating function for Bessel functions, will also satisfy Bessel's differential equation. We will achieve this by doing some mathematical gymnastics, starting from recurrence relationships we derived using the generating function.
 
 Let's begin with one of the results from Exer. \ref{ex-recurrence}:
 
@@ -326,15 +352,17 @@ Let's begin with one of the results from Exer. \ref{ex-recurrence}:
 J_{n-1}(x) = \frac{n}{x}J_n(x) + J_n'(x)
 \end{equation}
 
-\begin{cue}
-Multiply this by $x$, take the derivative with respect to $x$, and multiply by $x$ again.
-\end{cue}
-
-Getting rid of the denominator, this can be written as
+Getting rid of the denominator and reordering some terms, this can be written as
 
 \begin{equation}
 x J_n'(x) + n J_n(x) - x J_{n-1}(x) = 0 \label{eq-bessel-dif-rec}
 \end{equation} 
+
+Since we're working towards Bessel's differential equation, it would be good to get terms like $J_n''(x)$ in there:
+
+\begin{cue}
+Take the derivative of Eq.~\ref{eq-bessel-dif-rec} with respect to $x$.
+\end{cue}
 
 Differentiating with respect to $x$, we get
 
@@ -342,17 +370,19 @@ Differentiating with respect to $x$, we get
 J_n'(x) + x J_n''(x) + n J_n'(x) - J_{n-1}(x) - x J_{n-1}'(x)= 0
 \end{equation} 
 
-or, after multiplying by $x$:
+Bessel's differential equation starts with $x^2 X''(x)$, so, let's multiply this by $x$ and reorder some terms:
 
 \begin{equation}
-x^2 J_n''(x) + (n + 1) x J_n'(x) - x J_{n-1}(x) - x^2 J_{n-1}'(x)= 0
+x^2 J_n''(x) + (n + 1) x J_n'(x) - x J_{n-1}(x) - x^2 J_{n-1}'(x)= 0 \label{eq-bessel-dif-rec-b}
 \end{equation} 
 
+Looking at the second term, Bessel's differential equation has $x J_n'(x)$ rather than $(n + 1) x J_n'(x)$. Let's rectify this!
+
 \begin{cue}
-From this equation, subtract Eq.~\ref{eq-bessel-dif-rec} multiplied by $n$.
+From Eq.~\ref{eq-bessel-dif-rec-b}, subtract Eq.~\ref{eq-bessel-dif-rec} multiplied by $n$.
 \end{cue}
 
-Subtracting Eq.~\ref{eq-bessel-dif-rec} multiplied by $n$:
+This gives us
 
 \begin{align}
 x^2 J_n''(x) +& (n + 1) x J_n'(x) - x J_{n-1}(x) - x^2 J_{n-1}'(x) \nonumber \\-& n\left(x J_n'(x) + n J_n(x) - x J_{n-1}(x)\right)= 0
@@ -361,40 +391,42 @@ x^2 J_n''(x) +& (n + 1) x J_n'(x) - x J_{n-1}(x) - x^2 J_{n-1}'(x) \nonumber \\-
 This simplifies to
 
 \begin{equation}
-x^2 J_n''(x) +  x J_n'(x) - x^2 J_{n-1}'(x) - n^2 J_n(x) + (n - 1) x J_{n-1}(x)= 0 \label{eq-bessel-dif-rec-2}
+x^2 J_n''(x) +  x J_n'(x) - n^2 J_n(x) + (n - 1) x J_{n-1}(x) - x^2 J_{n-1}'(x)  = 0 \label{eq-bessel-dif-rec-2}
 \end{equation} 
 
-As a next step, we now take another recurrence equation from Exer. \ref{ex-recurrence}:
+We're slowly starting to see more elements of Bessel's differential equation appear, but the terms in $J_{n-1}(x)$ stick out like a sore thumb. But perhaps there is another recurrence relation that can save us?
+
+The following result from Exer.~\ref{ex-recurrence} looks promising:
 
 \begin{equation}
-J_{n+1}(x) = \frac{n}{x}J_n(x) - J_n'(x)
+J_{n+1}(x) = \frac{n}{x}J_n(x) - J_n'(x) \label{eq-bessel-dif-rec-b}
 \end{equation} 
 
 \begin{cue}
 In the equation above, replace $n$ with $n-1$, and use the result to eliminate $J_{n-1}$ and $J_{n-1}'$ from Eq.~\ref{eq-bessel-dif-rec-2}.
 \end{cue}
 
-Replacing $n$ with $n-1$, this can be written as
+Replacing $n$ with $n-1$, and multiplying by $x$, Eq.~\ref{eq-bessel-dif-rec-b} can be written as
 
 \begin{equation}
 x J_{n}(x) = (n-1)J_{n-1}(x) - x J_{n-1}'(x)
 \end{equation} 
 
-With this, we can eliminate $J_{n-1}$ and $J_{n-1}'$ from Eq.~\ref{eq-bessel-dif-rec-2}:
+With this, we can indeed eliminate $J_{n-1}$ and $J_{n-1}'$ from Eq.~\ref{eq-bessel-dif-rec-2}:
 
 \begin{equation}
 x^2 J_n''(x) +  x J_n'(x) + x^2 J_n(x) - n^2 J_n(x) = 0
 \end{equation} 
 
-This is nothing other than Bessel's differential equation Eq.~\ref{eq-bessel}.
+At last, this is nothing other than Bessel's differential equation Eq.~\ref{eq-bessel}!
 
-This shows that any function satisfying the recurrence relations used, also satisfies Bessel's equation.
+This shows that any function satisfying the recurrence relations derived from the generating function, also satisfies Bessel's equation. So, the two definitions are equivalent, at least for integer orders.
 
 
 \pagebreak
 
 
-\sectionugent{Lommel's integral}
+\sectionyoutubeugent{Lommel's integral}{iLAFoJJa4nM}
 
 As we will discuss in the next section, Bessel functions can be used as a basis set for a series expansion. However, before we can tackle this, we require an auxiliary result based on the calculation of a certain integral.
 
@@ -419,7 +451,7 @@ x^2 \frac{d^2 \psi}{dx^2}  + x \frac{d \psi}{dx} + \left(k^2x^2 - n^2\right) \ps
 What are the solutions to these equations?  
 \end{cue}
 
-Solutions to these equations are $J_n(lx)$ and $J_n(kx)$ respectively.
+From the derivation of Bessel's differential equation, we can see that the solutions to these equations are $J_n(lx)$ and $J_n(kx)$ respectively.
 
 After staring long and hard at these equations, Lommel tried to perform the following manipulations on them:
 
@@ -427,7 +459,7 @@ After staring long and hard at these equations, Lommel tried to perform the foll
 Multiply Eq.~\ref{eq-bessel-orth-1} with $\psi/x$, Eq.~\ref{eq-bessel-orth-2} with $\phi/x$ and subtract the two results.  
 \end{cue}
 
-By multiplying Eq.~\ref{eq-bessel-orth-1} with $\psi/x$, Eq.~\ref{eq-bessel-orth-2} with $\phi/x$ and subtracting the two results, we get
+We get
 
 \begin{equation}
 x \left( \frac{d^2 \phi}{dx^2}\psi - \frac{d^2 \psi}{dx^2} \phi \right) + \left(\psi \frac{d \phi}{dx}- \frac{d \psi}{dx}\phi\right) + \left(l^2 - k^2\right) x \phi \psi = 0
@@ -457,7 +489,7 @@ We have $dJ_n(kx)/dx = kJ_n'(kx)$ and $dJ_n(lx)/dx = lJ_n'(lx)$, such that for $
 
 \begin{align}
   \int x & J_n(lx)J_n(kx)dx = \nonumber \\
-  & \frac{x}{k^2 - l^2} \left[{l J_n'(lx) J_n(kx) -  k J_n'(kx) J_n(lx)}\right] + C \label{eq-lommel-1}
+  & \frac{x}{k^2 - l^2} \left[{l J_n'(lx) J_n(kx) - k J_n'(kx) J_n(lx)}\right] + C \label{eq-lommel-1}
 \end{align} 
 
 \begin{cue}
@@ -491,15 +523,17 @@ Eq.~\ref{eq-lommel-2} is called Lommel's integral.
 \sectionugent{Fourier--Bessel series}
 \label{week4}
 
+\subsectionyoutube{Deriving the Fourier-Bessel series}{NCI-epRDlHg}
+
 The ultimate goal of this section is to try and expand a function over the interval $[0,1]$ as a sum of Bessel functions, just like periodic functions can be expanded using sines and cosines.
 
 \begin{cue}
 But why would we want to use Bessel functions as a basis set?
 \end{cue}
 
-If you choose your basis functions smartly, such that they already incorporate some of the physics of your problem, you might need significantly fewer terms in the series expansion to reach a certain numerical precision. So, in case your problem involves cylindrical symmetry, Bessel functions are useful to consider as a basis set. In case you have periodicity, sines and cosines are your best friend.
+If you choose your basis functions smartly, such that they already incorporate some of the physics of your problem, you might need significantly fewer terms in the series expansion to reach a certain numerical precision. So, in case your problem involves cylindrical symmetry, Bessel functions are useful to consider as a basis set. In case you have periodicity on the other hand, sines and cosines are your best friend.
 
-As we know from Fourier series, the fact that sines and cosines are orthogonal helps a lot in simplifying the formulas. Let's try to come up with an orthogonaly relation for Bessel functions by playing around with Lommel's integral.
+As we know from Fourier series, the fact that sines and cosines are orthogonal helps a lot in simplifying the formulas. Let's try to come up with an orthogonality relation for Bessel functions by playing around with Lommel's integral.
 
 \begin{marginfigure}[-.3cm]
   % credits: Wikipedia
@@ -539,10 +573,20 @@ Multiply Eq.~\ref{eq-fourier-bessel} by $x J_n(\xi_m x)$ and integrate over $[0,
 We get
 
 \begin{equation}
+  \left<f(x),J_n(\xi_m x)\right> = a_m \left<J_n(\xi_m x),J_n(\xi_m x)\right>
+\end{equation} 
+
+or
+
+\begin{equation}
 \int_0^1 x J_n(\xi_m x) f(x) dx = a_m \int_0^1 x J_n^2(\xi_m x) dx \label{eq-fourier-bessel-2}
 \end{equation} 
 
-The integral on the left--hand side of Eq.~\ref{eq-fourier-bessel-2} can be calculated analytically or numerically, depending on the nature of $f(x)$. To evaluate the integral on the right--hand side of \ref{eq-fourier-bessel-2}, we cannot use Lommel's integral Eq.~\ref{eq-lommel-2}, because $k=l$. So we need to calculate this normalisation integral in a different way, which we will do now.
+The integral on the left--hand side of Eq.~\ref{eq-fourier-bessel-2} can be calculated analytically or numerically, depending on the nature of $f(x)$. To evaluate the integral on the right--hand side of \ref{eq-fourier-bessel-2}, we cannot use Lommel's integral Eq.~\ref{eq-lommel-2}, because $k=l$. So we need to calculate this normalisation integral \marginnote{This integral is called the normalisation integral, because it gives the norm squared of the basis function under our scalar product.} in a different way, which we will do now.
+
+\pagebreak
+
+\subsectionyoutube{Normalisation integral for Fourier-Bessel series}{sfVooOpYnQY}
 
 We need to calculate
 
@@ -566,8 +610,10 @@ Integration by parts, with $u=J_n^2(t)$ and $dv=t dt$, yields
 I = \frac{t^2}{2 k^2}J_n^2(t) - \frac{1}{k^2} \int t^2 J_n(t) J_n'(t) dt
 \end{equation}
 
+To solve the remaining integral, observe that $t^2 J_n(t)$ is a term that appears in Bessel's differential equation.
+
 \begin{cue}
-  To solve the remaining integral, write down that $J_n(t)$ satisfies Bessel's differential equation. Multiply the result by $J_n'(t)$, and use this to write $t^2 J_n(t) J_n'(t)$ as a total differential. 
+Extract $t^2 J_n(t)$ from Bessel's differential equation. Multiply the result by $J_n'(t)$, and use this to write $t^2 J_n(t) J_n'(t)$ as a total differential. 
 \end{cue}
 
 Because $J_n(t)$ is a solution of Bessel's equation Eq.~\ref{eq-bessel}, we can write
@@ -610,15 +656,27 @@ Returning to our normalisation integral in the right-hand side of Eq.~\ref{eq-fo
 \int_0^1 x J_n^2(\xi_m x) dx = \frac{1}{2}\left[{J_n'^2(\xi_m) + \left(1 - \frac{n^2}{\xi_m^2}\right) J_n^2(\xi_m)}\right] + \frac{n^2}{2\xi_m^2} J_n^2(0)
 \end{equation} 
 
-This reduces to
+The second term vanishes because $\xi_m$ is a zero of $J_n$. The third term is also zero because of the properties of Bessel functions at the origin (see Fig.~\ref{fig-bessel-J} or Eq.~\ref{eq-bessel-series}): if $n$ is not zero, then $J_n(0)=0$, so regardless of the value of $n$, this vanishes.
 
-\begin{align}
-\int_0^1 x J_n^2(\xi_m x) dx =& \, \frac{1}{2}J_n'^2(\xi_m) + \frac{n^2}{2\xi_m^2} J_n^2(0) \nonumber \\
- =& \, \frac{1}{2}J_{n+1}^2(\xi_m) + \frac{n^2}{2\xi_m^2} J_n^2(0) \nonumber \\
- =& \, \frac{1}{2}J_{n+1}^2(\xi_m)
-\end{align} 
+So, our integral reduces to
 
-where the second step makes use of the recurrence relations and the fact that $\xi_m$ is a zero of $J_n(x)$. The last transition is based on the fact that $J_n(0)=0$ for $n \ne 0$ (see Fig.~\ref{fig-bessel-J} or Eq.~\ref{eq-bessel-series}).
+\begin{equation}
+\int_0^1 x J_n^2(\xi_m x) dx =& \, \frac{1}{2}J_n'^2(\xi_m)
+\end{equation} 
+
+From Exer.~\ref{ex-recurrence}, we know that
+
+$$J_{n+1}(x) = \frac{n}{x}J_n(x) - J_n'(x)$$
+
+So, given that $\xi_m$ is a zero of $J_n(x)$, we can finally write
+
+\begin{equation}
+\int_0^1 x J_n^2(\xi_m x) dx = \frac{1}{2}J_{n+1}^2(\xi_m) 
+\end{equation}
+
+\pagebreak
+
+\subsectionyoutube{Bringing it all together}{BSbJnJZISPE}
 
 So, finally we get from Eq.~\ref{eq-fourier-bessel-2} the following expression for the expansion coefficients in the Fourier--Bessel series:
 
@@ -634,7 +692,7 @@ Finally, one might wonder what the point of this entire exercise was. If we alre
 f(x) \approx \sum_{i=0}^{N} a_i J_n(\xi_i x)
 \end{equation} 
 
-Substituting this into the differential equation and playing around with the orthogonality relation, will allow you to replace the differential equation with a linear system that allows you to determine the expansion coefficients.
+If the problem is somehow related to cylindrical coordinates, then such an expansion makes sense. Substituting this into the differential equation and playing around with the orthogonality relation, will allow you to replace the differential equation with a linear system that allows you to determine the expansion coefficients.
 
 \begin{exer}
 % difficulty: hard
@@ -649,8 +707,7 @@ where $\xi_i$ are the zeros of $J_0(x)$.
 
 \pagebreak
 
-
-\sectionugent{Neumann and Hankel functions}
+\sectionyoutubeugent{Neumann and Hankel functions}{utN3aWMx2ko}
 
 \begin{marginfigure}[0.3cm]
   % credits: Wikipedia
@@ -719,7 +776,7 @@ Of course, if we are solving Eq.~\ref{eq-helmholtz-cyl} instead of Eq.~\ref{eq-b
 
 \pagebreak
 
-\sectionugent{Cylindrical vs Cartesian wave solutions}
+\sectionyoutubeugent{Cylindrical vs Cartesian wave solutions}{R3PJmx495SQ}
 
 It is instructive to compare the Neumann and the Hankel functions to the solutions of the Helmholtz equation in a 1D Cartesian coordinate system:
 
@@ -791,7 +848,7 @@ Whether to use Bessel/Neumann functions or rather Hankel functions of the first 
 \pagebreak
 
 
-\sectionugent{Application: the eigenmodes of an optical fibre}
+\sectionyoutubeugent{Application: the eigenmodes of an optical fibre}{V-ll_oSIGP8}
 
 
 \begin{marginfigure}[3cm]
@@ -801,9 +858,9 @@ Whether to use Bessel/Neumann functions or rather Hankel functions of the first 
 \label{fig-fibre}
 \end{marginfigure}
 
-\noindent\marginnote{Don't confuse this situation with the one where we were looking at bend losses: there, the propagation direction was along $\theta$, here, it's along $z$.}Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius $R$ made of a material with refractive index $n_1$, surrounded by a cladding with refractive index $n_2 < n_1$. The cladding is taken to be infinitely thick. 
+Consider the optical fibre from Fig.~\ref{fig-fibre}: a central core with radius $R$ made of a material with refractive index $n_1$, surrounded by a cladding with refractive index $n_2 < n_1$. The cladding is taken to be infinitely thick. 
 
-Fields in the optical fibre have to satisfy the Helmholtz equation. Just like in Section~\ref{sec-bessel-eq}, we propose solutions of the form (where the function $R(r)$ unfortunately shares the same symbol with the unrelated radius $R$)
+Fields in the optical fibre have to satisfy the Helmholtz equation, and let's restrict ourselves to the scalar case. Just like in Section~\ref{sec-bessel-eq}, we propose solutions of the form (where the function $R(r)$ unfortunately shares the same symbol with the unrelated radius $R$)
 
 \begin{equation}
 \psi(r,\theta,z) = R(r)e^{-j k_\theta \theta }e^{-j k_z z} \\
@@ -875,7 +932,9 @@ A J_l\left(k_{t,1}R\right) = D H_l^{(2)}\left(k_{t,2}R\right)
 A k_{t,1} J'_l\left(k_{t,1}R\right) = D k_{t,2} H_l'^{(2)}\left(k_{t,2}R\right)
 \end{equation} 
 
-This only has non--trivial solutions if
+In the last equation, we've made use of the chain rule and the fact that a prime denotes derivation with respect to the total argument.
+
+This set of two equations only has non--trivial solutions if
 
 \begin{equation}
 \frac{J_l\left(k_{t,1}R\right)}{k_{t,1} J'_l\left(k_{t,1}R\right)} = \frac{H_l^{(2)}\left(k_{t,2}R\right)}{k_{t,2} H_l'^{(2)}\left(k_{t,2}R\right)} \label{eq-disp-fibre}
