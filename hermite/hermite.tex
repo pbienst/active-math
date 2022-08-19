@@ -15,7 +15,7 @@ After presenting the corresponding differential equation, we introduce their gen
 
 \pagebreak
 
-\sectionugent{The paraxial wave equation}
+\sectionyoutubeugent{The paraxial wave equation}{z7KigqxDk1E}
 
 Wave propagation is governed by the Helmholtz equation:
 
@@ -58,22 +58,32 @@ If $A({\mathbf r})$ varies slowly as a function of $z$, what does that mean? Obv
 You might be tempted to write down that
 
 \begin{equation}
+  \left|\partial A({\mathbf r}) / \partial z\right| \ll 1
+ \end{equation}
+
+However, be aware that solutions to Maxwell's equations are only defined up to a scaling factor. So, multiplying $A$ by a big number would not fundamentally alter the solution from a physical point of view, but it would violate the inequality.
+
+Next attempt:
+
+\begin{equation}
  \left|\partial A({\mathbf r}) / \partial z\right| \ll \left|A({\mathbf r})\right|
 \end{equation} 
 
-At least that way, the criterion is unaffected by multiplication of $A$ by an arbitrary scaling factor. However, the dimensions are wrong: on the right-hand side, we need to divide by something which has a dimension of meter. Using the wavelength as a yard stick for this seems like a good idea. Since dividing by $\lambda$ is equivalent to multiplying by the wavevector $k$, we get
+At least that way, the criterion is unaffected by multiplication of $A$ by an arbitrary scaling factor. However, the dimensions are wrong: on the right-hand side, we need to divide by something which has a dimension of meter. Using the wavelength as a yard stick for this seems like a good idea. Since dividing by $\lambda$ is equivalent to multiplying by the wavevector $k$ (we don't worry about $2 \pi$ here), we get
 
 \begin{equation}
-\left|\partial A({\mathbf r}) / \partial z\right| \ll k \left|A({\mathbf r})\right|
+\left|\partial A({\mathbf r}) / \partial z\right| \ll k \left|A({\mathbf r})\right| \label{eq-approx-paraxial-1}
 \end{equation}
 
-Taking the derivative with respect to $z$ once more, means we can neglect $\partial^2 A / \partial z^2$ with respect to $j k \partial A / \partial z$ in Eq~\ref{eq-svea-d2}.
+If we were to neglect $\partial A / \partial z$ completely, that would mean also neglecting the second-order derivative. That approximation is too coarse, since we would lose all $z$-dependence.
+
+Therefore, let's try and take the derivative of Eq.~\ref{eq-approx-paraxial-1} with respect to $z$. Note that in general you cannot say that if $f(x) < g(x)$ then $f'(x) < g'(x)$. However, here $A$ is a slowly varying function, so we're assuming that taking derivatives of higher and higher order will result in smaller and smaller values. This means we can neglect $\partial^2 A / \partial z^2$ with respect to $j k \partial A / \partial z$ in Eq~\ref{eq-svea-d2}. 
 
 \begin{cue}
 Make this approximation and figure out what the Helmholtz equation reduces to.
 \end{cue}
 
-With this, the Helmholtz equation becomes
+With this, and after factoring out the complex exponential, the Helmholtz equation becomes
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -94,10 +104,10 @@ Here, $\nabla_T^2$ stands for the transverse part $(\partial^2 / \partial x^2) +
 It is possible to show that a solution to this equation is the following function, which describes a so-called Gaussian beam:
 
 \begin{equation}
-A_G({\mathbf r}) = \frac{1}{q(z)}e^{-\frac{jk\rho^2}{2q(z)}} \label{eq-gauss}
+A_G({\mathbf r}) = \frac{1}{q(z)}e^{-\frac{jk(x^2 + y^2)}{2q(z)}} \label{eq-gauss}
 \end{equation}   
 
-where $q(z)=z+jb_0$. 
+where $q(z)=z+jb_0$ and $b_0$ is a constant. 
 
 In this context, the function $W(z)$ is defined as
 
@@ -107,22 +117,34 @@ W(z)=\sqrt{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)} \label{eq-W}
 
 $W(z)$ can be interpreted as the width of the Gaussian beam.
 
-
 \pagebreak
-
 
 \section{Hermite's differential equation}
 
-Let's look for higher-order solutions to the paraxial wave equation. To achieve this, let's try a modulated version of the Gaussian beam:
+\begin{marginfigure}[0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Charles_Hermite
+  \includegraphics{hermite/figures/c_hermite}
+  \caption{Charles Hermite (1822–1901)}
+  \end{marginfigure}
+
+Let's look for higher-order solutions to the paraxial wave equation. 
+
+Warning: the calculation ahead is extremely painful and does not really add anything interesting. The upcoming derivation is mainly given for completeness sake, and in the odd chance that someone really wants to know how everything fits together.
+
+Let's propose a modulated version of the Gaussian beam as a trial solution:
 
 \begin{equation}
 A(x,y,z) = X\left({\frac{\sqrt{2}x}{W(z)}}\right) Y\left({\frac{\sqrt{2}y}{W(z)}}\right) e^{-jZ(z)} A_G(x,y,z) \label{eq-gauss-higher}
 \end{equation} 
 
-Here, $A_G$ is the Gaussian beam from Eq.~\ref{eq-gauss} and $X$, $Y$ and $Z$ are three real--valued functions that we still need to determine such that Eq.~\ref{eq-gauss-higher} satisfies the paraxial Helmholtz equation.
+Let's also introduce $u = \sqrt{2} x / W(z)$ and  $v = \sqrt{2} y / W(z)$ as shortcuts. 
+
+In Eq.~\ref{eq-gauss-higher}, $A_G$ is the Gaussian beam from Eq.~\ref{eq-gauss} and $X$, $Y$ and $Z$ are three real--valued functions that we still need to determine such that Eq.~\ref{eq-gauss-higher} satisfies the paraxial Helmholtz equation.
+
 
 \begin{cue}
-Calculate $\partial A^2 / \partial x^2$. Use the definition of the Gaussian beam Eq.~\ref{eq-gauss}. 
+Calculate $\partial A^2 / \partial x^2$. Use the definition of the Gaussian beam Eq.~\ref{eq-gauss} to calculate $\partial A_G / \partial x$. 
 \end{cue}
   
 For the x--derivative of Eq.~\ref{eq-gauss-higher}, we get
@@ -137,7 +159,9 @@ and
 \frac{\partial^2 A}{\partial x^2} = \frac{2}{W^2}X''Ye^{-jZ} A_G  + 2\frac{\sqrt{2}}{W}X'Ye^{-jZ} \frac{\partial A_G}{\partial x}  + XYe^{-jZ} \frac{\partial^2 A_G}{\partial x^2}
 \end{equation} 
 
-Or, using Eq.~\ref{eq-gauss} to calculate $\partial A_G / \partial x$:
+Important: note that $X'$ is shorthand here for $X'(u)=dX/du$, where the prime denotes as usual the derivation with respect to the total argument, in this case $u=\sqrt{2}x/W(z)$.
+
+Let's now use Eq.~\ref{eq-gauss} to calculate $\partial A_G / \partial x$:
 
 \begin{equation}
 \frac{\partial^2 A}{\partial x^2} = \frac{2}{W^2}X''Ye^{-jZ} A_G  - 2j k x \frac{\sqrt{2}}{qW}X'Ye^{-jZ}A_G  + XYe^{-jZ} \frac{\partial^2 A_G}{\partial x^2} \label{eq-hermite-gauss-1}
@@ -146,7 +170,7 @@ Or, using Eq.~\ref{eq-gauss} to calculate $\partial A_G / \partial x$:
 We can derive a similar equation for the $y$--derivative.
 
 \begin{cue}
-Calculate $\partial A / \partial z$. Use the definition of the Gaussian beam Eq.~\ref{eq-gauss}. 
+Calculate $\partial A / \partial z$.
 \end{cue}
 
 For the $z$--derivative, we get
@@ -157,7 +181,7 @@ For the $z$--derivative, we get
 \end{align} 
 
 \begin{cue}
-Plug these results into the paraxial wave equation and divide by $XY$.
+Plug these results into the paraxial wave equation.
 \end{cue}
 
 Let's substitute this in the paraxial equation Eq.~\ref{eq-paraxial}. Because $A_G$ is itself a solution of this equation, the last terms from Eq.~\ref{eq-hermite-gauss-1} and \ref{eq-hermite-gauss-2} cancel and we get:
@@ -169,33 +193,80 @@ Let's substitute this in the paraxial equation Eq.~\ref{eq-paraxial}. Because $A
 -2jk XY\left(-jZ'\right)e^{-jZ} A_G = 0
 \end{align}
 
+\begin{cue}
+Clean up, divide by $XY$, and then multiply by $W^2$.
+\end{cue}
+
 Getting rid of the common factors and dividing by $XY$, we get
 
 \begin{equation}
 \frac{1}{W^2}\left(\frac{X''}{X}+\frac{Y''}{Y}\right)  
-- j k \left(\frac{\sqrt{2}}{Wq} - \frac{\sqrt{2}W'}{W^2}\right)\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right)
--kZ' = 0
+- j k \left(\frac{\sqrt{2}}{Wq} - \frac{\sqrt{2}W'}{W^2}\right)\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right -kZ' = 0
 \end{equation} 
 
 or
+
+\begin{equation}
+  \frac{1}{W^2}\left(\frac{X''}{X}+\frac{Y''}{Y}\right)  
+  - j k \left(\frac{1}{q} - \frac{W'}{W^}\right)\frac{\sqrt{2}}{W}\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right) -kZ' = 0
+\end{equation} 
+
+Multiplying by $W^2$, we get
+
 \begin{equation}
 \left(\frac{X''}{X}+\frac{Y''}{Y}\right)  
-- j k  \left(\frac{W^2}{q} - W'W\right)\frac{\sqrt{2}}{W}\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right)
+- j k  \left(\frac{W^2}{q} - WW'\right)\frac{\sqrt{2}}{W}\left(x\frac{X'}{X}+y\frac{Y'}{Y}\right)
 -kW^2Z' = 0
 \end{equation} 
 
 \begin{cue}
-Simplify $W^2/q - W'W$ and perform the change of variables $u = \sqrt{2} x / W(z)$ and  $v = \sqrt{2} y / W(z)$. Then, perform separation of variables for the resulting differential equation. 
+Simplify $W^2/q - WW'$ based on the definition of $W$ and $q$. 
 \end{cue}
 
-Using the definitions for $W$ and $q$, it follows that $W^2/q - W'W = -j \lambda / \pi$. If we now perform the change of variables $u = \sqrt{2} x / W(z)$ and  $v = \sqrt{2} y / W(z)$, we get
+From Eq.~\ref{eq-W}, we had
+
+\begin{equation}
+W(z)=\sqrt{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)} 
+\end{equation}
+
+Also, $q(z)=z+jb_0$, so
+
+\begin{equation}
+\frac{W^2}{q} - WW' = \frac{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)}{z+jb_0} - \sqrt{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)} \cdot \frac{2\frac{b_0}{k} \cdot \frac{2z}{b_0^2}}{2\sqrt{\frac{2 b_0}{k} \left(1 + \frac{z^2}{b_0^2}\right)} }
+\end{equation}
+
+Cleaning up and getting rid of the complex denominator by multiplying with the complex conjugate, this becomes
+
+\begin{equation}
+\frac{\frac{2}{k b_0} \left(b_0^2 + z^2\right)}{z^2+b_0^2}(z-jb_0) - \frac{2z}{k b_0}
+\end{equation}
+
+Satisfyingly, this reduces to
+
+\begin{equation}
+\frac{2z}{k b_0}  + \frac{2}{k}(-j) - \frac{2z}{k b_0} = - \frac{2j}{k}
+\end{equation}
+
+Let's insert this result in the differential equation to simplify it. Let's also bring back the arguments of the different functions.
+
+\begin{equation}
+  \left(\frac{X''(u)}{X(u)}+\frac{Y''(v)}{Y(v)}\right)  
+  - 2  \frac{\sqrt{2}}{W(z)}\left(x\frac{X'(u)}{X(u)}+y\frac{Y'(v)}{Y(v)}\right)
+  -kW^2(z)Z'(z) = 0
+  \end{equation} 
+
+\begin{cue}
+Use the definitions $u = \sqrt{2} x / W(z)$ and  $v = \sqrt{2} y / W(z)$. Then, perform separation of variables for the resulting differential equation. 
+\end{cue}
+
+Rearranging some terms, we get
 
 \begin{equation}
 \left[{\frac{X''(u)}{X(u)} - 2 u\frac{X'(u)}{X(u)}}\right] + 
 \left[{\frac{Y''(v)}{Y(v)} - 2 v\frac{Y'(v)}{Y(v)}}\right] -kW^2(z)Z'(z) = 0
 \end{equation} 
 
-The left--hand side of this equation is a sum a three terms, each of which is a function of a single independent variable ($u$, $v$ and $z$ respectively). Therefore, each of these terms must be equal to a constant. Equating the first term to $-2\mu_1$ and the second to $-2\mu_2$, the third must be equal to $2(\mu_1+\mu_2)$. This separation of variables leads to the following ordinary differential equations:
+The left--hand side of this equation is a sum of three terms, each of which is a function of a single independent variable ($u$, $v$ and $z$ respectively). Therefore, each of these terms must be equal to a constant. Equating the first term to $-2\mu_1$ and the second to $-2\mu_2$, the third must be equal to $2(\mu_1+\mu_2)$. This separation of variables leads to the following ordinary differential equations:
 
 \begin{equation}
 X''(u) - 2 u X'(u) = - 2 \mu_1 X(u) 
@@ -206,12 +277,20 @@ Y''(v) - 2 v Y'(v) = - 2 \mu_2 Y(v)
 \end{equation} 
 
 \begin{equation}
-b_0\left(1 + \frac{z^2}{b_0^2}\right)Z'(z) = -(\mu_1+\mu_2)
+-2b_0\left(1 + \frac{z^2}{b_0^2}\right)Z'(z) = 2(\mu_1+\mu_2)
 \end{equation} 
 
-From this, it follows immediately that $Z(z) = -(\mu_1+\mu_2) \arctan(z/b_0)$.
+From this, you can easily verify that 
 
-The differential equations for $X$ and $Y$ are both of the following form:
+$$Z(z) = -(\mu_1+\mu_2) \arctan\left(\frac{z}{b_0}\right)$$
+
+because
+
+\begin{equation}
+Z'(z) = -(\mu_1+\mu_2) \frac{1}{1+\left(\frac{z}{b_0}\right)^2} \frac{1}{b_0}
+\end{equation} 
+
+The differential equations for $X$ and $Y$ are both of the following form: \marginnote{For aesthetical reasons we replaced $u$ by a generic argument $x$. Note however that this generic $x$ is different from the specific $x$ related to $u$ by the definition above.}
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -219,22 +298,13 @@ X''(x) - 2 x X'(x) + 2 n X(x) = 0 \label{eq-diff-hermite-0}
 $}
 \end{equation} 
 
-\begin{marginfigure}[-4.3cm]
-% credits: Wikipedia
-% url: https://en.wikipedia.org/wiki/Charles_Hermite
-\includegraphics{hermite/figures/c_hermite}
-\caption{Charles Hermite (1822–1901)}
-\end{marginfigure}
-
 They don't have any obvious solutions at first sight. In the next sections, we will show that their solutions are \emph{Hermite polynomials}, and that $n$ is an integer.
 
 In a similar vein to the treatment of Bessel functions, we will start by introducing a generating function and then continue to derive recurrence relations which will lead to a differential equation.
 
-
 \pagebreak
 
-
-\sectionugent{Generating function for Hermite polynomials}
+\sectionyoutubeugent{Generating function for Hermite polynomials}{sN_rIAUIEhQ}
 
 The generating function of the Hermite polynomials takes the following form:
 
@@ -309,7 +379,7 @@ Factor out $n \choose r$.
 \pagebreak
 
 
-\sectionugent{Recurrence relations for Hermite polynomials}
+\sectionyoutubeugent{Recurrence relations for Hermite polynomials}{pajC-otGLNU}
 \label{week5}
 
 Similar to the treatment of Bessel functions, we can derive recurrence relations by differentiating the generating function.
@@ -355,10 +425,9 @@ $$\displaystyle H_n'(x) = 2nH_{n-1}(x)$$ \label{eq-recur-hermite-2}
 
 \pagebreak
 
+\sectionyoutubeugent{Hermite's differential equation revisited}{tMVbpZUL2zE}
 
-\sectionugent{Hermite's differential equation revisited}
-
-Next step is showing that the polynomials as defined through the generating function satisfy Hermite's differential equation. We will do this using the recurrence relations we derived from the generating function.
+The next step is showing that the polynomials as defined through the generating function satisfy Hermite's differential equation. We will do this using the recurrence relations we derived from the generating function.
 
 \begin{cue}
 Take the derivative of Eq.~\ref{eq-recur-hermite-1} with respect to $x$ and use the recurrence relationship involving $H_n'(x)$ to calculate  $H_{n+1}'(x)$ and $H_n''(x)$. Then, recover Hermite's differential equation.
@@ -383,6 +452,12 @@ H_n''(x) - 2 x H_n'(x) + 2n H_n(x) = 0 \label{eq-diff-hermite-1}
 \end{equation} 
 
 which is indeed Eq.~\ref{eq-diff-hermite-0}.
+
+This shows that the two definitions are equivalent.
+
+\pagebreak
+
+\sectionyoutubeugent{Gauss--Hermite modes}{LJoIkN1T7Ls}
 
 Returning to our higher--order solutions of the paraxial wave equation, Fig.~\ref{fig-gauss-hermite} plots field profiles of some of these so--called \textbf{Gauss--Hermite modes}.
 
@@ -412,6 +487,8 @@ The higher-order Gauss-Hermite modes are broader because they get multiplied by 
 
 Just as we did with Bessel functions, we can use Hermite polynomials to expand a function in a series. In order to do that, we will need to establish the correct orthogonality relation between Hermite polynomials and normalise them.
 
+\subsectionyoutube{Orthogonality relationship for Hermite polynomials}{7OIAe4a4IU0}
+
 Consider the following two differential equations:
 
 \begin{equation}
@@ -434,7 +511,7 @@ e^{-x^2}\left(\phi''\psi -\psi''\phi\right)- e^{-x^2} 2 x \left(\phi'\psi -\psi'
 \end{equation} 
 
 \begin{cue}
-Identify a total differential in the first terms of this equation.
+Identify a total differential in the first two terms of this equation.
 \end{cue}
 
 This can be written as
@@ -461,6 +538,7 @@ $}
 
 This is the orthogonality relation for Hermite polynomials: they are orthogonal over the interval $[-\infty, \infty]$ with the weighting function $e^{-x^2}$.
 
+\subsectionyoutube{Normalisation integral for Hermite polynomials}{4gLyl1FudXo}
 
 To normalise the Hermite polynomials, we need to calculate
 
@@ -469,21 +547,23 @@ I = \int_{-\infty}^{\infty}e^{-x^2}H_n^2(x)dx
 \end{equation}
 
 \begin{cue}
-Multiply the generating function by itself and by $e^{-x^2}$. Careful: can you use $t$ in both copies of the generating function? Afterwards, integrate from $-\infty$ to $\infty$ and simplify. 
+Taking inspiration from the integrand, calculate $e^{-x^2}g(x,t)g(x,s)$. Use the definition of the generating function, integrate from $-\infty$ to $\infty$ and simplify. 
 \end{cue}
 
-We first multiply the generating function Eq.~\ref{eq-g-hermite} by itself and by $e^{-x^2}$:
+Since we're taking the product of two series expansions, we obviously need to make the summation indices different:
 
-\begin{equation}
-e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx}= \sum_{m, n = 0}^{\infty}e^{-x^2} H_n(x)\frac{t^n}{n!}H_m(x)\frac{s^m}{m!}
-\end{equation} 
+\begin{align}
+e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} =& e^{-x^2} \left[\sum_{n = 0}^{\infty} H_n(x)\frac{t^n}{n!}\right]\left[\sum_{m = 0}^{\infty} H_m(x)\frac{s^m}{m!}\right] \nonumber \\
+ =& \sum_{m, n = 0}^{\infty}e^{-x^2} H_n(x)\frac{t^n}{n!}H_m(x)\frac{s^m}{m!}
+\end{align} 
 
-When we integrate this over $x$ from $-\infty$ to $\infty$, the terms with $m \ne n$ on the right--hand side drop out because of the orthogonality relation Eq.~\ref{eq-hermite-ortho}:
+When we integrate this over $x$ from $-\infty$ to $\infty$, the terms with $m \ne n$ on the right--hand side drop out because of the orthogonality relation Eq.~\ref{eq-hermite-ortho} ($t$ and $s$ are just constants as far as integration over $x$ is concerned):
 
 \begin{equation}
 \int_{-\infty}^{\infty} e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} dx= \sum_{n = 0}^{\infty} \int_{-\infty}^{\infty} e^{-x^2} H_n^2(x)\frac{(st)^n}{n!n!} dx \label{eq-hermite-norm-1}
 \end{equation}
 
+Let's recall an interesting result:
 \begin{exer}
   % difficulty: hard
   % youtube: 7ZOG3fnD584
@@ -496,37 +576,42 @@ and transform it to polar coordinates with $x^2+y^2=r^2$ and $dxdy = r dr d\thet
 \end{exer}
 
 \begin{cue}
-Using the result from the exercise above, evaluate the left--hand side of Eq.~\ref{eq-hermite-norm-1}.
+Using the result from the exercise above, evaluate the left--hand side of Eq.~\ref{eq-hermite-norm-1}. (Try to get a factor $e^{-(x-s-t)^2}$ to appear in the integrand)
 \end{cue}
 
 For the integral on the left--hand side of Eq.~\ref{eq-hermite-norm-1}, we get 
 
-\begin{align}
+\begin{equation}
 \int_{-\infty}^{\infty} e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} dx 
-  = & \int_{-\infty}^{\infty} e^{-(x-s-t)^2} e^{2st}dx \nonumber \\
-  = & \sqrt{\pi} e^{2st} \nonumber \\
-  = & \sqrt{\pi} \sum_{n = 0}^{\infty} \frac{2^n{(st)}^n}{n!}  \label{eq-hermite-norm-2}
-\end{align} 
-
-\pagebreak
+  =  \int_{-\infty}^{\infty} e^{-(x-s-t)^2} e^{2st}dx = \sqrt{\pi} e^{2st}
+  \label{eq-hermite-norm-2} 
+\end{equation} 
 
 \begin{cue}
-Compare the two different summations you derived so far to calculate the normalisation integral.
+Expand the right-hand side as a series. Compare this to the right-hand side of Eq.~\ref{eq-hermite-norm-1} to calculate the normalisation integral.
 \end{cue}
 
-By equating like powers of $st$ in the the right--hand sides of Eq.~\ref{eq-hermite-norm-1} and \ref{eq-hermite-norm-2}, we get the value of the normalisation integral:
+We can write Eq.~\ref{eq-hermite-norm-2} as
+\begin{equation}
+  \int_{-\infty}^{\infty} e^{-x^2} e^{-t^2 + 2tx} e^{-s^2 + 2sx} dx 
+    =  \sqrt{\pi} \sum_{n = 0}^{\infty} \frac{2^n{(st)}^n}{n!}  \label{eq-hermite-norm-3}
+\end{equation} 
+  
+By equating like powers of $st$ in the right--hand sides of Eq.~\ref{eq-hermite-norm-1} and \ref{eq-hermite-norm-3}, we get the value of the normalisation integral:
 
 \begin{equation}
 \int_{-\infty}^{\infty} e^{-x^2} H_n^2(x) dx = 2^n n! \sqrt{\pi}
 \end{equation} 
 
-With this we can finally write the complete expression to expand a function $f(x)$ in a series of Hermite polynomials:
+\subsectionyoutube{Series expansion using Hermite polynomials}{hlGd-1yzIe0}
+
+With all the previous information, we can finally write the complete expression to expand a function $f(x)$ in a series of Hermite polynomials:
 
 \begin{equation}
 f(x) = \sum_{n=0}^{\infty}a_n H_n(x)
 \end{equation} 
 
-with
+As before, taking the scalar product with an arbitrary but fixed basis function allows us to use the orthogonality relations to give us
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -535,6 +620,7 @@ $}
 \end{equation} 
 
 
+\pagebreak
 \begin{exer}
 % difficulty: trivial
 % ugent
@@ -560,13 +646,6 @@ How does this property translate to the Gauss-Hermite modes?
 
 \end{exer}
 
-\begin{marginfigure}[-18.0cm]
-% credits: Wikipedia
-% url: https://en.wikipedia.org/wiki/Olinde_Rodrigues
-\includegraphics{hermite/figures/o_rodrigues}
-\caption{Olinde Rodrigues (1795–1851)}
-\end{marginfigure}
-
 \begin{exer}
 % difficulty: hard
 % ugent
@@ -577,8 +656,6 @@ $$H_n(x) = (-1)^n e^{x^2}\frac{d^n}{d x^n}\left(e^{-x^2}\right)$$
 Verify this formula for a few values of $n$ to get a feeling for how it works, and then use mathematical induction.
 \end{hnt}  
 \end{exer}
-
-\pagebreak
 
 \begin{exer}
   % difficulty: normal
@@ -659,6 +736,12 @@ $$\int_{-\infty}^{\infty} e^{-x^2/2} H_{2m+1}(x) dx = 0 $$
 \end{sol}
 \end{exer}
 
+\begin{marginfigure}[5.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Olinde_Rodrigues
+  \includegraphics{hermite/figures/o_rodrigues}
+  \caption{Olinde Rodrigues (1795–1851)}
+  \end{marginfigure}
 
 \begin{exer}
   % difficulty: hard
