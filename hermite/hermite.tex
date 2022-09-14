@@ -94,14 +94,16 @@ $}
 
 Here, $\nabla_T^2$ stands for the transverse part $(\partial^2 / \partial x^2) + (\partial^2 / \partial y^2)$ of the Laplacian operator.
 
-\begin{marginfigure}[-5cm]
+\pagebreak
+
+It is possible to show that a solution to this equation is the following function, which describes a so-called Gaussian beam:
+
+\begin{marginfigure}[-.7cm]
 % credits: Wikipedia
 % url: https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss
 \includegraphics{hermite/figures/c_gauss}
 \caption{Carl Friedrich Gauss (1777-1855)}
 \end{marginfigure}
-
-It is possible to show that a solution to this equation is the following function, which describes a so-called Gaussian beam:
 
 \begin{equation}
 A_G({\mathbf r}) = \frac{1}{q(z)}e^{-\frac{jk(x^2 + y^2)}{2q(z)}} \label{eq-gauss}
@@ -121,7 +123,7 @@ $W(z)$ can be interpreted as the width of the Gaussian beam.
 
 \section{Hermite's differential equation}
 
-\begin{marginfigure}[0cm]
+\begin{marginfigure}[0.4cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Charles_Hermite
   \includegraphics{hermite/figures/c_hermite}
@@ -576,7 +578,7 @@ and transform it to polar coordinates with $x^2+y^2=r^2$ and $dxdy = r dr d\thet
 \end{exer}
 
 \begin{cue}
-Using the result from the exercise above, evaluate the left--hand side of Eq.~\ref{eq-hermite-norm-1}. (Try to get a factor $e^{-(x-s-t)^2}$ to appear in the integrand)
+Using the result from the exercise above, evaluate the left--hand side of Eq.~\ref{eq-hermite-norm-1}. (Try to get a factor $e^{-(x-s-t)^2}$ to appear in the integrand.)
 \end{cue}
 
 For the integral on the left--hand side of Eq.~\ref{eq-hermite-norm-1}, we get 
@@ -664,6 +666,7 @@ For $0 \leq m \leq n-1$, use the Rodriguez formula to show that
 $$\int_{-\infty}^{\infty}x^m e^{-x^2} H_n(x) dx = 0$$
 \end{exer}
 
+\pagebreak
 
 \begin{exer}
   % difficulty: normal

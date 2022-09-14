@@ -31,7 +31,7 @@ Each of these subjects could be the topic of an entire course in its own right, 
 
 \pagebreak
 
-\sectionugent{Finite difference approximation of derivatives}
+\sectionyoutubeugent{Finite-difference approximation of derivatives}{KEirr8vynUI}
 
 Let's say we are not interested in the solution to a certain differential equation in the entire domain of interest, but only in a limited number of discrete points inside the simulation domain. The set of discretisation points is called the \textbf{mesh}, and the distance between discretisation points is called the \textbf{mesh size}. A typical choice of 2D mesh is a rectangular one, where you only consider points of the form $(i \Delta x, j \Delta y)$, with $i$ and $j$ integers.
 
@@ -48,7 +48,7 @@ Obviously the hope is that as the mesh becomes finer and finer, the solution tha
   \caption{Brook Taylor (1685-1731)}
 \end{marginfigure}
 
-Since we only have information about the solution at discrete points, we will need to approximate the derivatives that appear in the differential equation using data from those discrete points. To write down these so--called \textbf{finite difference} approximations for derivatives, we will develop e.g. an unknown 1D function $f(x)$ in a Taylor series.
+Since we only have information about the solution at discrete points, we will need to approximate the derivatives that appear in the differential equation using data from those discrete points. To write down these so--called \textbf{finite-difference} approximations for derivatives, we will develop e.g. an unknown 1D function $f(x)$ in a Taylor series.
 
 \begin{cue}
 \noindent\marginnote[2.0cm]{The symbol $\mathcal{O}$ relates to the \textbf{order} of the remaining terms, i.e. how they scale as a function of $\Delta x$. Here, $\mathcal{O}\left(\Delta x^4\right)$ should really be interpreted as $\mathcal{O}\left((\Delta x)^4\right)$, i.e. if the grid size becomes twice as small, the sum of the remaining terms becomes roughly 16 times as small.}Write down Taylor expansions of $f(x+\Delta x)$ and $f(x-\Delta x)$ up till the third derivative. 
@@ -87,7 +87,7 @@ This so--called \textbf{backward difference} is also first--order accurate.
 Now subtract Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}. What is the order of accuracy of the approximation of the derivative now? Can you explain this intuitively?
 \end{cue}
 
-By subtracting Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get a \textbf{central difference} formula, which now however is second--order accurate:
+By subtracting Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get a \textbf{central difference} formula, which now however is second--order accurate, because the lower--order terms have cancelled:
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -97,14 +97,15 @@ $}
 
 This formula is second--order accurate thanks to the cancellation of terms in the Taylor expansion. Another way of looking at it is that the central difference involves not one but both neighbouring points, so it encorporates more information on the local behaviour of the function, which makes it more accurate.
 
-Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}. From this figure, you can clearly see that the central difference is more accurate.
-
 \begin{marginfigure}
 \centering
 \includegraphics{numeric/figures/fd}
 \caption{The arc AB represents backward differences, BC forward differences and AC central differences.}
 \label{fig-fd}
 \end{marginfigure}
+
+Forward, backward and central differences are illustrated in Fig.~\ref{fig-fd}. From this figure, you can clearly see that the central difference is more accurate.
+
 
 \begin{cue}
 Construct an approximation for the second derivative $f''$, this time adding Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}. What is the order of approximation? 
@@ -191,7 +192,7 @@ Derive the following higher-order approximation of the second derivative:
 \pagebreak
 
 
-\sectionugent{Solving the 1D wave equation with finite differences}
+\sectionyoutubeugent{Solving the 1D wave equation with finite differences}{TbIfp25tvQk}
 
 Illustrating finite difference methods is best done using a simple example, so we will solve the 1D Helmholtz equation in a uniform medium:
 
@@ -266,7 +267,7 @@ It is important to realise that the discretisation step that we have introduced 
 
 
 %\subsection{Solving the system ${\mathbf A} \cdot {\mathbf x}={\mathbf b}$}
-\sectionugent{Solving linear systems}
+\sectionyoutubeugent{Solving linear systems}{DetWn3j-P_c}
 
 
 In order to solve the linear system ${\mathbf A}\cdot{\mathbf x}={\mathbf b}$ that arises from formulating a problem using finite differences, there are a number of options.
@@ -275,12 +276,16 @@ First of all, we can use a \textbf{direct method}, i.e. explicitly invert the ma
 
 A second philosophy is to give up the notion of solving the system exactly, and search for a faster approximate solution, converged relative to the discretisation error but perhaps not relative to machine round--off. This seems acceptable, especially since the algebraic equations are only an approximation to the continuum equations anyway, subject to discretisation error.
 
-A way of constructing such an approximate solution is to use an \textbf{iterative method}: starting from an initial guess (e.g. setting all unknowns to zero), successive approximations  are constructed in the hope that after a sufficient number of iterations, the estimate converges to the true solution. There exists a plethora of literature on iterative methods, which we obviously cannot treat in detail here, but in order to get a flavour for the basic ideas, we will now discuss one of the most basic iterative schemes (which unfortunately has limited practical use in its most simple incarnation).
+A way of constructing such an approximate solution is to use an \textbf{iterative method}. Let's start from an initial guess (e.g. setting all unknowns to zero, or to a random value, or to a known solution of a related problem). Then, construct successive approximations in the hope that after a sufficient number of iterations, the estimate converges to the true solution. Of course, this is only interesting if you manage to calculate successive approximations fairly quickly, and if you don't need a lot of iterations, so that the overall method is still efficient.
+
+There exists a plethora of literature on iterative methods, which we obviously cannot treat in detail here, but in order to get a flavour for the basic ideas, we will now discuss one of the most basic iterative schemes (which unfortunately has limited practical use in its most simple incarnation).
 
 
 \pagebreak
 
 \section{The Jacobi method}
+
+\subsectionyoutube{The Jacobi method for the Helmholtz equation}{pWJDRvmL3eE}
 
 \begin{marginfigure}[0.0cm]
   % credits: Wikipedia
@@ -292,7 +297,7 @@ A way of constructing such an approximate solution is to use an \textbf{iterativ
 Let's return to the discretised version of the Helmholtz equation Eq.~\ref{eq-hh-diff}:
 
 \begin{equation}
-f_{i+1} -2 f_i + f_{i-1} +  \Delta x^2 k^2 f_i = 0 \label{eq-hh-diff-2}
+f_{i+1} -2 f_i + f_{i-1} + \Delta x^2 k^2 f_i = 0 \label{eq-hh-diff-2}
 \end{equation}  
 
 The subscript $i$ denotes the values at position $x_0 + i \Delta x$.
@@ -300,8 +305,10 @@ The subscript $i$ denotes the values at position $x_0 + i \Delta x$.
 Now, let's start from an initial set of estimates $f_i^0$, where the superscript denotes the iteration number. For Jacobi iteration, the update rule to go from estimates $f_i^n$ to $ f_i^{n+1}$ is defined as
 
 \begin{equation}
-f_{i+1}^n -2 f_i^n + f_{i-1}^n +  \Delta x^2 k^2 f_i^n = \alpha (f_i^{n+1} - f_i^n ) \label{eq-jacobi}
+f_{i+1}^n -2 f_i^n + f_{i-1}^n + \Delta x^2 k^2 f_i^n = \alpha (f_i^{n+1} - f_i^n ) \label{eq-jacobi}
 \end{equation}  
+
+Here, $\alpha$ is by convention a positive real number. Another way of looking at Eq.~\ref{eq-jacobi} is saying that the difference between the old and the new field is proportional to the error (i.e. difference from zero) we get when plugging the old field in Eq.~\ref{eq-hh-diff-2}.
 
 \begin{cue}
 Have a look at this equation and try to understand why such an approach could work. What happens in case the method has found the true solution?  
@@ -317,17 +324,21 @@ What could be advantages/disadvantages of having a small/large value of $\alpha$
 
 A small value of $\alpha$ means that the $f$ values will change rapidly from iteration to iteration, but with the risk of taking such large steps that the method won't converge. On the other hand, a larger value of $\alpha$ reduces the risk of diverging solutions, but on the other hand more iterations will be needed to reach convergence.
 
-To clarify this further, we will now investigate when the Jacobi method diverges, i.e. when the $f$ values become unbounded for a bounded initial estimate.
+To clarify this further, we will now investigate when the Jacobi method diverges, i.e. when the $f$--values become unbounded for a bounded initial estimate.
 
-\subsection{Convergence analysis of the Jacobi method}
+\subsectionyoutube{Stability analysis of the Jacobi method}{HpHmTQILeCA}
 
-To study convergence, we take an approach that is based on Fourier analysis: any wave used as the initial estimate can be written as a sum of Fourier components $e^{-j k_x x}$, which are nothing other than plane waves with wavevector $k_x$. Let's take such a plane wave and investigate what happens when iterating through the Jacobi method. If the amplitude of such a wave stays bounded when iterating, and this is true for all admissible wavevectors $k_x$, then we can be sure that whatever initial estimate will be used, the method will not produce an unbounded result at some time.
+Ideally, we'd like to know under what circumstances this method will converge to the exact solution. However, in this section, we're going to look at an easier subproblem: figuring out when the procedure will diverge, i.e. result in infinite field values. This stability is a necessary step for convergence.\marginnote{Turns out it's also a sufficient criterion, because of something called the Lax equivalence theorem.}
+
+To study divergence, we take an approach that is based on Fourier analysis: the field profile at any iteration can be written as a sum of Fourier components $e^{-j k_x x}$, which are nothing other than plane waves with wavevector $k_x$. Let's take such a plane wave and investigate what happens when iterating through the Jacobi method. If the amplitude of a plane wave stays bounded when iterating, and this is true for all admissible wavevectors $k_x$, then we can be sure that whatever initial estimate will be used, the method will not produce an unbounded result at some time.
 
 Our plane waves take the following form:
 
 \begin{equation}
-f_i^n = A^n e^{-j k_x i \Delta x}
+f_i^n = e^{-j k_x i \Delta x}
 \end{equation} 
+
+(Let's not worry about the amplitude, as we will be looking at the ratio $\frac{f_i^{n+1}}{f_i^{n}}$, and the Jacobi procedure is a linear one.)
 
 \begin{cue}
 Perform one Jacobi iteration on $f_i^n$, i.e. calculate $f_i^{n+1}$. Use that to calculate the ratio $\frac{f_i^{n+1}}{f_i^{n}}$, which will help us see whether this grows without bounds or not.  
@@ -335,34 +346,51 @@ Perform one Jacobi iteration on $f_i^n$, i.e. calculate $f_i^{n+1}$. Use that to
 
 After one Jacobi iteration, we get:
 
-\begin{equation}
-f_i^{n+1} = A^n e^{-j k_x i \Delta x} \left[{ 1 + \frac{1}{\alpha}\left(e^{+ j k_x  \Delta x} - 2+  e^{-j k_x  \Delta x} + \Delta x^2 k^2\right)}\right]
-\end{equation} 
+\begin{align}
+ e^{-j k_x (i+1) \Delta x} -2 e^{-j k_x i \Delta x} + 
+  e^{-j k_x (i-1) \Delta x} + \Delta x^2 k^2  e^{-j k_x i \Delta x} \\ \nonumber
+ = \alpha\left(f_i^{n+1} - e^{-j k_x i \Delta x} \right)
+\end{align} 
 
 or
 
+\begin{align}
+\alpha f_i^{n+1} -  \alpha e^{-j k_x i \Delta x} = e^{-j k_x i \Delta x}  \left[ e^{-j k_x \Delta x} -2 + e^{+j k_x \Delta x} + \Delta x^2 k^2 \right]
+\end{align} 
+
+Thanks to Euler, we can write that
+
+\begin{align}
+  \alpha f_i^{n+1}  =  e^{-j k_x i \Delta x}  \left[ \alpha +2 \cos {k_x \Delta x} -2 + \Delta x^2 k^2 \right]
+\end{align} 
+
+But $ e^{-j k_x i \Delta x}$ is $f_i^n$, so
+
 \begin{equation}
 \frac{f_i^{n+1}}{f_i^{n}} =  1 + \frac{1}{\alpha}\left[2 \cos ( k_x  \Delta x) - 2 + \Delta x^2 k^2\right]
+\label{eq-jacobi-conv}
 \end{equation} 
+
+(That's actually the main reason we were studying the problem in the Fourier space: plane waves are eigenfunctions of the Helmholtz equation, so we can factor them out in our calculations here.)
 
 \begin{cue}
-Derive a criterion for this ratio to remain bounded, irrespective of the choice of a positive value of the relaxation parameter $\alpha$. Pay special attention to the DC component, i.e. $k=0$. 
+Derive a criterion for this ratio to remain bounded, irrespective of the choice of a positive value of the relaxation parameter $\alpha$. Pay special attention to the DC plane wave component, i.e. $k_x=0$. 
 \end{cue}
 
-In order for this not to diverge, the ratio  $|f_i^{n+1} / f_i^{n}|$ should be smaller than 1 for any positive $\alpha$. This happens if
+Remember that by convention $\alpha$ is positive. In order for Eq.~\ref{eq-jacobi-conv} not to diverge, we should have that $\left|f_i^{n+1} / f_i^{n}\right| \le 1$. \marginnote{This is not sufficient, as $f_i^{n+1} / f_i^{n}$ should also be bigger than -1.}A necessary condition for this, is that the stuff between square brackets is negative. So, at least we need to have that
 
 \begin{equation}
-2 \cos ( k_x  \Delta x) - 2 \le - \Delta x^2 k^2 \label{eq-conv-jacobi}
+2 \cos ( k_x  \Delta x) - 2 \lt - \Delta x^2 k^2 \label{eq-conv-jacobi}
 \end{equation} 
 
-The left--hand side of this equation lies between -4 and 0 and reaches its maximum for $k_x=0$, which is an important case as it corresponds to a uniform solution. Since it's very likely that the final solution has a DC component, we better make sure that the method converges in this case. However, for this case we can only satisfy Eq.~\ref{eq-conv-jacobi} if $k=0$. So this means that unfortunately the Jacobi method is non--convergent for the general Helmholtz equation, but only works for Laplace's equation, i.e. the special case where $k=0$.
+Since the cosine lies between -1 and 1, the left--hand side of this equation lies between -4 and 0 and reaches its maximum for $k_x=0$, which is an important case as it corresponds to a uniform solution. Since it's very likely that the final solution has a DC component, we better make sure that the method converges in this case. However, for this case, we can only satisfy Eq.~\ref{eq-conv-jacobi} if $k=0$. \marginnote{People have tried to address this using a pair of \emph{complex} values for $\alpha$ (J. Comp. Phys. 203, 358–370, 2005).}So, this means that unfortunately the Jacobi method is non--convergent for the general Helmholtz equation, but only works for Laplace's equation, i.e. the special case where $k=0$.
 
 \pagebreak
 
-\sectionugent{Finite differences in the time domain}
+\sectionyoutubeugent{Finite differences in the time domain}{Pmx2rbBBuOc}
 \label{week6}
 
-Without going into any detail, we finally want to mention the existence of a very popular method to solve Maxwell's equations in the time domain. This \textbf{finite--difference time--domain} method (FDTD) uses central differences to discretise the full vectorial Maxwell's equations both in space and time.
+Without going into any detail, we finally want to mention extremely briefly the existence of a very popular method to solve Maxwell's equations in the time domain. This \textbf{finite--difference time--domain} method (FDTD) uses central differences to discretise the full vectorial Maxwell's equations both in space and time.
 
 It uses a staggered grid, i.e. the electric field and the magnetic field are not discretised at the same point in space, but are arranged in a \textbf{Yee cell} (Fig.~\ref{fig-yee}). The arrangement of the field components in a Yee cell is such that the discretised curl laws of Maxwell's equations can be written out in a natural form.
 
@@ -494,7 +522,7 @@ b_1(x) =& \, \frac{x_2 - x}{x_2 - x_1} \\
 b_2(x) =& \, \frac{x - x_1}{x_2 - x_1}
 \end{align} 
 
-\begin{marginfigure}
+\begin{marginfigure}[-4cm]
 \centering
 \includegraphics{numeric/figures/interpol}
 \caption{Simple shape functions $b_1(x)$ and $b_2(x)$ for a 1D finite element model.}
@@ -789,6 +817,8 @@ This is of course the Helmholtz equation.
 
 Eq.~\ref{eq-euler-lagrange-2} is called the \textbf{Euler} or the \textbf{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}.
 
+Other bit of terminology: a variational formulation of a problem is sometimes called a \emph{weak formulation}, whereas the corresponding differential equation is the \emph{strong} formulation of that problem.
+
 
 \begin{exer}
 % difficulty: trivial
@@ -816,6 +846,42 @@ $$-\frac{38}{3} + 10x$$
 \end{sol}
 \end{exer}
 
+\begin{exer}
+  % difficulty: normal
+  % youtube: cwMI8XAVfCQ 
+Use the identity
+
+$$\iint_S p \nabla q \cdot \nabla r dS= - \iint_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
+
+to find the Euler-Lagrange equation of the following variational expression
+
+$$J(\phi)=\iint_S f(x,y) (\nabla \phi)^2 dS$$
+
+with $f(x,y)$ a given scalar function.
+
+\begin{sol}
+$$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
+\end{sol}
+\end{exer}
+
+% Sorry Leonard, no space here.
+
+%\begin{marginfigure}[3.0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Leonhard_Euler
+%  \includegraphics{numeric/figures/l_euler}
+%  \caption{Leonhard Euler (1707-1783)}
+%\end{marginfigure}
+
+\begin{marginfigure}[-5.7cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange 
+  \includegraphics{numeric/figures/j_lagrange}
+  \caption{Joseph-Louis Lagrange (1736-1813)}
+\end{marginfigure}
+
+
+\pagebreak
 
 \begin{exer}
 % difficulty: normal
@@ -838,41 +904,6 @@ Here $S$ is the cross--section of the waveguide.
 
 c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy of such a mode at cut-off?
 
-\end{exer}
-
-% Sorry Leonard, no space here.
-
-%\begin{marginfigure}[3.0cm]
-  % credits: Wikipedia
-  % url: https://en.wikipedia.org/wiki/Leonhard_Euler
-%  \includegraphics{numeric/figures/l_euler}
-%  \caption{Leonhard Euler (1707-1783)}
-%\end{marginfigure}
-
-\begin{marginfigure}[1.0cm]
-  % credits: Wikipedia
-  % url: https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange 
-  \includegraphics{numeric/figures/j_lagrange}
-  \caption{Joseph-Louis Lagrange (1736-1813)}
-\end{marginfigure}
-
-
-\begin{exer}
-  % difficulty: normal
-  % youtube: cwMI8XAVfCQ 
-Use the identity
-
-$$\iint_S p \nabla q \cdot \nabla r dS= - \iint_S q \nabla \cdot (p \nabla r) dS + \int_{\delta S} pq \frac{\partial r}{\partial n} dl$$
-
-to find the Euler-Lagrange equation of the following variational expression
-
-$$J(\phi)=\iint_S f(x,y) (\nabla \phi)^2 dS$$
-
-with $f(x,y)$ a given scalar function.
-
-\begin{sol}
-$$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
-\end{sol}
 \end{exer}
 
 
