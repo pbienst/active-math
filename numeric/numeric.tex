@@ -436,9 +436,9 @@ To do so, construct the required $f(x)$ from $a_1(x)$, $c_1(x)$ and the exact so
 \pagebreak
 
 
-\sectionugent{Basic recipe for finite elements}
+\sectionyoutubeugent{Basic recipe for finite elements}{My6txtzMZHg}
 
-All finite element methods more or less share the same philosophy, which is outlined in the following recipe:
+Contrary to e.g. in finite differences, in finite elements we don't solve a differential equation directly, but rather take an oblique approach, as we will see below. All finite element methods more or less share the same philosophy, which is outlined in the following recipe:
 
 \begin{itemize}
 \item
@@ -453,31 +453,29 @@ All finite element methods more or less share the same philosophy, which is outl
 \begin{marginfigure}
 \centering
 \includegraphics[scale=0.5]{numeric/figures/grid}
-\caption{A triangular mesh can be locally refined.}
+\caption{A triangular mesh that is locally refined.}
 \label{fig-grid}
 \end{marginfigure}
 
-
-
-Subdivide the structure you want to model into $K$ finite subsections (hence the name finite elements). The elements don't have to be the same size, the mesh can be irregular. A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods (Fig.~\ref{fig-staircasing}). An additional advantage is that you can use more triangles where higher resolution is required (Fig.~\ref{fig-grid}). Such a local refinement of the grid turns out to be much more complicated in a finite-difference method.
+Subdivide the structure you want to model into $L$ finite subregions (the "finite elements"). A triangular mesh is a popular choice, because this allows one to approximate curved boundaries much better than e.g. with the rectangular grid that was used in finite difference methods (Fig.~\ref{fig-staircasing}). A second advantage is that all elements don't have to be the same size, so that you can use more elements where a higher resolution is required (Fig.~\ref{fig-grid}). Such a local refinement of the grid turns out to be much more complicated in a finite-difference method.
   
-
 \item
-Approximate the unknown function using a separate approximation expression for each element of the form
+In each separate element $l$, approximate the function $\psi$ you are looking for, using an approximation of the form
 \begin{equation}
-\psi(x,y) = \sum_{i=1}^M u_i b_i(x,y) \label{eq-fe-1}
+\psi_l(x,y) = \sum_{i=1}^M u_{i,l} b_{i,l}(x,y) \label{eq-fe-1}
 \end{equation}
 
-Here the $b_i(x,y)$ are some convenient set of known basis functions. In order to solve the problem, the $M$ unknown coefficients $u_i$ per element still need to be determined.
-\item
-  Introduce some constraint on the $MK$ number of unknowns, e.g. to ensure that $\psi$ is continuous across the elements.
-
-
+Here the $b_{i,l}(x,y)$ are some convenient set of known basis functions. In order to solve the problem, the $M$ unknown coefficients $u_{i,l}$ per element $l$ still need to be determined.
 
 \item
-Write down an expression $J$ containing the approximating functions $b_i$ and the coefficients $u_i$. Because the $b_i$ are chosen in advance and therefore known, $J$ is function of the unknown $u_i$ only. The precise form of $J$ differs from problem to problem, but is often related to the total energy in the system.
+Join the different elements, e.g. by ensuring that $\psi$ is continuous across the boundaries between the elements. This introduces some relationship between the $LM$ number of unknowns.
+
+
 \item
-Find the coefficients $u_i$ such that $J$ is minimised. In a popular method due to \textbf{Rayleigh and Ritz}, this is done simply by setting all $\partial J / \partial u_i$ equal to zero and solving the resulting linear system. If $J$ is an expression for the total energy in the system, there is a clear physical interpretation for this procedure: the true solution to the problem is one that minimises the energy in the system.
+Write down an expression $J$ involving the field in all elements, i.e. containing all the basis functions $b_{i,l}$ and all the expansion coefficients $u_{i,l}$. Because the  $b_{i,l}$ are chosen in advance and therefore known, $J$ is function of the unknown $u_{i,l}$ only. The precise form of $J$ differs from problem to problem, but is often related to the energy in the system.
+
+\item
+Find the coefficients $u_{i,l}$ such that $J$ is minimised. In a popular method due to \textbf{Rayleigh and Ritz}, this is done simply by setting all $\partial J / \partial u_{i,l}$ equal to zero and solving the resulting linear system. If $J$ is an expression for the total energy in the system, there is a clear physical interpretation for this procedure: the true solution to the problem is one that minimises the energy in the system.
 \end{itemize}
 
 
@@ -486,30 +484,27 @@ Find the coefficients $u_i$ such that $J$ is minimised. In a popular method due 
 
 \sectionugent{Solving the 1D wave equation with finite elements}
 
-\begin{marginfigure}[0.5cm]
-  % credits: Wikipedia
-  % url: https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
-  \includegraphics{numeric/figures/Rayleigh}
-  \caption{John William Strutt, 3rd Baron Rayleigh (1842-1919)}
-\end{marginfigure}
+\subsectionyoutube{Subdivide the structure}{wBzcZS_XkNo}
 
-In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite element methods can be used to solve the 1D Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrated the concept of finite differences:
+In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite elements can be used to solve the 1D Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrate the concept of finite differences:
 
 \begin{equation}
 \frac{d^2 \psi (x)}{d x^2} + k^2 \psi(x) = 0 \label{eq-helmholtz-1d-2}
 \end{equation} 
 
-\subsection{Piecewise approximation}
+We will subdivide our domain into $L$ finite elements being line segments of identical length.
 
-To describe the unknown function $\psi$, we will use a very simple but common approach, which is that of a piecewise straight approximation. We will subdivide our domain into $K$ finite elements being line segments of identical length. In each segment, we will assume that $\psi$ varies linearly between the end points $x_1$ and $x_2$ of that segment:
+\subsectionyoutube{Approximate the unknown function}{ZGmyCwsTays}
+
+To describe the unknown function $\psi$ in a certain element $l$, we will use a very simple but common approach, which is that of a piecewise straight approximation.  I.e., in each segment, we will assume that $\psi$ varies linearly between the end points (often called \textbf{nodes} of the mesh) $x_1$ and $x_2$ of that segment:
 
 \noindent\marginnote[1cm]{To see that this is a linear interpolation, just substitute $x$ with $x_1$ and $x_2$ and check what happens.}
 
 \begin{equation}
-\psi(x) = \frac{x_2 - x}{x_2 - x_1} \psi_1 + \frac{x - x_1}{x_2 - x_1} \psi_2 \label{eq-fe-2}
+\psi_l(x) = \frac{x_2 - x}{x_2 - x_1} \psi_1 + \frac{x - x_1}{x_2 - x_1} \psi_2 \label{eq-fe-2}
 \end{equation} 
 
-Here $\psi_1$ and $\psi_2$ are the so far unknown values of $\psi$ at $x_1$ and $x_2$ respectively. End points of the segments are often called \textbf{nodes} of the mesh.
+Here $\psi_1$ and $\psi_2$ are the so far unknown values of $\psi$ at $x_1$ and $x_2$ respectively. (To lighten the notation, we omit the index $l$ here, but strictly speaking we should write $x_{1,l}$, $\psi_{2,l}$, etc.)
 
 \begin{cue}
 Looking at Eq.~\ref{eq-fe-2}, what would be the set of basis functions we use in this case?
@@ -522,7 +517,7 @@ b_1(x) =& \, \frac{x_2 - x}{x_2 - x_1} \\
 b_2(x) =& \, \frac{x - x_1}{x_2 - x_1}
 \end{align} 
 
-\begin{marginfigure}[-4cm]
+\begin{marginfigure}[-5cm]
 \centering
 \includegraphics{numeric/figures/interpol}
 \caption{Simple shape functions $b_1(x)$ and $b_2(x)$ for a 1D finite element model.}
@@ -531,11 +526,11 @@ b_2(x) =& \, \frac{x - x_1}{x_2 - x_1}
 
 These shape functions or interpolation functions are sketched in Fig.~\ref{fig-shape}.
 
-(It is sometimes useful to express the interpolation functions in terms of a local scaled coordinate $\xi=(x-x_1)/(x_2-x_1)$ ranging from 0 to 1. The advantage of local coordinates is that expressions for $J$ can be more easily applied to the case where the size of the elements is not the same throughout the mesh.)
+(It is sometimes useful to express the interpolation functions in terms of a local scaled coordinate $\xi=(x-x_1)/(x_2-x_1)$ ranging from 0 to 1. The advantage of local coordinates is that expressions can be more easily applied to the case where the size of the elements is not the same throughout the mesh.)
 
-\subsection{Joining the elements}
+\subsectionyoutube{Join the elements}{5GLzU89pYc0}
 
-The elements are not independent but are usually coupled through some continuity condition. In the case of our problem, $\psi$ needs to be continuous across elements. The effect of this is that the number of unknowns is reduced.
+As mentioned before, the elements are not independent, but are usually coupled through some continuity condition. In the case of our problem, $\psi$ needs to be continuous across elements. The effect of this is that the number of unknowns is reduced.
 
 \begin{marginfigure}[0.5cm]
 \centering
@@ -544,7 +539,7 @@ The elements are not independent but are usually coupled through some continuity
 \label{fig-connect}
 \end{marginfigure}
 
-To see how this is done in practice, consider Fig.~\ref{fig-connect} with on one hand a \textbf{disconnected} local numbering scheme of the nodes (where the two nodes of each element are always given a new number), and on the other hand a \textbf{connected} global numbering scheme, which already takes the continuity conditions into account. I.e. nodes with a different number in the disconnected scheme but which are physically the same, are merged and only given a single number.
+To see how this is done in practice, consider Fig.~\ref{fig-connect}. Rather than numbering the nodes $\psi_{l,1}$ and $\psi_{l,2}$, let's use a numbering scheme with only a single index. The top of Fig.~\ref{fig-connect} shows a \textbf{disconnected} local numbering scheme, where the two nodes of each element are always given a new number. On the other hand, the bottom of Fig.~\ref{fig-connect} shows a \textbf{connected} global numbering scheme, which already takes the continuity conditions into account. I.e., nodes with a different number in the disconnected scheme but which are physically the same, are merged and only given a single number.
 
 \begin{cue}
 For the example in Fig.~\ref{fig-connect}, use a matrix to express the relation between $\psi_{i, \mathrm{disc}}$ in the disconnected numbering scheme and  $\psi_{i, \mathrm{con}}$ in the connected numbering scheme.
@@ -571,40 +566,46 @@ The disconnected values are related to connected values by the following matrix 
 \label{eq-con-matrix}
 \end{equation} 
 
-The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} of the mesh. Obviously, for such a simple case is seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for computer implementation of finite element methods.
+The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} {\mathbf C} of the mesh. Obviously, for such a simple case is seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for a computer implementation.
 
-\subsection{An expression for $J$}
+\pagebreak
 
-In order to keep the method physically interpretable, let's use the total energy of the system as an expression for $J$. Assume that each element has constant refractive index. From the complex Poynting theorem, we know that the time--averaged stored energy in a system is given by
+\subsectionyoutube{Write down an expression for $J$}{vdAuouW_9NY}
+
+In order to keep the method physically interpretable, let's use the electromagnetic energy of the system as an expression for $J$.
+
+From the complex Poynting theorem, we know that the time--averaged stored energy $\mathcal{E}$ in a system is given by (assume our systems are lossless and therefore have real $\varepsilon$ and $\mu$)
 
 \begin{align}
-J =& \, \frac{1}{2} \int ( {\mathbf E} \cdot {\mathbf D}^* - {\mathbf H} \cdot {\mathbf B}^* ) dx \\
-  =& \, \frac{1}{2} \int ( \varepsilon |{\mathbf E}|^2 - \mu |{\mathbf H}|^2 ) dx
+\mathcal{E} =& \, \frac{1}{2} \int \left( {\mathbf E} \cdot {\mathbf D}^* - {\mathbf H} \cdot {\mathbf B}^* \right ) dx \\
+  =& \, \frac{1}{2} \int \left( \varepsilon |{\mathbf E}|^2 - \mu |{\mathbf H}|^2 \right) dx
 \end{align} 
 
 \begin{cue}
 Use Maxwell to eliminate ${\mathbf E}$ from that expression. Then, simplify it for the TM case where ${\mathbf H} = H {\mathbf 1}_z = \psi {\mathbf 1}_z $.  
 \end{cue}
 
-We can use one of Maxwell's curl laws to eliminate ${\mathbf E}$:
+To eliminate ${\mathbf E}$, we can use one of Maxwell's curl laws:
 
 \begin{equation}
 {\mathbf E} = \frac{1}{j \omega \varepsilon} \nabla \times {\mathbf H}
 \end{equation}  
 
-Let's assume that we are working in the TM case, where ${\mathbf H} = H {\mathbf 1}_z = \psi {\mathbf 1}_z $. We get
+Let's assume that we are working in the TM case, where ${\mathbf H} = H {\mathbf 1}_z = \psi {\mathbf 1}_z $. This means that in our 1D case, $\nabla \times {\mathbf H}=-{\frac{d H}{d x}}{\mathbf 1}_y $, so that we get
 
 \begin{equation}
-J = \frac{1}{2} \int \left( \frac{1}{\omega ^2 \varepsilon}\left|{\frac{d H}{d x}}\right|^2 - \mu |H|^2 \right) dx
+\mathcal{E} = \frac{1}{2} \int \left( \frac{1}{\omega ^2 \varepsilon}\left|{\frac{d H}{d x}}\right|^2 - \mu |H|^2 \right) dx
 \end{equation}
 
-Although we will not prove it here, it can be shown that in the case of lossless media, we can always scale the solution such that the absolute values in the previous equation can be replaced by simple squares. Also, multiplying $J$ by the constant $2 \omega ^2 \varepsilon$ does not affect the location of the minimum, such that finally we can write
+Although we will not prove it here, it can be shown that in the case of lossless media, we can always scale the solution by a complex factor such that the absolute values in the previous equation can be replaced by simple squares.
+
+Remember that we're working in a uniform medium, such that $\varepsilon$ is constant everywhere. That way, to minimise $\mathcal{E}$, we can just as well multiply everything by the constant $2 \omega ^2 \varepsilon$. Therefore, we can define $J$, our quantity to be minimised, as
 
 \begin{equation}
 J = \int \left( \left(\frac{d H}{d x}\right)^2 - k^2 H^2 \right) dx
 \end{equation}
 
-or going back to our function $\psi$:
+or, going back to our function $\psi$:
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -612,47 +613,71 @@ J = \int \left( \left(\frac{d \psi}{d x}\right)^2 - k^2 \psi^2 \right) dx \label
 $}
 \end{equation} 
 
-The contribution of a single element to $J$ can now be calculated in terms of the unknown nodal values $\psi_i$ using the explicit form of the shape functions from Eq.~\ref{eq-fe-2}. This leads to tedious but straightforward algebra, which we will not repeat here. In view of the structure of Eq.~\ref{eq-J-power}, the contribution of a single element leads to a bilinear equation of the form
+The exact form of $J$ can now be calculated in terms of the unknown nodal values $\psi_i$, using the explicit form of the shape functions from Eq.~\ref{eq-fe-2}. This is tedious but straightforward, and we will not bother with it here. However, we will just look at the general structure. In view of the linear nature of $\psi$ and the quadratic structure of Eq.~\ref{eq-J-power}, the contribution $J_l$ of a single element $l$ leads to an equation containing squares $\psi_i^2$ and mixed products $\psi_i \psi_j$ of the nodal values. This means we can write it as a bilinear form:
 
 \begin{equation}
-J_i = \begin{bmatrix}
-\psi_{1,i} \psi_{2,i} 
-\end{bmatrix}_{disc}
+J_l = \begin{bmatrix}
+\psi_{2l-1} \psi_{2l} 
+\end{bmatrix}_\mathrm{disc}
 \begin{bmatrix}
 A & B \\
 C & D 
 \end{bmatrix}
 \begin{bmatrix}
-\psi_{1,i} \\ \psi_{2,i}
-\end{bmatrix}_{disc}
+\psi_{2l-1} \\ \psi_{2l}
+\end{bmatrix}_\mathrm{disc}
 \label{eq-J-power-i}
 \end{equation} 
 
-The total energy is just the sum of the contributions from all elements, which can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
+The elements of the matrix are complicated expressions whose exact value can be determined from evaluating $J$ exactly. To be consistent with the numbering of the nodal values we used before, the index $l$ starts at 1, so that e.g. the nodal elements of the first element are $\psi_{1,\mathrm{disc}}$ and $\psi_{2,\mathrm{disc}}$.
+
+Next up, the total energy $J$ is just the sum of the contributions $J_l$ from all elements. This total energy can also be cast in matrix form, this time with a block diagonal matrix, each block corresponding to a matrix of the type from Eq.~\ref{eq-J-power-i}.
 
 \begin{exer}
   % difficulty: trivial
   % youtube: MLrrcDAmzzg 
-Explicitly write down this total energy $\sum J_i$ using a block diagonal matrix.
+Explicitly write down this total energy $J=\sum J_l$ as 
+
+$$J={\mathbf \Psi}^{T}_\mathrm{disc} {\mathbf M} {\mathbf \Psi}_\mathrm{disc}
+$$ 
+
+Here, ${\mathbf M}$ is a block diagonal matrix, and ${\mathbf \Psi}_\mathrm{disc}$ is a column vector containing all nodal elements $\psi_i$ in the disconnected numbering scheme.
 \end{exer}
 
-Finally, the expressions in terms of disconnected nodal values can be transformed in terms of connected values using the connection matrix, like e.g. the one from Eq.~\ref{eq-con-matrix}. In this way, all the continuity conditions are imposed.
-
-\subsection{Minimising $J$}
-
-To find the unknowns $\psi_i$ that minimise $J$ we simply impose
+Finally, the expressions in terms of disconnected nodal values can be transformed in terms of connected values using the connection matrix ${\mathbf C}$, like e.g. the one from Eq.~\ref{eq-con-matrix}. 
 
 \begin{equation}
-\frac{\partial J}{\partial \psi_i} = 0 \label{eq-rayleigh-ritz}
+J = {\mathbf \Psi}^{T}_\mathrm{con}  {\mathbf C}^T {\mathbf M} {\mathbf C}  {\mathbf \Psi}_\mathrm{con}
 \end{equation} 
 
-and this for all $i$. Since $J$ is a bilinear form, Eq.~\ref{eq-rayleigh-ritz} takes the form of $MK$ linear equations with $MK$ unknowns. Just as was the case with the finite--difference method, this system can either be solved directly or iteratively.
-
+In this way, all the continuity conditions are imposed.
 
 \pagebreak
 
+\subsectionyoutube{Minimise $J$}{tVEGbGtwvFU}
 
-\sectionugent{Finite elements as a variational method}
+\begin{marginfigure}[0.5cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh
+  \includegraphics{numeric/figures/Rayleigh}
+  \caption{John William Strutt, 3rd Baron Rayleigh (1842-1919)}
+\end{marginfigure}
+
+To find the unknowns $\psi_{i,\mathrm{con}}$ that minimise $J$, we follow the Rayleigh-Ritz method and simply impose
+
+\begin{equation}
+\frac{\partial J}{\partial \psi_{i,\mathrm{con}}} = 0 \label{eq-rayleigh-ritz}
+\end{equation} 
+
+and this for all $i$. Remember that $J$ is a bilinear form, containing terms like $\psi_{i,\mathrm{con}}^2$ and $\psi_{i,\mathrm{con}}\psi_{j,\mathrm{con}}$. This means that Eq.~\ref{eq-rayleigh-ritz} takes the form of a set of linear equations, as many as there are unknowns. 
+
+Just as was the case with the finite--difference method, this system can either be solved directly or iteratively.
+
+If you're still uncomfortable that minimising $J$ is mathematically 100\% equivalent to solving the Helmholtz equation, don't worry, as we will show this more rigourously in a future section.
+
+\pagebreak
+
+\sectionyoutubeugent{Finite elements as a variational method}{klAmM-aV9rA}
 
 In theory, the outline of the finite element method that we have given so far is perfectly adequate to describe it. However, it yields additional insight to cast it in the framework of a variational method.
 
@@ -674,7 +699,7 @@ Now, let's introduce a \textbf{functional}. This is an object $F(f(x))$ that con
 Can you think of examples of a functional?  
 \end{cue}
 
-The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $E=J(\psi)$. (Nitpicking: in applying the Rayleigh--Ritz method, we have parametrised the function $\psi$ using a finite set of unknowns $\psi_i$. This effectively turns the functional $J(\psi)$ into a vanilla function $J(\psi(\psi_i))$, albeit one of multiple arguments.)
+The entity $J$ that we have introduced in this chapter is a functional, as it maps a function $\psi$ to a scalar (being in this case the energy of the system), so $\mathcal{E}=J(\psi)$.
 
 \begin{exer}
   % difficulty: trivial
@@ -695,10 +720,10 @@ A \textbf{variational expression} comes from minimising a functional over a set 
 In the case of finite elements, we have been solving the following variational expression:
 
 \begin{equation}
-E = \min_\psi J(\psi)
+\mathcal{E} = \min_\psi J(\psi)
 \end{equation} 
 
-where $E$ is the total energy in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
+where $\mathcal{E}$, is the total energy in the system, and $\psi$ are functions coming from an admissible set, e.g. continuous functions that satisfy the boundary conditions of the problem.
 
 \begin{marginfigure}[-1.5cm]
   % credits: Wikipedia
@@ -707,10 +732,10 @@ where $E$ is the total energy in the system, and $\psi$ are functions coming fro
   \caption{Walther Ritz (1878-1909)}
 \end{marginfigure}
 
-The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a finite number of known basis functions, and then determine the expansion coefficients such that the functional is minimised. This turns the infinite-dimensional problem into a much more tractable finite-dimensional one.
+The \textbf{Rayleigh--Ritz} method to minimise a functional is to expand $\psi$ in a finite number of known basis functions, and then determine the expansion coefficients such that the functional is minimised. This turns the infinite-dimensional problem into a much more tractable finite-dimensional one. (Nitpicking: this effectively turns the functional $J(\psi)$ into a vanilla function $J(\psi(\psi_i))$, albeit one of multiple arguments.)
 
 \begin{cue}
-What can you say about the sensitivity of $E$ to e.g. rounding errors, given that we are working at the minimum of the functional? 
+What can you say about the sensitivity of $\mathcal{E}$, to e.g. rounding errors, given that we are working at the minimum of the functional? 
 \end{cue}
 
 \begin{marginfigure}[1.5cm]
@@ -719,14 +744,14 @@ What can you say about the sensitivity of $E$ to e.g. rounding errors, given tha
   \label{fig-functional-min}
 \end{marginfigure}
 
-So far, we don't seem to have done anything useful except introducing some new terminology. However, by looking at the energy $E$ as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $E$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
+So far, we don't seem to have done anything useful except introducing some new terminology. However, by looking at the energy $\mathcal{E}$, as a minimum of a functional, we realise that a small variation $\delta \psi$ (caused e.g. by numerical round--off errors) will not have a very big impact on the calculated value of $\mathcal{E}$, since $\delta J=0$ at the minimum of the functional, for all possible 'directions' $\delta \psi$. This insensitivity to errors is a big bonus for practical applications, and means that methods which have a variational basis can be much more robust.
 
-Now, the energy $E$ is a decidedly uninteresting quantity for practical applications, so the fact that we can calculate it without being very sensitive to rounding errors is of limited use. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
+Now, the energy $\mathcal{E}$ is a decidedly uninteresting quantity for practical applications, so the fact that we can calculate it without being very sensitive to rounding errors is of limited use. However, it is possible to derive variational expressions for e.g. the propagation constant of a waveguide, which is a much more relevant parameter that people are interested in.
 
 \pagebreak
 
 
-\sectionugent{Variational form for the 3D Helmholtz equation}
+\sectionyoutubeugent{Variational form for the 3D Helmholtz equation}{vORxFwwLm6c}
 
 In this section, we wish to provide some extra proof that a function that minimises the functional from Eq.~\ref{eq-J-power} is indeed a solution to the Helmholtz equation. So far, this was only made acceptable by invoking physical arguments based on minimum energy, but a mathematical proof for this was lacking. At the same time, let's extend the method to three dimensions:
 
@@ -737,10 +762,10 @@ J = \iiint \left((\nabla \psi)^2 - k^2 \psi^2 \right) dV \label{eq-variational1}
 \noindent\marginnote{$\delta J=0$ can obviously also give us a maximum, but these situations are rare in practice and can be easily identified by exploring $J$ in the neighbourhood of the potential solution.}If a function $\psi$ minimises the functional $J$, then $\delta J$ has to be zero for $\psi$.
 
 \begin{cue}
-Calculate $\delta J$ for this functional, neglecting second-order terms in $\delta \psi$.
+Calculate $\delta J = J(\psi + \delta \psi) - J(\psi)$ for this functional, neglecting second-order terms in $\delta \psi$.
 \end{cue}
 
-\noindent\marginnote[3.3cm]{Don't get confused: $\left( \nabla \psi \right)^2 = \nabla \psi \cdot \nabla \psi \ne \nabla^2 \psi $}For $\delta J$ (also called the \textbf{first variation} of $J$) we get
+\noindent\marginnote[3.3cm]{Don't get confused: $\left( \nabla \psi \right)^2 = \nabla \psi \cdot \nabla \psi \ne \nabla^2 \psi = \nabla \cdot \nabla \psi$}For $\delta J$ (also called the \textbf{first variation} of $J$) we get
 
 \begin{align}
 \delta J =& \, J(\psi + \delta \psi) - J(\psi) \nonumber \\
@@ -751,46 +776,65 @@ Calculate $\delta J$ for this functional, neglecting second-order terms in $\del
 If we neglect second-order terms in $\delta \psi$, we get
 
 \begin{equation}
-\delta J = \iiint \left( 2 \nabla \psi \cdot \nabla (\delta \psi) - 2 k^2 \psi \delta \psi \right) dV
+\delta J = \iiint \left( 2 \nabla \psi \cdot \nabla (\delta \psi) - 2 k^2 \psi \delta \psi \right) dV \label{eq-var-helmholtz-1}
 \end{equation}
 
-Now, let's make use of the following vector identitity:
+Now, let's make use of the following vector identity:
 
 \begin{equation}
 \nabla \cdot (u \nabla v) = u \nabla \cdot \nabla v + (\nabla u) \cdot (\nabla v) \label{eq-vector-id-green-other}
 \end{equation} 
 
+\noindent\marginnote[-1.8cm]{To flex your vector calculus muscles, you can easily verify that all three terms turn out to be scalars.}
+
 \begin{cue}
 Take the volume integral of this identity and apply the divergence theorem. Next, use this expression to transform $\delta J$. Figure out how to best assign $u$, $v$ to $\psi$, $\delta \psi$, bearing in mind that the ultimate goal is to bring out the Helmholtz equation.
 \end{cue}
 
-By integrating Eq.~\ref{eq-vector-id-green-other}, we actually get one of the many incarnations of Green's theorem:
+Since the Helmholtz equation contains $\nabla^2 \psi = \nabla \cdot \nabla \psi$, let's assign $v$ to $\psi$ and $u$ to $\delta \psi$, as that will bring us closer to the Helmholtz equation. Additionally, this will result in a term that figures in Eq~\ref{eq-var-helmholtz-1}. By integrating Eq.~\ref{eq-vector-id-green-other}, we get
 
 \begin{equation}
-\iiint \nabla \psi \cdot \nabla (\delta \psi) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - \iiint \delta \psi \cdot \nabla^2 \psi dV
+  \iiint  \nabla \cdot (\delta \psi \nabla \psi) dV =  \iiint \delta \psi  \nabla^2 \psi dV + 
+  \iiint  \nabla (\delta \psi) \cdot \nabla \psi  dV  
 \end{equation} 
 
-So,
+Using the divergence theorem and bringing the final term, i.e. the term from Eq~\ref{eq-var-helmholtz-1}, to the left-hand side, we get
 
 \begin{equation}
-\delta J = 2\iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS - 2\iiint \delta \psi \cdot \nabla^2 \psi dV - 2 \iiint k^2 \psi \delta \psi dV
+\iiint \nabla \psi \cdot \nabla (\delta \psi) dV = \iint \delta \psi {\nabla \psi} \cdot \mathbf{1}_n dS - \iiint \delta \psi \nabla^2 \psi dV
 \end{equation} 
+
+Here, $\mathbf{1}_n$ is the unit vector perpendicular to the surface, and ${\nabla \psi} \cdot \mathbf{1}_n $ is by definition equal to the normal derivative ${\partial \psi} / {\partial n}$. This means that
+
+\begin{equation}
+  \iiint \nabla \psi \cdot \nabla (\delta \psi) dV = \iint \delta \psi  \frac{\partial \psi}{\partial n} dS - \iiint \delta \psi \nabla^2 \psi dV
+  \end{equation} 
+
+\noindent\marginnote[-1.5cm]{This is actually one of the many incarnations of Green's theorem.}
 
 \begin{cue}
-Now, impose the condition that says that $\psi$ should minimise $J$.  
+Use this result in $\delta J$, and impose the condition that says that $\psi$ should minimise $J$.  
 \end{cue}
+
+Using this in the expression for $\delta J$, we get
+
+\begin{equation}
+\delta J = 2\iint \delta \psi  \frac{\partial \psi}{\partial n} dS - 2\iiint \delta \psi  \nabla^2 \psi dV - 2 \iiint k^2 \psi \delta \psi dV
+\end{equation} 
 
 Demanding that $\delta J = 0$ (a condition which is called \textbf{stationarity}), we get
 
 \begin{equation}
-\iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = \iint \delta \psi \cdot \frac{\partial \psi}{\partial n} dS \label{eq-euler-lagrange-1}
+\iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = \iint \delta \psi  \frac{\partial \psi}{\partial n} dS \label{eq-euler-lagrange-1}
 \end{equation}
 
 \begin{cue}
-Think about how to deal with the term involving the boundary condition, i.e. the 2D integral.  
+Think about how to deal with the term involving the boundary conditions, i.e. the 2D integral.  
 \end{cue}
 
-\begin{marginfigure}[0.0cm]
+\pagebreak
+
+\begin{marginfigure}[0.2cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Peter_Gustav_Lejeune_Dirichlet
   \includegraphics{numeric/figures/p_dirichlet}
@@ -801,13 +845,13 @@ Suppose that our boundary conditions are of the Dirichlet type such that $\psi=0
 
 Similarly, for Neumann--type boundary conditions where $\partial \psi / \partial n = 0$ on the boundary, the right--hand side of Eq.~\ref{eq-euler-lagrange-1} will also be zero.
 
-So for these common boundary conditions we get
+So, for these common boundary conditions, we get that demanding that $\delta J = 0$ results in
 
 \begin{equation}
 \iiint \delta \psi (\nabla^2 \psi + k^2 \psi ) dV = 0
 \end{equation} 
 
-Since our choice of $\delta \psi$ has been completely arbitrary, it follows that stationarity of the variational expression requires that $\psi$ has to satisfy
+To minimise $J$, $\delta J$ should be zero not just for a particular lucky choice of $\delta \psi$, but it should actually be zero for any choice of $\delta \psi$. So, stationarity of the variational expression requires that $\psi$ has to satisfy
 
 \begin{equation}
 \nabla^2 \psi + k^2 \psi = 0 \label{eq-euler-lagrange-2}
@@ -817,8 +861,9 @@ This is of course the Helmholtz equation.
 
 Eq.~\ref{eq-euler-lagrange-2} is called the \textbf{Euler} or the \textbf{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}.
 
-Other bit of terminology: a variational formulation of a problem is sometimes called a \emph{weak formulation}, whereas the corresponding differential equation is the \emph{strong} formulation of that problem.
+Other bits of terminology: a variational formulation of a problem is sometimes called a \emph{weak formulation}, whereas the corresponding differential equation is the \emph{strong formulation} of that problem.
 
+\pagebreak
 
 \begin{exer}
 % difficulty: trivial
@@ -845,6 +890,7 @@ in the entire interval $[1,2]$ using only functions from $V = \mathrm{span} \{1,
 $$-\frac{38}{3} + 10x$$   
 \end{sol}
 \end{exer}
+
 
 \begin{exer}
   % difficulty: normal
@@ -880,7 +926,6 @@ $$\nabla \cdot \left( f \nabla \phi \right) = 0 $$
   \caption{Joseph-Louis Lagrange (1736-1813)}
 \end{marginfigure}
 
-
 \pagebreak
 
 \begin{exer}
@@ -913,7 +958,12 @@ c) Looking back at Eq.~\ref{eq-variational1}, what can you say about the energy 
 \sectionugent{Eigenmode expansion}
 \label{week7}
 
-In eigenmode expansion, we slice up the structure that we want to model in a number of layers where the refractive index profile does not change in the propagation direction (often taken to be the $z$--direction). A typical example is given in Fig.~\ref{fig-interface}, which shows the interface between two waveguides I and II.
+\subsectionyoutube{Introduction}{f2M9tZ8461o}
+
+In this section, we'll discuss a method that is not as general as finite difference or finite element methods, but which, for a certain class of structures, can give an important speed boost because it exploits the properties of the structure to be modelled in a natural way.
+
+In the so-called eigenmode expansion method, we are studying structures that consist of a number of layers where the refractive index profile does not change in the propagation direction (often taken to be the $z$--direction). \marginnote{If you're really desperate, you can even take a curved structure, and approximate it by slicing it up in a number of uniform layers, although in that case, you will suffer from staircasing.}This means that the structures are in essence a stack of waveguides, e.g. a Bragg reflector, or any structure that is like a layered cake. 
+The simplest case is given in Fig.~\ref{fig-interface}, which shows the interface between two waveguides I and II. This is the building block of more complicated structures.
 
 \begin{figure}[ht]
 \centering
@@ -922,11 +972,11 @@ In eigenmode expansion, we slice up the structure that we want to model in a num
 \label{fig-interface}
 \end{figure}
 
-We will expand the field in each waveguide using the eigenmodes of that waveguide. It can be shown that these eigenmodes form a \textbf{complete} set, i.e. they can be used to expand any arbitrary field in that layer. Also, by enclosing the structure that we want to model in a metal box, this set of eigenmodes is a discrete set rather than a continuum.
+We will expand the field in each waveguide using a basis set that incorporates already a lot of physics of the problem, namely the eigenmodes of that waveguide. It can be shown that these eigenmodes form a \textbf{complete} set, i.e. they can be used to expand any arbitrary field in that layer. Also, by enclosing the structure that we want to model in a metal box, this set of eigenmodes is a discrete set rather than a continuum.
 
 The interface is placed at $z=0$ and a single mode with index $p$ is incident from medium I. This incident mode will give rise to a backward--propagating field in medium I, which we expand in terms of the eigenmodes of this medium. Likewise, we expand the transmitted field in the eigenmodes of medium II.
 
-Before continuiting, we need to determine a relationship between the fields of the forward and the backward propagating modes.
+Before continuing, we need to determine a relationship between the fields of the forward and the backward propagating modes.
 
 \begin{exer}
   % difficulty: trivial
@@ -943,13 +993,17 @@ Because of the negative propagation constant, this is the backward propagating v
 
 \end{exer}
 
-Now that we know this, we can start applying the well--known \textbf{mode--matching} technique.
+\pagebreak
+
+\subsectionyoutube{Mode matching}{q2mp-Y9VDxY}
+
+Now that we've laid the groundwork, we can start applying the so-called \textbf{mode--matching} technique to the interface:
 
 \begin{cue}
 Impose the continuity of the tangential components of the total field on both sides of the interface in Fig.~\ref{fig-interface}.  
 \end{cue}
 
-Demanding continuity leads to: 
+Demanding continuity leads to: \marginnote[1.3cm]{Note that the expansion coefficients for $\mathbf{E}$ are the same as those for $\mathbf{H}$. This makes sense, because we're expanding in eigenmodes, and scaling each eigenmode will result in scaling both $\mathbf{E}$ and $\mathbf{H}$ with the same factor.} 
 
 \begin{eqnarray}
 \mathbf{E}^{I}_{p,t}+\sum _{j}R_{j,p}\mathbf{E}^{I}_{j,t} & = & \sum _{j}T_{j,p}\mathbf{E}^{II}_{j,t}\label{Eq:MM 1a} \\
@@ -971,7 +1025,7 @@ We get:
 \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{p}\right\rangle -\sum _{j}R_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{j}\right\rangle  & = & \sum _{j}T_{j,p}\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:MM 2b} 
 \end{eqnarray}
 
-where the scalar product is defined as the following overlap integral:
+\noindent\marginnote{You can easily verify that in that definition, only the tangential components contribute to the integral.}where the scalar product is defined as the following overlap integral:
 
 \begin{equation} 
 \left\langle \mathbf{E}_{m},\mathbf{H}_{n}\right\rangle \equiv \iint _{s}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}
@@ -979,8 +1033,14 @@ where the scalar product is defined as the following overlap integral:
 
 If we decide to truncate the series expansion after $N$ terms, we have $2N$ unknowns: $N$ reflection coefficients and $N$ transmission coefficients. Eq.~\ref{Eq:MM 2a} and \ref{Eq:MM 2b} provide us exactly with $2N$ equations, since we can write them for all $i$ in $1 \cdots N$.
 
+\subsectionyoutube{Exploiting orthogonality}{JdX-Ev-JK2I}
+
+It's possible to show that eigenmodes in a waveguide satisfy the following orthogonality condition ($m \ne n$):
+
+$$\iint_{S}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}=0$$
+
 \begin{cue}
-Reduce the dimensionality of this linear system by invoking the orthogonality relation $\iint_{S}\left( \mathbf{E}_{m}\times \mathbf{H}_{n}\right) \cdot d{\mathbf S}=0$, followed by adding and subtracting the resulting equations.
+Reduce the dimensionality of the linear system from the previous section by invoking this orthogonality relation, followed by adding and subtracting the resulting equations.
 \end{cue}
 
 The orthogonality condition leads to
@@ -997,13 +1057,17 @@ Adding and subtracting these equations yields
 R_{i,p}=\frac{1}{2\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle }\sum _{j}\left[ \left\langle \mathbf{E}^{II}_{j},\mathbf{H}^{I}_{i}\right\rangle -\left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \right] T_{j,p} &  & \label{Eq:MM 4b} 
 \end{eqnarray}
 
-This shows that we can first calculate the transmission coefficients by solving an $N \times N$ linear system, and then obtain the reflection coefficients by a simple matrix multiplication.
+This shows that we can first calculate the transmission coefficients by solving an $N \times N$ linear system, and then obtain the reflection coefficients by a simple matrix multiplication. This is much more efficient than solving the $2N \times 2N$ system from the previous section for the reflection and transmission coefficients simultaneously.
 
 After obtaining $R$ and $T$ upon incidence of mode $p$, we can of course repeat the whole procedure using all modes $p$ in $ 1 \cdots N$.
 
 \noindent\marginnote{Actually, when solving the system even an explicit inverse is not required, as we can use the LU decomposition of the system matrix.}Important to note is that this changes only the right--hand side in the linear system in Eq.~\ref{Eq:MM 4a}, so that we do not have to invert another system matrix. 
 
-Usually, we will choose to normalise our modes such that \( \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle =1 \).
+In what follows, we will also choose to normalise our modes such that \( \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{I}_{i}\right\rangle =1 \), which further simplifies the equations.
+
+\pagebreak
+
+\subsectionyoutube{Overlap matrices}{pdeceZHUlOU}
 
 Let's now defining the following overlap matrices:
 
@@ -1016,18 +1080,20 @@ Let's now defining the following overlap matrices:
 Use these matrices to write Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b} more compactly.   
 \end{cue}
 
-With the superscript $T$ denoting transpose, we finally get:
+With the superscript $T$ denoting transpose, we finally get\marginnote{If you need more details here, watch the video.}:
 
 \begin{eqnarray}
 \mathbf{T}_{I,II} & = & 2\left( \mathbf{O}_{I,II}+\mathbf{O}^{T}_{II,I}\right) ^{-1}\label{Eq:MM 5a} \\
-\mathbf{R}_{I,II} & = & \frac{1}{2}\left( \mathbf{O}^{T}_{II,I}-\mathbf{O}_{I,II}\right) \cdot \mathbf{T}_{I,II}\label{Eq:MM 5b} 
+\mathbf{R}_{I,II} & = & \frac{1}{2}\left( \mathbf{O}^{T}_{II,I}-\mathbf{O}_{I,II}\right)  \mathbf{T}_{I,II}\label{Eq:MM 5b} 
 \end{eqnarray}
 
-In these expressions $\mathbf{T}_{I,II}$ and $\mathbf{R}_{I,II}$ are the so--called transmission and reflection matrices. Their \( p \)--th columns consist of the $T_{j,p}$ and $R_{j,p}$ from Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b}. If we collect the expansion coefficients of an arbitrary incident field in a column vector $\mathbf{A}_{inc}$, we can write very compactly for the reflected and transmitted fields: 
+In these expressions $\mathbf{T}_{I,II}$ and $\mathbf{R}_{I,II}$ are the so--called transmission and reflection matrices. Their \( p \)--th columns consist of the $T_{j,p}$ and $R_{j,p}$ from Eq.~\ref{Eq:MM 4a} and \ref{Eq:MM 4b}. 
+
+If we collect the expansion coefficients of an arbitrary incident field in a column vector $\mathbf{A}_\mathrm{inc}$, we can write very compactly for the reflected and transmitted fields, using the meaning of the $R_{i,j}$ and $T_{i,j}$ coefficients: 
 
 \begin{eqnarray}
-\mathbf{A}_{refl} & = & \mathbf{R}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:R matrix} \\
-\mathbf{A}_{trans} & = & \mathbf{T}_{I,II}\cdot \mathbf{A}_{inc}\label{Eq:T matrix} 
+\mathbf{A}_\textrm{refl} & = & \mathbf{R}_{I,II} \mathbf{A}_\textrm{inc}\label{Eq:R matrix} \\
+\mathbf{A}_\textrm{trans} & = & \mathbf{T}_{I,II} \mathbf{A}_\textrm{inc}\label{Eq:T matrix} 
 \end{eqnarray}
 
 Obviously, we can repeat the entire procedure for incidence from medium II, which gives us the matrices $\mathbf{R}_{II,I}$ and $\mathbf{T}_{II,I}$.
@@ -1038,7 +1104,7 @@ These four matrices completely characterise the scattering that occurs at an int
 Study the structure of Eq.~\ref{Eq:MM 5a} and \ref{Eq:MM 5b}. Do they remind you of something?  
 \end{cue}
 
-\begin{marginfigure}[0.0cm]
+\begin{marginfigure}[-5.0cm]
   % credits: Wikipedia
   % url: https://en.wikipedia.org/wiki/Augustin-Jean_Fresnel
   \includegraphics{numeric/figures/a_fresnel}
@@ -1052,7 +1118,7 @@ T & = & \frac{2n_{1}}{n_{1}+n_{2}}\label{Eq:T normal} \\
 R & = & \frac{n_{1}-n_{2}}{n_{1}+n_{2}}\label{Eq:R normal} 
 \end{eqnarray}
 
-In fact, Eq.~\ref{Eq:T normal} and \ref{Eq:R normal} can also be derived from the more general treatment presented here. For homogeneous layers, where the refractive index does not vary in the transverse direction, it turns out that the overlap matrices are diagonal, meaning that there is no cross--coupling between the different modes. Further evaluation of the formula's reveals that the Fresnel equations are indeed recovered.
+In fact, Eq.~\ref{Eq:T normal} and \ref{Eq:R normal} can also be derived from the more general treatment presented here. For homogeneous layers, where the refractive index does not vary in the transverse direction, it turns out that the overlap matrices are diagonal, meaning that there is no cross--coupling between the different modes. Further evaluation of the formulas can reveal that the Fresnel equations are indeed recovered.
 
 Obviously, a realistic structure will consist of more than one interface, but that problem is outside the scope of this text.
 
@@ -1075,6 +1141,8 @@ $$ \begin{bmatrix} \mathbf{O}^{T}_{II,I} & -\mathbf{O}^{T}_{I,I} \\ \mathbf{O}_{
 \sectionugent{Method of weighted residuals}
 
 To conclude this chapter, we will present the method of weighted residuals, a very general scheme for converting linear differential and integral equations into a form suitable for numerical solution by standard matrix methods.
+
+\subsectionyoutube{Working with an error residual}{hdMlNCC6H8s}
 
 We start from a problem of the type
 
@@ -1105,13 +1173,13 @@ How would you quantify 'as well as possible'? Is the method you propose useful i
 Your first hunch could be to try and minimise the difference between the exact solution $u$ and its approximation $\tilde{u}$. However, this will get you nowhere in practice: you don't know the exact solution, so you cannot evaluate the difference.
 
 \begin{cue}
-What happens if you apply $L$ to the difference between $u$ and $\tilde{u}$? 
+What happens if you apply $L$ to the difference between $\tilde{u}$ and $u$? 
 \end{cue}
 
 Doing this, leads to the definition of the \textbf{error residual}:
 
 \begin{equation}
-R(x) = L\tilde{u} - v = L \sum_{i=1}^N u_i b_i(x) - v(x)
+R(x) = L\tilde{u} - Lu = L\tilde{u} - v = L \left( \sum_{i=1}^N u_i b_i(x) \right) - v(x)
 \end{equation} 
 
 which is clearly zero if and only if we have an exact solution to Eq.~\ref{eq-operator}. Moreover, apart from the coefficients $u_i$, all the other quantities can be calculated. Now we have a realistic objective: trying to make the residual as small as possible.
@@ -1124,9 +1192,9 @@ There are many approaches you could take here, e.g. asking that the energy of th
 
 Here however, we will introduce a more general approach, of which the examples listed above are special cases.
 
-\noindent\marginnote{Don't confuse the weight functions $w_i$ with the weight function you could choose to define your scalar product, e.g. $r$ in the scalar product of Bessel functions. These are completely independent choices.}To proceed, we choose another set of functions, the so--called \textbf{test} or \textbf{weight} functions $w_i$. We also introduce an inner product (scalar product) formally written as $\langle f(x),g(x) \rangle$. The definition of the inner product is in a sense arbitrary and often follows from the specifics of the problem considered.
+\noindent\marginnote{Don't confuse the weight functions $w_i$ with the weight function you could choose to define your scalar product, e.g. $r$ in the scalar product of Bessel functions. These are completely independent choices.}To proceed, we choose another set of functions, the so--called \textbf{test} or \textbf{weight} functions $w_j$. We also introduce an inner product (scalar product) formally written as $\langle f(x),g(x) \rangle$. The definition of the inner product is in a sense arbitrary and often follows from the specifics of the problem considered.
 
-Rather than asking the impossible that $R(x)=0$ for all $x$, we insist that $R(x)$ be orthogonal to each of the weight functions under the scalar product considered.
+Rather than asking the impossible that $R(x)=0$ for all $x$, we insist that the residual be orthogonal to each of the weight functions under the scalar product considered (hence the name of the method).
 
 \begin{cue}
 Impose this condition and put it in matrix form.  
@@ -1135,24 +1203,38 @@ Impose this condition and put it in matrix form.
 This results in the following $N$ equations for $N$ unknowns:
 
 \begin{equation}
-\left\langle \left\{ L \sum_{i=1}^N u_i b_i(x) - v(x)  \right\}, w_j(x) \right\rangle = 0 \hspace{0.5cm} j=1,2\cdots,N \label{eq-weighted-res}
+\left\langle  L \left(\sum_{i=1}^N u_i b_i(x)\right) - v(x) , w_j(x) \right\rangle = 0 \hspace{0.5cm} j=1,2\cdots,N \label{eq-weighted-res}
 \end{equation}
 
 In the above equation, $b_i(x)$, $v(x)$ and $w_j(x)$ are known functions of $x$. $L$ is the known operator and $u_i$ are the unknown and wanted scalars which when put into Eq.~\ref{eq-expansion} give our approximate solution.
 
-Because of the linearity of Eq.~\ref{eq-weighted-res}, it can be put into a compact matrix form:
+Let's move the excitation part to the right-hand side, and exploit the linearity of $L$ to write Eq.~\ref{eq-weighted-res} as
 
 \begin{equation}
-{\mathbf L} \cdot {\mathbf u} = {\mathbf v}
+  \left\langle  \sum_{i=1}^N u_i L b_i(x), w_j(x) \right\rangle = \left\langle v(x), w_j(x)\right\rangle 
+\end{equation}
+
+Of course, the scalar product is linear as well:
+
+\begin{equation}
+   \sum_{i=1}^N u_i \left\langle L b_i(x), w_j(x) \right\rangle = \left\langle v(x), w_j(x)\right\rangle  \label{eq-weighted-res-3}
+\end{equation}
+
+This can also be put into a compact matrix form:
+
+\begin{equation}
+{\mathbf L} {\mathbf u} = {\mathbf v}
 \end{equation} 
 
-Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. $\mathbf v$ denotes the known column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally ${\mathbf L}$ is a known $N \times N$ matrix with $(i,j)$-th element $\left\langle L b_i(x), w_j(x) \right\rangle$.
+Here, $\mathbf u$ denotes the unknown column vector containing $u_1, u_2, \hdots, u_N$. $\mathbf v$ denotes the column vector with elements $\left\langle v(x), w_j(x) \right\rangle$. Finally, ${\mathbf L}$ is a  $N \times N$ matrix with $(i,j)$-th element $\left\langle L b_j(x), w_i(x) \right\rangle$. $\mathbf v$ and ${\mathbf L}$ are known, because we can evaluate them based on our choice of basis and test functions.
 
-So, our equation $Lu=v$ has been \emph{projected} by approximation into the matrix equation ${\mathbf L} \cdot {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
+So, our equation $Lu=v$ has been \emph{projected} by approximation into the matrix equation ${\mathbf L} {\mathbf u} = {\mathbf v}$, which can be solved with standard numerical routines.
 
 Apart from the weighted residuals method, the above procedure is also called the \textbf{method of moments} or the \textbf{generalised Galerkin method}.
 
-\subsection{Choice of basis and test functions}
+\pagebreak
+
+\subsectionyoutube{Choice of basis and test functions}{yzLwNFePkhk}
 
 \begin{marginfigure}[-.0cm]
   % credits: Wikipedia
@@ -1191,7 +1273,7 @@ Another interesting choice is explored in the following exercise:
 % youtube: ZdapTpUOIrE  
 Assuming a commutative scalar product, show that the choice 
 
-$$w_i(x) = L b_i(x)$$
+$$w_j(x) = L b_j(x)$$
 
 leads to the minimisation of the norm of the error residual 
 
