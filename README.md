@@ -6,6 +6,6 @@ It is used as a textbook in the course "Mathematics for Photonics" at Ghent Univ
 
 This textbook takes an 'active approach': rather than only providing explanations, at key points you are given hints and are explicitly asked to try and derive the next steps on your own. This is then followed by the explanation. Obviously, to get maximum benefit from this approach, it is imperative that you work through these steps yourselves. You should resist the temptation to immediately skip to the answer, as this will only result in the illusion of competence.
 
-This textbook will be supported by videos on the <a href="https://www.youtube.com/channel/UCCrl_LDnXnXB19-2geTWhDQ">Active Math</a> YouTube channel. This is a work in progress, currently focusing on the critical path exercises.
+This textbook is supported by videos on the <a href="https://www.youtube.com/channel/UCCrl_LDnXnXB19-2geTWhDQ">Active Math</a> YouTube channel.
 
 Download the textbook by clicking 'Releases' in the sidebar to the right.
