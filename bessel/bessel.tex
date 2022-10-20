@@ -114,14 +114,14 @@ However, here we'll shift gears and take a completely different approach to defi
 Let's introduce a function of two variables, a so-called \emph{generating function}:
 
 \begin{equation}
-g(x,t) \stackrel{def}{=} e^{x/2(t-1/t)} \label{eq-gen-bessel}
+g(x,t) \stackrel{def}{=} e^{\frac{x}{2}\left(t-\frac{1}{t}\right)} \label{eq-gen-bessel}
 \end{equation}
 
 When we expand this function in a Laurent series in $t$, we \emph{define} the coefficients as being the Bessel functions:
 
 \begin{equation}
 \fbox{$\displaystyle
- g(x,t) = e^{x/2(t-1/t)} \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n
+ g(x,t) = e^{\frac{x}{2}\left(t-\frac{1}{t}\right)} \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n
     $}
   \label{eq-g-bessel}
 \end{equation}
@@ -135,7 +135,7 @@ The introduction of the generating function is a purely mathematical trick. $t$ 
 
 Remember our new definition: 
 
-$$g(x,t) = e^{x/2(t-1/t)}  \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
+$$g(x,t) =  e^{\frac{x}{2}\left(t-\frac{1}{t}\right)} \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
 
 Let's try to expand the generating function in a different series expansion, which we can then use to figure out a series expansion for $J_n(x)$.
 
@@ -233,7 +233,7 @@ Put $t=j$, take the real and imaginary parts.
 
 Let's look againt at Eq.~\ref{eq-g-bessel}:
 
-$$g(x,t) = e^{x/2(t-1/t)}  \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
+$$g(x,t) =  e^{\frac{x}{2}\left(t-\frac{1}{t}\right)}   \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
 
 \begin{cue}
 Differentiate the generating function with respect to $t$, and then resubstitute the generating function into the resulting expression. 
@@ -242,7 +242,7 @@ Differentiate the generating function with respect to $t$, and then resubstitute
 Differentiation gives us
 
 \begin{equation}
-\frac{x}{2}\left({1 + \frac{1}{t^2}}\right) e^{x/2(t-1/t)} = \sum_{n = - \infty}^{\infty} n J_n(x)t^{n-1}
+\frac{x}{2}\left({1 + \frac{1}{t^2}}\right)  e^{\frac{x}{2}\left(t-\frac{1}{t}\right)}  = \sum_{n = - \infty}^{\infty} n J_n(x)t^{n-1}
 \end{equation}
 
 Substituting the definition of the generating function back into this, we get
