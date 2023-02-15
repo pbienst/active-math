@@ -27,7 +27,7 @@ To end, we will discuss time-reversal symmetry, as well as some applications of 
 
 
 
-\sectionugent{The Helmholtz equation as an eigenvalue problem}
+\sectionyoutubeugent{Helmholtz equation as an eigenvalue problem}{rKL8RE97lFw}
 
 \begin{marginfigure}[-0.0cm]
   % credits: Wikipedia
@@ -36,7 +36,7 @@ To end, we will discuss time-reversal symmetry, as well as some applications of 
   \caption{Hermann von Helmholtz (1821-1894)}
 \end{marginfigure}
 
-We will first derive the most general form of the Helmholtz equation which is also valid in the case of continuous refractive index variations. We start from
+We will first derive the most general form of the vectorial Helmholtz equation which is also valid in the case of continuous refractive index variations. We start from
 
 \begin{equation}
 \nabla \times {\mathbf E({\mathbf r})} = - j \omega \mu {\mathbf H({\mathbf r})} \label{eq-maxwell-1}
@@ -57,7 +57,7 @@ Combining these equations results in
 $}
 \end{equation} 
 
-It is important not to yield to the temptation of bringing $\varepsilon({\mathbf r})$  outside of the $\nabla$--operator. This would be incorrect, because $\varepsilon$ is now no longer constant (although we assume that $\mu$ is constant since most 'normal' materials are non--magnetic).
+It is important not to yield to the temptation of bringing $\varepsilon({\mathbf r})$ outside of the $\nabla$--operator. This would be incorrect, because $\varepsilon$ is now no longer constant (although we assume that $\mu$ is constant since most 'normal' materials are non--magnetic).
 
 Let's define the following linear differential operator:
 
@@ -75,7 +75,7 @@ This operator takes the curl, divides by $\varepsilon({\mathbf r})$ and then tak
 \Theta {\mathbf H({\mathbf r})} = \omega^2 \mu {\mathbf H({\mathbf r})}
 \end{equation} 
 
-So, the eigenfunctions ${\mathbf H({\mathbf r})}$ of the $\Theta$--operator are field distributions that satisfy Maxwell's curl equations. The eigenvalues of these eigenfunctions are given by $\omega^2 \mu$. Note that in this point of view $\omega$ is seen as an unknown: for a given system with a certain index distribution, we are interested in finding the  $\omega$--values of the allowed solutions.
+So, the eigenfunctions ${\mathbf H({\mathbf r})}$ of the $\Theta$--operator are field distributions that satisfy Maxwell's curl equations. The eigenvalues of these eigenfunctions are given by $\omega^2 \mu$. Note that in our current point-of-view $\omega$ is considered an unknown: for a given system with a certain index distribution, we are interested in finding the  $\omega$--values of the allowed solutions.
 
 For physical reasons, we would obviously like these eigenvalues to be real and positive, as that would give rise to a real and positive value of the angular frequency $\omega$, provided that $\mu$ is real and positive.
 
@@ -84,8 +84,9 @@ To prove this, one of the concepts that we will need to use is that of \emph{Her
 
 \sectionugent{Hermitian operators}
 
+\subsectionyoutube{Definition of Hermitian operators}{R34gCNeyeMU}
 
-\noindent\marginnote{As should have become clear from earlier chapters, the choice of scalar product is somewhat arbitrary. Another choice would have been to omit the complex conjugate in the definition, but this would lose the link to a physical interpretition of the norm of a vector function as a real-valued power.}To define what it means for an operator to be Hermitian, we first need to introduce a scalar product (also called inner product). Let's define this inner product between two vector functions ${\mathbf F({\mathbf r})}$ and ${\mathbf G({\mathbf r})}$ as
+\noindent\marginnote{As should have become clear from earlier chapters, the choice of scalar product is somewhat arbitrary. Another choice would have been to omit the complex conjugate in the definition, but this would lose the link to a physical interpretation of the norm of a vector function as a real-valued energy.}To define what it means for an operator to be Hermitian, we first need to introduce a scalar product (also called inner product). Let's define this inner product between two vector functions ${\mathbf F({\mathbf r})}$ and ${\mathbf G({\mathbf r})}$ as
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -97,7 +98,7 @@ $}
 What can you say about $\left\langle {\mathbf G}, {\mathbf F}\right\rangle$? And what about $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$? 
 \end{cue}
 
-From this simple definition. we immediately get that $\left\langle {\mathbf G}, {\mathbf F}\right\rangle = \left\langle {\mathbf F}, {\mathbf G}\right\rangle ^*$. We also see that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real, even if ${\mathbf F}$ itself is complex.
+From this simple definition, we immediately get that $\left\langle {\mathbf G}, {\mathbf F}\right\rangle = \left\langle {\mathbf F}, {\mathbf G}\right\rangle ^*$. We also see that $\left\langle {\mathbf F}, {\mathbf F}\right\rangle$ is always real and positive, even if ${\mathbf F}$ itself is complex.
 
 Now, an operator $\Xi$ is said to be Hermitian if
 
@@ -107,7 +108,22 @@ Now, an operator $\Xi$ is said to be Hermitian if
 $}
 \end{equation} 
 
-This means that it doesn't matter which function is operated upon before taking the inner product. Clearly this is a special property which not all operators have. Before showing that our operator $\Theta$ has this property, let's first derive an auxiliary result to help us manipulate the integrals involved in taking the scalar product. 
+This means that it doesn't matter which function is operated upon before taking the inner product. 
+
+Clearly this is a special property which not all operators have, but it turns out that this is true for the $\Theta$ operator we defined above, in the context of the eigenproblem formulation of the Helmholtz equation. 
+
+\pagebreak
+
+\subsectionyoutube{$\Theta$ is a Hermitian operator}{VJGxvZBH1VM}
+
+\begin{marginfigure}[0cm]
+  % credits: Wikipedia
+  % url: https://en.wikipedia.org/wiki/Charles_Hermite
+  \includegraphics{hermite/figures/c_hermite}
+  \caption{Charles Hermite (1822–1901)}
+  \end{marginfigure}
+
+Before showing that our operator $\Theta$ has this property, let's first derive an auxiliary result to help us manipulate the integrals involved in taking the scalar product. 
 
 Let's start from
 
@@ -121,12 +137,6 @@ Integrate this over a volume and apply the divergence theorem.
 
 we immediately get
 
-\begin{marginfigure}[0cm]
-% credits: Wikipedia
-% url: https://en.wikipedia.org/wiki/Charles_Hermite
-\includegraphics{hermite/figures/c_hermite}
-\caption{Charles Hermite (1822–1901)}
-\end{marginfigure}
 
 \begin{equation}
 \iiint {\mathbf a}  \cdot (\nabla \times {\mathbf b}) dV = \iiint {\mathbf b} \cdot ( \nabla \times {\mathbf a}) dV - \iiint \nabla \cdot ({\mathbf a} \times {\mathbf b}) dV 
@@ -135,7 +145,7 @@ we immediately get
 With the divergence theorem, this can be written as
 
 \begin{equation}
-\iiint {\mathbf a}  \cdot (\nabla \times {\mathbf b}) dV = \iiint {\mathbf b} \cdot ( \nabla \times {\mathbf a}) dV - \iint  {\mathbf a} \times {\mathbf b} \cdot d{\mathbf S} \label{eq-part-int}
+\iiint {\mathbf a}  \cdot (\nabla \times {\mathbf b}) dV = \iiint  ( \nabla \times {\mathbf a}) \cdot {\mathbf b} dV - \iint  {\mathbf a} \times {\mathbf b} \cdot d{\mathbf S} \label{eq-part-int}
 \end{equation} 
 
 This result allows us to move a curl operator from one factor of a scalar product to another factor, which will come in handy when we try to move our $\Theta$ operator in a similar way to prove hermiticity. 
@@ -157,7 +167,9 @@ By applying our lemma Eq.~\ref{eq-part-int}, we get
 \label{eq-pos-omega}
 \end{equation} 
 
-The term related to the surface integral was dropped because in all practical cases, one of two things will be true. Either the fields at infinity will decay to zero, or the fields are periodic on the surface. In both cases, the surface term will vanish.
+Since $\nabla$ is real-valued, we were able to write $[ \nabla \times {\mathbf F}]^*$ instead of $\nabla \times {\mathbf F}^*$.
+
+Also, the term related to the surface integral was dropped because in all practical cases, one of two things will be true. Either the fields at infinity will decay to zero, or the fields are periodic on the surface. In both cases, the surface term will vanish.
 
 \begin{cue}
 The second ingredient of $\Theta$ we need to bring over to operate on $ {\mathbf F}$ is  $\varepsilon$. Under which conditions are we allowed to do this?   
@@ -173,13 +185,15 @@ If $\varepsilon$ is real (which will be the case for lossless media), we can wri
 Finally, bring the last curl operator over.
 \end{cue}
 
-Applying our lemma Eq.~\ref{eq-part-int} one more time, we get
+Applying our lemma Eq.~\ref{eq-part-int} one more time, and again making use of the real-valued nature of $\nabla$, we get
 
 \begin{equation}
 \left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint \left[ \nabla \times  \left [\frac{1}{\varepsilon({\mathbf r})} \nabla \times {\mathbf F}\right] \right ] ^* \cdot {\mathbf G({\mathbf r})}  dV  = \left\langle \Theta {\mathbf F}, {\mathbf G}\right\rangle 
 \end{equation} 
 
 This proves that our operator is indeed Hermitian.
+
+\pagebreak
 
 \begin{exer}
 % difficulty: trivial
@@ -222,7 +236,7 @@ From Maxwell's curl equations, derive an eigenvalue problem for the electric fie
 \sectionugent{Properties of a Hermitian operator}
 \label{week8}
 
-\subsection{Real eigenvalues}
+\subsectionyoutube{The eigenvalues of a Hermitian operator are real}{7G3nAOaH3ds}
 
 Let's return to our eigenvalue problem:
 
@@ -262,9 +276,11 @@ But $\Theta$ is Hermitian, so we can write
 
 Comparing Eq.~\ref{eq-real-eigen-1} and Eq.~\ref{eq-real-eigen-2}, we get that $(\omega^2 \mu)^* = \omega^2 \mu$, so \emph{the eigenvalues of a Hermitian operator are real}. If we now only consider lossless materials with real $\mu$, it immediately follows that $\omega^2$ is real.
 
-\subsection{Positive $\omega^2$}
 
-Using a different argument, we can show that not only is $\omega^2$ real, it is also positive, at least for our operator $\Theta$.
+
+\subsectionyoutube{The eigenvalues of $\Theta$ are positive}{hV9J5miSZgw}
+
+Using a different argument, we can show that, at least for our operator $\Theta$, not only is the eigenvalue $\omega^2 \mu$ real, it is also positive, 
 
 \begin{cue}
 Set ${\mathbf F}={\mathbf G}={\mathbf H}$ in Eq.~\ref{eq-pos-omega} and use the fact that $\mathbf H$ is an eigenfunction of $\Theta$. Assume we are working with lossless dielectrics.
@@ -287,11 +303,13 @@ For lossless dielectrics $\varepsilon$ is real and positive. Since now all terms
 
 Let's stress again that the fact that the eigenvalues are positive here, is due to the special form of our operator. It is \emph{not} a general property of Hermitian operators.
 
+
+
 \pagebreak
 
-\subsection{Orthogonality}
+\subsectionyoutube{The eigenfunctions of a Hermitian operator are orthogonal}{UlFuOt7wCrQ}
 
-Consider two modes ${\mathbf H}_1$ and ${\mathbf H}_2$ with frequencies $\omega_1$ and $\omega_2$.
+Consider two eigenfunctions (modes) ${\mathbf H}_1$ and ${\mathbf H}_2$ with frequencies $\omega_1$ and $\omega_2$.
 
 \begin{cue}
 Using the fact that these are eigenmodes of $\Theta$, calculate $\left\langle {\mathbf H}_1 , \Theta {\mathbf H}_2\right\rangle$ and $\left\langle \Theta {\mathbf H}_1 , {\mathbf H}_2\right\rangle$. 
@@ -350,8 +368,10 @@ If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\
 
 \pagebreak
 
-\sectionugent{A variational form of the eigenvalue problem}
+\sectionugent{Variational interpretation of the Helmholtz eigenvalue problem}
 \label{sec-sym-var}
+
+\subsectionyoutube{A variational form of the Helmholtz eigenvalue problem}{}
 
 In order to get some general feeling for the nature of the modes and derive some more of their properties, it is useful to look at a variational form:
 
@@ -381,10 +401,13 @@ Replacing ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by $J+ \de
 
 Subtracting Eq.~\ref{eq-variational-1} from Eq.~\ref{eq-variational-2} and neglecting higher-order variations gives
 
+
 \begin{equation}
 \left\langle \delta {\mathbf H},{\mathbf H} \right\rangle J + \left\langle {\mathbf H},\delta {\mathbf H} \right\rangle J + \left\langle {\mathbf H}, {\mathbf H} \right\rangle \delta J = \left\langle {\mathbf H},\Theta \delta {\mathbf H} \right\rangle + \left\langle \delta {\mathbf H},\Theta {\mathbf H} \right\rangle \label{eq-variational-3}
 \end{equation} 
 
+
+\pagebreak
 
 \begin{exer}
 % difficulty: trivial
@@ -408,7 +431,11 @@ Now, if $\delta J$ needs to be zero for all possible ${\delta \mathbf H}$, this 
 \Theta {\mathbf H} = \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} {\mathbf H} \label{eq-variational-4}
 \end{equation} 
 
-Bearing in mind that the quotient on the right hand side is just a number, Eq.~\ref{eq-variational-4} can only be fulfilled if ${\mathbf H}$ is indeed an eigenvector of $\Theta$. Incidentally, we have also proven that its eigenvalue is $J$.
+Bearing in mind that the quotient on the right-hand side is just a number, Eq.~\ref{eq-variational-4} can only be fulfilled if ${\mathbf H}$ is indeed an eigenvector of $\Theta$. Incidentally, we have also proven that its eigenvalue is $J$.
+
+
+\pagebreak
+\subsectionyoutube{Physical insights from the variational form of the Helmholtz eigenvalue problem}{}
 
 Having survived the gory mathematical details of verifying that Eq.~\ref{eq-variational} is indeed the variational expression of our eigenvalue problem, it's time to do something useful with it and derive a physical heuristic for the modes in our system.
 
@@ -416,16 +443,16 @@ Having survived the gory mathematical details of verifying that Eq.~\ref{eq-vari
 Evaluate $J$ if ${\mathbf H}$ is a solution to the eigenvalue problem. What does the result mean for the frequency of the modes?  
 \end{cue}
   
-In case ${\mathbf H}$ is a solution to the eigenvalue problem, $J$ becomes
+First, in case ${\mathbf H}$ is a solution to the eigenvalue problem, $J$ becomes
 
 \begin{equation}
 J =  \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} = \frac{\left\langle {\mathbf H} , \omega^2 \mu {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} = \omega^2 \mu
 \end{equation}
 
-This shows that solutions ${\mathbf H}$ which have low values of $J$ will tend to have a low frequency $\omega$. So, lower-order solutions will have lower frequencies/energies in comparison to higher-order solutions.
+Apart from verifying again that in its extremal points $J$ is the eigenvalue, this shows that solutions ${\mathbf H}$ which have low values of $J$ will tend to have a low frequency $\omega$. So, \textbf{lower-order solutions will have lower frequencies/energies} in comparison to higher-order solutions.
 
 \begin{cue}
-Use Eq.~\ref{eq-rot-H-bis} to write Eq.~\ref {eq-variational} as an expression containing a volume integral of $ \nabla \times {\mathbf H({\mathbf r})}$ in the numerator.   
+Use Eq.~\ref{eq-rot-H-bis} to write $J$ as an expression containing a volume integral of $ \nabla \times {\mathbf H({\mathbf r})}$ in the numerator.   
 \end{cue}
 
 Second, using Eq.~\ref{eq-rot-H-bis}, we can write the functional as
@@ -448,9 +475,9 @@ $$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} 
 Looking separately at the numerator and the denominator of this expression, what properties does ${\mathbf E}$ need to have in order to minimise $J$?   
 \end{cue}
 
-From this equation, we can see that $J$ is minimised if the electric field ${\mathbf E}$ is concentrated in regions where the refractive index is high. So, to minimise $J$, a mode will try to concentrate its field in regions of high dielectric, while remaining orthogonal to the modes below it in frequency. With this heuristic we can e.g. explain why it is that dielectric waveguides do indeed work: the field likes to be concentrated in regions where the refractive index is high. Also, because of the link between $J$ and $\omega$, concentrating a mode in regions of high refractive index (thus lowering $J$) will tend to lower its frequency.
+From this equation, we can see that $J$ is minimised if \textbf{the electric field ${\mathbf E}$ is concentrated in regions where the refractive index is high}. So, to minimise $J$, a mode will try to concentrate its field in regions of high dielectric, while remaining orthogonal to the modes below it in frequency. With this heuristic we can e.g. explain why it is that dielectric waveguides do indeed work: the field likes to be concentrated in regions where the refractive index is high. Also, because of the link between $J$ and $\omega$, concentrating a mode in regions of high refractive index (thus lowering $J$) will tend to lower its frequency.
 
-The same equation also suggests that to minimise $J$, is is advantageous to keep spatial variations in the field as low as possible so as to keep  $\left| \nabla \times {\mathbf E({\mathbf r})} \right |$ small. Indeed, the fundamental mode has much slower spatial variations than the higher-order modes.
+As a third point, the same equation also suggests that to minimise $J$, it is advantageous to keep spatial variations in the field as low as possible, so as to keep  $\left| \nabla \times {\mathbf E({\mathbf r})} \right |$ small. This explains why \textbf{the fundamental mode has much slower spatial variations than the higher-order modes}.
 
 Finally, remember that all modes are orthogonal to each other, so e.g. the first-order mode 'finds' the most energetically favourable solution in the subspace perpendicular to the fundamental mode.
 
@@ -491,9 +518,9 @@ $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} 
 \pagebreak
 
 
-\sectionugent{Inversion symmetry}
+\sectionyoutubeugent{Eigensolutions in structures with inversion symmetry}{}
 
-In this section, we start discussing how symmetries can be helpful to classify the solutions of Eq.~\ref{eq-master}. We'll do this using the example of inversion symmetry.
+In this section, we start discussing how symmetries can be helpful to classify the solutions of Eq.~\ref{eq-master}, without actually needing to solve the eigenproblem explicitly. We'll do this using the example of inversion symmetry.
 
 \begin{cue}
 What other symmetries do you know? How would you define a symmetry mathematically?  
@@ -697,7 +724,7 @@ True or false: if a system described by an operator $\Theta$ has a symmetry desc
 
 \pagebreak
 
-\sectionugent{Continuous translation symmetry}
+\sectionyoutubeugent{Eigensolutions in structures with continuous translation symmetry}{}
 
 One way of saying that our system is unchanged by a translation over a displacement ${\mathbf d}$ is
 
@@ -821,7 +848,7 @@ $n$ is called the \textbf{band number}\marginnote{Don't confuse the band number 
 \label{fig-slab-disp}
 \end{marginfigure}
 
-If for each modal solution that we find, we indicate its wave vector (spatial behaviour) and frequency (temporal behaviour) in a 2D diagram, we notice a continuous evolution if we change wave vector or frequency. What we get is the so-called \textbf{band structure} from Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically. The lowest curved line corresponds to the fundamental guided mode of the waveguide (band number $n=0$), the one above that to the first-order mode (band number $n=1$), and so on. The dashed straight lines $\omega=kc/n$ are there to help visualise that the wavevector of a guided mode always lies between the free-space wavevectors of the core and the cladding with the highest index.
+If for each modal solution that we find, we indicate its wave vector (spatial behaviour) and frequency (temporal behaviour) in a 2D diagram, we notice a continuous evolution if we change wave vector or frequency. What we get is the so-called \textbf{band structure} from Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically. The lowest curved line corresponds to the fundamental guided mode of the waveguide (band number $n=0$), the one above that to the first-order mode (band number $n=1$), and so on. The dashed straight lines $\omega=kc/n$ are there to help visualise that the wavevector of a guided mode always lies between the free-space wavevectors of the cladding (with the highest index, in case the upper cladding is different from the lower one) and of the core.
 
 Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}= k \frac {\lambda}{ 2\pi}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
 
@@ -840,7 +867,7 @@ You might recall from basic electromagnetism that a guided mode is basically a p
 
 With respect to the cladding, some of the light of this bouncing plane wave evanescently leaks out of the core, which explains the exponential decay of the guided modes in the cladding.
 
-Again from basic waveguide theory, you'll recall that for radiation modes on the other hand, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in oposite directions in the cladding.
+Again from basic waveguide theory, you'll recall that for radiation modes on the other hand, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in opposite directions in the cladding.
 
 \begin{cue}
 Why do the radiation modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
@@ -967,7 +994,7 @@ Ultimately, this periodicity in $k$-space comes from our convention of preferrin
 
 \pagebreak
 
-\sectionugent{A second form of Bloch's theorem}
+\sectionugent{Second form of Bloch's theorem}
 \label{week9}
 
 Let's introduce a new function $u$:
@@ -1199,7 +1226,7 @@ This formula can be used to build a numerical scheme to calculate Bloch modes: y
 
 \pagebreak
 
-\sectionugent{The reciprocal lattice}
+\sectionugent{Reciprocal lattice}
 
 Suppose we have a function $f({\mathbf r})$ that is periodic on a lattice, i.e. $f({\mathbf r} + {\mathbf R}) = f({\mathbf r})$ for all vectors ${\mathbf R}$ that translate the lattice into itself. As we have already seen, these vectors ${\mathbf R}$ are called the \textbf{lattice vectors}.
 
@@ -1308,7 +1335,7 @@ In the denominators of Eq.~\ref{eq-recip}, should you evaluate the scalar or the
 
 \pagebreak
 
-\sectionugent{The Brillouin zone in 3D}
+\sectionugent{Brillouin zone in 3D}
 
 We already know that for a Bloch mode there exists a vector ${\mathbf k}$ such that
 
@@ -1356,7 +1383,7 @@ To construct the Brillouin zone, we focus our attention on a particular point (t
 
 \pagebreak
  
-\sectionugent{The irreducible Brillouin zone}
+\sectionugent{Irreducible Brillouin zone}
 
 Often, a photonic crystal will have additional symmetries. E.g. the square lattice we considered earlier stays invariant for rotations over 90, 180 and 270 degrees. Another symmetry for the square crystal is mirror symmetry about the 45 degrees diagonal. The collection of symmetry operations (rotations, reflections, inversion) for which the crystal is invariant is called the \textbf{point group} of the crystal.
 

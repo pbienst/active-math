@@ -115,7 +115,7 @@ By adding Eq.~\ref{eq-taylor-plus} and Eq.~\ref{eq-taylor-min}, we get an approx
 
 \begin{equation}
 \fbox{$\displaystyle
-\frac{d^2 f}{d x^2} = \frac{f(x + \Delta x) -2 f(x) + f(x- \Delta x)}{ \Delta x^2} + \mathcal{O}\left(\Delta x^2\right)
+\frac{d^2 f}{d x^2} = \frac{f(x + \Delta x) -2 f(x) + f(x - \Delta x)}{ \Delta x^2} + \mathcal{O}\left(\Delta x^2\right)
 $}
 \end{equation} 
 
@@ -209,7 +209,7 @@ We solve this problem at a fixed wavelength, i.e. a fixed value of $k$.
 The discretised version of Eq.~\ref{eq-helmholtz-1d} reads
 
 \begin{equation}
-\frac{f(x + \Delta x) -2 f(x) + f(x- \Delta x)}{ \Delta x^2} + k^2 f(x) = 0 \label{eq-hh-diff}
+\frac{f(x - \Delta x) -2 f(x) + f(x + \Delta x)}{ \Delta x^2} + k^2 f(x) = 0 \label{eq-hh-diff}
 \end{equation}  
  
 To make this example even more concrete, let us assume a uniform grid with $\Delta x=1$ from $x=1$ to $x=5$. To illustrate boundary conditions, let us further assume that the values of $f$ are fixed at the boundaries, e.g. $f(1)=f_1$ and $f(5)=f_5$. This could be from a source forcing the electric field to a constant value, or from a metal wall which forces the electric field to zero. 
@@ -283,7 +283,7 @@ There exists a plethora of literature on iterative methods, which we obviously c
 
 \pagebreak
 
-\section{The Jacobi method}
+\section{Jacobi method}
 
 \subsectionyoutube{The Jacobi method for the Helmholtz equation}{pWJDRvmL3eE}
 
@@ -859,7 +859,7 @@ To minimise $J$, $\delta J$ should be zero not just for a particular lucky choic
 
 This is of course the Helmholtz equation.
 
-Eq.~\ref{eq-euler-lagrange-2} is called the \textbf{Euler} or the \textbf{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}.
+Eq.~\ref{eq-euler-lagrange-2} is called the \textbf{Euler} or the \textbf{Euler--Lagrange} equation of the variational formulation Eq.~\ref{eq-variational1}. So, rather than finding a function which minimises a certain functional in a variational formulation, we can explicitly solve a partial differential equation and achieve the same thing.
 
 Other bits of terminology: a variational formulation of a problem is sometimes called a \emph{weak formulation}, whereas the corresponding differential equation is the \emph{strong formulation} of that problem.
 
@@ -1069,7 +1069,7 @@ In what follows, we will also choose to normalise our modes such that \( \left\l
 
 \subsectionyoutube{Overlap matrices}{pdeceZHUlOU}
 
-Let's now defining the following overlap matrices:
+Let's now define the following overlap matrices:
 
 \begin{eqnarray}
 \mathbf{O}_{I,II}\left( i,j\right)  & \equiv  & \left\langle \mathbf{E}^{I}_{i},\mathbf{H}^{II}_{j}\right\rangle \label{Eq:O_I_II} \\
@@ -1293,7 +1293,6 @@ $$\left\langle R(x), w_j(x) \right\rangle = 0$$
 
 for all values of $j$?
 \end{exer}
-
 
 
 \begin{exer}
