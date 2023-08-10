@@ -14,6 +14,7 @@ re_exer = re.compile(r"""\\begin{exer}(.*?)\\end{exer}""", re.DOTALL)
 re_sol = re.compile(r"""\\begin{sol}(.*?)\\end{sol}""", re.DOTALL)
 re_hnt = re.compile(r"""\\begin{hnt}(.*?)\\end{hnt}""", re.DOTALL)
 re_yt = re.compile(r"""% youtube: (.+?)\s""", re.DOTALL)
+re_jup = re.compile(r"""% jupyter: (.+?)\s""", re.DOTALL)
 
 def process_exer(chapter_dirs):
     with open(os.path.join(build_dir, "solutions.tex"), 'w') as sol_file:
@@ -73,6 +74,10 @@ def process_exer(chapter_dirs):
                     if yt_match:
                         icons += \
                 f"\\href{{https://youtu.be/{yt_match.group(1)}}}{{\\youtube}}\\,"
+                    jup_match = re_jup.search(exer_text)
+                    if jup_match:
+                        icons += \
+                 f"\\href{{{jup_match.group(1)}}}{{\\jupyter}}\\,"                       
                     if "% ugent" in exer_text.lower():
                         icons += "\\ugent"
                     icons += "}"
