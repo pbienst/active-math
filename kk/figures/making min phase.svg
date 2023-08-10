@@ -375,7 +375,9 @@
        id="path2806"
        inkscape:path-effect="#path-effect2808"
        inkscape:original-d="m 45.204231,65.964569 c 1.669462,-2.242556 3.338821,-4.4852 5.008067,-6.72793 5.672444,0.589512 11.344559,1.178912 17.016674,1.768238 0.466817,4.427958 0.933514,8.855653 1.400103,13.283349 -3.195066,1.682103 -6.390114,3.36405 -9.585338,5.045947 -6.677452,-0.531834 -13.354745,-1.06373 -20.032286,-1.595728 2.620874,-3.277687 5.241532,-6.555331 7.862133,-9.833127 2.10031,-0.31619 4.200385,-0.632447 6.300479,-0.948811 1.884901,0.230106 3.769587,0.460112 5.654272,0.690044 -1.453882,1.969627 -2.907808,3.939089 -4.361867,5.908503 -1.525649,0.05759 -3.051374,0.115093 -4.57727,0.172511 -1.382077,-0.560585 -2.764204,-1.121236 -4.146465,-1.681983 -0.179395,-2.026958 -0.358891,-4.053922 -0.538502,-6.081013 z"
-       sodipodi:nodetypes="ccccccccccccc" />
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.500001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-8-1-2-4)"
        d="m 109.14487,69.731428 h 52.86927"
@@ -394,7 +396,9 @@
        id="path2806-2"
        inkscape:path-effect="#path-effect2907"
        inkscape:original-d="m 130.84954,66.180207 c 1.66946,-2.24256 3.33882,-4.48521 5.00806,-6.72794 5.67245,0.58952 11.34456,1.17892 17.01668,1.76824 0.46682,4.42796 0.93351,8.85566 1.4001,13.28335 -3.19506,1.6821 -6.39011,3.36405 -9.58534,5.04595 -6.67745,-0.53184 -13.35474,-1.06373 -20.03228,-1.59573 2.62087,-3.27769 5.24153,-6.55533 7.86213,-9.83313 2.10031,-0.31619 4.20039,-0.63244 6.30048,-0.94881 1.8849,0.23011 3.76959,0.46011 5.65427,0.69005 -1.45388,1.96962 -2.90781,3.93909 -4.36186,5.9085 -1.52565,0.0576 -3.05138,0.11509 -4.57727,0.17251 -1.38208,-0.56058 -2.76421,-1.12124 -4.14647,-1.68198 -0.17939,-2.02696 -0.35889,-4.05392 -0.5385,-6.08101 z"
-       sodipodi:nodetypes="ccccccccccccc" />
+       sodipodi:nodetypes="ccccccccccccc"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#004a90;fill-opacity:1;stroke:none;stroke-width:0.264583"

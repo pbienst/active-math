@@ -128,7 +128,7 @@ Indeed, focusing only on the essential bits, and not worrying about amplitudes a
 
 From now on, we will only work with complex amplitudes. To make our notational life a bit easier, we will omit the tilde that stresses that we are dealing with phasors, and just write e.g. for the homodyne case that $a(t) = A_\mathrm{ref} + a_s(t)$, where all terms are implied to be complex-valued phasors.
 
-\hl{TODO: Jupyter notebook}
+\hl{TODO: Jupyter notebook on DFT}
 
 \pagebreak
 
@@ -194,6 +194,8 @@ $$\Re \left(a_s(t) \right) = \frac{1}{2}\left(a_s(t) + a_s^*(t) \right)$$
 and since for SSB signals, $a_s(t)$ + $a_s^*(t)$ do not overlap in frequency, can just keep only the positive frequencies from $\Re \left(a_s(t) \right)$ and completely recover $a_s(t)$ that way.
 
 \fi
+
+\hl{TODO: Jupyter notebook, clarify possible 'negative' frequencies to the right of carrier, also in main text? Or too complex?}
 
 \pagebreak
 
@@ -616,13 +618,13 @@ Even if $a_s(t)$ circles around the origin, it will always be possible to ensure
 \label{fig-make-min-phase}
 \end{figure}
     
-This also sheds some light on why these signals are called minimum phase: it is clear that the phase as seen from the origin of the signal on the right-hand side of Fig.~\ref{fig-make-min-phase} varies much less compared to the signal on the left-hand side.
+This also sheds some light on why these signals are called minimum phase: it is clear that the phase as seen from the origin of the signal on the right-hand side of Fig.~\ref{fig-make-min-phase} varies much less compared to the signal on the left-hand side. Also, the phase varies continuously there, as opposed to jumping from e.g. $2 \pi$ to 0 in case of the non-minimum phase signal.
 
-In an actual telecommunication system, this extra subcarrier can be added either at the transmitter or at the receiver. Adding it at the transmitter reduces the complexity of the receiver, but requires sending a lot of power through the fibre, which can trigger nonlinear effects.
+In an actual telecommunication system, the extra subcarrier can be added either at the transmitter or at the receiver. Adding it at the transmitter reduces the complexity of the receiver, but requires sending a lot of power through the fibre, which can trigger nonlinear effects.
 
 Finally, note that when you hear the term 'minimum phase' in the wild, it's typically used to refer to minimum-phase systems characterised by a certain transfer function. Here, we're talking about minimum-phase signals, which is slightly different. 
 
-\hl{TODO: Jupyter notebook}
+\hl{TODO: Jupyter notebook, plot zeroes, ...}
 
 \pagebreak
 

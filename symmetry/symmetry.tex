@@ -371,7 +371,7 @@ If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\
 \sectionugent{Variational interpretation of the Helmholtz eigenvalue problem}
 \label{sec-sym-var}
 
-\subsectionyoutube{A variational form of the Helmholtz eigenvalue problem}{}
+\subsectionyoutube{A variational form of the Helmholtz eigenvalue problem}{aotPwYLJ2aA}
 
 In order to get some general feeling for the nature of the modes and derive some more of their properties, it is useful to look at a variational form:
 
@@ -435,7 +435,7 @@ Bearing in mind that the quotient on the right-hand side is just a number, Eq.~\
 
 
 \pagebreak
-\subsectionyoutube{Physical insights from the variational form of the Helmholtz eigenvalue problem}{}
+\subsectionyoutube{Physical insights from the variational form of the Helmholtz eigenvalue problem}{f398ScBbwfM}
 
 Having survived the gory mathematical details of verifying that Eq.~\ref{eq-variational} is indeed the variational expression of our eigenvalue problem, it's time to do something useful with it and derive a physical heuristic for the modes in our system.
 
@@ -518,7 +518,7 @@ $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} 
 \pagebreak
 
 
-\sectionyoutubeugent{Eigensolutions in structures with inversion symmetry}{}
+\sectionyoutubeugent{Eigensolutions in structures with inversion symmetry}{qrPcB0DVElI}
 
 In this section, we start discussing how symmetries can be helpful to classify the solutions of Eq.~\ref{eq-master}, without actually needing to solve the eigenproblem explicitly. We'll do this using the example of inversion symmetry.
 
@@ -588,17 +588,17 @@ Yes
 
 \pagebreak
 
-\sectionugent{Commutators and symmetry}
+\sectionyoutubeugent{Commutators and symmetry}{}
 
-We have classified the modes based on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing. 
+We have classified the modes based on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing, which can also be generalised more easily. 
 
-Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we do one of the following two things:
+\noindent\marginnote{To generalise this, just use any operator that expresses a symmetry of our system.}Suppose $O_I$ is an operator that inverts vector fields ${\mathbf H({\mathbf r})}$. Now, what is the mathematical expression that our system $\Theta$ has inversion symmetry? Since inversion is a symmetry of our system, it does not matter whether we do one of the following two things:
 
 \begin{itemize}
 \item
  We operate with $\Theta$ on a certain function.
 \item
-\noindent\marginnote{We do have to change the coordinates back, otherwise we're comparing apples to oranges.}We first invert the coordinates, then operate with $\Theta$ and then change the coordinates back.
+\noindent\marginnote{We do have to go back to the original coordinate system, otherwise we'd be comparing apples to oranges.}We first invert the coordinates, then operate with $\Theta$ and then change the coordinates back.
 \end{itemize}
 
 Graphically, this corresponds to the diagram in Fig.~\ref{fig-commutator}.
@@ -632,7 +632,7 @@ $$O_I \Theta - \Theta O_I = 0$$
 Draw a diagram similar to Fig.~\ref{fig-commutator} that expresses this relation.
 \end{exer}
 
-Just like in quantum mechanics, we can define the \textbf{commutator} $[A,B]$ of two operators $A$ and $B$ as
+\noindent\marginnote{The name is well-chosen: if the commutator is zero, the two operations commute, i.e. their order does not matter.}Just like in quantum mechanics, we can define the \textbf{commutator} $[A,B]$ of two operators $A$ and $B$ as
 
 \begin{equation}
  \fbox{$\displaystyle
@@ -640,9 +640,9 @@ Just like in quantum mechanics, we can define the \textbf{commutator} $[A,B]$ of
  $}
 \end{equation} 
 
-Note that the commutator is itself an operator. So, we have shown that our system is symmetric under inversion only if the inversion operator commutes with $\Theta$.
+So, we have shown that \textbf{our system is symmetric under inversion only if the inversion operator commutes with $\Theta$}.
 
-\pagebreak
+Note that the commutator is itself an operator. 
 
 \begin{cue}
 Operate with this commutator on a solution ${\mathbf H({\mathbf r})}$, making use of the fact that this is an eigenmode of $\Theta$. Can you use the result to identify a new eigenmode for $\Theta$? 
@@ -651,28 +651,28 @@ Operate with this commutator on a solution ${\mathbf H({\mathbf r})}$, making us
 If we now operate with this commutator on any mode ${\mathbf H({\mathbf r})}$ of the system, we get
 
 \begin{equation}
-[O_I, \Theta] {\mathbf H}= O_I(\Theta {\mathbf H}) - \Theta (O_I {\mathbf H} ) = 0
+[O_I, \Theta] {\mathbf H}= O_I \left(\Theta {\mathbf H} \right) - \Theta \left(O_I {\mathbf H} \right) = 0
 \end{equation} 
 
 This means that
 
 \begin{equation}
-\Theta (O_I {\mathbf H} ) = O_I(\Theta {\mathbf H}) = O_I ( \omega^2 \mu {\mathbf H})
+\Theta \left(O_I {\mathbf H} \right) = O_I \left( \Theta {\mathbf H} \right) = O_I \left( \omega^2 \mu {\mathbf H}\right)
 \end{equation} 
 
 Or
 
 \begin{equation}
-\Theta (O_I {\mathbf H} ) =  \omega^2 \mu (O_I {\mathbf H})
+\Theta \left(O_I {\mathbf H} \right) =  \omega^2 \mu \left(O_I {\mathbf H}\right)
 \end{equation} 
 
-This is nothing other than saying that if ${\mathbf H}$ is mode with frequency $\omega$, then $O_I {\mathbf H}$ is also a mode with the same frequency.
+This is nothing other than saying that if ${\mathbf H}$ is an eigenmode with frequency $\omega$, then $O_I {\mathbf H}$ is also an eigenmode with the same frequency.
 
 \begin{cue}
 Assuming no degeneracy, what does this mean?
 \end{cue}
 
-In the absence of degeneracy there can only be one mode per frequency, so ${\mathbf H}$ and $O_I {\mathbf H}$ can only differ by a multiplicative factor.
+In the absence of degeneracy, there can only be one mode per frequency, so ${\mathbf H}$ and $O_I {\mathbf H}$ can only differ by a multiplicative factor.
 
 \begin{cue}
 Formulate this mathematically. What kind of an equation is this?
@@ -682,9 +682,9 @@ This means $O_I {\mathbf H} = \alpha {\mathbf H}$. This is actually an eigenvalu
 
 Tracing back, we see that we started from a function ${\mathbf H}$ that was an eigenvector of $\Theta$ and ended up by showing that the same ${\mathbf H}$ was also an eigenvector of $O_I$ (at least in the absence of degeneracy). 
 
-But what if there is degeneracy in the system? In that case, two modes might have the same frequency, even though they are not related by a simple multiplier. Again, although we won't show it here, in that case it will still be possible to construct different linear combinations of these degenerate modes to make new modes which themselves are even or odd.
+But what if there is degeneracy in the system? In that case, two modes might have the same frequency, even though they are not related by a simple multiplier. Again, although we won't show it here, in that case it will still be possible to construct different linear combinations of these degenerate modes to make new modes which themselves are even or odd, or - more generally - are eigenfunctions of the symmetry operator.
 
-So, generally speaking, \emph{if two operators commute, it is possible to construct simultaneous eigenfunctions ${\mathbf H}$ of both operators}, i.e. functions ${\mathbf H}$ that are solutions of both eigenproblems $\Theta {\mathbf H} = \omega^2 \mu {\mathbf H}$ and $O_I {\mathbf H} = \alpha {\mathbf H}$.
+So, \textbf{if two operators commute, it is possible to construct joint eigenfunctions ${\mathbf H}$ of both operators}, i.e. functions ${\mathbf H}$ that are solutions of both eigenproblems $\Theta {\mathbf H} = \omega^2 \mu {\mathbf H}$ and $O_I {\mathbf H} = \alpha {\mathbf H}$.
 
 This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the existence of different classes of solutions, based on the properties of the symmetry operation.
 
