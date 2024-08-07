@@ -377,10 +377,10 @@ But $ e^{-j k_x i \Delta x}$ is $f_i^n$, so
 Derive a criterion for this ratio to remain bounded, irrespective of the choice of a positive value of the relaxation parameter $\alpha$. Pay special attention to the DC plane wave component, i.e. $k_x=0$. 
 \end{cue}
 
-Remember that by convention $\alpha$ is positive. In order for Eq.~\ref{eq-jacobi-conv} not to diverge, we should have that $\left|f_i^{n+1} / f_i^{n}\right| \le 1$. \marginnote{This is not sufficient, as $f_i^{n+1} / f_i^{n}$ should also be bigger than -1.}A necessary condition for this, is that the stuff between square brackets is negative. So, at least we need to have that
+ In order for Eq.~\ref{eq-jacobi-conv} not to diverge, we should have that $\left|f_i^{n+1} / f_i^{n}\right| \le 1$. \marginnote{This is not sufficient, as $f_i^{n+1} / f_i^{n}$ should also be bigger than -1.}A necessary condition for this, is that the stuff between square brackets is negative (remember that by convention $\alpha$ is positive). So, at least we need to have that
 
 \begin{equation}
-2 \cos ( k_x  \Delta x) - 2 \lt - \Delta x^2 k^2 \label{eq-conv-jacobi}
+2 \cos ( k_x  \Delta x) - 2 \le - \Delta x^2 k^2 \label{eq-conv-jacobi}
 \end{equation} 
 
 Since the cosine lies between -1 and 1, the left--hand side of this equation lies between -4 and 0 and reaches its maximum for $k_x=0$, which is an important case as it corresponds to a uniform solution. Since it's very likely that the final solution has a DC component, we better make sure that the method converges in this case. However, for this case, we can only satisfy Eq.~\ref{eq-conv-jacobi} if $k=0$. \marginnote{People have tried to address this using a pair of \emph{complex} values for $\alpha$ (J. Comp. Phys. 203, 358–370, 2005).}So, this means that unfortunately the Jacobi method is non--convergent for the general Helmholtz equation, but only works for Laplace's equation, i.e. the special case where $k=0$.
@@ -425,9 +425,9 @@ To check your results, try the solver using the following set of functions:
 
 $$a_1(x) = 1 + x^2$$
 $$c_1(x) = 0$$
-$$u_1(x) = x(1-x) e^x $$
+$$u_{\mathrm{sol}}(x) = x(1-x) e^x $$
 
-To do so, construct the required $f(x)$ from $a_1(x)$, $c_1(x)$ and the exact solution $u_1(x)$ and evaluate how close the numerical approximation of $u$ is to this analytical form.
+To do so, use the differential equation to construct the required $f(x)$ from $a_1(x)$, $c_1(x)$ and the exact solution $u_{\mathrm{sol}}(x)$ and evaluate how close the numerical approximation of $u$ is to this analytical form.
 
 \end{exer}
 
@@ -566,7 +566,7 @@ The disconnected values are related to connected values by the following matrix 
 \label{eq-con-matrix}
 \end{equation} 
 
-The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} {\mathbf C} of the mesh. Obviously, for such a simple case is seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for a computer implementation.
+The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} {\mathbf C} of the mesh. Obviously, for such a simple case it seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for a computer implementation.
 
 \pagebreak
 

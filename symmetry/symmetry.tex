@@ -514,6 +514,13 @@ $$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} 
 
 \end{exer}
 
+\begin{exer}
+    % difficulty: trivial
+    % youtube: NFy9apMT6G0
+
+You have two parallel metal plates separated by an air gap, which you connect to a battery. What will happen if you bring a dielectric in the neighbourhood of this gap?
+  
+\end{exer}
 
 \pagebreak
 
@@ -588,7 +595,7 @@ Yes
 
 \pagebreak
 
-\sectionyoutubeugent{Commutators and symmetry}{}
+\sectionyoutubeugent{Commutators and symmetry}{8JiNmTqZ83k}
 
 We have classified the modes based on how they respond to one of the cavity's symmetry operations. Let's place this on a slightly more mathematical footing, which can also be generalised more easily. 
 
@@ -689,6 +696,13 @@ So, \textbf{if two operators commute, it is possible to construct joint eigenfun
 This is very convenient, as eigenvectors and eigenvalues for simple symmetry operators can be easily determined, whereas those for $\Theta$ cannot. So, without solving the eigenproblem for $\Theta$ explicitly, we can still make useful statements about the existence of different classes of solutions, based on the properties of the symmetry operation.
 
 \begin{exer}
+    % difficulty: trivial
+    % youtube: LKwZDM9KBr4
+    We have an operator $A$ that operates on $x$, giving $y$ as a result. $B$ is an operator that commutes with $A$. What do we get when $A$ operates on $Bx$? Does it matter if $x$ is an eigenvector/eigenfunction of $A$ or $B$? Can you get the same result if $A$ and $B$ don't commute? E.g. if $x$ is an eigenvector/eigenfunction of $B$?
+  \end{exer}
+
+
+\begin{exer}
   % difficulty: trivial
   % youtube: H0vg0kd0aJc
   If you have a function which is an eigenfunction of two operators, show that the commutator of these operators operating on that eigenfunction yields zero.
@@ -724,7 +738,7 @@ True or false: if a system described by an operator $\Theta$ has a symmetry desc
 
 \pagebreak
 
-\sectionyoutubeugent{Eigensolutions in structures with continuous translation symmetry}{}
+\sectionyoutubeugent{Eigensolutions in structures with continuous translation symmetry}{A2S9Ztz1_pc}
 
 One way of saying that our system is unchanged by a translation over a displacement ${\mathbf d}$ is
 
@@ -780,7 +794,7 @@ What is the most general function that converts sums to products like that?
 \lambda(d) = e^{-j k_z d}
 \end{equation} 
 
-So, we can use this number $k_z$ as a label to classify the different modes, just like we classified modes with inversion symmetry based on whether their eigenvalue for $O_I$ was $+1$ or $-1$.
+We can use this number $k_z$ as a label to classify the different solutions (modes), just like we classified those with inversion symmetry based on whether their eigenvalue for $O_I$ was $+1$ or $-1$.
 
 \begin{cue}
 Bring all of this together to write down a relationship between $H(z + d)$ and $H(z)$. Based on that, derive the general form of the  $z$--dependence of the modes. 
@@ -792,7 +806,7 @@ Therefore, we can write, for all possible $d$,
 H(z + d) = e^{-j k_z d}H(z) \label{eq-bloch-degenerate}
 \end{equation} 
 
-So, the $z$--dependence of the field can only be
+This means that we can write for the $z$--dependence of the field (basically replacing $z$ by 0, and $d$ by $z$)
 
 \begin{equation}
 H(z) = H_0 e^{-j k_z z}
@@ -812,12 +826,11 @@ Of course, this does not mean Maxwell is now obsolete, as we still don't know th
 The fact the symmetry of free space results in plane waves is obviously not unique to Maxwell. Can you think of other physical systems to illustrate this?
 \end{cue}
 
-% Does not fit on the page...
-%Plane waves also make their appearance in e.g. acoustics and quantum mechanics.
-
-\pagebreak
+Plane waves also make their appearance in e.g. acoustics and quantum mechanics.
 
 \sectionugent{Example: the slab waveguide}
+
+\subsectionyoutube{Eigenmodes in the slab waveguide}{W4WO_cxO0Ck}
 
 An interesting system which has continuous translation symmetry is that of a slab waveguide. In this case, the dielectric constant only varies on the $x$--direction and the system has continuous translation symmetry in the $z$-- and $y$--directions (Fig.~\ref{fig-slab-wg}). 
 
@@ -829,31 +842,38 @@ An interesting system which has continuous translation symmetry is that of a sla
 \end{marginfigure}
 
 \begin{cue}
-Based on these symmetries, what should be the general form of the eigenmodes of such a structure?
+Based on these symmetries, what is a possible form of the eigenmodes of such a structure?
 \end{cue}
 
-This means the modes must have the following form:
+This means that the modes can be written as:
 
 \begin{equation}
-{\mathbf H}_{\mathbf k}({\mathbf r}) = {\mathbf h}(x) e^{-j k_y y} e^{-j k_z z} 
+{\mathbf H}({\mathbf r}) = {\mathbf h}(x) e^{-j k_y y} e^{-j k_z z} 
 \end{equation} 
 
-Just like we did for the case of inversions, we can classify the modes by their eigenvalue of the symmetry operator, i.e. by their value of ${\mathbf k} = k_y {\mathbf 1}_y + k_z {\mathbf 1}_z$. Although we cannot say anything yet about ${\mathbf h}(x)$ (we need Maxwell for that), we can nevertheless line up the modes in order of increasing frequency. For a given ${\mathbf k}$, we call $n$ the number indicating that mode's place in the line of increasing frequency, so we can identify each mode by its name $({\mathbf k},n)$.
-$n$ is called the \textbf{band number}\marginnote{Don't confuse the band number with the refractive index $n$.}. If there is a countable number of modes, $n$ is an integer, but sometimes $n$ may be a continuous variable. 
+Just like before, we can classify these solutions to Maxwell's equations by a quantity related to their eigenvalues of the symmetry operator, i.e. by their value of ${\mathbf k} = k_y {\mathbf 1}_y + k_z {\mathbf 1}_z$. Note that we cannot explicitly determine ${\mathbf h}(x)$ based on symmetry alone, as we need Maxwell's equations for that. We also need these equations to figure out which wavevectors correspond to which frequencies.
 
 \begin{marginfigure}
 \centering
 \includegraphics{symmetry/figures/slabdisp}
-\caption{Band structure of a slab waveguide.}
+\caption{Band diagram of a slab waveguide.}
 \label{fig-slab-disp}
 \end{marginfigure}
 
-If for each modal solution that we find, we indicate its wave vector (spatial behaviour) and frequency (temporal behaviour) in a 2D diagram, we notice a continuous evolution if we change wave vector or frequency. What we get is the so-called \textbf{band structure} from Fig.~\ref{fig-slab-disp}. It has been computed by solving Maxwell's equations numerically. The lowest curved line corresponds to the fundamental guided mode of the waveguide (band number $n=0$), the one above that to the first-order mode (band number $n=1$), and so on. The dashed straight lines $\omega=kc/n$ are there to help visualise that the wavevector of a guided mode always lies between the free-space wavevectors of the cladding (with the highest index, in case the upper cladding is different from the lower one) and of the core.
+So, let's solve Maxwell's equations numerically. If for each modal solution that we find, we plot its frequency $\omega$ (describing its temporal behaviour) versus its wavevector $k$ (describing its spatial behaviour), we get something like Fig.~\ref{fig-slab-disp}. This representation is called a \textbf{band diagram}. (Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}= k \frac {\lambda}{ 2\pi}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.)
 
-Beware that in some engineering texts this information is presented in a different way. Rather than plotting $\omega$ against $k$, $n_\mathrm{eff}= k \frac {\lambda}{ 2\pi}$ is plotted against $\lambda$, and such a plot is called a \textbf{dispersion relation}.
+We notice two different kinds of solutions: a discrete set of curves in the lower right corner of the diagram, and a continuous area of solutions, represented by the grey region in the top left corner. The boundary between these two is called the \textbf{light line}. 
+
+Let's now look in more detail at each of these families of solutions.
+
+\subsectionyoutube{Guided modes in the slab waveguide}{IisGHTLbFqA}
+
+\noindent\marginnote{}Numerical simulations show that solutions on the discrete curves correspond to the \textbf{guided modes} of the waveguide. The curves themselves are called \textbf{bands}, which is why the entire plot is called a band diagram. People sometimes use the term 'mode' to refer to an entire band of solutions, rather than just to a single point on the band. Using this terminology, it turns out that the lowest band corresponds to the fundamental guided mode of the waveguide (let's call this band number $n=0$\marginnote{Don't confuse the band number with the refractive index $n$.}), the one above that to the first-order mode (band number $n=1$), and so on. So, we can identify each guided mode by an extended label $({\mathbf k},n)$. 
+
+The dashed straight lines $\omega=kc/n$ in the band diagram are there to help visualise that the wavevector of a guided mode always lies between the free-space wavevectors of the cladding (with the highest index, in case the upper cladding is different from the lower one) and of the core.
 
 \begin{cue}
-Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) form a discrete set?
+Why do the guided modes in Fig.~\ref{fig-slab-disp} form a discrete set?
 \end{cue}
 
 \begin{marginfigure}
@@ -863,14 +883,21 @@ Why do the guided modes in Fig.~\ref{fig-slab-disp} (the lines in the diagram) f
 \label{fig-guided}
 \end{marginfigure}
 
-You might recall from basic electromagnetism that a guided mode is basically a plane wave that bounces up and down in the core region, reflecting an infinite number of times at the interfaces with the cladding (Fig.~\ref{fig-guided}). The angle this plane wave makes with the horizontal is related to the propagation constant. Saying that the mode spectrum is discretised, is equivalent to saying that only a specific set of angles of this bouncing plane wave gives rise to an eigenmode, i.e. a field distribution that does not change its shape during propagation. We can only achieve this for special angles where we have a roundtrip phase of $2 \pi$. In other words, this resonance condition discretises the mode spectrum.
+You might recall from basic electromagnetism that a guided mode is basically a plane wave that bounces up and down in the core region, reflecting an infinite number of times at the interfaces with the cladding (Fig.~\ref{fig-guided}). Changing the angle that this plane wave makes with the horizontal, will change the propagation constant in the horizontal direction, as it will affect how quickly the phase changes upon horizontal propagation. Now, saying that the mode spectrum is discretised, is equivalent to saying that only a specific set of angles of this bouncing plane wave gives rise to an eigenmode, i.e. a field distribution that does not change its shape during propagation. We can only achieve this for special angles where we have a roundtrip phase of $2 \pi$. In other words, this resonance condition discretises the mode spectrum.
 
 With respect to the cladding, some of the light of this bouncing plane wave evanescently leaks out of the core, which explains the exponential decay of the guided modes in the cladding.
 
-Again from basic waveguide theory, you'll recall that for radiation modes on the other hand, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in opposite directions in the cladding.
+\pagebreak
+
+
+\subsectionyoutube{Radiation modes in the slab waveguide}{D5Cv2v9w-VM}
+
+Let's now turn our attention to the second family of solutions, namely the continuous set in the band diagram. Numerical simulations show that these correspond to \textbf{radiation modes}.
+
+From basic waveguide theory, you'll recall that for radiation modes, the light in the cladding is not an evanescent wave, but rather a standing wave. This also suggests the presence of two plane waves travelling in opposite directions in the cladding.
 
 \begin{cue}
-Why do the radiation modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
+Where do these counterpropagating waves in the cladding come from? And why do the radiation modes in Fig.~\ref{fig-slab-disp} (the shaded region in the diagram) form a continuous set?
 \end{cue}
 
 \begin{marginfigure}
@@ -880,20 +907,21 @@ Why do the radiation modes in Fig.~\ref{fig-slab-disp} (the shaded region in the
 \label{fig-radiation}
 \end{marginfigure}
 
-A way to explain this is to first enclose the entire slab waveguide between two metallic mirrors (Fig.~\ref{fig-radiation}), and then study what happens when you move these plates towards infinity, so that you recover the situation of an infinite cladding.
+A way to explain all this, is to do a thought experiment. First, enclose the entire slab waveguide between two metallic mirrors (Fig.~\ref{fig-radiation}), and then study what happens when you move these plates towards infinity, so that you recover the situation of an infinite cladding.
 
-Initially, for a finite distance between the plates, the plates will impose another resonance condition: the plane wave propagating upwards in e.g. the top cladding will be reflected downwards, pass through the core into the bottom cladding, and be reflected upwards again. Again, after one roundtrip, the phase change should be 2 $\pi$ again.
+Now, if you have light that actually propagates in the cladding like for a radiation mode (as opposed to evanescent light that leaks in the cladding for a guided mode), it will encounter the metallic mirror and reflect back.
+
+Initially, for a finite distance between the plates, this will impose another resonance condition: a plane wave e.g. propagating upwards in the top cladding will be reflected downwards, pass through the core into the bottom cladding, and be reflected upwards again. Again, after one roundtrip, the phase change should be 2 $\pi$ to get a resonance.
 
 \begin{cue}
 What will happen to the separation between the radiation modes in $k$-space as the plates move more and more towards infinity? As an approximation, consider what happens if the space between plates is just filled with air.
 \end{cue}
 
-Neglecting the presence of the core, as well as phase shifts upon reflection at the plates, the resonance condition for the phase looks something like $2 d k_x =  2 N \pi$, with $d$ the distance between the plates, $k_x$ the transverse wavevector and $N$ an integer describing the order of the resonance. This shows you that if $d$ goes up, the $k_x$ to realise resonance should go down. In other words, the $k$-vectors get spaced closer together as the distance $d$ increases. In the limit of infinite distance, they will merge together in a single continuum.
+Neglecting the presence of the core, as well as phase shifts upon reflection at the plates, the resonance condition for the phase looks like $2 d k_x =  2 N \pi$, with $d$ the distance between the plates, $k_x$ the transverse (i.e. perpendicular to the propagation direction $z$) wavevector and $N$ an integer describing the order of the resonance. This shows you that if $d$ goes up, the $k_x$ to realise resonance should go down. In other words, the $k$-vectors get spaced closer together as the distance $d$ increases. In the limit of infinite distance, they will merge together in a single continuum.
 
-A final piece of terminology: the boundary between the discrete guided modes and the continuous radiation modes in the band diagram is called the \textbf{light line}.
+\pagebreak
 
-
-\sectionugent{1D discrete translational symmetry and Bloch's theorem}
+\sectionyoutubeugent{1D discrete translational symmetry and Bloch's theorem}{sLfl0T_dEcI}
 
 An important class of systems has \emph{discrete} translational symmetry, i.e. they are not invariant under translations over \emph{any} distance, but only over distances that are a multiple of some fixed step length.
 
@@ -906,36 +934,36 @@ Let's first study systems with such symmetry in one dimension. Higher-dimensiona
 \label{fig-1d-periodic}
 \end{marginfigure}
 
-Fig.~\ref{fig-1d-periodic} shows a simple structure that is periodic in the $z$--direction, or - to phrase things differently - that has discrete translational symmetry in the $z$--direction. The basic step length is called the \textbf{period} or the \textbf{lattice constant} $a$, and the basic step vector is called the \textbf{primitive lattice vector} ${\mathbf a} = a {\mathbf 1}_z$.
+Fig.~\ref{fig-1d-periodic} shows a simple structure that is periodic in the $z$--direction, or - to phrase things in a slightly more pendantic way - that has discrete translational symmetry in the $z$--direction. The basic step length is called the \textbf{period} or the \textbf{lattice constant} $a$, and the basic step vector is called the \textbf{primitive lattice vector} ${\mathbf a} = a {\mathbf 1}_z$.
 
-Let's dwell on this concept of lattices a little bit longer, because it will be relevant later as well. A \textbf{lattice} is a collection of vectors which are integer multiples of the primitive latice vectors. There is one primitive lattice vector per dimension, so for our 1D case, its only  ${\mathbf a} = a {\mathbf 1}_z$. Also, it's easy to verify that any integer linear combination of arbitrary lattice vectors will give you another vector belonging to the lattice.
+Let's dwell on this concept of lattices a little bit longer, because it will be relevant later as well. A \textbf{lattice} is a collection of vectors which are integer linear combinations of the primitive latice vectors. There is one primitive lattice vector per dimension, so for our 1D case, the lattice consists only of integer multiples  ${\mathbf a} = a {\mathbf 1}_z$. Also, it's easy to verify that any integer linear combination of arbitrary lattice vectors will give you another vector belonging to the lattice.
 
 Because of symmetry, $\varepsilon({\mathbf r}) =  \varepsilon({\mathbf r} + {\mathbf a})$, or by repeating this procedure $\varepsilon({\mathbf r}) =  \varepsilon({\mathbf r} + l {\mathbf a})$ with $l$ an integer. The dielectric block that is considered to be repeated over and over is called the \textbf{unit cell} and is highlighted in the square box in Fig.~\ref{fig-1d-periodic}. 
 
-
 We will now derive an important property of the eigenfunctions of systems with discrete translational symmetry.
 
-Because of the symmetries present, $\Theta$ must commute with all the translation operators over a distance ${\mathbf R} = l a {\mathbf 1}_z$ in the $z$--direction. Again, we will restrict ourselves to the case of scalar fields only varying in the $z$--direction to lighten the notation.
+Because of the symmetries present, $\Theta$ must commute with all the translation operators over a distance ${\mathbf R} = l a {\mathbf 1}_z$ in the $z$--direction. Again, to lighten the notation, we will restrict ourselves to the case of scalar fields that only vary in the $z$--direction.
 
 \begin{cue}
-Taking a cue from our discussions about continuous translation symmetry, what is the relationship between $H(z + la)$ and $e^{-j k_z la} H(z)$?
+Taking a cue from our discussions about continuous translation symmetry, what is the relationship between $H(z + la)$ and $H(z)$?
 \end{cue}
 
-We can follow exactly the same argument that led to Eq.~\ref{eq-bloch-degenerate}, but this time with the set of translations over $la$, to arrive at
+We can follow exactly the same geometric argument (replacing two consecutive translations with a single translation) as we did for the case of continuous translation symmetry, and once again end up with Eq.~\ref{eq-bloch-degenerate}: 
 
 \begin{equation}
 H(z + la) = e^{-j k_z la} H(z)
 \end{equation} 
 
+The only difference is that this time, we're not dealing with translations over arbitrary distances, but only with the set of translations over $la$.
 
-\begin{marginfigure}[0.5cm]
+\begin{marginfigure}[-1.5cm]
   % credits: Nobel Prize
   % url: https://www.nobelprize.org/prizes/physics/1952/bloch/biographical/
   \includegraphics{symmetry/figures/bloch}
   \caption{Felix Bloch (1905-1983)}
 \end{marginfigure}
 
-This leads to a first form of Bloch's theorem:
+From this, we can write down a first form of Bloch's theorem, by putting $l=1$:
 
 \begin{equation}
 \fbox{$\displaystyle  
@@ -949,7 +977,7 @@ Is this mode periodic?
 
 Note that, although we are working in periodic systems, this mode itself is not periodic, since $H(z + a) \ne H(z)$, but it picks up an extra phase factor.
 
-Eigenfunctions of periodic systems are often called \textbf{Bloch states}.
+Eigenfunctions of periodic systems are often called \textbf{Bloch states} or \textbf{Bloch modes}.
 
 \begin{cue}
   The equations for waveguide modes (continuous translation symmetry) and Bloch modes (discrete translation symmetry) look suspiciously similar. What is the difference then?
@@ -957,12 +985,12 @@ Eigenfunctions of periodic systems are often called \textbf{Bloch states}.
 
 A crucial difference with the case of continuous translation symmetry is that Eq.~\ref{eq-bloch-1} is only valid for displacements that are an integer multiple of the period, and not for arbitrary displacements, as would be the case for waveguide modes.
  
-The number $k_z$ is called the \textbf{wave number} of the Bloch state. Once again, we can use the wave number $k_z$ to classify the modes and draw a band diagram. Compared to the case of continuous translational symmetry however, the wave number has a different interpretation. Rather than saying something about the phase relationship between any two different points on e.g. a slab waveguide, the Bloch wave number only provides information about the phase relationship between points in the structure that are spaced with the same periodicity as the system.
+The number $k_z$ is called the \textbf{wave number} of the Bloch state. Once again, we can use the wave number $k_z$ to classify the modes and draw a band diagram. Again, compared to the case of continuous translational symmetry however, the wave number has a slightly different interpretation. Rather than saying something about the phase relationship between any two different points on e.g. a slab waveguide, the Bloch wave number only provides information about the phase relationship between points in the structure that are spaced with the same periodicity as the system.
 
 
 \pagebreak
 
-\sectionugent{The Brillouin zone}
+\sectionyoutubeugent{The Brillouin zone}{CzXmYfRTloM}
 
 \begin{marginfigure}[-0.0cm]
 % credits: AIP Emilio Segre Visual Archives, Leon Brillouin Collection
@@ -971,10 +999,12 @@ The number $k_z$ is called the \textbf{wave number} of the Bloch state. Once aga
 \caption{L\'{e}on Brillouin (1889-1969)}
 \end{marginfigure}
 
-Looking at Eq.~\ref{eq-bloch-1}, it is clear that the wave number $k_z$ is only defined up to an integer multiple of $2 \pi/a$:
+\begin{cue}
+Looking at Bloch's theorem Eq.~\ref{eq-bloch-1}, show that the wave number $k_z$ is only defined up to an integer multiple $m$ of $2 \pi/a$.
+\end{cue}
 
 \begin{equation}
-e^{-j (k_z + m\frac{2 \pi}{a} ) a} = e^{-j k_z a} e^{-j m 2 \pi} = e^{-j k_z a}
+e^{-j \left(k_z + m\frac{2 \pi}{a} \right) a} = e^{-j k_z a} e^{-j m 2 \pi} = e^{-j k_z a}
 \end{equation} 
 
 Any Bloch state doesn't have just a single wave number $k_z$ at a given frequency, but in fact a whole family of equivalent wave numbers $k_z+m 2 \pi /a$ at that frequency.
@@ -990,34 +1020,36 @@ The band diagram at other $k_z$--values can be constructed by periodic repetitio
 \label{fig-band-folding}
 \end{figure}
 
-Ultimately, this periodicity in $k$-space comes from our convention of preferring to using the $k$-vector to label a mode, rather than using the entire phase factor $ e^{-j k_z a}$. 
+Ultimately, this periodicity in $k$-space comes from our convention of preferring to use the $k$-vector to label a mode, rather than using the entire eigenvalue phase factor $ e^{-j k_z a}$. 
 
 \pagebreak
 
-\sectionugent{Second form of Bloch's theorem}
+\sectionyoutubeugent{Second form of Bloch's theorem}{OPwMA93rBDI}
 \label{week9}
 
-Let's introduce a new function $u$:
+Starting from a Bloch mode $H(z)$, let's introduce a new function $u$, defined as follows:
 
 \begin{equation}
-u(z) = e^{j k_z z} H(z) \label{eq-bloch-u}
+u(z) \stackrel{def}{=} e^{j k_z z} H(z) \label{eq-bloch-u}
 \end{equation} 
 
 \begin{cue}
 Use Bloch's theorem to show that this function has the same periodicity as the lattice.
 \end{cue}
 
-\noindent\marginnote[-2cm]{Sometimes the name of Floquet is also used instead of that of Bloch. The mathematician Floquet first came up with this theory in the context of 1D systems in mechanics, while Bloch later generalised it to 3D in the context of solid state physics.}We start from
+\noindent\marginnote[-2cm]{Sometimes the name of Floquet is also used instead of Bloch. The mathematician Floquet came up with this theory in the context of 1D systems in mechanics, while Bloch later generalised it to 3D in the context of solid state physics. Also Hill and Lyapunov derived similar results independently.}We start from Eq.~\ref{eq-bloch-u} and change the argument from $z$ to $z+la$:
 
 \begin{equation}
 u(z+la)= e^{j k_z z} e^{j k_z l a} H(z + l a)
 \end{equation} 
 
-With Eq.~\ref{eq-bloch-1} this becomes
+With Bloch's theorem Eq.~\ref{eq-bloch-1}, this becomes
 
 \begin{equation}
 u(z+l a)= e^{j k_z z} e^{j k_z l a} e^{-j k_z l a} H(z) = e^{j k_z z} H(z) = u(z)
 \end{equation} 
+
+So, $u(z)$ is indeed periodic.
 
 Rewriting Eq.~\ref{eq-bloch-u}, we can say that the eigenfunctions of a 1D periodic system can be written as
 
@@ -1046,7 +1078,7 @@ H(z)=  \sum_{m=-\infty}^{\infty} u_m {e^{-j \left( k_z + m \frac{2 \pi}{a} \righ
 \end{equation} 
 
 \begin{cue}
-Interpret this physically. How does the Brillouin zone come into play again?
+Interpret this physically. How does the Brillouin zone come back into play?
 \end{cue}
 
 This shows that a Bloch mode is made up of an infinity of plane wave contributions with wave vectors $k_z + m 2 \pi / a$.
@@ -1067,6 +1099,8 @@ This illustrates again that it does not matter what 'label' ($k$ or $k'$) we use
 \pagebreak
 
 \sectionugent{Example: band gaps in 1D layered stacks}
+
+\subsectionyoutube{Zero index contrast}{THgjSuGmo98}
 
 \begin{marginfigure}
 \centering
@@ -1108,7 +1142,9 @@ This means that, according to Bloch theory, the two lines should repeat themselv
 \label{fig-1d-bands-uniform}
 \end{figure}
 
-When we restrict such a plot to the Brillouin zone, we get the results from the left panel of Fig.~\ref{fig-1d-bands}, with the bands appearing to fold back at the edges of the Brillouin zone. In this figure, we plot the band diagrams $\omega_n(k)$ for three different cases of index contrast between the two layers: zero, low and high. (Note that the wavevector is expressed in units of $\pi /a$, and the frequency in units of $a/c$.) These results have been obtained by numerical calculations.
+\subsectionyoutube{Increasing the index contrast}{ox04N7MQxus}
+
+When we restrict such a plot to the Brillouin zone, we get the results from the left panel of Fig.~\ref{fig-1d-bands}, with the bands appearing to fold back at the edges of the Brillouin zone. In this figure, we plot the band diagrams $\omega_n(k)$ for three different cases of index contrast between the two layers: zero, low and high. That way, we can clearly see the gradual evolution of the band diagrams. (Note that the wavevector is expressed in units of $\pi /a$, and the frequency in units of $a/c$.) These results have been obtained by numerical calculations.
 
 \begin{figure}[H]
 \centering
@@ -1119,21 +1155,23 @@ When we restrict such a plot to the Brillouin zone, we get the results from the 
 
 As we increase the index contrast, a curious feature emerges at the edges of the Brillouin zone in Fig.~\ref{fig-1d-bands}. We start to see frequency regions appear where no solutions exist for any $k$. This so--called \textbf{photonic band gap} becomes wider as the index contrast increases.
 
-What is the consequency of having of such a band gap? In this frequency range, there are no allowed propagating states in the system. Suppose we have a semi--infinite periodic system for $z>0$, and a uniform medium for $z<0$.
+What is the consequence of having of such a band gap? In this frequency range, there are no allowed propagating states in the system. Now suppose we have a semi--infinite periodic system for $z>0$, and a uniform medium for $z<0$.
 
 \begin{cue}
 What happens if we excite the semi--infinite periodic system with light coming from the uniform medium below?
 \end{cue}
 
-In this situation, the light will find no states to couple to inside the periodic system. Therefore, it has no choice but to return from where it came and be fully reflected. So, inside a band gap, a periodic structure acts as a perfect mirror.
+\noindent\marginnote{Compared to metallic mirrors, which have inherent absorption losses, these dielectric mirrors can in theory be lossless for an infinite number of periods.}In this situation, the light will find no states to couple to inside the periodic system. Therefore, it has no choice but to return from where it came and be fully reflected. So, inside a band gap, a periodic structure acts as a perfect mirror.
+
+\subsectionyoutube{The origin of the bandgap}{slXfIu7QwkE}
 
 \begin{cue}
 Where does such a band gap come from?
 \end{cue}
 
-One obvious way of explaining the origin of the band gap, is saying that the reflections from each of the interfaces in the system interfere constructively, such that the system will behave as a perfect reflector and no modes can exist inside it.
+One obvious way of explaining the origin of the band gap, is saying that the reflections from each of the interfaces in the system interfere constructively. At the same time, the transmissions from each interface will show complete destructive interference, such that the system will behave as a perfect reflector and no modes can exist inside of it.
 
-Another more convoluted (but educational!) heuristic way of looking at it, is by making use of the heuristics we derived from the variational formulation of Maxwell's equations. Let's look at mode profiles for states immediately above and below the gap. The gap between bands 1 and 2 occurs at the edge of the Brillouin zone, where $k = \pi / a$. If we look at the middle and right diagram of Fig.~\ref{fig-1d-bands}, we see that at the edges, the numerical calculations show us that the bands are horizontal.
+Another more convoluted (but educational!) handwaving way of looking at it, is by making use of the heuristics we derived from the variational formulation of Maxwell's equations. Let's look at mode profiles for states immediately above and below the gap. The gap between bands 1 and 2 occurs at the edge of the Brillouin zone, where $k = \pi / a$. If we look at the middle and right diagram of Fig.~\ref{fig-1d-bands}, we see that at the edges, the numerical calculations show us that the bands are horizontal.
 
 \begin{cue}
 What are the consequences in terms of wave propagation for such so-called flat bands?
@@ -1147,13 +1185,13 @@ What is the relationship between the wavelength and the lattice constant in this
 
 At the edge, $k=\pi / a$, so we have standing waves with a wavelength of $\lambda = 2 \pi / k = 2a$, i.e. twice the lattice constant.
 
-For small index contrast, it is logical to assume that the standing waves won't differ too much in shape from those in free space, i.e. they will also be roughly sinusoidal.
+For small index contrast, it is logical to assume that the standing waves won't differ too much in shape from standing waves (two counterpropagating plane waves) in free space, i.e. they will also be roughly sinusoidal.
 
 \begin{cue}
 How can you position a sinusoidal standing wave with wavelength $2a$ with respect to the layer stack, such that you still respect all the symmetries of the system?
 \end{cue}
 
-Given that there's inversion symmetry in the middle of each layer, there are only two ways to centre a standing wave of this kind, without violating the symmetry of the system. These are plotted in Fig.~\ref{fig-field-placement}: we can position the peak of the mode either in the low or in the high dielectric region.
+Given that there's inversion symmetry in the middle of each layer, there are only two ways to centre a standing wave of this kind, without violating the symmetry of the system, i.e. they should be even or odd with respect to the middle of each layer. These two possibilities are plotted in Fig.~\ref{fig-field-placement}: we can position the peak of the mode either in the low or in the high dielectric region.
 
 \begin{marginfigure}
 \centering
@@ -1168,7 +1206,7 @@ Recall what we've seen about the frequency of a mode depending on how much it's 
 
 We know from our variational study that a mode that is more concentrated in high dielectric regions will have a lower frequency. So, the two modes from Fig.~\ref{fig-field-placement} will have a different frequency and therefore a gap opens between them.
 
-Since in the low--frequency band the fields are more concentrated in the high dielectric region, this band is usually called the \textbf{dielectric band}. Often, the low dielectric is air, which explains why the upper band is often called the \textbf{air band}.
+Since in the low--frequency band the fields are more concentrated in the high dielectric region, this band is usually called the \textbf{dielectric band}.  The low dielectric on the other hand is often air, which explains why the upper band is often called the \textbf{air band}.
 
 All of this is completely analogous to semiconductor physics, where the periodicity of the semiconductor crystal gives rise to conduction and valence bands with a forbidden gap in between. In our case, we have artificial periodicity on a larger length scale (comparable to the wavelength of light used), so we call these structures \textbf{photonic crystals}.
 
@@ -1176,29 +1214,29 @@ In the 1D case, although there is a bandgap for normal incidence for any index c
 
 \pagebreak
 
-\sectionugent{Bloch's theorem in 3D}
+\sectionyoutubeugent{Bloch's theorem in 3D}{XkhAQ1U9SNw}
 
-The same arguments we used to introduce Bloch's theorem for 1D systems can of course be extended to higher dimensionalities. Following a similar line of reasoning, we can conclude that for any eigenfunction ${\mathbf H}$ of $\Theta$ which describes a periodic system, there exists a vector ${\mathbf k}$ such that for any lattice vector ${\mathbf R}$ the following holds:
-
-\begin{equation}
-\fbox{$\displaystyle
-{\mathbf H}_{\mathbf k} ({\mathbf r}+ {\mathbf R}) = e^{-j {\mathbf k} \cdot {\mathbf R}} {\mathbf H}_{\mathbf k} ({\mathbf r})
-$}
-\end{equation} 
-
-Since we label each solution by its wavevector, ${\mathbf k}$ was used a subscript of ${\mathbf H}$.
-
-Completely similar to the 1D argument, we can derive an alternative formulation of Bloch's theorem by saying that any solution ${\mathbf H}_{\mathbf k}$ can be written as
+To extend Bloch's theorem to 3D, let's focus on a single lattice vector ${\mathbf R}$ in 3D space, and follow an identical line of reasoning that led to Eq.~\ref{eq-bloch-1}. Also here, we can conclude that there exist solutions which obey:
 
 \begin{equation}
 \fbox{$\displaystyle
-{\mathbf H}_{\mathbf k} ({\mathbf r}) = e^{-j {\mathbf k} \cdot {\mathbf r}} {\mathbf u}_{\mathbf k} ({\mathbf r})
+{\mathbf H} ({\mathbf r}+ {\mathbf R}) = e^{-j {\mathbf k} \cdot {\mathbf R}} {\mathbf H} ({\mathbf r})
 $}
 \end{equation} 
 
-The function ${\mathbf u}$ is periodic for all lattice vectors ${\mathbf R}$ of the crystal: ${\mathbf u}_{\mathbf k} ({\mathbf r} + {\mathbf R})  = {\mathbf u}_{\mathbf k} ({\mathbf r})$
+Here, ${\mathbf k}$ is the wavevector of the Bloch mode. \noindent\marginnote{Often, people will use the Bloch vector ${\mathbf k}$ to explicitly label the solution, and write things like ${\mathbf H}_{\mathbf k}({\mathbf r})$. }
 
-Just like in 1D, there is a range of ${\mathbf k}$--values which gives rise to non--redundant solutions which is called the Brillouin zone. However, in higher dimensions it is slightly more complicated to construct this region, so we first spend some time discussing additional tools we need for that.
+Completely similar to the 1D argument that gave us Eq.~\ref{eq-bloch-state}, we can derive an alternative formulation of Bloch's theorem, and say that our solution ${\mathbf H}$ can also be written as
+
+\begin{equation}
+\fbox{$\displaystyle
+{\mathbf H} ({\mathbf r}) = e^{-j {\mathbf k} \cdot {\mathbf r}} {\mathbf u} ({\mathbf r})
+$}
+\end{equation} 
+
+The function ${\mathbf u}$ is periodic in the lattice vector ${\mathbf R}$ : ${\mathbf u} ({\mathbf r} + {\mathbf R})  = {\mathbf u} ({\mathbf r})$.
+
+In fact, ${\mathbf u}$ is periodic in \emph{all} lattice vectors ${\mathbf R}$. However, to prove this, we first need to spend a bit of time discussing some additional tools. These will also come in handy when we want to construct the 3D Brillouin zone, i.e. the region in ${\mathbf k}$-space which corresponds to non-redundant solutions.
 
 \pagebreak
 
@@ -1226,7 +1264,7 @@ This formula can be used to build a numerical scheme to calculate Bloch modes: y
 
 \pagebreak
 
-\sectionugent{Reciprocal lattice}
+\sectionyoutubeugent{Reciprocal lattice}{M7EC-9KAmZo}
 
 Suppose we have a function $f({\mathbf r})$ that is periodic on a lattice, i.e. $f({\mathbf r} + {\mathbf R}) = f({\mathbf r})$ for all vectors ${\mathbf R}$ that translate the lattice into itself. As we have already seen, these vectors ${\mathbf R}$ are called the \textbf{lattice vectors}.
 
@@ -1279,7 +1317,7 @@ So, what we have just discovered is that if we construct a periodic function usi
 Verify that the  ${\mathbf G}$-vectors form a lattice of their own, i.e. adding two reciprocal lattice vectors yields another reciprocal lattice vector.
 \end{exer}
 
-We still need to answer the question of how to build the set of all ${\mathbf G}$--vectors given the set of ${\mathbf R}$--vectors, i.e. find all ${\mathbf G}$ such that ${\mathbf G} \cdot {\mathbf R} = N 2 \pi$ for all ${\mathbf R}$ and for an integer $N$.
+We still need to answer the question of how to build the set of all ${\mathbf G}$--vectors given the set of ${\mathbf R}$--vectors, i.e. find all ${\mathbf G}$ such that ${\mathbf G} \cdot {\mathbf R} = N 2 \pi$ for all ${\mathbf R}$ and for an integer $N$. Rather than dealing with infinite families of vectors, let's try to simplify this a bit.
 
 Every lattice vector ${\mathbf R}$ can be written as a linear combination of the so--called \textbf{primitive lattice vectors}, which are the smallest vectors pointing from one lattice point to another.
 
@@ -1289,7 +1327,7 @@ Every lattice vector ${\mathbf R}$ can be written as a linear combination of the
 
 For a simple cubic lattice with spacing $a$, all ${\mathbf R}$s are of the form ${\mathbf R} = la {\mathbf 1}_x + ma {\mathbf 1}_y + na {\mathbf 1}_z$, with $(l,m,n)$ integers.
 
-In general, we call the primitive lattice vectors ${\mathbf a}_1$, ${\mathbf a}_2$ and ${\mathbf a}_3$. They don't need to be of unit length.
+In general, we call the primitive lattice vectors ${\mathbf a}_1$, ${\mathbf a}_2$ and ${\mathbf a}_3$.
 
 Since the reciprocal lattice vectors ${\mathbf G}$ also form a lattice, they have a set of primitive vectors ${\mathbf b}_i$ as well, such that ${\mathbf G} = l' {\mathbf b}_1 + m' {\mathbf b}_2 + n' {\mathbf b}_3$.
 
@@ -1310,7 +1348,7 @@ For all choices of $(l,m,n)$, this must hold for some $N$. That's a lot of diffe
 Verify that we can satisfy the condition if we happen to find ${\mathbf b}_i$ vectors such that ${\mathbf a}_i \cdot {\mathbf b}_j = 2 \pi \delta_{ij}$, where $\delta_{ij}$ is non--zero only if $i=j$.
 \end{cue}
 
-The final question is how to construct these ${\mathbf b}_i$ vectors. We can do this by exploiting the fact that $ {\mathbf x} \cdot ({\mathbf x} \times {\mathbf y}) = 0$ for all vectors ${\mathbf x}$ and ${\mathbf y}$:
+The final question is how to construct these ${\mathbf b}_j$ vectors. We can do this by exploiting the fact that $ {\mathbf x} \cdot ({\mathbf x} \times {\mathbf y}) = 0$ for all vectors ${\mathbf x}$ and ${\mathbf y}$:
 
 \begin{align}
 {\mathbf b}_1 =&  \, 2 \pi \frac{{\mathbf a}_2 \times {\mathbf a}_3}{{\mathbf a}_1 \cdot {\mathbf a}_2 \times {\mathbf a}_3} \nonumber \\
@@ -1332,10 +1370,28 @@ To summarise, when we build the Fourier transform of a periodic function, we onl
 In the denominators of Eq.~\ref{eq-recip}, should you evaluate the scalar or the vector product first?
 \end{exer}
 
+\begin{exer}
+    % difficulty: normal
+    % youtube: D8WBLKu81hE
+  
+Say we have a 3D lattice with primitive lattice vectors $\{ {\mathbf a}_1, {\mathbf a}_2, {\mathbf a}_3 \}$ and primitive reciprocal lattice vectors $\{ {\mathbf b}_1, {\mathbf b}_2, {\mathbf b}_3 \} }$. We know that there exist solutions $\mathbf H(\mathbf r)$ which are common eigenfunctions of $\Theta$ and all three translation operators $T_{{\mathbf a}_i}$. If we write down the eigenvalues in a slightly creative way, this means that
+
+$${\mathbf H} ({\mathbf r}+ {\mathbf a}_i) = e^{2 \pi j \theta_i }{\mathbf H} ({\mathbf r})$$
+
+with $\theta_i$ just a constant, proportional to the logarithm of the eigenvalue. Now, construct a vector ${\mathbf k}$ according to
+
+$${\mathbf k} \stackrel{def}{=} \theta_1 {\mathbf b}_1 + \theta_2 {\mathbf b}_2 + \theta_3 {\mathbf b}_3$$
+
+Finally, define a function ${\mathbf u} ({\mathbf r})$ as
+
+$${\mathbf u} ({\mathbf r}) \stackrel{def}{=} e^{j {\mathbf k} \cdot {\mathbf r}} {\mathbf H} ({\mathbf r})$$
+
+Show that ${\mathbf u} ({\mathbf r} + {\mathbf a}_j)  = {\mathbf u} ({\mathbf r})$ for all primitive lattice vectors ${\mathbf a}_j$, thereby formally proving the second form of Bloch's theorem in three dimensions.
+\end{exer}
 
 \pagebreak
 
-\sectionugent{Brillouin zone in 3D}
+\sectionyoutubeugent{Brillouin zone in 3D}{x6Y6GsbtLK4}
 
 We already know that for a Bloch mode there exists a vector ${\mathbf k}$ such that
 
@@ -1344,23 +1400,27 @@ We already know that for a Bloch mode there exists a vector ${\mathbf k}$ such t
 \end{equation} 
 
 \begin{cue}
-  Use this formula and what you know about the reciprocal lattice to figure out how to define the Brillouin zone in 3D
+  Use this formula and what you know about the reciprocal lattice to figure out how to define the Brillouin zone in 3D, i.e. which changes in ${\mathbf k}$ still result in the same Bloch mode.
 \end{cue}
 
 If ${\mathbf k}$ is incremented by a reciprocal lattice vector ${\mathbf G}$, then $e^{-j {\mathbf k} \cdot {\mathbf R}}$ is unchanged by the very definition of reciprocal lattice vector. So, incrementing ${\mathbf k}$ by ${\mathbf G}$ results in the same physical mode.
 
-Therefore, we can restrict our attention to a region in ${\mathbf k}$--space where you cannot get from any point in that region to another in that region by adding a reciprocal lattice vector. This region is the Brillouin zone and consists of all the ${\mathbf k}$--vectors around the origin in reciprocal space that are closer to the origin than to any other neighbouring lattice point in the reciprocal lattice.
+This means that the Brillouin zone, i.e. the non-redundant region in $k$-space, cannot contain two points that are separated by a reciprocal lattice vector ${\mathbf G}$. 
 
-These two definitions are equivalent. If a particular ${\mathbf k}$ is closer to a neighbouring lattice point, you can always reach it by staying close to the original point and then translating it by the ${\mathbf G}$ that reaches from one lattice point to the other (Fig.~\ref{fig-bril-bisector}).
+Let's center our Brillouin zone around the origin, and let's focus on only one lattice vector ${\mathbf G}$ and its opposite $-{\mathbf G}$. If we draw perpendicular bisectors like in Fig.~\ref{fig-bril-bisector}, it's clear that if you look at two points in the interior of the shaded area, you cannot go from one to the other by adding or subtracting ${\mathbf G}$, simply because that area is not 'big enough'. 
 
-\begin{figure}[H]
+\begin{marginfigure}
 \centering
-\includegraphics{symmetry/figures/bisector}
-\caption{Construction of the Brillouin zone using bisectors of lines joining two lattice points. Any vector ${\mathbf k}'$ that reaches to an arbitrary point on the other side from $A$ can be expressed as the sum of a vector ${\mathbf k}$ on the same side and a lattice vector ${\mathbf G}$.}
+\includegraphics[width=5cm]{symmetry/figures/bisector}
+\caption{The interior of the shaded area between the perpendicular bisectors does not contain any points that are ${\mathbf G}$ or $-{\mathbf G}$ apart.}
 \label{fig-bril-bisector}
-\end{figure}
+\end{marginfigure}
 
-To make this more concrete, let's consider the case of a 2D square lattice (Fig.~\ref{fig-bril-square}). Its lattice vectors are ${\mathbf a}_1 = a {\mathbf 1}_x$ and ${\mathbf a}_2 = a {\mathbf 1}_y$.
+Obviously, there will be more directions to consider than just ${\mathbf G}$, so we need to repeat this procedure for all the other reciprocal lattice vectors and make the intersection of all zones between the perpendicular bisectors to arrive at the final Brillouin zone.
+
+Another way of looking at this, is that the Brillouin zone contains the points which are closer to the origin than to any other reciprocal lattice vector.
+
+Let's try and construct the Brillouin zone for the case of a 2D square lattice (Fig.~\ref{fig-bril-square}). Its lattice vectors are ${\mathbf a}_1 = a {\mathbf 1}_x$ and ${\mathbf a}_2 = a {\mathbf 1}_y$.
 
 \begin{cue}
   What is the reciprocal lattice of this square lattice?
@@ -1372,9 +1432,9 @@ In order to use Eq.~\ref{eq-recip}, we need a third basis vector in the $z$--dir
 Now construct the Brillouin zone.
 \end{cue}
 
-To construct the Brillouin zone, we focus our attention on a particular point (the origin), and draw the lattice vectors that start at the origin. For each of these vectors, we draw the perpendicular bisectors, which divide the lattice into two half--planes (like in Fig.~ \ref{fig-bril-square}), one of which contains the origin. Now repeat this procedure for all lattice vectors near the origin. \noindent\marginnote[-0.7cm]{Depending on the lattice, there could be more vectors to consider than just the primitive lattice vectors and their inverses.} The intersection of all these half--planes forms the Brillouin zone (Fig.~\ref{fig-bril-square}).
+We construct the perpendicular bisectors for all lattice vectors closest to the origin and make the intersection. Finally, we end up with the result from Fig.~\ref{fig-bril-square}, which is a square with side $2 \pi / a$.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics{symmetry/figures/brillouin_square}
 \caption{The square lattice. Left: lattice in real space. Middle: lattice in reciprocal space. Right: construction of the Brillouin zone in reciprocal space.}
@@ -1383,18 +1443,18 @@ To construct the Brillouin zone, we focus our attention on a particular point (t
 
 \pagebreak
  
-\sectionugent{Irreducible Brillouin zone}
+\sectionyoutubeugent{Irreducible Brillouin zone}{FDdNnA09mGI}
 
-Often, a photonic crystal will have additional symmetries. E.g. the square lattice we considered earlier stays invariant for rotations over 90, 180 and 270 degrees. Another symmetry for the square crystal is mirror symmetry about the 45 degrees diagonal. The collection of symmetry operations (rotations, reflections, inversion) for which the crystal is invariant is called the \textbf{point group} of the crystal.
+\noindent\marginnote[.0cm]{The collection of symmetry operations (rotations, reflections, inversion, ...) for which the crystal is invariant is called the \textbf{point group} of the crystal.}Often, a periodic structure will have additional symmetries on top of the translation symmetries. E.g., the square lattice we considered earlier also stays invariant for rotations over 90, 180 and 270 degrees. Another symmetry for the square crystal is mirror symmetry about the 45 degree diagonal. 
 
-\begin{marginfigure}
+\begin{marginfigure}[.5cm]
 \centering
 \includegraphics[width=4cm]{symmetry/figures/irred_bril}
 \caption{The irreducible Brillouin zone for the square lattice}
 \label{fig-irred-bril}
 \end{marginfigure}
 
-All of these symmetries mean that there is additional redundancy in the Brillouin zone. The smallest region in the Brillouin zone for which the bands are not related by symmetry is called the \textbf{irreducible Brillouin zone}. As shown in Fig.~\ref{fig-irred-bril}, the irreducible Brillouin zone for the square lattice is a triangular wedge $1/8$ the size of the full Brillouin zone. Also indicated in Fig.~\ref{fig-irred-bril} are some special high--symmetry points of the Brillouin zone. The origin is called the $\Gamma$--point, $X$ is in the direction along the shortest lattice vector and $M$ is in the direction of the diagonal.
+All of these symmetries mean that there is additional redundancy in the Brillouin zone. The smallest region in the Brillouin zone for which the bands are not related by these extra symmetries is called the \textbf{irreducible Brillouin zone}. As shown in Fig.~\ref{fig-irred-bril}, the irreducible Brillouin zone for the square lattice is a triangular wedge $1/8$ the size of the full Brillouin zone. Indeed, if you apply the additional symmetries to this wedge, you can fill out the entire Brillouin zone. Also indicated in Fig.~\ref{fig-irred-bril} are some special high--symmetry points of the Brillouin zone of the square lattice. The origin is called the $\Gamma$--point, $X$ is in the direction along the shortest lattice vector and $M$ is in the direction of the diagonal.
 
 Don't get confused: the irreducible Brillouin zone has further symmetries of its own (e.g. drop a line from $X$ perpendicular onto $\Gamma M$), but these are not symmetries of the original crystal, so they can't be used to reduce the Brillouin zone.
 
@@ -1417,9 +1477,9 @@ For a triangular (hexagonal) lattice, what are the lattice vectors, reciprocal l
 
 \pagebreak
 
-\sectionugent{Example: 2D square lattice of dielectric rods}
+\sectionyoutubeugent{Example: 2D square lattice of dielectric rods}{TjdMHCA4aZc}
 
-As we have seen, with a 1D periodic structure, we have a band gap for normal incidence regardless of the index contrast. However, if we want to have a gap for oblique incidence too, we will need more--dimensional periodicity: carefully designed 2D structures can have a band gap for all propagation angles in a plane, whereas carefully designed 3D photonic crystals can have a gap for any propagation direction.
+As we have seen, for a 1D periodic structure, we have a band gap for normal incidence regardless of the index contrast. However, if we want to have a gap for oblique incidence too, we will need periodicity in more dimensions: carefully designed 2D structures can have a band gap for all propagation angles in a plane, whereas carefully designed 3D photonic crystals can have a gap for any propagation direction.
 
 We say 'carefully designed structures', because in more dimensions, it is not the case that any periodic structure will automatically give rise to a band gap.
 
@@ -1438,7 +1498,7 @@ Obviously, a higher index contrast will help, because it will create stronger re
 
 Remember that in the 1D case, the band diagram plotted the frequency as a function of the 1D wavevector, where the bands were 1D curves. For the 2D case, the frequency is now plotted against the two components of the wavevector, so that we get surfaces instead of curves.
 
-As an example we plot the band structure of a 2D square lattice of dielectric rods in air, for waves propagating in the $xy$--plane. For each ${\mathbf k}$--point in the triangular irreducible Brillouin zone there are a number of bands with increasing frequency. Each band can be plotted as a surface over the irreducible Brillouin zone, as illustrated in Fig.~\ref{fig-bands-rods-3D}.
+As an example, we plot the band structure of a 2D square lattice of dielectric rods in air, for waves propagating in the $xy$--plane. For each ${\mathbf k}$--point in the triangular irreducible Brillouin zone there are a number of bands with increasing frequency. Each band can be plotted as a surface over the irreducible Brillouin zone, as illustrated in Fig.~\ref{fig-bands-rods-3D}.
 
 As such a 3D plot quickly becomes difficult to interpret, people usually only plot the bands along the edges of the irreducible Brillouin zone, as is done in Fig.~\ref{fig-bands-rods}. We can see that there is a bandgap for modes with TM polarisation, but not for TE. In the context of photonic crystals, TM is defined as modes with the ${\mathbf E}$--vector along the rods in the $z$--direction.
 
@@ -1480,7 +1540,7 @@ Band diagrams are symmetric around $k=0$, i.e. if there is a mode at frequency $
 
 \pagebreak
 
-\sectionugent{Applications of photonic crystals}
+\sectionyoutubeugent{Applications of photonic crystals}{PE7LyJjPYFg}
 \label{week10}
 
 Photonic crystals have a lot of similarities compared to electronic crystals, but also some differences. These are summarised in Table~\ref{tab-phot-cryst}.
@@ -1502,7 +1562,6 @@ Photonic crystals have a lot of similarities compared to electronic crystals, bu
   \label{tab-phot-cryst}
 \end{table}
 
-
 Just as with semiconductors, photonic crystals only become truly useful when defects are introduced in the crystal lattice (Fig.~\ref{fig-defects}).
 
 \begin{figure}[H]
@@ -1522,7 +1581,7 @@ Similarly, when we create a line defect, light cannot propagate into the crystal
 
 Finally, we can also create a surface defect, where we just exploit the \emph{mirror} properties of the photonic crystal.
 
-The nice thing about these structures is that they are very small, on the order of the wavelength of the light used. This is why they are often called \emph{nanophotonic} structures. They offer the possibility of miniaturising and integrating a variety of optical components (like e.g. the bends, splitters and filters from Fig.~\ref{fig-components}) onto a single photonic IC.
+The nice thing about these structures is that they are very small, on the order of the wavelength of the light used. This is why they are often called \emph{nanophotonic} structures. They offer the possibility of \emph{miniaturising} and integrating a variety of optical components (like e.g. the bends, splitters and filters from Fig.~\ref{fig-components}) onto a single photonic IC. Also, they can be engineered to have very \emph{specific dispersion} profiles.
 
 \begin{figure}
 \centering

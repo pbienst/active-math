@@ -201,15 +201,15 @@ or
 Where in Eq.~\ref{eq-cr-suf} is the direction of approach encoded? Get rid of that term by applying the Cauchy-Riemann conditions.
 \end{cue}
 
-We now need to prove that this expression is independent on $d y / d x$ in order for the complex derivatives to be independent of the direction of approach. Indeed, each direction of approach will have its own value of $d y / d x$ .
+We now need to prove that this expression is independent on $d y / d x$ in order for the complex derivatives to be independent of the direction of approach. Indeed, each direction of approach will have its own value of $d y / d x$ (e.g. a diagonal approach under 45 degrees will have a value of 1).
 
 Applying the Cauchy--Riemann conditions to the $y$--derivatives, we obtain
 
 \begin{equation}
-\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y} = -\frac{\partial v}{\partial x}+j\frac{\partial u}{\partial x}
+\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y} = -\frac{\partial v}{\partial x}+j\frac{\partial u}{\partial x} = j \left( \frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x} \right)
 \end{equation}
 
-Substituting this into Eq.\ref{eq-cr-suf}, we get that the $d y / d x$ dependence cancels out to give
+Substituting this into Eq.\ref{eq-cr-suf}, we get that the factor $1 + j d y / d x$ cancels out, so we lose the  $d y / d x$ dependence:
 
 \begin{equation}
 \fbox{$\displaystyle
@@ -748,7 +748,7 @@ $$e^{1/z} = \sum_{m=0}^{\infty} \frac{1}{z^m m!} $$
 
 has an infinite number of negative powers of $z$, it is an essential singularity.
 
-Note that a pole of order $M$ can be removed by multiplying $f(z)$ by $(z-z_0)^M$. This obviously cannot be done for an essential singularity.
+Say you have a function $f(z)$ that has a pole of order $M$. You can create a new function that does not have this pole by multiplying $f(z)$ by $(z-z_0)^M$. This obviously cannot be done for an essential singularity, as multiplying by something like $(z-z_0)^\infty$ does not make a lot of sense.
 
 \noindent\marginnote{This is shown in Picard's Great Theorem.}One can also prove that in a small neighbourhood around an essential singularity, the function actually takes all possible complex values (with at most a single exception)! So, obviously it makes no sense to talk about the limit of that function there.
 
@@ -781,13 +781,13 @@ So, Eq.~\ref{eq-sqrt} is clearly not a single--valued function: a single point i
 
 Fig.~\ref{fig-riemann} is a so-called \emph{Riemann surface} associated with complex square root. You can see that the parabola representing the real-valued square root is also embedded in this surface. Additionally, the Riemann surface clearly shows the multivaluedness of the square root: for each point in the $z$--plane there are two points on the surface, one in the top part and one in the bottom part. 
 
-Another way to appreciate this multivaluedness is by looking at how the argument of $w$ changes if we pick a point on the surface, make a full round trip on the Riemann surface, and arrive back at our original point.
+Another way to appreciate this multivaluedness, is picking a point on the Riemann surface, and making a full round trip on that surface to arrive back at our starting location.
 
 \begin{cue}
-When you do such an excursion in the complex plane, how does the angle of $w$ change? 
+When you do such an excursion in the complex plane, how does the argument of the point travelling on the Riemann surface change? 
 \end{cue}
 
-From the figure, it is clear that we will have circled twice around the origin for that path, so one could say that on the Riemann surface, the argument of $w$ needs to change over $4 \pi$ in order to complete a full round trip. Therefore, this Riemann surface can be seen as an extension of the complex plane which is 'twice as large' as the regular complex plane.
+From the figure, it is clear that we will have circled twice around the origin for that path, so one could say that on the Riemann surface, the argument needs to change over $4 \pi$ in order to complete a full round trip. Therefore, this  surface can be seen as an extension of the complex plane which is 'twice as large' as the regular complex plane.
 
 \pagebreak
 
@@ -820,7 +820,7 @@ On the other hand, for $z_- = \rho e^{j (\pi + \epsilon)}$, naively calculation 
 
 In the limit of zero $\epsilon$, $w_+$ tends to $j\sqrt{\rho}$, whereas $w_-$ tends to $-j\sqrt{\rho}$. This clearly shows that our function is no longer continuous when crossing the branch cut.
 
-The relationship between branch cuts and the Riemann surface is show schematically in Fig.~\ref{fig-sheets}: our branch cut cuts the Riemann surface in two separate \emph{Riemann sheets}. In the first sheet, the argument moves from $-\pi$ at B to $\pi$ at A. In the second sheet, we could say by convention that the argument actually is in the extended interval $[\pi, 3\pi]$.
+The relationship between branch cuts and the Riemann surface is shown schematically in Fig.~\ref{fig-sheets}: our branch cut cuts the Riemann surface in two separate \emph{Riemann sheets}. In the first sheet, the argument of $z$ moves from $-\pi$ at B to $\pi$ at A. In the second sheet, we could say by convention that the argument actually is in the extended interval $[\pi, 3\pi]$.
 
 \begin{marginfigure}[-2cm]
 \centering
@@ -1824,7 +1824,7 @@ For an analytic function $\arg df / dz = \alpha$ (the angle of the derivative) d
 \phi = \theta + \alpha
 \end{equation}
 
-This also means that an analytic transformation will rotate any curve though $z_0$ in the $z$--plane over an angle of $\alpha$ in the $w$--plane. Since this result holds for any curve through $z_0$, it obviously also holds for any \emph{pair} of curves. This means that for the angle between these two curves we get
+This also means that an analytic transformation will rotate any curve through $z_0$ in the $z$--plane over an angle of $\alpha$ in the $w$--plane. Since this result holds for any curve through $z_0$, it obviously also holds for any \emph{pair} of curves. This means that for the angle between these two curves we get
 
 \begin{equation}
 \phi_2 - \phi_1 = (\theta_2 + \alpha) - (\theta_1 + \alpha) = \theta_2 -

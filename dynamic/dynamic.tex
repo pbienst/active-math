@@ -17,7 +17,7 @@ As for everything else, so for a mathematical theory: beauty can be perceived bu
 
 In this chapter, we will study some aspects of the dynamics of nonlinear systems. We will see that these systems can exhibit wonderfully complex and intricate phenomena, producing both pretty pictures and profound insights into the behaviour of physical processes.
 
-After an example from the photonics world, we will look at \textbf{1D discrete systems}, and study aspects like cobweb plots, fixed points and their stability, as well as periodic points. We'll look at how to visualise the properties of the family of logistic maps in a bifurcation diagram. We'll also define chaos as being the sensitive dependence on initial conditions.
+After an example from the photonics world, we will look at \textbf{1D discrete systems}, and study aspects like cobweb plots, fixed points and their stability, as well as periodic points. We''ll look at how to visualise the properties of the family of logistic maps in a bifurcation diagram. We'll also define chaos as being the sensitive dependence on initial conditions.
 
 \textbf{2D discrete systems} are studied next, and we'll introduce the concept of saddle points. After studying linear maps, we'll show how to locally approximate a nonlinear map by a linear one. We briefly discuss the importance of stable and unstable manifolds.
 
@@ -25,7 +25,7 @@ Finally, we will talk about \textbf{continuous systems}, i.e. systems that are d
 
 \pagebreak
 
-\sectionugent{Example: chaos in a photonic system}
+\sectionyoutubeugent{Example: chaos in a photonic system}{Qjft-8lee4U}
 
 \begin{marginfigure}
 \centering
@@ -34,7 +34,7 @@ Finally, we will talk about \textbf{continuous systems}, i.e. systems that are d
 \label{fig-co2}
 \end{marginfigure}
 
-In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating current $I(t)=A+B \sin (\omega t)$ was applied to the modulator\footnote{Lepers \emph{et al.}, Phys. Rev. A, 43, 5, 2573, 1991.}. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output power $P(t)$. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
+In 1991, scientists at the University of Lille studied a CO$_2$--laser which contained an electrooptic absorber inside the cavity to modulate the output intensity of the laser beam. An alternating voltage $V(t)=A+B \sin (\omega t)$ was applied to the modulator\footnote{Lepers \emph{et al.}, Phys. Rev. A, 43, 5, 2573, 1991.}. The modulation amplitude $B$ was kept fixed at 3V, and the modulator frequency $\omega$ was set to 640 kHz, a resonance frequency of the laser. Next, the experimenters varied the DC bias $A$ from 60V to 460V and observed what happened to the laser output power $P(t)$. They sampled the output 640 000 times per second, i.e. in lockstep with the modulation frequency. They did this experiment for various values of the DC bias to produce the oscilloscope picture of Fig.~\ref{fig-co2}.
 
 \begin{cue}
 For low values of the DC bias, there is only a single branch. What does this mean for the time evolution of the laser intensity?
@@ -44,7 +44,7 @@ For low values of the DC bias, there is only a single branch. What does this mea
 \centering
 % -.5*sin(x)+0.9+.5*sin(0.5*x)
 \includegraphics{dynamic/figures/lille}
-\caption{Time evolution of the modulator current (top), of the laser output for low DC bias (middle) and of the laser output for higher DC bias.}
+\caption{Time evolution of the modulator voltage (top), of the laser output for low DC bias (middle) and of the laser output for higher DC bias.}
 \label{fig-lille}
 \end{marginfigure}
 
@@ -54,7 +54,7 @@ For low values of the DC bias, for every bias value there is only a single value
 For larger DC bias, there are suddenly two branches in the curves. What can you say now about the time evolution?
 \end{cue}
 
-These two branches in the curves mean that e.g. for odd periods you get a certain sample value, whereas for even periods you get a different value. This means that the laser oscillation takes two periods of the modulation to repeat. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period (Fig. \ref{fig-lille} bottom).
+These two branches in the curves mean that e.g. for odd periods you get a certain sample value, whereas for even periods you get a different value. This means that the laser oscillation takes two periods of the modulation to repeat. We're obviously dealing with nonlinear effects here. This pattern with doubled period is called a \textbf{subharmonic} of the modulation period (Fig. \ref{fig-lille} bottom).
 
 Increasing the DC bias even further leads to patterns which take 4, 8 or more modulation periods to repeat. There is even a certain range where the laser output varies between so many levels that it looks very chaotic.
 
@@ -63,12 +63,12 @@ The combination of CO$_2$--laser plus absorber can be described by a set of rela
 In this chapter, we will study some aspects of this complex behaviour of dynamical systems, starting from very simple 1D models described by difference equations. Higher dimensional systems and systems described by differential equations instead of difference equations will also be treated.
 
 
-\sectionugent{Dynamical systems}
+\sectionyoutubeugent{Dynamical systems}{J5DOYlPC2i0}
 
 A \textbf{dynamical system} consists of a set of possible states, together with a rule that determines the present state in terms of the past states. E.g., a simple model for growth of bacteria in a lab culture is that the population doubles each hour.
 
 \begin{cue}
-  What would the update rule of such a system look like?
+  What would the update rule of such a system look like, if you only count the bacteria once per hour?
 \end{cue}
 
 The update rule of this system is
@@ -77,7 +77,7 @@ The update rule of this system is
 x_n = f(x_{n-1}) = 2 x_{n-1} \label{eq-exp-growth}
 \end{equation}
 
-here, the state $x$ designates the population size, and the subscript $n$ stands for the state at time step $n$, in this case the state after $n$ hours.  
+Here, the state $x$ designates the population size, which is an integer number. The subscript $n$ stands for the state at time step $n$, in this case the state after $n$ hours.  
 
 Based on the properties of the update rule, we can distinguish several types of dynamical systems.
 
@@ -87,13 +87,13 @@ If the update rule is applied at discrete times, the system is called a \textbf{
 
 \pagebreak
 
-\sectionugent{1D maps - logistic growth}
+\sectionyoutubeugent{1D maps - logistic growth}{5MhI2qpp62Y}
 
-A function $f$ whose input and output space are the same is called a \textbf{map}. The evolution of a dynamical system is governed by multiple applications of the update rule $f$. Let us define $f^2(x)=f(f(x))$ and more generally define $f^k(x)$ as the results of applying $f$ to $x$ $k$ times. \noindent\marginnote{In this chapter, $f^k(x) \ne \left[f(x) \right]^k$!} The set of points ${x_0, f(x_0), f^2(x_0), ...}$ is called the \textbf{orbit} of $x_0$ under $f$. The starting point $x_0$ is called the \textbf{initial value} of the orbit.
+A function $f$ whose input and output space are the same is called a \textbf{map}. Since the input space is equal to the output space, we can use $f$ as an update rule, and create a dynamical system by performing successive applications of this map. Let us define $f^2(x) \stackrel{def}{=} f(f(x))$ and more generally define $f^k(x)$ as the results of applying $f$ to $x$ $k$ times. \noindent\marginnote{Again, in this chapter, $f^k(x) \ne \left[f(x) \right]^k$!} The set of points ${x_0, f(x_0), f^2(x_0), ...}$ is called the \textbf{orbit} of $x_0$ under $f$. The starting point $x_0$ is called the \textbf{initial value} of the orbit.
 
-Of interest in the study of dynamical systems is the limiting behaviour of $f^k(x)$ for large values of $k$. For the exponential growth scenario of Eq.~\ref{eq-exp-growth}, the population will clearly increase without bound, which is obviously not a realistic model.
+Of interest in the study of dynamical systems is the limiting behaviour of $f^k(x)$ for large values of $k$. For the exponential growth scenario $f(x)=2x$ of Eq.~\ref{eq-exp-growth}, the population will clearly increase without bound, which is obviously not a realistic model.
 
-Let's build a slightly more realistic model, where e.g. competition for scarse resources will put brakes on growth as soon as the population gets too large.. First of all, rather than working with integer population values, we switch to a population size which is normalised between 0 and 1, with 1 representing some kind of reference value.
+Let's build a slightly more realistic model, where e.g. competition for scarce resources will put brakes on growth as soon as the population gets too large. First of all, rather than working with integer population values, we switch to a real-valued population size which is normalised between 0 and 1, with 1 representing some kind of reference value.\marginnote[-.8cm]{Note that even though the state space is now continuous, this is still a discrete-time map.} 
 
 \begin{cue}
 Instead of having a multiplication by 2 every time step, can you propose a simple model where this factor reduces the larger the population gets? 
@@ -116,7 +116,7 @@ Show using computer simulations that populations evolving under the rule $f(x) =
 
 \pagebreak
 
-\sectionugent{Cobweb plots}
+\sectionyoutubeugent{Cobweb plots}{0Zhl81F5LII}
 
 A cobweb plot is a graphical representation of the orbit of an initial value under a 1D map. It is obtained by drawing the graph of the update rule, together with the diagonal $y=x$ (see Fig.~\ref{fig-cobweb1}).
 
@@ -133,7 +133,7 @@ Study this figure and convince yourself that this indeed represents an orbit. Mo
 
 Sketching the orbit of an initial point is done as follows. E.g., starting with the input value $x_0=0.1$ and $f(x)=2x(1-x)$ in Fig.~\ref{fig-cobweb1}, we can easily plot $f(0.1)$ by drawing a vertical line starting from $x_0=0.1$ to the curve $f(x)$, which gives us a value of $0.18$. Next, we need to turn this output value of $0.18$ to an input value to compute $f(0.18)$. This is done by drawing a horizontal line from the input--output pair $(0.1,0.18)$ until it reaches the diagonal $y=x$. Now, the process can be repeated by drawing a sequence of vertical and horizontal line segments between the curve of the update rule and the diagonal.
 
-From the cobweb plot, it is clear that the orbit will converge to the point $x=0.5$, which lies on the intersection of the graph of the update function and the diagonal.
+\noindent\marginnote{If you zoom in near 0.5, the plot really starts to look like a cobweb!}From the cobweb plot, it is clear that the orbit will converge to the point $x=0.5$, which lies on the intersection of the graph of the update function and the diagonal.
 
 Such points where $f(x)=x$ are called \textbf{fixed points}. They are of extreme importance when studying the dynamics of a system, as they contain information on the asymptotic behaviour of the system.
 
@@ -154,9 +154,9 @@ Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Draw cobweb plots for orbits wi
 
 \pagebreak
 
-\sectionugent{Sinks and sources}
+\sectionugent{Sinks and sources}{g9s9KpRS9aA}
 
-Not all fixed points are alike. A \textbf{stable} fixed point has the property that points near it will move even closer to it as the dynamical system evolves. For an \textbf{unstable} fixed point, the opposite is true: points starting out in its neighbourhood will rapidly move away as time progresses.
+Not all fixed points are alike. A \textbf{stable} fixed point has the property that points near it will move even closer to it as the dynamical system evolves (e.g., 0.5 for the map $f(x)=2x(1-x)$). For an \textbf{unstable} fixed point, the opposite is true: points starting out in its neighbourhood will rapidly move away as time progresses (e.g., 0 for the map $f(x)=2x(1-x)$).
 
 A good analogy is that a ball at the bottom of a valley is stable, while a ball balanced at the tip of mountain will be unstable.
 
@@ -196,27 +196,30 @@ Or, in symbols:
 \label{fig-source}
 \end{marginfigure}
 
-Similarly, a fixed point is called a source if there exists an epsilon neighbourhood $N_\epsilon(p)$ such that each $x$ in $N_\epsilon(p)$ except $p$ eventually maps outside of $N_\epsilon(p)$:
+For a source, we might be tempted to write down something like
 
 \begin{equation}
-\exists \, \epsilon : \forall x \in  N_\epsilon(p) \setminus \{p\} : \exists \, K : f^K(x) \notin  N_\epsilon(p)
+    \exists \, \epsilon : \forall x \in  N_\epsilon(p) : \lim_{k \to \infty} f^k(x) \ne p
 \end{equation}
 
 \begin{cue}
-Why do we need to exclude $p$ from this definition?
+What's wrong with this?
 \end{cue}
 
-Since $p$ is a fixed point, it will always map to itself, rather than running away outside of the epsilon neighbourhood.
+First of all, since $p$ is a fixed point, it will always map to itself, rather than running away outside of the epsilon neighbourhood. So, we need to exclude it from the neighbourhood.
 
-\begin{cue}
-Why don't we say for the definition of the source simply that $\lim_{k \to \infty} f^k(x) \ne p$, in analogy with the definition of the sink?
-\end{cue}
+Second, as we will see later, an orbit might not even have a limit value! Therefore, we just demand that the orbit eventually leaves the epsilon neighbourhood.
 
-For the source, we cannot use the limit of the orbit in the definition, for the simple reason that perhaps this limit is not defined! Indeed, later we'll see plenty of examples where orbits do not settle. Therefore, we demand instead that the orbit leaves the epsilon neighbourhood.
+So, we end up with
+
+\begin{equation}
+\exists \, \epsilon : \forall x \in  N_\epsilon(p) \setminus \{p\} : \exists \, K : \forall k > K : f^k(x) \notin  N_\epsilon(p)
+\end{equation}
+
 
 \pagebreak
 
-\sectionugent{Stability theorem for fixed points}
+\sectionyoutubeugent{Stability theorem for fixed points}{tetxn1SSlvA}
 
 Next question: how can we determine from the shape of $f$ whether a fixed point is a source or a sink? The answer lies in the following theorem:
 
@@ -271,20 +274,27 @@ Using the fact that $p$ is a fixed point, we get
 
 So, $f(x)$ is closer to $p$ than $x$ was to $p$ by at least a factor of $a$, meaning that $f(x)$ is also in $N_\epsilon(p)$.
 
-Let's rewrite Eq.~\ref{eq-stab-fix} slightly:
-
-\begin{equation}
-\left|f^1(x)-p\right| < a \left|f^0(x)-p\right|,  \hspace{.5cm} \forall x \in N_\epsilon(p)
-\end{equation} 
 
 \begin{cue}
 Why can we apply this procedure again? Do so!  
 \end{cue}
 
-Since $f^1(x)$ is also in $N_\epsilon(p)$, we can repeat the above procedure to get
+Since $f(x)$ is also in $N_\epsilon(p)$, we can repeat the procedure above, replacing $x$ by $f(x)$, to get
 
 \begin{equation}
-\left|f^k(x)-p\right| < a\left|f^{k-1}(x)-p\right| < a^2\left|f^{k-2}(x)-p\right|< ... < a^k |x-p| 
+    \left|f^2(x)-p\right| < a\left|f(x)-p\right| 
+\end{equation}  
+
+Using Eq.~\ref{eq-stab-fix}, we can further bound the right-hand side:
+
+\begin{equation}
+    \left|f^2(x)-p\right| < a\left|f(x)-p\right| < a^2\left|x-p\right|
+\end{equation}  
+
+Obviously, this can be generalised to an arbitrary number of function applications:
+
+\begin{equation}
+\left|f^k(x)-p\right| < a^k |x-p| 
 \end{equation}  
 
 \begin{cue}
@@ -301,7 +311,7 @@ This proves that $p$ is a sink.
 
 The set of initial conditions that is attracted to the sink is called the \textbf{basin} of the sink. From the proof of the stability theorem, we get that the basin of a sink contains at least a small epsilon neighbourhood, but in practice sinks often attract a large set of initial conditions.
 
-Finally, note that the stability theorem does not say anything about the case $|f'(p)|=1$.
+Finally, what about the case $|f'(p)|=1$? Then, the fixed point will obviously still be either a sink or a source, but our theorem won't be able to help you out...
 
 \begin{exer}
 % difficulty: trivial
@@ -324,7 +334,7 @@ Prove the stability theorem explicitly for the case of a source.
 
 \pagebreak
 
-\sectionugent{Periodic points}
+\sectionyoutubeugent{Periodic points}{lx8Oz9VBdVc}
 
 \begin{marginfigure}
 \centering
@@ -352,7 +362,7 @@ Since a period--$k$ point is a fixed point of $f^k$, apply the stability theorem
 For a period--2 point, we need to evaluate $|f^{2'}(p_1)|$, which can be done easily with the chain rule:
 
 \begin{equation}
-|f^{2'}(p_1)| = |f'(f(p_1)) f'(p_1)| = |f'(p_2) f'(p_1)|
+\left|\frac{d}{dx} f(f(p_1))\right| = |f'(f(p_1)) f'(p_1)| = |f'(p_2) f'(p_1)|
 \end{equation}  
 
 This can be easily generalised to period--$k$ points:
@@ -371,8 +381,7 @@ $$|f'(p_1) f'(p_2) ... f'(p_k)| > 1$$
 
 \end{exer}
 
-
-Note that stability is a collective property of the periodic orbit, in the sense that $f^{k'}(p_i) = f^{k'}(p_j)$ for all values of $i$ and $j$.
+Note that stability is a collective property of the final periodic part of the orbit, in the sense that $f^{k'}(p_i) = f^{k'}(p_j)$ for all values of $i$ and $j$.
 
 \begin{exer}
   % difficulty: trivial
@@ -393,7 +402,7 @@ Verify that the map $f(x)=2x^2-5x$ has fixed points at 0 at 3. Use this informat
 
 \pagebreak
 
-\sectionugent{Family of logistic maps}
+\sectionyoutubeugent{Family of logistic maps}{AI-PnZIGmGg}
 
 We have already seen that the scaling parameter $a$ in the family of logistic maps $f_a(x)=ax(1-x)$ can have a large influence on the behaviour of the system: for some ranges of $a$ there is only one attracting solution, for other ranges there is a stable period--2 orbit. Although these cobweb diagrams can be pretty to look at, it would be nice to have a more compact snapshot containing the entire family of logistic maps.
 
@@ -404,7 +413,7 @@ We have already seen that the scaling parameter $a$ in the family of logistic ma
 \label{fig-bifur}
 \end{figure} 
 
-To visualise the behaviour of logistic maps for various values of $a$, we can make a diagram like the one in Fig.~\ref{fig-bifur}. On the horizontal axis we plot $a$, while the vertical axis shows $x$--values. The figure is constructed as follows: for each $a$--value, pick a random starting value $x$, and calculate its orbit under the map $f_a(x)$.
+To visualise the behaviour of logistic maps for various values of $a$, we can make a diagram like the one in Fig.~\ref{fig-bifur}. On the horizontal axis we plot $a$, while the vertical axis shows $x$--values. The figure is constructed as follows: for each $a$--value, pick a random starting value $x_0$, and calculate its orbit under the map $f_a(x)$.
 
 \begin{cue}
 Should you plot all the points of the orbit in order to get Fig.~\ref{fig-bifur}?  
@@ -412,7 +421,7 @@ Should you plot all the points of the orbit in order to get Fig.~\ref{fig-bifur}
 
 Since we are only interested in the limiting behaviour and not the transient, discard e.g. the first 100 points of this orbit, and plot the remaining points of the orbit. Then increment $a$ and start the procedure again. The points that are plotted will (within the resolution of the picture) approximate either fixed or periodic sinks or other attracting orbits of the dynamic system.
 
-One might ask how Fig.~\ref{fig-bifur} will change if different starting values of $x$ were selected. Surprisingly, it turns out that for the logistic map, nothing will change.
+One might ask how Fig.~\ref{fig-bifur} will change if different starting values of $x_0$ were selected. Surprisingly, it turns out that for the logistic map, nothing will change.
 
 \begin{cue}
 What does that statement tell you about the number of orbits for each value of $a$?  
@@ -449,12 +458,11 @@ The number 4.669201609 is called \textbf{Feigenbaum's constant}.
 
 For other values of the parameter $a$, the orbit appears to randomly fill out the interval $[0,1]$, or a subinterval. A typical cobweb plot for such a situation is shown in Fig.~\ref{fig-cobweb3}. These non--periodic attracting sets are called \textbf{chaotic attractors} and are obviously much harder to describe than periodic sinks.
 
-
 So are these non--periodic attractors what we mean by 'chaos'? Partly. Another important concept in that regard is the sensitive dependence on initial conditions, which we will explore next.
 
 \pagebreak
 
-\sectionugent{Sensitive dependence on initial conditions}
+\sectionyoutubeugent{Sensitive dependence on initial conditions}{mjnpWy4g59s}
 \label{week11}
 
 \begin{table}[H]
@@ -519,6 +527,8 @@ $}
 
 if this limit exists.
 
+E.g., if the Lyapunov number of an orbit is equal to 2, this means that on average the distance between the orbit of $x_0$ and a neighbouring orbit will double each iteration.
+
 The \textbf{Lyapunov exponent} is defined as the logarithm of the Lyapunov number:
 
 \begin{equation}
@@ -526,8 +536,6 @@ h(x_0) = \ln L(x_0) = \lim _{n \to \infty}\frac{1}{n}\left(\ln\left|f'(x_0)\righ
 \end{equation} 
 
 Note that $h$ exists if and only if $L$ exists and is non--zero.
-
-E.g., if the Lyapunov number of an orbit is equal to 2, this means that on average the distance between the orbit of $x_0$ and a neighbouring orbit will double each iteration.
 
 \begin{cue}
 Which values of the Lyapunov number / Lyapunov exponent will correspond to chaos?  
@@ -564,7 +572,7 @@ Is this a useful formula from a computational point of view?
 
 \pagebreak
 
-\sectionugent{2D maps - the H\'{e}non map}
+\sectionyoutubeugent{2D maps - the H\'{e}non map}{6SZ4TbrsGc8}
 
 \begin{marginfigure}
 % credits: CNRS
@@ -611,7 +619,7 @@ For $a=1.4$ and $b=-0.3$, we get a completely different picture: the boundary of
 \label{fig-henon-attractor}
 \end{marginfigure} 
 
-Let us finally flip the sign of $b$ and look at the case $a=1.4$ and $b=0.3$. Now the period--2 sink disappears, and the orbit will eventually evolve to look like the structure in Fig.~\ref{fig-henon-attractor}. This is an example of a dynamical system with a \textbf{fractal attractor}, as it turns out that this attractor is once again self--similar at different zoom levels. The orbit of nearly any point in this region will converge to this attractor. Note that this does not mean that two slightly different initial conditions will converge to the same limiting behaviour. In fact, the opposite is true: because of the infinitely complicated nature of the attractor, the two orbits will eventually diverge and become completely uncorrelated.
+Let us finally flip the sign of $b$ and look at the case $a=1.4$ and $b=0.3$. Now the period--2 sink disappears, and the orbit will eventually evolve to look like the structure in Fig.~\ref{fig-henon-attractor}. This is an example of a dynamical system with a \textbf{fractal attractor}, as it turns out that this attractor is once again self--similar at different zoom levels. The orbit of nearly any point in this region will converge to this attractor. Note that this does not mean that two slightly different initial conditions will converge to the same limiting behaviour. In fact, the opposite is true: because of the infinitely complicated and chaotic nature of the attractor, the two orbits will eventually diverge and become completely uncorrelated.
 
 \begin{cue}
 Is there an orbit that continuously traces the attractor?  
@@ -658,7 +666,7 @@ Show that the Mandelbrot set has mirror symmetry along the real axis.
 
 \pagebreak
 
-\sectionugent{Saddle points}
+\sectionyoutubeugent{Saddle points}{cAaP3EAJBNQ}
 
 We used the term 'sink' in our discussion of 1D maps to refer to a fixed point or a periodic orbit that attracts an epsilon neighbourhood of initial values. A 'source' is a fixed point that repels a neighbourhood. These definitions make sense in higher--dimensional state spaces without alteration. In 2D e.g., the neighbourhoods in question are disks.
 
@@ -666,7 +674,7 @@ We used the term 'sink' in our discussion of 1D maps to refer to a fixed point o
 What would an image under the map of a disk around a sink or a source look like?  
 \end{cue}
 
-Fig.~\ref{fig-circle-images} shows schematic views of a sink and a source for a 2D map, together with a typical disk neighbourhood and its image under the map. Along with the sink and the source, a new type of fixed point is introduced, which cannot occur in 1D systems. This type of point, which we call a \textbf{saddle}, has at least one attracting direction and one repelling direction.
+Fig.~\ref{fig-circle-images} shows schematic views of a sink and a source for a 2D map, as indicated by a typical disk neighbourhood and its image under the map. Along with the sink and the source, a new type of fixed point is introduced, which cannot occur in 1D systems. This type of point, which we call a \textbf{saddle}, has a mix of attracting and repelling directions.
 
 \begin{figure}[h]
 \centering
@@ -678,10 +686,10 @@ Fig.~\ref{fig-circle-images} shows schematic views of a sink and a source for a 
 Points near this type of fixed point act as if they were moving along the surface of a cowboy's saddle under the influence of gravity. This is illustrated in Fig.~\ref{fig-saddle}.
 
 \begin{cue}
-Would you have sensitive dependence on initial conditions in the neigbourhood of a saddle?
+Is a saddle point stable or unstable?
 \end{cue}
 
-A saddle exhibits sensitive dependence on initial conditions, because of the neighbouring initial conditions that escape along the repelling direction.
+If you perturb the system at a saddle point, in practice, the chance that you will push it exactly along the attracting direction only is vanishingly small, so you will always run away. Hence, a saddle is unstable.
 
 \begin{marginfigure}
 \centering
@@ -690,13 +698,13 @@ A saddle exhibits sensitive dependence on initial conditions, because of the nei
 \label{fig-saddle}
 \end{marginfigure} 
 
-Saddle points play surprising roles in the dynamics of a system. To already give an example of this, let's return to Fig.~\ref{fig-henon-basin}, where black points are in the basin of infinity and white points are in the basin of sink. What happens to points which are located on the boundary between these two basins? Will they converge towards the sink or towards infinity? The answer is: neither. It turns out that these points converge towards the saddle! So, although not a general attractor, the saddle obviously plays an important role in determining which points go to which basin.
+Saddle points play surprising roles in the dynamics of a system. To already give an example of this, let's return to Fig.~\ref{fig-henon-basin}, where black points are in the basin of infinity and white points are in the basin of sink. What happens to points which are located exactly on the boundary between these two basins? Will they converge towards the sink or towards infinity? The answer is: neither. It turns out that these points converge towards the saddle! So, although not a general attractor, the saddle obviously plays an important role in determining which points go to which basin.
 
-Our goal in the next sections is to find ways of identifying sources, sinks and saddles from the defining equations of the map. In 1D systems, we already saw that the key to determining stability was looking at the derivative in that point. Since the derivative determines the tangent line, or the best linear approximation near that point, it determines the amount of shrinking/stretching in the vicinity of that point. The same principle operates in higher dimensional systems, where we need to look at the best linear approximation of the system at that point. Before constructing such a linearisation, let's first study linear maps and see what we can learn from them.
+Our goal in the next sections is to find ways of identifying sources, sinks and saddles from the defining equations of the map. In 1D systems, we already saw that the key to determining stability was looking at the derivative in that point, which determines the amount of shrinking/stretching happening there to orbits. Note that the derivative determines the tangent line, or the best linear approximation near that point. The same principle operates in higher dimensional systems, where we need to look at the best linear approximation of the system at that point. Before constructing such a linearisation, let's first study linear maps and see what we can learn from them.
 
 \pagebreak
 
-\sectionugent{Linear maps}
+\sectionyoutubeugent{Stability of linear maps}{QmaLQGmWG9E}
 
 A 2D linear map is described by a simple matrix multiplication:
 
@@ -721,9 +729,9 @@ y
 What is the fixed point of this map? In general terms, how would you study its stability? 
 \end{cue}
 
-Every linear map has a fixed point at the origin. Its stability can be investigated in the same way as we did for 1D maps: if all points in the neighbourhood of the fixed point approach the fixed point when iterated by the map, we consider the fixed point to be an attractor.
+Every linear map has a fixed point at the origin. Its stability can be investigated in the same way as we did for 1D maps. E.g., if all points in the neighbourhood of the fixed point approach the fixed point when iterated by the map, we consider the fixed point to be stable.
 
-In some cases, the dynamics of a 2D system resemble 1D dynamics.
+In some cases, the dynamics of a 2D system resemble 1D dynamics:
 
 \begin{cue}
 What does an orbit of an eigenvector of the map look like?  
@@ -736,7 +744,7 @@ When the initial point ${\mathbf v_0}$ is an eigenvector of ${\mathbf A}$ with e
 {\mathbf v_2} = {\mathbf A}\lambda {\mathbf v_0} = \lambda^2 {\mathbf v_0} 
 \end{gather} 
 
-and in general ${\mathbf v_n} = \lambda^n {\mathbf v_0}$. Hence the map behaves like the 1D map $v_{n+1} = \lambda v_n$.
+and in general ${\mathbf v_n} = \lambda^n {\mathbf v_0}$. In this case, each component of the 2D map behaves like the 1D map $v_{n+1} = \lambda v_n$.
 
 The importance of eigenvalues is further exemplified by looking at the orbit of an arbitrary point. Let's restrict ourselves for the moment to the case where the eigenvalues $\lambda_i$ of ${\mathbf A}$ are distinct, so that we can diagonalise the matrix as follows (see your undergraduate linear algebra course):
 
@@ -755,7 +763,28 @@ Here $\mathbf Q$ is a matrix whose columns are the eigenvectors of ${\mathbf A}$
 Using this representation, calculate the orbit of an arbitrary point.
 \end{cue}
 
-After $n$ iterations, the orbit of a starting vector ${\mathbf x}_0$ looks as follows:
+After 2 iterations, we have $ {\mathbf x}_2 = {\mathbf A} {\mathbf x}_1 = {\mathbf A}^2 {\mathbf x}_0$, or
+
+\begin{equation}
+    {\mathbf x}_2 =  {\mathbf Q}
+    \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+    \end{bmatrix} 
+    {\mathbf Q^{-1}} {\mathbf Q}
+    \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+    \end{bmatrix} 
+    {\mathbf Q^{-1}} {\mathbf x}_0 =  {\mathbf Q}
+    \begin{bmatrix}
+    \lambda_1^2 & 0 \\
+    0 & \lambda_2^2
+    \end{bmatrix} 
+    {\mathbf Q^{-1}} {\mathbf x}_0
+\end{equation} 
+
+In general, after $n$ iterations, the orbit of a starting vector ${\mathbf x}_0$ looks as follows:
 
 \begin{equation}
 {\mathbf x}_n = {\mathbf A}^n {\mathbf x}_0 = {\mathbf Q}
@@ -770,7 +799,7 @@ After $n$ iterations, the orbit of a starting vector ${\mathbf x}_0$ looks as fo
 From this representation, what conclusions can you draw about the stability?  
 \end{cue}
 
-We see immediately that if all eigenvalues have a magnitude smaller than 1, the orbit converges to our fixed point $(0,0)$. On the other hand, if all eigenvalues have a magnitude larger than 1, the iterates will diverge, meaning that the fixed point is unstable. Finally, for one eigenvalue smaller than 1, and one eigenvalue larger than 1, we have saddle point, as there is one converging and one diverging direction.
+We see that if all eigenvalues have a magnitude smaller than 1, the diagonal matrix becomes zero if $n$ goes to infinity, and the orbit converges to our fixed point $(0,0)$. On the other hand, if all eigenvalues have a magnitude larger than 1, the orbit will diverge, meaning that the fixed point is unstable. Finally, for one eigenvalue smaller than 1, and one eigenvalue larger than 1, we have saddle point, as there is one converging and one diverging direction.
 
 
 \begin{exer}
@@ -784,6 +813,8 @@ a) $$\begin{bmatrix}4 & 30 \\ 1 & 3 \end{bmatrix}$$
 b) $$\begin{bmatrix}1 & 1/2 \\ 1/4 & 3/4 \end{bmatrix}$$
 
 \end{exer}
+
+\pagebreak
 
 \begin{exer}
   % difficulty: normal
@@ -816,7 +847,7 @@ $$\lim_{n \to \infty}\begin{bmatrix}4.5 & 8 \\ -2 & -3.5 \end{bmatrix} ^ n \begi
 
 \pagebreak
 
-\sectionugent{Nonlinear maps and the Jacobian matrix}
+\sectionyoutubeugent{Nonlinear maps and the Jacobian matrix}{zIQCeQRsdd0}
 
 Let's construct a linear approximation of an $N$-dimensional nonlinear map. To warm up, let's start with some simpler cases first.
 
@@ -880,11 +911,11 @@ If $\mathbf p$ is a fixed point of the nonlinear map $\mathbf f$, what happens t
 
 Our map takes $\mathbf p$ to $\mathbf p$ and ${\mathbf p} + {\mathbf h}$ to approximately $\mathbf p + {\mathbf Df}({\mathbf p}) \cdot {\mathbf h}$.
 
-Looking only at the distances from $\mathbf p$, we can say that a distance $\mathbf h$  gets transformed to a distance  ${\mathbf Df}({\mathbf p}) \cdot {\mathbf h}$, which is a linear map in $\mathbf h$. 
+Looking only at the distances from $\mathbf p$, we can say that a distance $\mathbf h$  gets transformed to a distance ${\mathbf Df}({\mathbf p}) \cdot {\mathbf h}$, which is a linear map in $\mathbf h$. 
 
-As long as this distance remains small (so that $|{\mathbf h}|^2$ is negligible and our approximation is valid), the action of the nonlinear map $\mathbf f$ operating on inputs $\mathbf x$ near ${\mathbf p}$, is essentially the same as the linear map ${\mathbf A} = {\mathbf Df}({\mathbf p})$ operating on distances $\mathbf h$ near 0.
+As long as this distance remains small (so that $|{\mathbf h}|^2$ is negligible and our approximation is valid), the action of the nonlinear map $\mathbf f$ operating on inputs $\mathbf x$ near ${\mathbf p}$, is essentially the same as the linear map ${\mathbf Df}({\mathbf p})$ operating on distances $\mathbf h$ near 0.
 
-This map obviously has a fixed point ${\mathbf h} = 0$, and we can use our eigenvalue criteria for linear maps to study the stability of ${\mathbf Df}({\mathbf p})$. On the other hand, to draw conclusions about the associated non-linear map, although we won't prove it here, the following plausible stability criteria hold:
+This map obviously has a fixed point ${\mathbf h} = 0$, and we can use our eigenvalue criteria for linear maps to study the stability of ${\mathbf Df}({\mathbf p})$. Also, to draw conclusions about the associated non-linear map, although we won't prove it here, the following plausible stability criteria hold:
 
 Let ${\mathbf f}$ be a map on $\mathbb{R}^n$ and assume ${\mathbf f}({\mathbf p})={\mathbf p}$.
 
@@ -894,7 +925,7 @@ If the magnitude of each eigenvalue of ${\mathbf Df}({\mathbf p})$ is less than 
 \item
 If the magnitude of each eigenvalue of ${\mathbf Df}({\mathbf p})$ is greater than 1, then ${\mathbf p}$ is a source of ${\mathbf f}$.
 \item
-\noindent\marginnote{If none of the eigenvalues of ${\mathbf Df}({\mathbf p})$ are on the unit circle, $\mathbf p$ is called a \textbf{hyperbolic fixed point} of $f$.}If none of the eigenvalues of ${\mathbf Df}({\mathbf p})$ have magnitude equal to 1, if at least one eigenvalue of ${\mathbf Df}({\mathbf p})$ has magnitude less than 1, and at least one eigenvalue of ${\mathbf Df}({\mathbf p})$ has magnitude greater than 1, then ${\mathbf p}$ is a saddle of ${\mathbf f}$.
+\noindent\marginnote{In general, if none of the eigenvalues of ${\mathbf Df}({\mathbf p})$ are on the unit circle, $\mathbf p$ is called a \textbf{hyperbolic fixed point} of $f$.}If none of the eigenvalues of ${\mathbf Df}({\mathbf p})$ have magnitude equal to 1, if at least one eigenvalue of ${\mathbf Df}({\mathbf p})$ has magnitude less than 1, and at least one eigenvalue of ${\mathbf Df}({\mathbf p})$ has magnitude greater than 1, then ${\mathbf p}$ is a saddle of ${\mathbf f}$.
 \end{enumerate}
 
 \pagebreak
@@ -949,7 +980,7 @@ Discuss the stability of the periodic point from the previous exercise: consider
 
 \pagebreak
 
-\sectionugent{Stable and unstable manifolds}
+\sectionyoutubeugent{Stable and unstable manifolds}{odO67dd9zSU}
 
 Without providing any proofs, we will discuss in this section some more aspects of the special properties of saddle points.
 
@@ -965,14 +996,14 @@ A =
 \end{equation} 
 
 \begin{cue}
-What are the attracting and repelling directions of this map? Which points will converge to the saddle point? 
+Which points will converge to the saddle point? 
 \end{cue}
 
 For initial values on the $x$--axis, the orbit will converge to the saddle point, because it does not feel the influence of the expanding direction. This set of points is important enough to warrant its own name, for the case of general, nonlinear maps:
 
 The \textbf{stable manifold} of a saddle point ${\mathbf p}$ is defined as the set of points ${\mathbf v}$ for which $|{\mathbf f}^n({\mathbf v}) - {\mathbf p} | \to 0$ as $ n \to \infty$.
 
-\noindent\marginnote{A one--dimensional manifold is a set of points that locally looks like a line everywhere along its length. E.g. the letter 'O' is a 1--manifold. The letter 'T' on the other hand is not, because of the intersection and the end points.}For 2D maps, one can prove the following properties about the stable manifold. First of all, it is a one--dimensional manifold. Second, the stable manifold will be tangent to the eigenvector of the matrix ${\mathbf Df}({\mathbf p})$ with eigenvalue smaller than 1.
+\noindent\marginnote{A one--dimensional manifold is a set of points that locally looks like a line everywhere along its length. E.g. the letter 'O' is a 1--manifold. The letter 'T' on the other hand is not, because of the intersection and the end points.}For 2D maps, one can prove the following properties about the stable manifold. First of all, it is a one--dimensional manifold. Second, the stable manifold will be tangent to the eigenvector of the matrix ${\mathbf Df}({\mathbf p})$ with eigenvalue smaller than 1 in magnitude.
 
 In the example from Eq.~\ref{eq-map-ex}, the $y$--axis is the \textbf{unstable manifold} of the saddle point.
 
@@ -980,28 +1011,29 @@ In the example from Eq.~\ref{eq-map-ex}, the $y$--axis is the \textbf{unstable m
 How would you define an unstable manifold in general?  
 \end{cue}
 
-The unstable manifold of a saddle point ${\mathbf p}$ is defined as the set of points ${\mathbf v}$ for which $|{\mathbf f}^{-n}({\mathbf v}) - {\mathbf p}| \to 0$ as $ n \to \infty$, so points in the unstable manifold converge to the saddle point when iterating the map backwards. In other words, the unstable manifold is the stable manifold of the inverse map ${\mathbf f}^{-1}$.
+A first guess might be to define the unstable manifold as the set of points for which $|{\mathbf f}^{n}({\mathbf v}) - {\mathbf p}| \to \infty$. However, there's a few problems with this. First, for e.g. the linear map above, this definition would be too broad and not only include the $y$--axis, but all points not on the $x$--axis. Additionally, in the nonlinear case, the limit might not even be defined.
 
-Note that we have not defined the unstable manifold as the set of points for which $|{\mathbf f}^{n}({\mathbf v}) - {\mathbf p}| \to \infty$. Indeed, that would also include every point not on the stable manifold.
+So, we need to do something more clever. Let's define the unstable manifold of a saddle point ${\mathbf p}$ as the set of points ${\mathbf v}$ for which $|{\mathbf f}^{-n}({\mathbf v}) - {\mathbf p}| \to 0$ as $ n \to \infty$. This means that points on the unstable manifold converge to the saddle point when iterating the map backwards. In other words, the unstable manifold is the stable manifold of the inverse map ${\mathbf f}^{-1}$.
 
-For the unstable manifold, similar properties hold as for the stable manifold. It is a 1D--manifold, and it is tangent to eigenvector of the Jacobian with eigenvalue larger than 1.
+For the unstable manifold, similar properties hold as for the stable manifold. It is a 1D--manifold, and it is tangent to eigenvector of the Jacobian with eigenvalue larger than 1 in magnitude.
 
-For linear maps, the stable and unstable manifolds are easily determined, and are just lines in the direction of the eigenvectors of the Jacobian. For nonlinear maps, they can look significantly more complicated, as is illustrated in Fig.~\ref{fig-manifold} for a H\'{e}non map. 
+For linear maps, the stable and unstable manifolds are easily determined, and are just lines in the direction of the eigenvectors of the Jacobian. For nonlinear maps, they can look significantly more complicated, as is illustrated in Fig.~\ref{fig-manifold} for an H\'{e}non map. 
 
 \begin{marginfigure}
 \centering
 \includegraphics{dynamic/figures/manifold}
-\caption{Stable and unstable manifold of a H\'{e}non map. The saddle point is the square in the lower left corner, the stable manifold is mainly vertical, the unstable one mainly horizontal.}
+\caption{Stable and unstable manifold of a H\'{e}non map with $a=1.4$ and $b=0.3$. The saddle point is the square in the lower left corner. The blue structure is the stable manifold, and the red one the unstable manifold.}
 \label{fig-manifold}
 \end{marginfigure} 
 
-The shape of these curves should look familiar. Indeed, one can prove that the following properties hold:
+The shape of these curves should look familiar. As it turns out, the following two statements hold:
 
 \begin{enumerate}
 \item
-The stable manifold forms the boundary between the basin of the sink and the basin at infinity.
+The unstable manifold contains the attractor of the map, in this case a chaotic one.
 \item
-The attractor of the map lies along the unstable manifold (which can be either a periodic sink, or a chaotic attractor)
+The stable manifold forms the boundary of the basin of that attractor.
+
 \end{enumerate}
 
 A further important aspect of the unstable and stable manifold is the following: if they cross (at another point than the saddle of course), there are automatically an infinite numbers of such crossings (which are called \textbf{heteroclinic points}). Also, the system will show chaotic behaviour in such a case.
@@ -1010,9 +1042,9 @@ These insights are mainly due to Poincar\'{e}, who developed much of the theory 
 
 \pagebreak
 
-\sectionugent{Continuous systems}
+\sectionyoutubeugent{Continuous systems}{y2DEf54R7x0}
 
-In the last part of this chapter, we will discuss some introductory concepts on continuous dynamical systems, i.e. those that are described by differential equations rather than difference equations.
+In the last part of this chapter, we will briefly discuss some introductory concepts on continuous dynamical systems, i.e. those that are described by differential equations rather than difference equations.
 
 Since we have already spent so much time discussing discrete maps, it would be nice to have some tools to reduce a continuous system to a discrete one and be able to study some aspects of its dynamics in that way. There are two methods that can be used for this: the time--$T$ map and the Poincar\'{e} map.
 
@@ -1053,7 +1085,7 @@ Note that the laser dynamics example from the opening of the chapter also used t
   \caption{Henri Poincaré (1854-1912)}
 \end{marginfigure}
 
-Another technique to reduce a continuous system to a discrete one is the so--called \textbf{Poincar\'{e} map}. One of Poincar\'{e}'s most important innovations was a simplified way of looking at complex continuous trajectories. Instead of studying the entire trajectory, he found that much of the important information was encoded in the points at which the trajectory passes through a two--dimensional plane. The order of these intersection points defines a discrete plane map, which is called the Poincar\'{e} map. 
+Another technique to reduce a continuous system to a discrete one is the so--called \textbf{Poincar\'{e} map}. One of Poincar\'{e}'s most important innovations was a simplified way of looking at complex continuous trajectories. Instead of studying e.g. an entire 3D trajectory, he found that much of the important information was encoded in the points at which the trajectory passes through a 2D plane. The order of these intersection points defines a discrete lower-dimensional map, which is called the Poincar\'{e} map. 
 
 \begin{marginfigure}
 \centering
@@ -1062,19 +1094,19 @@ Another technique to reduce a continuous system to a discrete one is the so--cal
 \label{fig-poincare}
 \end{marginfigure}
 
-Fig.~\ref{fig-poincare} shows a schematic view of a trajectory $C$. The plane $S$ is defined by $x_3=$ constant. Each time the trajectory $C$ pierces $S$ in a downward direction, as at points ${\mathbf A}$ and ${\mathbf B}$, we record the point of piercing on the plane $S$. We can label these points with coordinates $(x_1,x_2)$. Let ${\mathbf A}$ represent the $k$--th downward piercing of the plane, and ${\mathbf B}$ the $(k+1)$--th downward piercing. The Poincar\'{e} map is the 2D map $G$ such that $G({\mathbf A}) = {\mathbf B}$.
+By way of illustration, look at Fig.~\ref{fig-poincare}, which shows a schematic view of a trajectory $C$. The plane $S$ is defined by $x_3=$ constant. Each time the trajectory $C$ pierces $S$ in a downward direction, as at points ${\mathbf A}$ and ${\mathbf B}$, we record the point of piercing on the plane $S$. We can label these points with coordinates $(x_1,x_2)$. Let ${\mathbf A}$ represent the $k$--th downward piercing of the plane, and ${\mathbf B}$ the $(k+1)$--th downward piercing. The Poincar\'{e} map is the 2D map $G$ such that $G({\mathbf A}) = {\mathbf B}$.
 
-Given ${\mathbf A}$, the differential equations can be solved with ${\mathbf A}$ as initial condition, and the solution followed until the next downward piercing at ${\mathbf B}$. Thus ${\mathbf A}$ uniquely determines ${\mathbf B}$, which ensures that the map $G$ is well--defined. Much of the dynamical behaviour of the trajectory $C$ is present in the 2D map $G$. E.g, if $C$ is periodic in the sense that it follows a closed loop, then the plane map $G$ will have a periodic orbit.
+Given ${\mathbf A}$, the differential equations can be solved with ${\mathbf A}$ as initial condition, and the solution followed until the next downward piercing at ${\mathbf B}$. Thus ${\mathbf A}$ uniquely determines ${\mathbf B}$, which ensures that the map $G$ is well--defined. Much of the dynamical behaviour of the trajectory $C$ is present in the 2D map $G$. E.g, if $C$ is periodic in the sense that it follows a closed loop, then the plane map $G$ will have a fixed point or a periodic orbit.
 
 \begin{cue}
-How are Poincar\'{e} maps and time--$T$ maps similar? How are they different?   
+What is a fundamental difference between Poincar\'{e} maps and time--$T$ maps?   
 \end{cue}
 
-The Poincar\'{e} map is similar in principle to the time--$T$ map we considered above, although the details are different. While the time--$T$ map is stroboscopic (it logs the value of a variable at equal time intervals), the Poincar\'{e} map records plane piercings, which need not be equally spaced in time.
+While the time--$T$ map is stroboscopic (i.e., it logs the value of a variable at equal time intervals), the Poincar\'{e} map records plane piercings, which need not be equally spaced in time.
 
 \pagebreak
 
-\sectionugent{Phase portraits}
+\sectionyoutubeugent{Phase portraits}{lxrDhPcf8rQ}
 
 If we do want to study the trajectory $C$ without reducing it to a discrete map, it is often useful to construct phase portraits (also called phase planes) of the solutions of a differential equation. 
 
@@ -1101,9 +1133,9 @@ Plot a few of these trajectories for different starting points.
 \label{fig-phaseportrait}
 \end{marginfigure} 
 
-Fig.~\ref{fig-phaseportrait} a) sketches several trajectories of $x$ for different initial values. All curves converge to the equilibrium value $x=0$. An \textbf{equilibrium} solution is a solution of the differential equation which satisfies $dx/dt = 0$. They play the same role as fixed points in discrete maps, and are therefore important to study.
+Fig.~\ref{fig-phaseportrait} a) sketches several trajectories of $x$ for different initial values. (Negative starting temperatures don't make physical sense, but mathematically, we can still consider them.) All curves converge to the equilibrium value $x=0$. An \textbf{equilibrium} solution is a solution of the differential equation which satisfies $dx/dt = 0$. They play the same role as fixed points in discrete maps, and are therefore important to study.
 
-Often, a figure like Fig.~\ref{fig-phaseportrait}  a) contains too much information, as we are often only interested in the stability of the equilibrium. We are not so much interested in the different curves for different initial conditions, nor in the precise rate at which the equilibrium is approached. This leads to the \textbf{phase portrait} in Fig.~\ref{fig-phaseportrait} b), in which the $t$--axis is suppressed, and it is simply shown on the $x$--axis where trajectories are headed. The arrows indicate the direction of solutions (towards or away from equilibria) without graphing specific values of $t$. The phase portrait allows one to see at a glance where the equilibria are located and whether they are stable or not.
+Often, a figure like Fig.~\ref{fig-phaseportrait}  a) contains too much information, as we are typically only interested in the stability of the equilibrium, and not in the precise rate at which the equilibrium is approached. This leads to the \textbf{phase portrait} in Fig.~\ref{fig-phaseportrait} b), in which the $t$--axis is suppressed, and it is simply shown on the $x$--axis where trajectories are headed. The arrows indicate the direction of solutions (towards or away from equilibria) without graphing specific values of $t$. The phase portrait allows one to see at a glance where the equilibria are located and whether they are stable or not.
 
 
 \iffalse
@@ -1117,7 +1149,7 @@ What are the stable points?
 
 \pagebreak
 
-\sectionugent{Example: the Lorenz attractor}
+\sectionyoutubeugent{Example: the Lorenz attractor}{PcNeiIBgP8s}
 \label{week12}
 
 \begin{marginfigure}[0.0cm]
@@ -1135,9 +1167,9 @@ We finish the chapter by looking at the most famous set of differential equation
 \frac{dz}{dt} =& \, xy - bz
 \end{align} 
 
-For $\sigma=10$ and $b=8/3$, Lorenz found that the system behaves 'chaotically' whenever $r$ exceeds the critical value of $24.74$. In that case, all solutions appear to be extremely sensitive to initial conditions, and almost all of them are apparently neither periodic solutions nor convergent to periodic solutions or equilibria. Instead, he found found one of the very first chaotic attractors, which is now called the Lorenz attractor. This attractor is plotted in Fig.~\ref{fig-lorenz}.
+For $\sigma=10$ and $b=8/3$, Lorenz found that the system behaves 'chaotically' whenever $r$ exceeds the critical value of $24.74$. In that case, all solutions appear to be extremely sensitive to initial conditions, and almost all of them are apparently neither periodic solutions nor convergent to periodic solutions or equilibria. Instead, he found found one of the very first chaotic attractors, which is now called the Lorenz attractor. This attractor is plotted in Fig.~\ref{fig-lorenz}. (Note that contrary to the discrete H\'{e}non attractor, the Lorenz attractor is traced out continuously by the system.)
 
-\begin{marginfigure}
+\begin{marginfigure}[-1cm]
 \centering
 \includegraphics{dynamic/figures/lorenz}
 \caption{The Lorenz attractor.}
@@ -1145,7 +1177,7 @@ For $\sigma=10$ and $b=8/3$, Lorenz found that the system behaves 'chaotically' 
 \end{marginfigure} 
 
 
-Lorenz realised that this sensitivity on initial conditions has a huge impact on weather predicting. In fact, the title of one of his talks was: "Predictability: Does the Flap of a Butterfly's Wings in Brazil set off a Tornado in Texas?". This is why sensitivity on initial conditions is sometimes referred to as 'the butterfly effect'.
+Lorenz realised that this sensitivity on initial conditions has a huge impact on weather predicting. In fact, the title of one of his talks was: "Predictability: Does the Flap of a Butterfly's Wings in Brazil set off a Tornado in Texas?". This is why sensitivity on initial conditions is sometimes referred to as 'the butterfly effect'. (Incidentally, the Lorenz attractor looks a bit like a butterfly.)
 
 \pagebreak
 
