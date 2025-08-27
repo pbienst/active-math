@@ -156,11 +156,11 @@ y}\label{eq-deriv-dy}
 Now derive a necessary condition for the complex derivative to be independent of the direction of approach.
 \end{cue}
 
-A necessary condition for the complex derivative to be independent of the direction of approach, can be derived from equating the real and imaginary parts of Eq.~\ref{eq-deriv-dx} and \ref{eq-deriv-dy}:
+As mentioned above, if the derivative is independent of direction of approach for all possible directions, then certainly we should get the same result in the specific case of horizontal and vertical approaches. Therefore, a necessary (but not sufficient) condition for the complex derivative to be independent of the direction of approach, can be derived by equating the real and imaginary parts of Eq.~\ref{eq-deriv-dx} and \ref{eq-deriv-dy}:
 
 \begin{equation}
 \fbox{$\displaystyle
-\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \hspace{.5cm}
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \hspace{.5cm}
 \frac{\partial v}{\partial x} = -\frac{\partial u}{\partial y}
 \label{eq-Cauchy-Riemann}
 $}
@@ -173,13 +173,13 @@ $}
   \caption{Bernhard Riemann (1826-1866)}
 \end{marginfigure}
 
-These are called the \emph{Cauchy--Riemann conditions}. A complex function that satisfies these conditions is called \emph{analytic} (or holomorphic). Important to note is that for a function to be analytic, it necessarily has to be continuous and should not contain any singularities, otherwise the partial derivatives could be undefined.
+These are called the \emph{Cauchy--Riemann conditions}. A complex function that satisfies these conditions is called \emph{holomorphic} (or 'complex analytic', or simply 'analytic'). Important to note is that for a function to be holomorphic, it necessarily has to be continuous and should not contain any singularities, otherwise the partial derivatives could be undefined.
 
 \subsectionyoutube{The Cauchy-Riemann conditions are sufficient}{cllOl8A4LR8}
 
-We will now show that the Cauchy--Riemann conditions are not only necessary, they are also sufficient (assuming all partial derivatives are continuous).
+We will now show that the Cauchy--Riemann conditions are not only necessary, they are also sufficient (assuming all partial derivatives are continuous). I.e, we want to go in the other direction than in the previous section, and prove that, if the Cauchy--Riemann conditions hold, then the derivative will be independent of the direction of approach.
 
-We can write the total differential
+Let's start by writing the total differential
 
 \begin{equation}
 d f = \frac{\partial f}{\partial x} d x + \frac{\partial f}{\partial y} d y  = \left( \frac{\partial u}{\partial x}+j\frac{\partial v}{\partial x}\right) d x+\left(\frac{\partial u}{\partial y}+j\frac{\partial v}{\partial y}\right) d y
@@ -230,7 +230,7 @@ $$\begin{array}{lcll}a) & f(z)=z^2 \\b) & f(z)=z z^* \\c) & f(z)= \Re(z)=x \end{
 What rule-of-thumb can you derive from these results?
 
 \begin{sol}
-Analytical and $f'(z)=2z$ / non-analytical / non-analytical. Real-valued functions where you replace $x$ by $z$ are typically analytical. Functions where you make explicit reference to the real and imaginary components of a complex number or to its complex conjugate are not.
+Analytic and $f'(z)=2z$ / non-analytic / non-analytic. Real-valued functions where you replace $x$ by $z$ are typically analytic. Functions where you make explicit reference to the real and imaginary components of a complex number or to its complex conjugate are not.
 \end{sol}
   
 \end{exer}
@@ -287,7 +287,7 @@ As an example, let's calculate the contour integral $\oint_{C}z^ndz$ where the c
 Parametrise the curve in polar coordinates using $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$ and calculate the integral. 
 \end{cue}
 
-Expressing the unit cirle as $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$, we get
+Expressing the cirle as $z=r\exp(j\theta)$ for $\theta=0\to 2 \pi$, we get
 
 $$\oint_{C} z^n dz = \int_0^{2\pi} \left(r^n e^{jn\theta}\right) \left(jr e^{j \theta}d \theta\right)=j r^{n+1} \int_0^{2\pi} e^{j(n+1)\theta} d \theta $$
 
@@ -451,7 +451,7 @@ If $z_0$ were outside of the contour, then the integrand of Eq.~\ref{eq-cauchy-2
 \label{fig-cauchy-II}
 \end{marginfigure}
 
-To prove Eq.~\ref{eq-cauchy-2}, we note that although the function $f(z)$ is analytic, $f(z)/(z-z_0)$ is not, because is has a singularity at $z=z_0$. However, if we deform ${C}$ to exclude the singularity as in Fig.~\ref{fig-cauchy-II}, we end up with an extended contour where Cauchy's theorem does apply. Our ultimate goal is to bring the two straight sections of this contour infinitely close together, so that our original contour $C$ becomes fully contained in the extended contour.
+To prove Eq.~\ref{eq-cauchy-2}, we note that although the function $f(z)$ is analytic, $f(z)/(z-z_0)$ is not, because it has a singularity at $z=z_0$. However, if we deform ${C}$ to exclude the singularity as in Fig.~\ref{fig-cauchy-II}, we end up with an extended contour where Cauchy's theorem does apply. Our ultimate goal is to bring the two straight sections of this contour infinitely close together, so that our original contour $C$ becomes fully contained in the extended contour.
 
 \begin{cue}
 Apply Cauchy's theorem to this extended contour, and split up the contributions from its different parts. Bring the two straight lines infinitely close together. What happens to their contributions?
@@ -535,7 +535,7 @@ Show that
 
   $$f^{(n)}(z_0)=\frac{n!}{2 \pi j} \oint_{{C}} \frac{f(z)} {(z-z_0)^{n+1}} dz$$
   
-This also means that if a function is analytic, then the derivatives of any order automatically exist.
+This also means that if a function is holomorphic, then the derivatives of any order automatically exist.
 \begin{hnt}
 Use induction and repeat the technique used in Ex. \ref{ex-cauchy-diff}.
 \end{hnt}  
@@ -1180,7 +1180,7 @@ The same balancing process can also be applied to limits at infinity:
 PV \int_{-\infty}^\infty f(x) dx = \lim_{a \to \infty} \int_{-a}^{a} f(x) dx
 \end{equation} 
 
-In summary, if you have an integral, it can either converge or diverge. In case the integral diverges, you can look at the principle value of the integral, which in turn can again diverge or not.
+In summary, if you have an integral, it can either converge or diverge. In case the integral diverges, you can look at the principal value of the integral, which in turn can again diverge or not.
 
 \pagebreak
 
@@ -1368,7 +1368,7 @@ After taking the limit $R \to \infty$, we're only left with
 PV \int_{-\infty}^{\infty}\frac{e^{j \lambda x}}{1 + x^2} dx = \pi e^{-\lambda}
 \end{equation}
 
-\noindent\marginnote[-1.5cm]{For readers that like to lie awake at night about mathematical rigour: we do indeed need to mention `principle value` here, since the fact that we're using a circle centered at the origin, means that we approach  $\pm \infty$ together in a symmetric way.}After taking the real part of the result, we get
+\noindent\marginnote[-1.5cm]{For readers that like to lie awake at night about mathematical rigour: we do indeed need to mention `principal value` here, since the fact that we're using a circle centered at the origin, means that we approach  $\pm \infty$ together in a symmetric way.}After taking the real part of the result, we get
 
 \begin{equation}
 PV \int_{-\infty}^{\infty}\frac{\cos \lambda x}{1 + x^2} dx = \pi e^{-\lambda}
@@ -1584,7 +1584,7 @@ $$\frac{\pi}{2n} \mathrm{cosec} \left( \frac{2m+1}{2n} \pi \right)$$
 
 \subsectionyoutube{Kramers--Kronig and the Hilbert Transform}{zJCcXXN4dM4}
 
-Suppose $f(z)$ is an analytic function with $\lim_\infty f(z) = 0$ in the upper half of the complex plane.
+Suppose $f(z)$ is an analytic function with $\lim_{z \to \infty} f(z) = 0$ in the upper half of the complex plane.
 
 \begin{marginfigure}[-0.5cm]
 \centering
@@ -1610,7 +1610,7 @@ Split up the contour integral into contributions from its different parts.
   \caption{Hans Kramers (1894–1952)}
 \end{marginfigure}
 
-The integral over the large semi--circle vanishes because of the big limit theorem, because of the requirement that $\lim_\infty f(z) = 0$ in the upper half of the complex plane, so
+The integral over the large semi--circle vanishes because of the big limit theorem, because of the requirement that $\lim_{z \to \infty} = 0$ in the upper half of the complex plane, so
 
 \begin{equation}
   \lim_{z \to \infty} \frac{f(z)}{z-x_0} \cdot (z-x_0) = 0

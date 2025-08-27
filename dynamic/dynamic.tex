@@ -17,7 +17,7 @@ As for everything else, so for a mathematical theory: beauty can be perceived bu
 
 In this chapter, we will study some aspects of the dynamics of nonlinear systems. We will see that these systems can exhibit wonderfully complex and intricate phenomena, producing both pretty pictures and profound insights into the behaviour of physical processes.
 
-After an example from the photonics world, we will look at \textbf{1D discrete systems}, and study aspects like cobweb plots, fixed points and their stability, as well as periodic points. We''ll look at how to visualise the properties of the family of logistic maps in a bifurcation diagram. We'll also define chaos as being the sensitive dependence on initial conditions.
+After an example from the photonics world, we will look at \textbf{1D discrete systems}, and study aspects like cobweb plots, fixed points and their stability, as well as periodic points. We'll look at how to visualise the properties of the family of logistic maps in a bifurcation diagram. We'll also define chaos as being the sensitive dependence on initial conditions.
 
 \textbf{2D discrete systems} are studied next, and we'll introduce the concept of saddle points. After studying linear maps, we'll show how to locally approximate a nonlinear map by a linear one. We briefly discuss the importance of stable and unstable manifolds.
 
@@ -89,7 +89,7 @@ If the update rule is applied at discrete times, the system is called a \textbf{
 
 \sectionyoutubeugent{1D maps - logistic growth}{5MhI2qpp62Y}
 
-A function $f$ whose input and output space are the same is called a \textbf{map}. Since the input space is equal to the output space, we can use $f$ as an update rule, and create a dynamical system by performing successive applications of this map. Let us define $f^2(x) \stackrel{def}{=} f(f(x))$ and more generally define $f^k(x)$ as the results of applying $f$ to $x$ $k$ times. \noindent\marginnote{Again, in this chapter, $f^k(x) \ne \left[f(x) \right]^k$!} The set of points ${x_0, f(x_0), f^2(x_0), ...}$ is called the \textbf{orbit} of $x_0$ under $f$. The starting point $x_0$ is called the \textbf{initial value} of the orbit.
+We call a function $f$ whose input and output space are the same a \textbf{map}. Since the input space is equal to the output space, we can use $f$ as an update rule, and create a dynamical system by performing successive applications of this map. Let us define $f^2(x) \stackrel{def}{=} f(f(x))$ and more generally define $f^k(x)$ as the results of applying $f$ to $x$ $k$ times. \noindent\marginnote{Again, in this chapter, $f^k(x) \ne \left[f(x) \right]^k$!} The set of points ${x_0, f(x_0), f^2(x_0), ...}$ is called the \textbf{orbit} of $x_0$ under $f$. The starting point $x_0$ is called the \textbf{initial value} of the orbit.
 
 Of interest in the study of dynamical systems is the limiting behaviour of $f^k(x)$ for large values of $k$. For the exponential growth scenario $f(x)=2x$ of Eq.~\ref{eq-exp-growth}, the population will clearly increase without bound, which is obviously not a realistic model.
 
@@ -154,7 +154,7 @@ Let $f$ be the map given by $f(x) = (3x-x^3)/2$. Draw cobweb plots for orbits wi
 
 \pagebreak
 
-\sectionugent{Sinks and sources}{g9s9KpRS9aA}
+\sectionyoutubeugent{Sinks and sources}{g9s9KpRS9aA}
 
 Not all fixed points are alike. A \textbf{stable} fixed point has the property that points near it will move even closer to it as the dynamical system evolves (e.g., 0.5 for the map $f(x)=2x(1-x)$). For an \textbf{unstable} fixed point, the opposite is true: points starting out in its neighbourhood will rapidly move away as time progresses (e.g., 0 for the map $f(x)=2x(1-x)$).
 
@@ -311,7 +311,7 @@ This proves that $p$ is a sink.
 
 The set of initial conditions that is attracted to the sink is called the \textbf{basin} of the sink. From the proof of the stability theorem, we get that the basin of a sink contains at least a small epsilon neighbourhood, but in practice sinks often attract a large set of initial conditions.
 
-Finally, what about the case $|f'(p)|=1$? Then, the fixed point will obviously still be either a sink or a source, but our theorem won't be able to help you out...
+Finally, what about the case $|f'(p)|=1$? Then, the fixed point of a 1D map will obviously still be either a sink or a source, but our theorem won't be able to help you out...
 
 \begin{exer}
 % difficulty: trivial
@@ -974,7 +974,7 @@ Consider the nonlinear map defined as $g(x,y) = (2x+y, x+y)\, mod \, 1$, i.e. th
   % difficulty: normal
   % credits: Martin Virte
   % youtube: AiWLmfC4ppc
-Discuss the stability of the periodic point from the previous exercise: consider $A^4 \begin{bmatrix} 1/3 + \delta_x \\ 1/3 + \delta_y \end{bmatrix} \, mod \, 1$ and looks what happens to the perturbation, without calculating any new eigenvalues, but using what you know about the stability of the fixed point of $A$.
+Discuss the stability of the periodic point from the previous exercise: consider $A^4 \begin{bmatrix} 1/3 + \delta_x \\ 1/3 + \delta_y \end{bmatrix} \, mod \, 1$ and look what happens to the perturbation, without calculating any new eigenvalues, but using what you know about the stability of the fixed point of $A$.
 \end{exer}
 
 

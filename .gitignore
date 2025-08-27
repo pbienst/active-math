@@ -6,3 +6,7 @@
 *.mtc*
 NOTES
 *.log
+test*
+student*
+o
+out.html

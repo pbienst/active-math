@@ -75,10 +75,10 @@ x = r \sqrt{k_0^2 n^2 - k_z^2} \stackrel{def}{=} k_t r
 Implement those changes.
 \end{cue}
 
-We know that
+The chain rule gives us
 
 \begin{equation}
- \frac{d}{d r} =  \frac{d}{d x} \frac{dx}{dr} = k_t \frac{d}{d x} 
+ \frac{d}{d r} =  \frac{dx}{dr}  \frac{d}{d x}= k_t \frac{d}{d x} 
 \end{equation}
 
 After some algebraic manipulation, this leads to
@@ -231,7 +231,7 @@ Put $t=j$, take the real and imaginary parts.
 
 \sectionyoutubeugent{Recurrence relations for Bessel functions}{vRmvYLsE93I}
 
-Let's look againt at Eq.~\ref{eq-g-bessel}:
+Let's look again at Eq.~\ref{eq-g-bessel}:
 
 $$g(x,t) =  e^{\frac{x}{2}\left(t-\frac{1}{t}\right)}   \stackrel{def}{=} \sum_{n = - \infty}^{\infty} J_n(x)t^n$$
 
@@ -261,7 +261,7 @@ Use this to derive a relationship between $J_{n-1}(x)$, $J_{n}(x)$ and  $J_{n+1}
 \frac{x}{2} J_n(x) + \frac{x}{2} J_{n+2}(x) = (n+1)J_{n+1}(x)
 \end{equation} 
 
-Or with the substitution $n+1 \to n$
+\noindent\marginnote{Strictly speaking, the $n$ from $n+1$ is a different $n$, but these indices are in fact only throw-away variables.}Or with the substitution $n+1 \to n$
 
 \begin{equation}
 J_{n-1}(x) + J_{n+1}(x) = \frac{2n}{x} J_n(x)
@@ -325,7 +325,7 @@ $$x_0 = \rho_0 \cos \theta_0; \quad y_0 = \rho_0 \sin \theta_0$$
 
 show that for rotationally symmetric apertures this reduces to
 
-$$U(\rho_0) \sim  \int_0^{\infty} \int_0^{2 \pi} U(\rho_1)  e ^{j \frac{2\pi}{\lambda z} \rho_0 \rho_1 \cos \theta_1} \rho_1 d\rho_1 d\theta_1  $$
+$$U(\rho_0) \sim \int_0^{2 \pi} \int_0^{\infty} U(\rho_1)  e ^{j \frac{2\pi}{\lambda z} \rho_0 \rho_1 \cos \theta_1} \rho_1 d\rho_1 d\theta_1  $$
 
 \begin{marginfigure}[-5cm]
   % credits: Wikipedia
@@ -870,7 +870,7 @@ Fields in the optical fibre have to satisfy the Helmholtz equation, and let's re
 What is the physical interpretation of $k_z$? Also based on the physics of the problem, what can you say about $k_\theta $? Can it take any value?  
 \end{cue}
 
-These kinds of solutions are the eigenmodes of this particular waveguide, because of the form of their $z$--dependence\footnote{These eigenmodes propagate along $z$. Contrast this with the treatment of bent waveguides in the previous chapter, where the $z$--dimension didn't come in play because of the 2D nature of the problem and where the propagation was essentially along $\theta$.}.  Also, physics dictates that the fields must be periodic in the $\theta$--direction with period $2 \pi$. This means that the 'angular propagation constant' $k_\theta$ has to be an integer, which we will call $l = 0, \pm 1, \pm 2, \ldots$.
+These kinds of solutions are the eigenmodes of this particular waveguide, because of the form of their $z$--dependence\footnote{These eigenmodes propagate along $z$. Contrast this with the treatment of bent waveguides in the previous chapter, where the $z$--dimension didn't come in play because of the 2D nature of the problem and where the propagation was essentially along $\theta$.}.  Also, physics dictates that the fields must be periodic in the $\theta$--direction with period $2 \pi$. Because the complex exponential consists of a sine and a cosine, this means that the 'angular propagation constant' $k_\theta$ has to be an integer, which we will call $l = 0, \pm 1, \pm 2, \ldots$.
 
 As we've seen before, $R$ has to satisfy this equation:
 

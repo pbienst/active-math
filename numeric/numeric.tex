@@ -566,7 +566,7 @@ The disconnected values are related to connected values by the following matrix 
 \label{eq-con-matrix}
 \end{equation} 
 
-The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} {\mathbf C} of the mesh. Obviously, for such a simple case it seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for a computer implementation.
+The matrix in Eq.~\ref{eq-con-matrix} is called the \textbf{connection matrix} $\mathbf C$ of the mesh. Obviously, for such a simple case it seems overkill to write the continuity equations in matrix form, but for complicated 3D meshes such a matrix has its practical value for a computer implementation.
 
 \pagebreak
 
@@ -884,7 +884,7 @@ Construct the best least-squares approximation to the parabola
 
 $$f(x) = 10(x-1)^2 -1$$ 
 
-in the entire interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$.
+in the entire interval $[1,2]$ using only functions from $V = \mathrm{span} \{1, x\}$, i.e. the space of linear combinations of $1$ and $x$.
 
 \begin{sol}
 $$-\frac{38}{3} + 10x$$   
@@ -1267,6 +1267,8 @@ This is called the \textbf{point matching} or \textbf{collocation method}.
 
 Another interesting choice is explored in the following exercise:
 
+\pagebreak
+
 \begin{exer}
 % difficulty: normal
 % ugent
@@ -1301,7 +1303,22 @@ for all values of $j$?
 Construct an example where the Galerkin method and the least-squares residual method are identical.
 \end{exer}
 
+\pagebreak
 
+
+\sectionugent{Comparison of different numerical techniques}
+
+Finally, to wrap up this chapter, let's bring together what we've discussed about the most popular numerical methods to help you decide in which circumstances a certain method would be most appropriate.
+
+\textbf{FDTD} is a very general method that can in theory be applied to a wide range of problems. However, because the structure is discretised on a square grid, it is not very well suited for curved boundaries because of the staircasing issue.  Another disadvantage of FDTD is that it is a brute-force method that is computationally expensive, requiring a lot of memory and CPU time.
+
+\textbf{Finite element methods} don't suffer as much from staircasing because the edges of the elements can have an arbitrary orientation, not just horizontal and vertical. This makes them more suitable for curved structures. Also, if you expect your fields to varying rapidly in a certain region of your domain (e.g. inside a metal layer), then you can use smaller elements in that region and larger elements elsewhere. The flip side of that flexbility is that choosing the optimal mesh can be a bit of an art.
+
+Finally, \textbf{eigenmode expansion} methods are a suitable choice for structures that can be modelled as a stack of waveguides. They are very efficient because they handle the propagation in the $z$-direction analytically, irrespective of the thickness of each layer. However, they are not as general as the other methods.
+
+Finally, each numerical method has a set of metaparameters, like the grid size or the number of eigenmodes. It is important to not just perform a single simulation and call it a day. Rather, you should investigate what happens when you change these parameters, and how the results are affected. This \textbf{convergence analysis} will give you some confidence in knowing e.g. whether your grid is fine enough.
+
+\pagebreak
 
 \section*{Review questions}
 

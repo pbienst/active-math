@@ -163,13 +163,13 @@ Simply making use of definitions, we get
 By applying our lemma Eq.~\ref{eq-part-int}, we get
 
 \begin{equation}
-\left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint [ \nabla \times {\mathbf F}]^* \cdot \left[ \frac{1}{\varepsilon({\mathbf r})}\nabla \times {\mathbf G({\mathbf r})}  \right ] dV 
+\left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint [ \nabla \times {\mathbf F}]^* \cdot \left[ \frac{1}{\varepsilon({\mathbf r})}\nabla \times {\mathbf G({\mathbf r})}  \right ] dV - \iint \cdots \enspace d{\mathbf S}
 \label{eq-pos-omega}
 \end{equation} 
 
 Since $\nabla$ is real-valued, we were able to write $[ \nabla \times {\mathbf F}]^*$ instead of $\nabla \times {\mathbf F}^*$.
 
-Also, the term related to the surface integral was dropped because in all practical cases, one of two things will be true. Either the fields at infinity will decay to zero, or the fields are periodic on the surface. In both cases, the surface term will vanish.
+Also, we can drop the term related to the surface integral, because in all practical cases, one of two things will be true. Either the fields at infinity will decay to zero, or the fields are periodic on the surface. In both cases, the surface term will vanish.
 
 \begin{cue}
 The second ingredient of $\Theta$ we need to bring over to operate on $ {\mathbf F}$ is  $\varepsilon$. Under which conditions are we allowed to do this?   
@@ -178,7 +178,7 @@ The second ingredient of $\Theta$ we need to bring over to operate on $ {\mathbf
 If $\varepsilon$ is real (which will be the case for lossless media), we can write
 
 \begin{equation}
-\left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint \left [\frac{1}{\varepsilon({\mathbf r})} \nabla \times {\mathbf F}\right]^* \cdot \left[ \nabla \times {\mathbf G({\mathbf r})}  \right ] dV 
+\left\langle {\mathbf F}, \Theta {\mathbf G}\right\rangle = \iiint \left [\frac{1}{\varepsilon({\mathbf r})} \nabla \times {\mathbf F}\right]^* \cdot \, \left[ \nabla \times {\mathbf G({\mathbf r})}  \right ] dV 
 \end{equation} 
 
 \begin{cue}
@@ -376,7 +376,7 @@ If $\omega_1 \ne \omega_2$, we have $\left\langle {\mathbf H}_1 , {\mathbf H}_2\
 In order to get some general feeling for the nature of the modes and derive some more of their properties, it is useful to look at a variational form:
 
 \begin{equation}
-J \stackrel{def}{=} \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} \label{eq-variational}
+J = J({\mathbf H}) \stackrel{def}{=} \frac{\left\langle {\mathbf H} , \Theta {\mathbf H}\right\rangle}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle} \label{eq-variational}
 \end{equation}  
 
 We will show that any function ${\mathbf H}$ for which $J$ is stationary (i.e. $\delta J=0$) will satisfy our eigenvalue problem.
@@ -388,7 +388,7 @@ We can calculate the first variation of $J$ directly from Eq.~\ref{eq-variationa
 \end{equation} 
 
 \begin{cue}
-'Perturb' this equation, i.e. replace ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by a corresponding $J+ \delta J$. Then, subtract the original from the perturbed equation, and neglect higher-order terms.  
+'Perturb' this equation, i.e. replace ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by a corresponding $J+ \delta J$ (i.e. $\delta J=\delta J({\mathbf H},\delta {\mathbf H})$). Then, subtract the original from the perturbed equation, and neglect higher-order terms.  
 \end{cue}
 
 Replacing ${\mathbf H}$ by ${\mathbf H} + \delta {\mathbf H}$ and $J$ by $J+ \delta J$, we get:
@@ -752,7 +752,7 @@ We can also define a translation operator $T_{\mathbf d}$:
 T_{\mathbf d} \varepsilon ({\mathbf r}) \stackrel{def}{=} \varepsilon ({\mathbf r} + {\mathbf d})
 \end{equation} 
 
-Just like before, saying that our system in invariant under that operator amounts to $[\Theta, T_{\mathbf d}] = 0$.
+Just like before, saying that our system is invariant under that operator amounts to $[\Theta, T_{\mathbf d}] = 0$.
 
 A system with \emph{continuous} translation symmetry in the $z$--direction is invariant for all $T_{\mathbf d}$ in that direction. So, $\Theta$ must commute with all the translation operators over a distance ${\mathbf d} = d {\mathbf 1}_z$. In order not to make the notation too heavy, we will limit ourselves here to scalar fields which only vary in the $z$--direction.
 
@@ -1376,7 +1376,7 @@ In the denominators of Eq.~\ref{eq-recip}, should you evaluate the scalar or the
   
 Say we have a 3D lattice with primitive lattice vectors $\{ {\mathbf a}_1, {\mathbf a}_2, {\mathbf a}_3 \}$ and primitive reciprocal lattice vectors $\{ {\mathbf b}_1, {\mathbf b}_2, {\mathbf b}_3 \} }$. We know that there exist solutions $\mathbf H(\mathbf r)$ which are common eigenfunctions of $\Theta$ and all three translation operators $T_{{\mathbf a}_i}$. If we write down the eigenvalues in a slightly creative way, this means that
 
-$${\mathbf H} ({\mathbf r}+ {\mathbf a}_i) = e^{2 \pi j \theta_i }{\mathbf H} ({\mathbf r})$$
+$${\mathbf H} ({\mathbf r}+ {\mathbf a}_i) = e^{-2 \pi j \theta_i }{\mathbf H} ({\mathbf r})$$
 
 with $\theta_i$ just a constant, proportional to the logarithm of the eigenvalue. Now, construct a vector ${\mathbf k}$ according to
 
@@ -1512,7 +1512,7 @@ As such a 3D plot quickly becomes difficult to interpret, people usually only pl
 \begin{exer}
   % difficulty: normal
   % youtube: _qb090Rsdmc
-Based on symmetry arguments, do you think it will be easier to create a 2D omnidirectional bandgap for a square lattice or for a triagular lattice?
+Based on symmetry arguments, do you think it will be easier to create a 2D omnidirectional bandgap for a square lattice or for a triangular lattice?
 \end{exer}
 
 \begin{exer}

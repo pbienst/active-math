@@ -48,7 +48,7 @@ Given such a complex-valued phasor, how can we recover the real-valued electric 
 \noindent\marginnote{Note that some people use a different convention, which results in $e^{-j \omega t}$. This can give rise to some surprising sign changes in formulas, so be aware of this!}The relation between the phasor and the electric field is given by
 
 \begin{equation}
-E_x({\mathbf r},t) = \Re \left(\tilde{E}_x({\mathbf r}) e^{j \omega t}\right)
+    E_x({\mathbf r},t) = \Re \left(\tilde{E}_x({\mathbf r}) e^{j \omega t}\right)\label{eq:phasor-time-dep}
 \end{equation}
 
 \begin{cue}
@@ -92,7 +92,7 @@ These are Maxwell's equations expressed in the frequency domain.
 \begin{exer}
   % difficulty: trivial
   % youtube: 9nuSuCjhtUU
-How do you need to change Eq.~\ref{eq-phasor}, so that the time dependence of a phasor corresponds to $e^{-j \omega t}$? 
+How do you need to change Eq.~\ref{eq-phasor} to get the correct time dependence for $E_x$, if you choose to use $e^{-j \omega t}$ in the conversion between time and frequency domain in Eq.~\ref{eq:phasor-time-dep}? 
 \end{exer}
 
 \pagebreak
@@ -182,7 +182,7 @@ The Helmholtz equation we derived here is only valid for uniform media. Exactly 
 \begin{exer}
   % difficulty: normal
   % jupyter: https://github.com/pbienst/active-math/blob/main/helmholtz/notebooks/DFT.ipynb
-The phasor representation is obviously a Fourier transform in disguise. You might recall that a numerical implementation of this is the so-called Discrete Fourier Transform (DTF), of which the famous Fast Fourier Transform (FFT) is a special case. If you want to brush up on concepts related to the DFT, check out the programming exercises in the Jupyter notebook you can download by clicking the icon in the sidebar.
+The phasor representation is obviously a Fourier transform in disguise. You might recall that a numerical implementation of this is the so-called Discrete Fourier Transform (DFT), of which the famous Fast Fourier Transform (FFT) is a special case. If you want to brush up on concepts related to the DFT, check out the programming exercises in the Jupyter notebook you can download by clicking the icon in the sidebar.
 \end{exer}
 
 \section*{Review questions}
