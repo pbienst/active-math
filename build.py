@@ -42,9 +42,13 @@ def process_exer(chapter_dirs):
                     sol_label = f"sol_{chapter_counter}_{exer_counter}"
                     hnt_label = f"hnt_{chapter_counter}_{exer_counter}"
                     exer_text = f"\\label{{{exer_label}}}" + exer_match.group(1)
+                    print("----", exer_counter, exer_text)
                     # Extract solution.
                     sol_match = re_sol.search(exer_text)
                     if sol_match:
+                        print(chapter_counter, exer_counter)
+                        print(sol_match.group(1), sol_match.group(0))
+                        print("<---")
                         link_text = f"Exer. {chapter_counter}.{exer_counter}"
                         sol_file.write(\
                 f"\\hyperref[{exer_label}]{{\\textbf{{{link_text}}}}}" + \

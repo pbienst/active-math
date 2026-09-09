@@ -265,7 +265,7 @@ Resist the temptation to say that $(\omega^2 \mu)^*= \omega^2 \mu $ for physical
 For any operator $\left\langle {\mathbf G}, {\mathbf F}\right\rangle ^*  = \left\langle {\mathbf F}, {\mathbf G}\right\rangle$ such that
 
 \begin{equation}
-\left\langle \Theta {\mathbf H} , {\mathbf H} \right\rangle  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
+\left\langle{\mathbf H} , \Theta {\mathbf H}\right\rangle^* = \left\langle \Theta {\mathbf H} , {\mathbf H} \right\rangle  = (\omega^2 \mu)^* \left\langle {\mathbf H} , {\mathbf H}\right\rangle 
 \end{equation} 
 
 But $\Theta$ is Hermitian, so we can write
@@ -467,7 +467,7 @@ J =& \frac{1}{\left\langle {\mathbf H} , {\mathbf H}\right\rangle}  \iiint \frac
   % difficulty: normal
   % youtube: Tw5EOfN30mY
 When ${\mathbf H}$ is a solution to the eigenvalue problem, transform Eq.~\ref{eq-variational-HH} into the following form, which contains only the electric field:
-$$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} {\iiint \epsilon \left | {\mathbf E({\mathbf r})} \right |^2  dV} $$
+$$J=\frac{\iiint \left | \nabla \times {\mathbf E({\mathbf r})} \right |^2  dV} {\iiint \varepsilon({\mathbf r}) \left | {\mathbf E({\mathbf r})} \right |^2  dV} $$
 \label{ex-eigenvalue-e}
 \end{exer}
 
@@ -508,7 +508,7 @@ Derive a generalised eigenvalue problem for $\mathbf E$. Under what conditions i
   % youtube: Iu1NIrRO7u4
 Show based on the previous two exercises that minimising the following variational expression is equivalent to solving Maxwell's equations: \\
 
-$$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} {\iiint \epsilon \left| {\mathbf E ({\mathbf r})} \right| ^2  dV}$$
+$$J=\frac{\iiint \left| \nabla \times {\mathbf E ({\mathbf r})} \right| ^2  dV} {\iiint \varepsilon({\mathbf r}) \left| {\mathbf E ({\mathbf r})} \right| ^2  dV}$$
 
 (This is the same result as in Ex.~\ref{ex-eigenvalue-e}, but the derivation there assumed that we were starting from an existing solution $\mathbf H$. The approach here is much more general.)
 
@@ -936,7 +936,7 @@ Let's first study systems with such symmetry in one dimension. Higher-dimensiona
 
 Fig.~\ref{fig-1d-periodic} shows a simple structure that is periodic in the $z$--direction, or - to phrase things in a slightly more pendantic way - that has discrete translational symmetry in the $z$--direction. The basic step length is called the \textbf{period} or the \textbf{lattice constant} $a$, and the basic step vector is called the \textbf{primitive lattice vector} ${\mathbf a} = a {\mathbf 1}_z$.
 
-Let's dwell on this concept of lattices a little bit longer, because it will be relevant later as well. A \textbf{lattice} is a collection of vectors which are integer linear combinations of the primitive latice vectors. There is one primitive lattice vector per dimension, so for our 1D case, the lattice consists only of integer multiples  ${\mathbf a} = a {\mathbf 1}_z$. Also, it's easy to verify that any integer linear combination of arbitrary lattice vectors will give you another vector belonging to the lattice.
+Let's dwell on this concept of lattices a little bit longer, because it will be relevant later as well. A \textbf{lattice} is a collection of vectors which are integer linear combinations of the primitive lattice vectors. There is one primitive lattice vector per dimension, so for our 1D case, the lattice consists only of integer multiples  ${\mathbf a} = a {\mathbf 1}_z$. Also, it's easy to verify that any integer linear combination of arbitrary lattice vectors will give you another vector belonging to the lattice.
 
 Because of symmetry, $\varepsilon({\mathbf r}) =  \varepsilon({\mathbf r} + {\mathbf a})$, or by repeating this procedure $\varepsilon({\mathbf r}) =  \varepsilon({\mathbf r} + l {\mathbf a})$ with $l$ an integer. The dielectric block that is considered to be repeated over and over is called the \textbf{unit cell} and is highlighted in the square box in Fig.~\ref{fig-1d-periodic}. 
 
@@ -1144,12 +1144,12 @@ This means that, according to Bloch theory, the two lines should repeat themselv
 
 \subsectionyoutube{Increasing the index contrast}{ox04N7MQxus}
 
-When we restrict such a plot to the Brillouin zone, we get the results from the left panel of Fig.~\ref{fig-1d-bands}, with the bands appearing to fold back at the edges of the Brillouin zone. In this figure, we plot the band diagrams $\omega_n(k)$ for three different cases of index contrast between the two layers: zero, low and high. That way, we can clearly see the gradual evolution of the band diagrams. (Note that the wavevector is expressed in units of $\pi /a$, and the frequency in units of $a/c$.) These results have been obtained by numerical calculations.
+When we restrict such a plot to the Brillouin zone, we get the results from the left panel of Fig.~\ref{fig-1d-bands}, with the bands appearing to fold back at the edges of the Brillouin zone. In this figure, we plot the band diagrams $\omega_n(k)$ for three different cases of index contrast between the two layers: zero, low and high. That way, we can clearly see the gradual evolution of the band diagrams. (Note that the wavevector is expressed in units of $\pi /a$, and the frequency in units of $c/a$.) These results have been obtained by numerical calculations.
 
 \begin{figure}[H]
 \centering
 \includegraphics{symmetry/figures/1D_bands}
-\caption{Band structures for normal incidence for three different multilayer films where all layers are $a/2$ thick. Left: all layers have $\varepsilon=13$. Middle: layers alternate between $\varepsilon=12$ and $\varepsilon=13$. Right: layers alternate between $\varepsilon=1$ and $\varepsilon=13$}
+\caption{Band structures for normal incidence for three different multilayer films where all layers are $a/2$ thick. Left: all layers have $\varepsilon=13$. Middle: layers alternate between $\varepsilon=12$ and $\varepsilon=13$. Right: layers alternate between $\varepsilon=1$ and $\varepsilon=13$. As soon as the index contrast is non--zero, two different modes appear ($n=1$ and $n=2$).}
 \label{fig-1d-bands}
 \end{figure}
 

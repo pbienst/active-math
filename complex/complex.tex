@@ -464,7 +464,7 @@ The result is
 {z-z_0} dz=0
 \end{equation} 
 
-\noindent\marginnote{By convention, contours are positive when traversed in the counterclockwise direction.}Here, ${C}$ is the original outer contour and ${C}_2$ is the circle surrounding the point $z_0$ traversed in a counterclockwise direction (hence the minus sign, because in the extended contour we should traverse it in the clockwise direction). In the limit of becoming infinitely close together, the two straight sections cancel because $f(z)$ is continuous (a side effect of it being analytic).
+\noindent\marginnote{By convention, contours are positive when traversed in the counterclockwise direction.}Here, ${C}$ is the original outer contour and ${C}_2$ is the circle surrounding the point $z_0$ traversed in a counterclockwise direction (hence the minus sign in the full formula, because as part of the extended contour, we should travel around $z_0$ in the clockwise direction). In the limit of becoming infinitely close together, the two straight sections cancel because $f(z)$ is continuous (a side effect of it being analytic).
 
 \begin{cue}
 Parametrise ${C}_2$ and calculate its contribution to the integral. Then, take the limit $ r \to 0 $ to prove Cauchy's formula.   
@@ -549,7 +549,7 @@ Use induction and repeat the technique used in Ex. \ref{ex-cauchy-diff}.
 
 \subsectionyoutube{An extension for Taylor series}{dAH_GZN74Qc}
 
-Let's use what we have learned so far to try and come up with a series expansion of complex functions around a certain point $z_o$. What's more, we want to move beyond replacing $x$ by $z$ in a Taylor series, and also allow for the case where the function is not holomorphic around $z_o$. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$.
+Let's use what we have learned so far to try and come up with a series expansion of complex functions around a certain point. To keep the notation simple, we’ll take that point to be the origin. For our series expansion, we want to move beyond replacing $x$ by $z$ in a Taylor series, and also allow for the case where the function is not holomorphic in the neighbourhood of the point around which we create the expansion. Consider e.g. a function that is analytic in some annular region around the origin of inner radius $r$ and outer radius $R$.
 
 \begin{cue}
 Would a circular contour work in this situation, if we want to apply Cauchy's formula?
@@ -561,7 +561,7 @@ Would a circular contour work in this situation, if we want to apply Cauchy's fo
 \label{fig-laurent}
 \end{marginfigure}
 
-A simple circular contour would enclose the inner region where the function is not analytic, so we need to construct a more complicated contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent}). For ease of notation, we'll take the point $z_0$ to be the origin from now on.
+A simple circular contour would enclose the inner region where the function is not analytic, so we need to construct a more complicated contour that only encloses points where the function is analytic (Fig.~\ref{fig-laurent}). 
 
 \begin{cue}
 Apply Cauchy's formula, and split up the contour into its different parts. Bring the straight segments infinitely close together.
@@ -1418,7 +1418,7 @@ We used the traditional choice of branch cut, and it's easy to verify that $e^{j
 What is the contribution of ${C_R}$ to the integral in the limit of infinite radius?
 \end{cue}
 
-\noindent\marginnote[0.5cm]{Don't forget the factor $z-0$ here!}Let's use the big limit theorem to calculate the contribution of the outer circular part ${C_R}$ to the integral. For that, we calculate the following limit:
+\noindent\marginnote[0.cm]{Don't confuse the $a$ from the denominator of the integrand with the $a$ from the big limit theorem, which here is zero as the centre of the circle, and therefore gives a factor $z-0$.}Let's use the big limit theorem to calculate the contribution of the outer circular part ${C_R}$ to the integral. For that, we calculate the following limit:
 
 \begin{equation}
 \lim_{z \to \infty}\frac{z^{1/2}}{z^2+a^2} \cdot (z - 0) = \lim_{z \to
@@ -1734,7 +1734,7 @@ If we use $f(z)= \Delta n(\omega) = n(\omega) - n(\infty) = n(\omega) - 1$, we a
   \label{eq-KK-3}
   \end{subequations}
 
-As you might remember, the imaginary part of the refractive index $n$ is a measure for optical absorption. So, this means that in theory it is enough to measure just the losses of a material over a wide wavelength range to calculate its refractive index.
+As you might remember, the imaginary part of the refractive index $n$ is a measure of optical absorption. So, this means that in theory it is enough to measure just the losses of a material over a wide wavelength range to calculate its refractive index.
 
 Finally, it's important to note that one can prove that there is a relation between the Kramers--Kronig dispersion relations and the fact that the systems considered are \emph{causal} (i.e. effect cannot precede cause)\noindent\marginnote{This is one of the subjects of the Titchmarsh theorem.}. Thus, there is an immediate physical significance of the Kramers--Kronig dispersion relations.
 
@@ -2040,6 +2040,12 @@ What's missing in that argument? What would happen e.g. if you had simply used t
 \end{cue}
 
 Looking at the steepness of the index profile in the cladding only tells part of the story. There are also aspects like how wide the waveguide becomes after transformation, how big is the index in the core, ... . So, it's the entire index profile that will determine the radiation losses, not just the steepness in the outer cladding.
+
+\begin{exer}
+  % difficulty: trivial
+  % youtube: ldxFjLJ3rVY
+For an excellent fun video on a painting by Escher that makes use of some concepts we've seen in this chapter, check out the video by 3Blue1Brown linked in the sidebar.
+\end{exer}
 
 \pagebreak
 

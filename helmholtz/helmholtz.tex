@@ -33,17 +33,17 @@ E_x({\mathbf r},t) = E_{x,0}({\mathbf r}) \cos \left( \omega t + \phi_{E_x} ({\m
 \right) \label{eq-phasor}
 \end{equation}
 
-Similar expressions can be written for the other field components and for the magnetic field. It is convenient to introduce a complex number $\tilde{E}_x$ called a \emph{phasor}, that is defined as
+Similar expressions can be written for the other field components and for the magnetic field. 
+
+Another way of saying that we work with fields that only vary sinusoidally as a function of time, is saying that we work in the \emph{frequency domain}. In this context, it is convenient to introduce a complex number $\tilde{E}_x$ called a \emph{phasor}, that is defined as
 
 \begin{equation}
 \tilde{E}_x(\mathbf{r})=E_{x,0}({\mathbf r}) e^{j \phi_{E_x}({\mathbf r})} \label{eq:phasor}
 \end{equation}
 
 \begin{cue}
-Given such a complex-valued phasor, how can we recover the real-valued electric field?
+Given such a complex-valued phasor, how can we recover the real-valued electric field, i.e. how can we go from the frequency domain to the time domain?
 \end{cue}
-
-\pagebreak
 
 \noindent\marginnote{Note that some people use a different convention, which results in $e^{-j \omega t}$. This can give rise to some surprising sign changes in formulas, so be aware of this!}The relation between the phasor and the electric field is given by
 
@@ -92,7 +92,7 @@ These are Maxwell's equations expressed in the frequency domain.
 \begin{exer}
   % difficulty: trivial
   % youtube: 9nuSuCjhtUU
-How do you need to change Eq.~\ref{eq-phasor} to get the correct time dependence for $E_x$, if you choose to use $e^{-j \omega t}$ in the conversion between time and frequency domain in Eq.~\ref{eq:phasor-time-dep}? 
+You decide to change Eq.~\ref{eq:phasor-time-dep} to use $e^{-j \omega t}$ instead of $e^{j \omega t}$ to define the recipe to go from a phasor to the time domain. How does Eq.~\ref{eq-phasor} change as a result of this choice? 
 \end{exer}
 
 \pagebreak

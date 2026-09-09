@@ -168,13 +168,6 @@ Which $\theta$-values correspond to which methods?
 
 \pagebreak
 
-%\begin{exer}
-% difficulty: normal
-%Derive the following higher-order approximation of the second derivative:
-
-%$$ \frac{d^2 f}{d x^2} = \frac{1}{12 \Delta x^2} \big[& -f(x + 2 \Delta x) + 16 f(x + \Delta x) -30 f(x) - f(x - 2 \Delta x) + 16 f(x- \Delta x) \big] + \mathcal{O}\left(\Delta x^4\right)$$
-
-%\end{exer}
 
 
 \begin{exer}
@@ -330,7 +323,7 @@ To clarify this further, we will now investigate when the Jacobi method diverges
 
 Ideally, we'd like to know under what circumstances this method will converge to the exact solution. However, in this section, we're going to look at an easier subproblem: figuring out when the procedure will diverge, i.e. result in infinite field values. This stability is a necessary step for convergence.\marginnote{Turns out it's also a sufficient criterion, because of something called the Lax equivalence theorem.}
 
-To study divergence, we take an approach that is based on Fourier analysis: the field profile at any iteration can be written as a sum of Fourier components $e^{-j k_x x}$, which are nothing other than plane waves with wavevector $k_x$. Let's take such a plane wave and investigate what happens when iterating through the Jacobi method. If the amplitude of a plane wave stays bounded when iterating, and this is true for all admissible wavevectors $k_x$, then we can be sure that whatever initial estimate will be used, the method will not produce an unbounded result at some time.
+To study divergence, we take an approach that is based on Fourier analysis: the field profile at any iteration can be written as a sum of Fourier components $e^{-j k_x x}$, which are nothing other than plane waves with wavevector $k_x$. Let's take such a plane wave and investigate what happens when iterating through the Jacobi method. If the amplitude of a plane wave stays bounded when iterating, and this is true for all admissible wavevectors $k_x$, then we can be sure that whatever initial estimate will be used, the method will not produce an unbounded result at some time. Indeed, the differential equation is linear, so whatever is true for one plane wave will also be true for a sum of plane waves.
 
 Our plane waves take the following form:
 
@@ -472,7 +465,7 @@ Join the different elements, e.g. by ensuring that $\psi$ is continuous across t
 
 
 \item
-Write down an expression $J$ involving the field in all elements, i.e. containing all the basis functions $b_{i,l}$ and all the expansion coefficients $u_{i,l}$. Because the  $b_{i,l}$ are chosen in advance and therefore known, $J$ is function of the unknown $u_{i,l}$ only. The precise form of $J$ differs from problem to problem, but is often related to the energy in the system.
+Write down an expression $J$ involving the field in all elements, i.e., containing all the basis functions $b_{i,l}$ and all the expansion coefficients $u_{i,l}$. Because the  $b_{i,l}$ are chosen in advance and therefore known, $J$ is function of the unknown $u_{i,l}$ only. The precise form of $J$ differs from problem to problem, but is often related to the energy in the system.
 
 \item
 Find the coefficients $u_{i,l}$ such that $J$ is minimised. In a popular method due to \textbf{Rayleigh and Ritz}, this is done simply by setting all $\partial J / \partial u_{i,l}$ equal to zero and solving the resulting linear system. If $J$ is an expression for the total energy in the system, there is a clear physical interpretation for this procedure: the true solution to the problem is one that minimises the energy in the system.
@@ -486,7 +479,7 @@ Find the coefficients $u_{i,l}$ such that $J$ is minimised. In a popular method 
 
 \subsectionyoutube{Subdivide the structure}{wBzcZS_XkNo}
 
-In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite elements can be used to solve the 1D Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrate the concept of finite differences:
+In order to make the recipe from the previous section more concrete, we will now indicate in more detail how finite elements can be used to solve the 1D scalar Helmholtz equation in a uniform medium, i.e. the same problem we used to illustrate the concept of finite differences:
 
 \begin{equation}
 \frac{d^2 \psi (x)}{d x^2} + k^2 \psi(x) = 0 \label{eq-helmholtz-1d-2}
@@ -504,7 +497,7 @@ To describe the unknown function $\psi$ in a certain element $l$, we will use a 
 \psi_l(x) = \frac{x_2 - x}{x_2 - x_1} \psi_1 + \frac{x - x_1}{x_2 - x_1} \psi_2 \label{eq-fe-2}
 \end{equation} 
 
-Here $\psi_1$ and $\psi_2$ are the so far unknown values of $\psi$ at $x_1$ and $x_2$ respectively. (To lighten the notation, we omit the index $l$ here, but strictly speaking we should write $x_{1,l}$, $\psi_{2,l}$, etc.)
+Here, $\psi_1$ and $\psi_2$ are the so far unknown values of $\psi$ at $x_1$ and $x_2$, respectively. (To lighten the notation, we omit the index $l$ here, but strictly speaking we should write $x_{1,l}$, $\psi_{2,l}$, etc.)
 
 \begin{cue}
 Looking at Eq.~\ref{eq-fe-2}, what would be the set of basis functions we use in this case?
@@ -1257,7 +1250,7 @@ w_j(x) = \delta(x-x_j)
 What will be the effect of choosing the test functions that way?  
 \end{cue}
 
-This corresponds to demanding the the error residual vanishes exactly at the points $x_j$ when the scalar product is defined as the integral of the product:
+This corresponds to demanding that the error residual vanishes exactly at the points $x_j$ when the scalar product is defined as the integral of the product:
 
 \begin{equation}
 \left\langle R(x), w_j(x) \right\rangle = \int R(x) \delta(x-x_j) dx = R(x_j) = 0
